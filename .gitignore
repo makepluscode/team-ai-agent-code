@@ -1,0 +1,37 @@
+# 비밀정보와 로컬 설정
+.env
+.env.*
+!.env.example
+credentials.json
+*credentials*.json
+*token*.json
+
+# Python
+.venv/
+__pycache__/
+*.pyc
+.pytest_cache/
+.ruff_cache/
+
+# Node.js
+node_modules/
+
+# 빌드 및 런타임 캐시
+build/
+dist/
+*.egg-info/
+.orca/
+*.log
+.logs/
+tmp/
+
+# SQLite 로컬 DB (런타임 생성 파일)
+*.db
+*.db-journal
+*.db-wal
+
+# 편집기 및 OS
+.DS_Store
+.idea/
+.vscode/
+*.swp
