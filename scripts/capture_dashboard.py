@@ -1,3 +1,17 @@
+"""[폐기 2026-10-08] 이 스크립트는 더 쓰지 않는다.
+
+PIL로 영어 화면을 직접 그리던 방식이었고, 3부 9장 시절 설계(딥시크, 생성용 로컬 모델,
+가명화, VRAM 12GB, 보안 논지)를 담고 있었다. 그 설계는 모두 폐기됐다.
+
+지금은 `prototypes/dashboard_v2.html`을 실제로 렌더링해 찍는다.
+
+    python3 prototypes/capture.py
+
+그래야 시제품을 고치면 그림이 따라 바뀌고 둘이 어긋나지 않는다.
+"""
+import sys
+sys.exit("폐기된 스크립트입니다. prototypes/capture.py를 쓰세요.")
+
 import os
 from pathlib import Path
 from PIL import Image, ImageDraw, ImageFont
