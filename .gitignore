@@ -21,6 +21,8 @@ build/
 dist/
 *.egg-info/
 .orca/
+work/
+work-*/
 *.log
 .logs/
 tmp/
