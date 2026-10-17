@@ -1,0 +1,14 @@
+[
+  {
+    "sku": "SNS",
+    "name": "제품 소개 게시물",
+    "unit": "건",
+    "unit_price_krw": 200000
+  },
+  {
+    "sku": "LANDING-COPY",
+    "name": "랜딩 문구 교체",
+    "unit": "건",
+    "unit_price_krw": 500000
+  }
+]

@@ -1,0 +1,69 @@
+{
+  "mode": "local-fixture",
+  "threads": [
+    {
+      "id": "THREAD-BB-001",
+      "client": "봉봉소프트",
+      "client_id": "BB",
+      "campaign_id": "CAMP-BB-202610",
+      "messages": [
+        {
+          "id": "MSG-BB-001-1",
+          "date": "2026-10-05",
+          "from": "고객",
+          "body": "제품 소개용 콘텐츠를 준비해 주세요. 첫 발행일은 10월 12일로 생각하고 있습니다."
+        },
+        {
+          "id": "MSG-BB-001-2",
+          "date": "2026-10-05",
+          "from": "고객",
+          "body": "채널은 SNS로 정했습니다."
+        },
+        {
+          "id": "MSG-BB-001-3",
+          "date": "2026-10-05",
+          "from": "고객",
+          "body": "분량과 검수 담당자는 내부에서 정한 뒤 알려 드리겠습니다."
+        }
+      ]
+    }
+  ],
+  "calendar": [
+    {
+      "id": "CAL-BB-001",
+      "date": "2026-10-12",
+      "title": "봉봉소프트 소개 글 발행",
+      "status": "confirmed",
+      "source_event_id": "EV-BB-1005-PLAN"
+    },
+    {
+      "id": "CAL-BB-002",
+      "date": "2026-10-12",
+      "title": "검수 담당자 확인",
+      "status": "tentative",
+      "source": "MEET-BB-1008"
+    }
+  ],
+  "channels": [
+    {
+      "id": "#studio-merry-ops",
+      "service": "slack",
+      "kind": "practice"
+    },
+    {
+      "id": "kakao-memo",
+      "service": "kakaotalk",
+      "kind": "practice"
+    }
+  ],
+  "documents": [
+    {
+      "id": "DOC-BB-001",
+      "version": 1,
+      "source_event_id": "EV-BB-1005-PLAN",
+      "body": "초기 발행일: 2026-10-12",
+      "wiki_page": "wiki/campaigns/CAMP-BB-202610.md"
+    }
+  ],
+  "note": "합성 메일·캘린더·채널입니다. 실제 계정이 아닙니다."
+}

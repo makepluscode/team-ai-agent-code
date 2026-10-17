@@ -1,0 +1,13 @@
+{
+  "checked_on": "2026-10-09",
+  "provider": "anthropic",
+  "model": "검증 때 고정",
+  "source": "https://platform.claude.com/docs/en/about-claude/pricing",
+  "rates_usd_per_million": {
+    "input_tokens": null,
+    "output_tokens": null,
+    "cache_read_tokens": null,
+    "cache_write_tokens": null
+  },
+  "note": "단가는 아직 확인·고정하지 않았습니다. 이 파일의 null은 0원이 아닙니다."
+}

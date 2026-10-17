@@ -1,0 +1,28 @@
+{
+  "mode": "local-fixture",
+  "client": "봉봉소프트",
+  "campaign_id": "CAMP-BB-202610",
+  "external_writes": false,
+  "document_id": "DOC-BB-001",
+  "wiki_page": "wiki/campaigns/CAMP-BB-202610.md",
+  "versions": [
+    {
+      "version": 1,
+      "source_event_id": "EV-BB-1005-PLAN",
+      "date": "2026-10-12",
+      "status": "변경 전(보존)"
+    },
+    {
+      "version": 2,
+      "source_event_id": "EV-BB-1008-CALL",
+      "date": "2026-10-15",
+      "status": "현재"
+    }
+  ],
+  "document": {
+    "source_event_id": "EV-BB-1008-CALL",
+    "version": 2,
+    "date": "2026-10-15"
+  },
+  "wiki_equivalent": "캠페인 페이지의 현재 조건(2판)과 변경 이력(1판). 위키 갱신은 ch05-wiki-record에서 합니다."
+}

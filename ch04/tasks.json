@@ -1,0 +1,194 @@
+{
+  "chapter": "ch04",
+  "version": "draft-2026-10-15",
+  "scenario": "synthetic",
+  "tasks": [
+    {
+      "id": "ch04-research",
+      "section": "4.1",
+      "title": "자료 조사 정리",
+      "operation": "model",
+      "output": "research.md",
+      "input": "reports.md",
+      "required": [
+        "봉봉소프트",
+        "REPORT|wiki/",
+        "확인 필요"
+      ],
+      "client_id": "BB",
+      "campaign_id": "CAMP-BB-202610",
+      "context": [
+        "wiki:wiki/clients/BB.md?",
+        "wiki:wiki/campaigns/CAMP-BB-202610.md?",
+        "wiki:wiki/research/content-review.md?",
+        "wiki:guides/brands/BB.md?",
+        "input:product.md",
+        "input:reports.md"
+      ]
+    },
+    {
+      "id": "ch04-sns",
+      "section": "4.2",
+      "title": "SNS 게시물 초안",
+      "operation": "model",
+      "output": "sns-draft.md",
+      "input": "content-brief.md",
+      "required": [
+        "봉봉소프트",
+        "확인 필요"
+      ],
+      "client_id": "BB",
+      "campaign_id": "CAMP-BB-202610",
+      "context": [
+        "wiki:guides/brands/BB.md?",
+        "wiki:wiki/campaigns/CAMP-BB-202610.md?",
+        "input:product.md",
+        "input:previous-posts.json",
+        "input:content-brief.md",
+        "input:events.json"
+      ],
+      "forbidden": [
+        "자동 견적 발송"
+      ],
+      "forbidden_scope_end": [
+        "사용한 사실",
+        "쓰지 않은",
+        "제외",
+        "확인 필요",
+        "발송 전 확인"
+      ]
+    },
+    {
+      "id": "ch04-newsletter",
+      "section": "4.3",
+      "title": "뉴스레터 초안",
+      "operation": "model",
+      "output": "newsletter-draft.md",
+      "input": "content-brief.md",
+      "required": [
+        "봉봉소프트",
+        "프리헤더",
+        "CTA",
+        "확인 필요"
+      ],
+      "client_id": "BB",
+      "campaign_id": "CAMP-BB-202610",
+      "context": [
+        "wiki:guides/brands/BB.md?",
+        "wiki:wiki/campaigns/CAMP-BB-202610.md?",
+        "input:product.md",
+        "input:content-brief.md",
+        "input:events.json"
+      ],
+      "forbidden": [
+        "50%"
+      ],
+      "forbidden_scope_end": [
+        "사용한 사실",
+        "쓰지 않은",
+        "제외",
+        "확인 필요",
+        "발송 전 확인"
+      ]
+    },
+    {
+      "id": "ch04-weekly-report",
+      "section": "4.4",
+      "title": "캠페인 주간 보고",
+      "operation": "report",
+      "output": "weekly-report.md",
+      "input": "performance.csv",
+      "required": [
+        "집계 조건",
+        "계산 결과",
+        "확인 필요"
+      ],
+      "client_id": "BB",
+      "campaign_id": "CAMP-BB-202610"
+    },
+    {
+      "id": "ch04-wiki-ingest",
+      "section": "4.1~4.4",
+      "title": "콘텐츠 결과를 위키에 정리",
+      "operation": "wiki",
+      "output": "wiki-runs/ch04-wiki-ingest.json",
+      "input": "wiki/raw",
+      "required": [
+        "\"passed\": true"
+      ],
+      "client_id": "BB",
+      "campaign_id": "CAMP-BB-202610"
+    }
+  ],
+  "wiki": [
+    {
+      "id": "ch04-wiki-ingest",
+      "section": "4.1~4.4",
+      "title": "콘텐츠 결과 네 건을 위키에 정리",
+      "snapshot": "ch04",
+      "conflict": "keep",
+      "instruction": "초안 원본은 캠페인 페이지의 산출물 목록에 한 줄로 연결하고 본문을 옮겨 적지 마. 가설이나 제안을 확인된 성과로 옮기지 마.",
+      "raws": [
+        {
+          "name": "20261006_BB_CAMP-BB-202610_research.md",
+          "output": "research.md",
+          "fixture": "ch04/completed/research.md",
+          "header": {
+            "client": "BB",
+            "campaign": "CAMP-BB-202610",
+            "date": "2026-10-06",
+            "kind": "research",
+            "made_by": "기획"
+          }
+        },
+        {
+          "name": "20261007_BB_CAMP-BB-202610_sns-draft.md",
+          "output": "sns-draft.md",
+          "fixture": "ch04/completed/sns-draft.md",
+          "header": {
+            "client": "BB",
+            "campaign": "CAMP-BB-202610",
+            "date": "2026-10-07",
+            "kind": "sns-draft",
+            "made_by": "기획"
+          }
+        },
+        {
+          "name": "20261007_BB_CAMP-BB-202610_newsletter-draft.md",
+          "output": "newsletter-draft.md",
+          "fixture": "ch04/completed/newsletter-draft.md",
+          "header": {
+            "client": "BB",
+            "campaign": "CAMP-BB-202610",
+            "date": "2026-10-07",
+            "kind": "newsletter-draft",
+            "made_by": "기획"
+          }
+        },
+        {
+          "name": "20261008_BB_CAMP-BB-202610_weekly-report.md",
+          "output": "weekly-report.md",
+          "fixture": "ch04/completed/weekly-report.md",
+          "header": {
+            "client": "BB",
+            "campaign": "CAMP-BB-202610",
+            "date": "2026-10-08",
+            "kind": "weekly-report",
+            "made_by": "PM"
+          }
+        }
+      ],
+      "expect": {
+        "wiki/campaigns/CAMP-BB-202610.md": [
+          "sns-draft",
+          "newsletter-draft",
+          "weekly-report",
+          "확인 필요"
+        ],
+        "wiki/research/*.md": [
+          "20261006_BB_CAMP-BB-202610_research.md"
+        ]
+      }
+    }
+  ]
+}

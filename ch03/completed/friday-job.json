@@ -1,0 +1,13 @@
+{
+  "schedule": "0 16 * * 5",
+  "timezone": "Asia/Seoul",
+  "status": "not_registered",
+  "input": "input/의 해당 자료",
+  "output": "output/의 날짜별 파일",
+  "check": "수동 실행·저장 결과·중복 예약·휴무일 확인",
+  "steps": [
+    "위키 받기 전용(wiki_sync.py pull-only, 멈추면 중단)",
+    "이번 주 결과·수정 이력 읽기",
+    "주간 회고 초안 저장"
+  ]
+}

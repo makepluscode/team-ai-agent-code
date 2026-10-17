@@ -1,0 +1,41 @@
+[
+  {
+    "inquiry_id": "INQ-BB-D01-A",
+    "sku": "SNS",
+    "quantity": 2,
+    "discount": "0"
+  },
+  {
+    "inquiry_id": "INQ-BB-D06-A",
+    "sku": "LANDING-COPY",
+    "quantity": 1,
+    "discount": "0"
+  },
+  {
+    "inquiry_id": "INQ-DP-D08-A",
+    "sku": "VIDEO",
+    "quantity": null,
+    "discount": "0"
+  },
+  {
+    "inquiry_id": "INQ-LB-D09-A",
+    "sku": "INFLUENCER",
+    "quantity": 1,
+    "discount": "0"
+  },
+  {
+    "inquiry_id": "INQ-BB-D06-C",
+    "items": [
+      {
+        "sku": "LANDING-COPY",
+        "quantity": 2
+      },
+      {
+        "sku": "SNS",
+        "quantity": 2
+      }
+    ],
+    "discount": "0",
+    "note": "여러 상품 견적 예시(고액 1,540,000원)"
+  }
+]

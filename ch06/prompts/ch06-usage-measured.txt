@@ -1,0 +1,4 @@
+이 작업 폴더의 실행 기록({{OUTPUT_DIR}}/../run-history.jsonl)에서 상용 API로 실행한 시도만 골라 집계해 줘.
+공급자·모델별 시도 수와 입력·출력 토큰을 나누고, 실패·재시도를 함께 보여 줘.
+가격표({{INPUT}}/price-card.json)의 단가가 null이면 비용도 null로 남겨 줘. 0원으로 계산하지 마.
+결과는 {{OUTPUT}}에 JSON으로 저장해 줘.

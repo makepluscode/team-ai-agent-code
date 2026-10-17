@@ -1,0 +1,602 @@
+[
+  {
+    "id": "INQ-BB-D01-A",
+    "situation_id": "SIT-D01",
+    "split": "development-preview",
+    "data_origin": "authored-fixture",
+    "expected": {
+      "category": "견적",
+      "role": "기획",
+      "urgency": 0,
+      "contract_stop": false,
+      "review_required": false
+    },
+    "predicted": {
+      "category": "견적",
+      "role": "기획",
+      "urgency": 0,
+      "contract_stop": false,
+      "review_required": false
+    }
+  },
+  {
+    "id": "INQ-BB-D01-B",
+    "situation_id": "SIT-D01",
+    "split": "development-preview",
+    "data_origin": "authored-fixture",
+    "expected": {
+      "category": "견적",
+      "role": "기획",
+      "urgency": 0,
+      "contract_stop": false,
+      "review_required": false
+    },
+    "predicted": {
+      "category": "견적",
+      "role": "기획",
+      "urgency": 0,
+      "contract_stop": false,
+      "review_required": false
+    }
+  },
+  {
+    "id": "INQ-BB-D01-C",
+    "situation_id": "SIT-D01",
+    "split": "development-preview",
+    "data_origin": "authored-fixture",
+    "expected": {
+      "category": "견적",
+      "role": "기획",
+      "urgency": 0,
+      "contract_stop": false,
+      "review_required": false
+    },
+    "predicted": {
+      "category": "견적",
+      "role": "기획",
+      "urgency": 0,
+      "contract_stop": false,
+      "review_required": false
+    }
+  },
+  {
+    "id": "INQ-BB-D02-A",
+    "situation_id": "SIT-D02",
+    "split": "development-preview",
+    "data_origin": "authored-fixture",
+    "expected": {
+      "category": "일정",
+      "role": "PM",
+      "urgency": 1,
+      "contract_stop": false,
+      "review_required": true
+    },
+    "predicted": {
+      "category": "일정",
+      "role": "PM",
+      "urgency": 1,
+      "contract_stop": false,
+      "review_required": true
+    }
+  },
+  {
+    "id": "INQ-BB-D02-B",
+    "situation_id": "SIT-D02",
+    "split": "development-preview",
+    "data_origin": "authored-fixture",
+    "expected": {
+      "category": "일정",
+      "role": "PM",
+      "urgency": 1,
+      "contract_stop": false,
+      "review_required": true
+    },
+    "predicted": {
+      "category": "일정",
+      "role": "PM",
+      "urgency": 1,
+      "contract_stop": false,
+      "review_required": true
+    }
+  },
+  {
+    "id": "INQ-BB-D02-C",
+    "situation_id": "SIT-D02",
+    "split": "development-preview",
+    "data_origin": "authored-fixture",
+    "expected": {
+      "category": "일정",
+      "role": "PM",
+      "urgency": 1,
+      "contract_stop": false,
+      "review_required": true
+    },
+    "predicted": {
+      "category": "일정",
+      "role": "PM",
+      "urgency": 1,
+      "contract_stop": false,
+      "review_required": true
+    }
+  },
+  {
+    "id": "INQ-BB-D03-A",
+    "situation_id": "SIT-D03",
+    "split": "development-preview",
+    "data_origin": "authored-fixture",
+    "expected": {
+      "category": "단순문의",
+      "role": "개발",
+      "urgency": 0,
+      "contract_stop": false,
+      "review_required": false
+    },
+    "predicted": {
+      "category": "단순문의",
+      "role": "개발",
+      "urgency": 0,
+      "contract_stop": false,
+      "review_required": false
+    }
+  },
+  {
+    "id": "INQ-BB-D03-B",
+    "situation_id": "SIT-D03",
+    "split": "development-preview",
+    "data_origin": "authored-fixture",
+    "expected": {
+      "category": "단순문의",
+      "role": "개발",
+      "urgency": 0,
+      "contract_stop": false,
+      "review_required": false
+    },
+    "predicted": {
+      "category": "단순문의",
+      "role": "개발",
+      "urgency": 0,
+      "contract_stop": false,
+      "review_required": false
+    }
+  },
+  {
+    "id": "INQ-BB-D03-C",
+    "situation_id": "SIT-D03",
+    "split": "development-preview",
+    "data_origin": "authored-fixture",
+    "expected": {
+      "category": "단순문의",
+      "role": "개발",
+      "urgency": 0,
+      "contract_stop": false,
+      "review_required": false
+    },
+    "predicted": {
+      "category": "단순문의",
+      "role": "개발",
+      "urgency": 0,
+      "contract_stop": false,
+      "review_required": false
+    }
+  },
+  {
+    "id": "INQ-BB-D04-A",
+    "situation_id": "SIT-D04",
+    "split": "development-preview",
+    "data_origin": "authored-fixture",
+    "expected": {
+      "category": "클레임",
+      "role": "영상",
+      "urgency": 1,
+      "contract_stop": false,
+      "review_required": true
+    },
+    "predicted": {
+      "category": "클레임",
+      "role": "영상",
+      "urgency": 1,
+      "contract_stop": false,
+      "review_required": true
+    }
+  },
+  {
+    "id": "INQ-BB-D04-B",
+    "situation_id": "SIT-D04",
+    "split": "development-preview",
+    "data_origin": "authored-fixture",
+    "expected": {
+      "category": "클레임",
+      "role": "영상",
+      "urgency": 1,
+      "contract_stop": false,
+      "review_required": true
+    },
+    "predicted": {
+      "category": "클레임",
+      "role": "영상",
+      "urgency": 1,
+      "contract_stop": false,
+      "review_required": true
+    }
+  },
+  {
+    "id": "INQ-BB-D04-C",
+    "situation_id": "SIT-D04",
+    "split": "development-preview",
+    "data_origin": "authored-fixture",
+    "expected": {
+      "category": "클레임",
+      "role": "영상",
+      "urgency": 1,
+      "contract_stop": false,
+      "review_required": true
+    },
+    "predicted": {
+      "category": "클레임",
+      "role": "영상",
+      "urgency": 1,
+      "contract_stop": false,
+      "review_required": true
+    }
+  },
+  {
+    "id": "INQ-BB-D05-A",
+    "situation_id": "SIT-D05",
+    "split": "development-preview",
+    "data_origin": "authored-fixture",
+    "expected": {
+      "category": "기술",
+      "role": "개발",
+      "urgency": 2,
+      "contract_stop": false,
+      "review_required": true
+    },
+    "predicted": {
+      "category": "기술",
+      "role": "개발",
+      "urgency": 2,
+      "contract_stop": false,
+      "review_required": true
+    }
+  },
+  {
+    "id": "INQ-BB-D05-B",
+    "situation_id": "SIT-D05",
+    "split": "development-preview",
+    "data_origin": "authored-fixture",
+    "expected": {
+      "category": "기술",
+      "role": "개발",
+      "urgency": 2,
+      "contract_stop": false,
+      "review_required": true
+    },
+    "predicted": {
+      "category": "기술",
+      "role": "개발",
+      "urgency": 2,
+      "contract_stop": false,
+      "review_required": true
+    }
+  },
+  {
+    "id": "INQ-BB-D05-C",
+    "situation_id": "SIT-D05",
+    "split": "development-preview",
+    "data_origin": "authored-fixture",
+    "expected": {
+      "category": "기술",
+      "role": "개발",
+      "urgency": 2,
+      "contract_stop": false,
+      "review_required": true
+    },
+    "predicted": {
+      "category": "기술",
+      "role": "개발",
+      "urgency": 2,
+      "contract_stop": false,
+      "review_required": true
+    }
+  },
+  {
+    "id": "INQ-BB-D06-A",
+    "situation_id": "SIT-D06",
+    "split": "development-preview",
+    "data_origin": "authored-fixture",
+    "expected": {
+      "category": "견적",
+      "role": "개발",
+      "urgency": 0,
+      "contract_stop": false,
+      "review_required": false
+    },
+    "predicted": {
+      "category": "견적",
+      "role": "개발",
+      "urgency": 0,
+      "contract_stop": false,
+      "review_required": false
+    }
+  },
+  {
+    "id": "INQ-BB-D06-B",
+    "situation_id": "SIT-D06",
+    "split": "development-preview",
+    "data_origin": "authored-fixture",
+    "expected": {
+      "category": "견적",
+      "role": "개발",
+      "urgency": 0,
+      "contract_stop": false,
+      "review_required": false
+    },
+    "predicted": {
+      "category": "견적",
+      "role": "개발",
+      "urgency": 0,
+      "contract_stop": false,
+      "review_required": false
+    }
+  },
+  {
+    "id": "INQ-BB-D06-C",
+    "situation_id": "SIT-D06",
+    "split": "development-preview",
+    "data_origin": "authored-fixture",
+    "expected": {
+      "category": "견적",
+      "role": "개발",
+      "urgency": 0,
+      "contract_stop": false,
+      "review_required": false
+    },
+    "predicted": {
+      "category": "견적",
+      "role": "개발",
+      "urgency": 0,
+      "contract_stop": false,
+      "review_required": false
+    }
+  },
+  {
+    "id": "INQ-BB-D07-A",
+    "situation_id": "SIT-D07",
+    "split": "development-preview",
+    "data_origin": "authored-fixture",
+    "expected": {
+      "category": "클레임",
+      "role": "PM",
+      "urgency": 2,
+      "contract_stop": true,
+      "review_required": true
+    },
+    "predicted": {
+      "category": "클레임",
+      "role": "PM",
+      "urgency": 2,
+      "contract_stop": true,
+      "review_required": true
+    }
+  },
+  {
+    "id": "INQ-BB-D07-B",
+    "situation_id": "SIT-D07",
+    "split": "development-preview",
+    "data_origin": "authored-fixture",
+    "expected": {
+      "category": "클레임",
+      "role": "PM",
+      "urgency": 2,
+      "contract_stop": true,
+      "review_required": true
+    },
+    "predicted": {
+      "category": "클레임",
+      "role": "PM",
+      "urgency": 2,
+      "contract_stop": true,
+      "review_required": true
+    }
+  },
+  {
+    "id": "INQ-BB-D07-C",
+    "situation_id": "SIT-D07",
+    "split": "development-preview",
+    "data_origin": "authored-fixture",
+    "expected": {
+      "category": "클레임",
+      "role": "PM",
+      "urgency": 2,
+      "contract_stop": true,
+      "review_required": true
+    },
+    "predicted": {
+      "category": "클레임",
+      "role": "PM",
+      "urgency": 2,
+      "contract_stop": true,
+      "review_required": true
+    }
+  },
+  {
+    "id": "INQ-DP-D08-A",
+    "situation_id": "SIT-D08",
+    "split": "development-preview",
+    "data_origin": "authored-fixture",
+    "expected": {
+      "category": "견적",
+      "role": "영상",
+      "urgency": 0,
+      "contract_stop": false,
+      "review_required": true
+    },
+    "predicted": {
+      "category": "견적",
+      "role": "영상",
+      "urgency": 0,
+      "contract_stop": false,
+      "review_required": true
+    }
+  },
+  {
+    "id": "INQ-DP-D08-B",
+    "situation_id": "SIT-D08",
+    "split": "development-preview",
+    "data_origin": "authored-fixture",
+    "expected": {
+      "category": "견적",
+      "role": "영상",
+      "urgency": 0,
+      "contract_stop": false,
+      "review_required": true
+    },
+    "predicted": {
+      "category": "견적",
+      "role": "영상",
+      "urgency": 0,
+      "contract_stop": false,
+      "review_required": true
+    }
+  },
+  {
+    "id": "INQ-DP-D08-C",
+    "situation_id": "SIT-D08",
+    "split": "development-preview",
+    "data_origin": "authored-fixture",
+    "expected": {
+      "category": "견적",
+      "role": "영상",
+      "urgency": 0,
+      "contract_stop": false,
+      "review_required": true
+    },
+    "predicted": {
+      "category": "견적",
+      "role": "영상",
+      "urgency": 0,
+      "contract_stop": false,
+      "review_required": true
+    }
+  },
+  {
+    "id": "INQ-LB-D09-A",
+    "situation_id": "SIT-D09",
+    "split": "development-preview",
+    "data_origin": "authored-fixture",
+    "expected": {
+      "category": "견적",
+      "role": "기획",
+      "urgency": 0,
+      "contract_stop": false,
+      "review_required": true
+    },
+    "predicted": {
+      "category": "견적",
+      "role": "기획",
+      "urgency": 0,
+      "contract_stop": false,
+      "review_required": true
+    }
+  },
+  {
+    "id": "INQ-LB-D09-B",
+    "situation_id": "SIT-D09",
+    "split": "development-preview",
+    "data_origin": "authored-fixture",
+    "expected": {
+      "category": "견적",
+      "role": "기획",
+      "urgency": 0,
+      "contract_stop": false,
+      "review_required": true
+    },
+    "predicted": {
+      "category": "견적",
+      "role": "기획",
+      "urgency": 0,
+      "contract_stop": false,
+      "review_required": true
+    }
+  },
+  {
+    "id": "INQ-LB-D09-C",
+    "situation_id": "SIT-D09",
+    "split": "development-preview",
+    "data_origin": "authored-fixture",
+    "expected": {
+      "category": "견적",
+      "role": "기획",
+      "urgency": 0,
+      "contract_stop": false,
+      "review_required": true
+    },
+    "predicted": {
+      "category": "견적",
+      "role": "기획",
+      "urgency": 0,
+      "contract_stop": false,
+      "review_required": true
+    }
+  },
+  {
+    "id": "INQ-LB-D10-A",
+    "situation_id": "SIT-D10",
+    "split": "development-preview",
+    "data_origin": "authored-fixture",
+    "expected": {
+      "category": "일정",
+      "role": "PM",
+      "urgency": 1,
+      "contract_stop": false,
+      "review_required": true
+    },
+    "predicted": {
+      "category": "일정",
+      "role": "PM",
+      "urgency": 1,
+      "contract_stop": false,
+      "review_required": true
+    }
+  },
+  {
+    "id": "INQ-LB-D10-B",
+    "situation_id": "SIT-D10",
+    "split": "development-preview",
+    "data_origin": "authored-fixture",
+    "expected": {
+      "category": "일정",
+      "role": "PM",
+      "urgency": 1,
+      "contract_stop": false,
+      "review_required": true
+    },
+    "predicted": {
+      "category": "일정",
+      "role": "PM",
+      "urgency": 1,
+      "contract_stop": false,
+      "review_required": true
+    }
+  },
+  {
+    "id": "INQ-LB-D10-C",
+    "situation_id": "SIT-D10",
+    "split": "development-preview",
+    "data_origin": "authored-fixture",
+    "expected": {
+      "category": "일정",
+      "role": "PM",
+      "urgency": 1,
+      "contract_stop": false,
+      "review_required": true
+    },
+    "predicted": {
+      "category": "일정",
+      "role": "PM",
+      "urgency": 1,
+      "contract_stop": false,
+      "review_required": true
+    }
+  }
+]
