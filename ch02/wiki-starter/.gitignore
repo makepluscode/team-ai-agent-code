@@ -1,0 +1,18 @@
+# 인증 정보는 위키에 올리지 않습니다
+.env
+*.env
+*.key
+auth.json
+
+# 녹음 파일은 용량이 크고 개인정보가 담길 수 있어 올리지 않습니다
+*.mp3
+*.m4a
+*.wav
+*.mp4
+
+# 실습 작업 폴더와 임시 파일
+work/
+work-*/
+*.bak-*
+.DS_Store
+Thumbs.db
