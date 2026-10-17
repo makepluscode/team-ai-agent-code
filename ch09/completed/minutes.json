@@ -1,0 +1,42 @@
+{
+  "meeting_id": "MEET-BB-1008",
+  "source": "meeting-script.md",
+  "source_event_id": "EV-BB-1008-CALL",
+  "version": 2,
+  "decisions": [
+    {
+      "id": "DEC-BB-PUBLISH",
+      "status": "confirmed",
+      "value": "발행일 2026-10-15",
+      "evidence": "오늘 통화에서 10월 15일로 변경됐습니다.",
+      "supersedes": "EV-BB-1005-PLAN"
+    },
+    {
+      "id": "DEC-BB-REVIEW",
+      "status": "tentative",
+      "value": "2026-10-12 검수 담당자 확인",
+      "evidence": "잠정안으로 남깁니다."
+    }
+  ],
+  "cancelled": [
+    "금요일 다음 회의안"
+  ],
+  "actions": [
+    {
+      "role": "기획",
+      "task": "제품 사실과 변경 발행일을 반영한 소개 글 초안",
+      "due": "2026-10-12"
+    },
+    {
+      "role": "PM",
+      "task": "검수 담당자와 CTA 주소 확인",
+      "due": null
+    }
+  ],
+  "unknown": [
+    "최종 분량",
+    "검수 담당자",
+    "CTA 주소"
+  ],
+  "data_origin": "authored-reference"
+}

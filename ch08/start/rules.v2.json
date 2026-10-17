@@ -1,0 +1,22 @@
+{
+  "confidence_threshold": "0.85",
+  "threshold_status": "illustrative-not-calibrated",
+  "high_quote_krw": 1000000,
+  "currency": "KRW",
+  "discount": "0",
+  "tax_rate": "0.10",
+  "quantity_limit": 100,
+  "rounding": "ROUND_HALF_UP",
+  "risk_review_threshold": "0.5",
+  "note": "임계값·금액은 초고용 합성 규칙이며 개발 묶음으로 조정한 뒤 동결합니다.",
+  "criteria_rules": [
+    {
+      "id": "CRIT-OFFLIST-PM",
+      "when": "quote_sku_not_in_price_list",
+      "reason": "단가표 밖 협업 요청: 확인 책임자 PM",
+      "confirm_owner": "PM",
+      "status": "적용",
+      "source": "wiki/criteria/inquiry-routing.md"
+    }
+  ]
+}

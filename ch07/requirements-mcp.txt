@@ -1,0 +1,2 @@
+# Optional: chapter 5's synthetic service server, separate from the dashboard.
+mcp==2.3.0
