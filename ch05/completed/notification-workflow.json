@@ -1,0 +1,16 @@
+{
+  "mode": "local-fixture",
+  "client": "봉봉소프트",
+  "campaign_id": "CAMP-BB-202610",
+  "external_writes": false,
+  "channel": "#studio-merry-ops",
+  "channel_kind": "연습 채널",
+  "status": "not_sent",
+  "wiki_page": "wiki/campaigns/CAMP-BB-202610.md",
+  "body": "[봉봉소프트] 채널 SNS 확정, 분량 문의 답장 초안 확인 대기 / wiki/campaigns/CAMP-BB-202610.md / 위키를 동기화하고 캠페인 페이지의 채널을 확인한 뒤 게시물 초안 형식을 맞춰 주세요.",
+  "alternative": {
+    "channel": "kakao-memo",
+    "status": "not_sent",
+    "note": "카카오톡 수신 범위는 확인 필요"
+  }
+}

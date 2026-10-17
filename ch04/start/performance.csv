@@ -1,0 +1,4 @@
+period,client_id,campaign_id,channel,impressions,clicks,leads,data_origin
+2026-10-05/2026-10-08,BB,CAMP-BB-202610,SNS,1000,20,,synthetic
+2026-10-05/2026-10-08,BB,CAMP-BB-202610,newsletter,500,15,3,synthetic
+2026-09-28/2026-10-01,BB,CAMP-BB-202610,SNS,800,,,synthetic

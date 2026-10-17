@@ -1,0 +1,25 @@
+[
+  {
+    "id": "EV-BB-1005-PLAN",
+    "date": "2026-10-05",
+    "client_id": "BB",
+    "campaign_id": "CAMP-BB-202610",
+    "kind": "plan",
+    "effective_date": "2026-10-12",
+    "source": "연습 메일 THREAD-BB-001"
+  },
+  {
+    "id": "EV-BB-1008-CALL",
+    "date": "2026-10-08",
+    "client_id": "BB",
+    "campaign_id": "CAMP-BB-202610",
+    "kind": "confirmed_change",
+    "effective_date": "2026-10-15",
+    "supersedes": "EV-BB-1005-PLAN",
+    "source": "PM이 적은 합성 통화 메모",
+    "unconfirmed": [
+      "최종 분량",
+      "검수 담당자"
+    ]
+  }
+]
