@@ -1,0 +1,6 @@
+[project]
+name = "ch10-03-wiki-audit"
+version = "0.1.0"
+description = "10장 모순과 오래된 기록 점검 예제"
+requires-python = ">=3.11"
+dependencies = []

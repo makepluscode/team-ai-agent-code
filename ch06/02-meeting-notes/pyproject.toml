@@ -1,0 +1,6 @@
+[project]
+name = "ch06-02-meeting-notes"
+version = "0.1.0"
+description = "6장 회의 결정과 할 일 추출 예제"
+requires-python = ">=3.11"
+dependencies = []

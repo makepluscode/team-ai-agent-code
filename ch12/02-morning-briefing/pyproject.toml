@@ -1,0 +1,6 @@
+[project]
+name = "ch12-02-morning-briefing"
+version = "0.1.0"
+description = "12장 회의록과 아침 브리핑 통합 예제"
+requires-python = ">=3.11"
+dependencies = []

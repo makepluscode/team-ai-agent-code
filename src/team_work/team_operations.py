@@ -141,6 +141,7 @@ def run_due(workspace, owner, at=None):
             if status["working_hours"]:
                 result = briefing(workspace, at)
                 path = Path(workspace) / "output" / f"briefing-{run_id}.json"
+                path.parent.mkdir(parents=True, exist_ok=True)
                 with path.open("x", encoding="utf-8") as stream:
                     json.dump(result, stream, ensure_ascii=False, indent=2)
                 run.update(status="succeeded-record-briefing", output_ref=str(path.relative_to(Path(workspace))))

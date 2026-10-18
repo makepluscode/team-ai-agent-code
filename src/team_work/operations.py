@@ -88,16 +88,16 @@ def backup(workspace, destination):
     if destination.exists() or destination.is_relative_to(work):
         raise ValueError("작업 폴더 밖의 새 백업 경로를 고르세요.")
     verify(work)
-    if any(p.is_symlink() for p in work.rglob("*")):
+    # uv가 예제 폴더에 만드는 실행 환경(.venv)은 자료가 아니므로 백업하지 않는다
+    data = [p for p in work.rglob("*") if ".venv" not in p.relative_to(work).parts]
+    if any(p.is_symlink() for p in data):
         raise ValueError("심볼릭 링크가 있는 폴더는 백업하지 않습니다.")
     if (work / "output/personal-schedule.lock").exists() or (
         work / "state/team-operation.lock"
     ).exists():
         raise ValueError("예약 실행 또는 팀 작업이 끝난 뒤 백업하세요.")
     # SQLite's backup API snapshots a live DB consistently, including committed WAL data.
-    databases = [
-        p for p in work.rglob("*") if p.is_file() and p.suffix in {".sqlite3", ".sqlite", ".db"}
-    ]
+    databases = [p for p in data if p.is_file() and p.suffix in {".sqlite3", ".sqlite", ".db"}]
     ignored = {
         str(p)
         for db in databases
@@ -105,7 +105,7 @@ def backup(workspace, destination):
     }
 
     def ignore(folder, names):
-        return [name for name in names if str(Path(folder) / name) in ignored]
+        return [name for name in names if str(Path(folder) / name) in ignored or name == ".venv"]
 
     shutil.copytree(work, destination, ignore=ignore)
     for path in databases:

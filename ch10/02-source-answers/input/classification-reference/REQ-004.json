@@ -1,0 +1,13 @@
+{
+  "request_id": "REQ-004",
+  "type": "일정 조정",
+  "owner_candidates": [
+    "M01"
+  ],
+  "urgency": "보통",
+  "needs_confirmation": false,
+  "evidence": "안내의 확정 시각과 장소를 확인해 주세요.",
+  "confirmation_reason": "",
+  "artifact_kind": "author-reference",
+  "data_kind": "synthetic"
+}

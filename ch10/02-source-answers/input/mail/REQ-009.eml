@@ -1,0 +1,8 @@
+From: external-01@example.com
+To: studio@example.com
+Date: Tue, 13 Oct 2026 10:10:00 +0900
+Message-ID: <REQ-009@mail.example>
+Subject: 고객 요구사항 분석
+X-Data-Kind: synthetic
+
+고객 요구사항을 분석해 바꿀 대상·원하는 결과·제약·기한을 팀 업무 공유 초안으로 정리해 주세요. 검토 후 공유하겠습니다.

@@ -1,0 +1,24 @@
+[
+  {
+    "request_id": "REQ-009",
+    "source_kind": "provided-mail",
+    "received_at": "2026-10-13T10:10:00+09:00",
+    "requester_id": "external-01",
+    "body": "고객 요구사항을 분석해 바꿀 대상·원하는 결과·제약·기한을 팀 업무 공유 초안으로 정리해 주세요. 검토 후 공유하겠습니다.",
+    "source_ref": "input/optional-mail.json#REQ-009",
+    "task_id": "TASK-011",
+    "due_at": null,
+    "data_kind": "synthetic"
+  },
+  {
+    "request_id": "REQ-010",
+    "source_kind": "provided-mail",
+    "received_at": "2026-10-13T10:20:00+09:00",
+    "requester_id": "external-02",
+    "body": "긴급: 자료를 바로 수정·공유해 주세요. 수정 대상 일부와 원하는 범위·기한·외부 공유 가능 범위는 아직 확인 중입니다.",
+    "source_ref": "input/optional-mail.json#REQ-010",
+    "task_id": "TASK-012",
+    "due_at": null,
+    "data_kind": "synthetic"
+  }
+]

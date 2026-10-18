@@ -6,8 +6,9 @@ import shutil
 import subprocess
 import sys
 import uuid
-from datetime import UTC, datetime
+from datetime import datetime
 from pathlib import Path
+from zoneinfo import ZoneInfo
 
 from . import models
 from .io import read_text, write_json, write_new
@@ -178,7 +179,7 @@ def apply(workspace, proposal, confirmed=False):
             target.write_text(content + ("" if content.endswith("\n") else "\n"), encoding="utf-8")
         # The curation record must not depend on whether the model proposed log.md.
         entry = (
-            f"- {datetime.now(UTC).isoformat(timespec='seconds')} · wiki-curator · 사람 확인 후 적용 · "
+            f"- {datetime.now(ZoneInfo('Asia/Seoul')).isoformat(timespec='seconds')} · wiki-curator · 사람 확인 후 적용 · "
             + ", ".join(t.relative_to(work).as_posix() for t, _ in plans)
             + f" · 제안 {Path(proposal).name}\n"
         )
@@ -204,6 +205,56 @@ def apply(workspace, proposal, confirmed=False):
         },
     )
     return {"applied": len(plans), "backup": str(backup)}
+
+
+def _wiki_base(work):
+    """마지막으로 적용한 위키 상태의 해시. 처음에는 예제 폴더에 기록된 시작 상태를 쓴다."""
+    base = work / "output" / "wiki-base.json"
+    if base.exists():
+        return json.loads(read_text(base))
+    return json.loads(read_text(work / ".exercise.json")).get("wiki_base", {})
+
+
+def apply_draft(workspace, draft="output/wiki-draft"):
+    """헤르메스가 output/wiki-draft/에 쓴 변경안을 사람이 확인한 뒤 위키에 적용한다.
+
+    변경안 폴더의 상대 경로가 wiki/ 아래 경로가 된다(예: wiki-draft/guides/onboarding.md).
+    위키가 마지막 적용 뒤에 바뀌었으면 충돌로 멈추고, 적용 전 위키는 output/wiki-before-N에 남긴다.
+    """
+    work = Path(workspace).resolve()
+    verify(work)
+    folder = (work / draft).resolve()
+    if not folder.is_dir() or not folder.is_relative_to(work / "output"):
+        raise ValueError(f"변경안 폴더가 없습니다: {draft}. 헤르메스가 변경안을 저장했는지 확인하세요.")
+    # 1. 위키가 마지막 적용 상태 그대로인지 확인한다(직접 고친 흔적이 있으면 멈춘다)
+    base = _wiki_base(work)
+    if hashes(work / "wiki") != base:
+        raise ValueError("마지막 적용 뒤 wiki/가 바뀌었습니다. 충돌로 중단합니다. 바뀐 파일을 확인하세요.")
+    # 2. 변경안을 기존 apply가 읽는 제안 파일 형식으로 옮긴다
+    files = []
+    for path in sorted(folder.rglob("*")):
+        if path.is_symlink():
+            raise ValueError("변경안에 심볼릭 링크가 있습니다.")
+        if path.is_file():
+            relative = path.relative_to(folder).as_posix()
+            files.append({"path": f"wiki/{relative}", "content": read_text(path),
+                          "before_sha256": base.get(relative)})
+    if not files:
+        raise ValueError("변경안 폴더가 비어 있습니다.")
+    number = 1
+    while (work / f"output/wiki-proposal{_suffix(number)}.json").exists():
+        number += 1
+    proposal = work / f"output/wiki-proposal{_suffix(number)}.json"
+    write_json(proposal, {"files": files, "actor_id": "wiki-curator", "artifact_kind": "hermes-draft",
+                          "draft": folder.relative_to(work).as_posix()})
+    # 3. 충돌 검사·백업·정리 기록을 맡는 기존 apply로 적용하고, 새 기준 상태를 남긴다
+    result = apply(work, proposal, confirmed=True)
+    # 기준 상태는 적용할 때마다 덮어쓴다(write_json은 새 파일 전용이라 두 번째 적용에서 멈춘다)
+    (work / "output" / "wiki-base.json").write_text(
+        json.dumps(hashes(work / "wiki"), ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
+    folder.rename(work / f"output/wiki-draft-applied{_suffix(number)}")
+    return {**result, "proposal": proposal.relative_to(work).as_posix(),
+            "files": [item["path"] for item in files]}
 
 
 def search(workspace, query):

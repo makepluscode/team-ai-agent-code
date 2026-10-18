@@ -1,0 +1,14 @@
+{
+  "request_id": "REQ-010",
+  "type": "기타/복합",
+  "owner_candidates": [
+    "M02",
+    "M01"
+  ],
+  "urgency": "보통",
+  "needs_confirmation": true,
+  "evidence": "긴급: 자료를 바로 수정·공유해 주세요. 수정 대상 일부와 원하는 범위·기한·외부 공유 가능 범위는 아직 확인 중입니다.",
+  "confirmation_reason": "추가 증상·범위·기한·출처 또는 사람의 수정 확인 필요",
+  "artifact_kind": "author-reference",
+  "data_kind": "synthetic"
+}

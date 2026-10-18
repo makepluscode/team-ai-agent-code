@@ -2,7 +2,7 @@
 
 『팀 AI 에이전트 실전』의 실습 예제입니다. 장과 예제 순서대로 폴더를 나눴고, 예제 폴더 하나에 그 실습에 필요한 지시문·입력 자료·비교용 결과·확인 스크립트가 모두 들어 있습니다.
 
-## 예제 구성(1~3장)
+## 예제 구성
 
 | 디렉터리 | 주제 | 책 |
 |---|---|---|
@@ -15,8 +15,35 @@
 | [ch03/02-weekly-report](ch03/02-weekly-report/) | 노트 8개로 주간 보고 | 3.2절 |
 | [ch03/03-weekly-skill](ch03/03-weekly-skill/) | 주간 보고 스킬 등록과 짧은 요청 재실행 | 3.3절 |
 | [ch03/04-weekly-schedule](ch03/04-weekly-schedule/) | 금요일 개인 예약 등록·즉시 실행·중지 | 3.4절 |
+| [ch04/01-wiki-folder](ch04/01-wiki-folder/) | 로컬 위키 폴더와 정리 규칙 확인 | 4.1~4.2절 |
+| [ch04/02-first-page](ch04/02-first-page/) | 첫 위키 페이지 정리 | 4.3절 |
+| [ch04/03-source-query](ch04/03-source-query/) | 위키 출처 조회 | 4.4절 |
+| [ch05/01-share-repo](ch05/01-share-repo/) | 팀 위키 저장소 준비 | 5.1절 |
+| [ch05/02-wiki-sync](ch05/02-wiki-sync/) | 위키 동기화 스킬 | 5.2절 |
+| [ch05/03-change-memo](ch05/03-change-memo/) | 동료의 변경 메모 반영 | 5.3절 |
+| [ch05/04-member-revision](ch05/04-member-revision/) | 위키를 받은 동료의 결과 수정 | 5.4절 |
+| [ch05/05-skill-share](ch05/05-skill-share/) | 공유 스킬 배포 | 5.5절 |
+| [ch06/01-meeting-input](ch06/01-meeting-input/) | 회의 입력 자료와 로컬 전사 | 6.1~6.2절 |
+| [ch06/02-meeting-notes](ch06/02-meeting-notes/) | 회의 결정과 할 일 추출 | 6.3절 |
+| [ch06/03-decision-wiki](ch06/03-decision-wiki/) | 회의 결정의 위키 반영 | 6.4절 |
+| [ch07/01-request-intake](ch07/01-request-intake/) | 내부 요청 접수와 처리 기록 | 7.1~7.2절 |
+| [ch07/02-mcp-lookup](ch07/02-mcp-lookup/) | 조회 전용 MCP 연결 | 7.3절 |
+| [ch07/03-mail-input](ch07/03-mail-input/) | 추가 입력 경로인 메일 | 7.4절 |
+| [ch08/01-classify-requests](ch08/01-classify-requests/) | 요청 분류와 담당 제안 | 8.1~8.3절 |
+| [ch08/02-compare-paths](ch08/02-compare-paths/) | 판정 경로 비교 | 8.4절 |
+| [ch09/01-review-inputs](ch09/01-review-inputs/) | 검토 대상 점검과 확인 기준 | 9.1~9.2절 |
+| [ch09/02-review-and-fix](ch09/02-review-and-fix/) | 수정 요청과 다시 확인 | 9.3절 |
+| [ch09/03-criteria-wiki](ch09/03-criteria-wiki/) | 판단 기준의 위키 반영 | 9.4절 |
+| [ch10/01-revision-search](ch10/01-revision-search/) | 문서 버전 관리와 위키 검색 | 10.1~10.2절 |
+| [ch10/02-source-answers](ch10/02-source-answers/) | 출처가 있는 답변 | 10.3절 |
+| [ch10/03-wiki-audit](ch10/03-wiki-audit/) | 모순과 오래된 기록 점검 | 10.4절 |
+| [ch11/01-team-hermes](ch11/01-team-hermes/) | 헤르메스 한 대로 모으기 | 11.1절 |
+| [ch11/02-team-dashboard](ch11/02-team-dashboard/) | 팀 대시보드 조회와 동료 접속 | 11.2~11.4절 |
+| [ch12/01-dashboard-work](ch12/01-dashboard-work/) | 대시보드에서 지시와 상태 변경 | 12.1~12.2절 |
+| [ch12/02-morning-briefing](ch12/02-morning-briefing/) | 회의록과 아침 브리핑 통합 | 12.3절 |
+| [ch12/03-hours-backup](ch12/03-hours-backup/) | 업무시간 운영과 백업·복구 | 12.4절 |
 
-4~12장은 아직 아래 'v1.7 기능별 실습'의 `src/team_work/`·`examples/` 구성을 씁니다. 같은 장·예제 폴더 구조로 옮기는 작업이 남아 있습니다.
+4~12장 예제 폴더는 `tools/make_chapter_examples.py`가 `tools/chapter_example_specs.py`의 명세로 만듭니다. 예제를 고칠 때는 명세를 고친 뒤 `python3 tools/make_chapter_examples.py`로 다시 만듭니다. 4장부터는 확정적인 처리를 예제 폴더의 main.py가 맡습니다(`uv run main.py <단계>`, 단계 목록은 main.py 머리 설명).
 
 ## 실행 방법
 
@@ -58,9 +85,9 @@ uv run --extra dev python -m pytest tests legacy/ch02/tests -q
 
 ---
 
-## v1.7 기능별 실습(4~12장)
+## 제공 코드(src/team_work/)
 
-4~12장 실습은 `src/team_work/`와 `examples/`를 사용합니다. `book-exercises.yaml`은 장→시작 자료·지시문·편집 비교 결과·명령·확인 기준 연결표입니다. 파일 내용은 JSON 호환 YAML입니다. 구판 legacy/chNN/·run.py·part3.py·wiki.py는 재현용으로 보존합니다. examples/documents/ch01~ch03은 1~3장 예제 폴더로 옮기기 전 구성이며 prepare 호환을 위해 남겨 둡니다.
+예제 폴더의 main.py가 부르는 제공 코드입니다. 이전 실습 경로 `src/team_work/`와 `examples/`를 사용합니다. `book-exercises.yaml`은 장→시작 자료·지시문·편집 비교 결과·명령·확인 기준 연결표입니다. 파일 내용은 JSON 호환 YAML입니다. 구판 legacy/chNN/·run.py·part3.py·wiki.py는 재현용으로 보존합니다. examples/documents/ch01~ch03은 1~3장 예제 폴더로 옮기기 전 구성이며 prepare 호환을 위해 남겨 둡니다.
 
 ```sh
 uv sync --extra dev

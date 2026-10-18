@@ -1,0 +1,6 @@
+[project]
+name = "ch09-01-review-inputs"
+version = "0.1.0"
+description = "9장 검토 대상 점검과 확인 기준 예제"
+requires-python = ">=3.11"
+dependencies = []

@@ -1,0 +1,6 @@
+[project]
+name = "ch07-01-request-intake"
+version = "0.1.0"
+description = "7장 내부 요청 접수와 처리 기록 예제"
+requires-python = ">=3.11"
+dependencies = []

@@ -41,3 +41,4 @@ tmp/
 # 장별 예제 폴더에서 실행했을 때 생기는 결과
 ch*/*/output/
 ch*/*/.venv/
+ch*/*/state/

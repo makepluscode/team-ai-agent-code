@@ -1,0 +1,25 @@
+# 03-decision-wiki: 회의 결정의 위키 반영
+
+사람이 확인한 회의록(DOC-012@r1)을 raw/에 등록하고, 헤르메스가 wiki-curator로 결정 페이지와 안내 페이지의 변경안을 쓴 뒤
+사람이 확인하고 적용합니다. 책 6.4절에 대응합니다.
+
+## 실행 방법
+
+```bash
+cd ~/agent-work/ch06/03-decision-wiki
+uv run main.py register
+hermes chat --query-file prompt.md
+uv run main.py apply
+uv run check.py
+```
+
+## 폴더 구성
+
+| 파일 | 역할 |
+|---|---|
+| input/DOC-012_meeting-notes.md | 확인한 회의록(비교용 편집 예시를 확인본으로 사용) |
+| raw/·wiki/ | 5장까지의 원본과 위키 |
+| prompt.md | 결정 반영 지시문 |
+| main.py | register: 회의록 등록 / apply: 변경안 적용 |
+| expected/wiki/ | 비교용 결정 페이지 |
+| check.py | 원본 보존·등록·페이지 저장 확인 |

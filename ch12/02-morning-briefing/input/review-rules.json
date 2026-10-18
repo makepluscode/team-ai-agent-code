@@ -1,0 +1,25 @@
+{
+  "transitions": {
+    "접수": [
+      "진행",
+      "확인 대기"
+    ],
+    "진행": [
+      "확인 대기"
+    ],
+    "확인 대기": [
+      "수정 필요",
+      "완료"
+    ],
+    "수정 필요": [
+      "진행"
+    ],
+    "완료": []
+  },
+  "completion_requires": "명부의 사람이 결과·수정이유·근거 확인",
+  "parent_requires_all_children_complete": true,
+  "source_immutable": true,
+  "missing_is_not_zero": true,
+  "external_send": "별도 사람 수행; 제공 코드에 발송 기능 없음",
+  "data_kind": "synthetic"
+}

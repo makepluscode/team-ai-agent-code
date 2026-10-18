@@ -1,0 +1,137 @@
+[
+  {
+    "document_ref": "DOC-001@r1",
+    "source_path": "examples/documents/ch01/start/input/DOC-001_onboarding.md",
+    "preserved_path": "raw/DOC-001_r1.md",
+    "sha256": "ae5f61026f5286dcad9cb41e791edc9b4cd05585b1ba8300b9cf9ecb3cd2e58d",
+    "artifact_kind": "synthetic-source"
+  },
+  {
+    "document_ref": "DOC-002@r1",
+    "source_path": "examples/meetings/ch06/start/raw/DOC-002_library-rules.md",
+    "preserved_path": "raw/DOC-002_r1.md",
+    "sha256": "7ba1c8734df98eeb8b9d57500a32cafa7e0ecdedf71fc15369f339b8c5152756",
+    "artifact_kind": "synthetic-source"
+  },
+  {
+    "document_ref": "DOC-004@r1",
+    "source_path": "examples/documents/ch03/start/input/DOC-004_weekly-meetings.md",
+    "preserved_path": "raw/DOC-004_r1.md",
+    "sha256": "6b7964eb758bd13149cf7e6361761db31928e201f6f75bca44ed2fe6af1ee7a7",
+    "artifact_kind": "synthetic-source"
+  },
+  {
+    "document_ref": "DOC-007@r1",
+    "source_path": "examples/documents/ch03/reference/DOC-007_onboarding-guide.r1.md",
+    "preserved_path": "raw/DOC-007_r1.md",
+    "sha256": "320abfbb99a6c59241783c894b4c8a86229ea69fc9147ad54fa3a6164a5b1902",
+    "artifact_kind": "author-reference"
+  },
+  {
+    "document_ref": "DOC-007@r2",
+    "source_path": "examples/wiki/ch05/reference/DOC-007_onboarding-guide.r2.md",
+    "preserved_path": "raw/DOC-007_r2.md",
+    "sha256": "f4f85037454e46a1689b3a867aeec88595227597ed4ebe131b816e9a54c624b0",
+    "artifact_kind": "author-reference"
+  },
+  {
+    "document_ref": "DOC-009@r1",
+    "source_path": "examples/documents/ch03/reference/DOC-009_weekly-report.r1.md",
+    "preserved_path": "raw/DOC-009_r1.md",
+    "sha256": "411ca8cbafc43b15fdab35db78d9a5d66327b639c8b64eb0f295366083eee3eb",
+    "artifact_kind": "author-reference"
+  },
+  {
+    "document_ref": "DOC-010@r1",
+    "source_path": "examples/wiki/ch05/start/input/DOC-010_schedule-change.md",
+    "preserved_path": "raw/DOC-010_r1.md",
+    "sha256": "7e7af9364b2335ae8b9801c766bcff4b95beb677e4467ddf9c885c0423fb8467",
+    "artifact_kind": "synthetic-source"
+  },
+  {
+    "document_ref": "DOC-011@r1",
+    "source_path": "examples/meetings/ch06/start/raw/DOC-011_transcript-fallback.md",
+    "preserved_path": "raw/DOC-011_r1.md",
+    "sha256": "5fb3bf7f14111965db40cf1480e93ed07f4c1ecbf93f52b3ed428131d3ee7430",
+    "artifact_kind": "synthetic-source"
+  },
+  {
+    "document_ref": "DOC-012@r1",
+    "source_path": "examples/meetings/ch06/reference/DOC-012_meeting-notes.md",
+    "preserved_path": "raw/DOC-012_r1.md",
+    "sha256": "bf52a68a94ced64dc098d09a8d8b6881ca6814e103c4ef0015eb6f5cae2870d0",
+    "artifact_kind": "author-reference"
+  },
+  {
+    "document_ref": "DOC-004@r1#2026-10-02_회의노트_주간회의.md",
+    "original_path": "input/organized/2026-10-02_회의노트_주간회의.md",
+    "preserved_path": "raw/report-input/organized/2026-10-02_회의노트_주간회의.md",
+    "source_path": "examples/documents/ch03/start/input/organized/2026-10-02_회의노트_주간회의.md",
+    "sha256": "4cc501917c74b057ad9990eed11e8fae6850805c3f973477d65d25697913445f",
+    "artifact_kind": "synthetic-source"
+  },
+  {
+    "document_ref": "DOC-004@r1#2026-10-05_회의노트_주간회의.md",
+    "original_path": "input/organized/2026-10-05_회의노트_주간회의.md",
+    "preserved_path": "raw/report-input/organized/2026-10-05_회의노트_주간회의.md",
+    "source_path": "examples/documents/ch03/start/input/organized/2026-10-05_회의노트_주간회의.md",
+    "sha256": "09608240752cdb5c48b3fb45bb09ffd3bad75652b1b0999f4ac415e810f1af1c",
+    "artifact_kind": "synthetic-source"
+  },
+  {
+    "document_ref": "DOC-004@r1#2026-10-06_대화기록_온보딩준비.txt",
+    "original_path": "input/organized/2026-10-06_대화기록_온보딩준비.txt",
+    "preserved_path": "raw/report-input/organized/2026-10-06_대화기록_온보딩준비.txt",
+    "source_path": "examples/documents/ch03/start/input/organized/2026-10-06_대화기록_온보딩준비.txt",
+    "sha256": "ba1c96b191c1fdf8b19cd5c8f7766d726285d1d6afafddb3a249bd6ed720f6dc",
+    "artifact_kind": "synthetic-source"
+  },
+  {
+    "document_ref": "DOC-004@r1#2026-10-06_업무노트_비교표작성.md",
+    "original_path": "input/organized/2026-10-06_업무노트_비교표작성.md",
+    "preserved_path": "raw/report-input/organized/2026-10-06_업무노트_비교표작성.md",
+    "source_path": "examples/documents/ch03/start/input/organized/2026-10-06_업무노트_비교표작성.md",
+    "sha256": "7b96c12336ef17f827588efc94cc30962a33726106bd0a8202f2c3d82ce8ef99",
+    "artifact_kind": "synthetic-source"
+  },
+  {
+    "document_ref": "DOC-004@r1#2026-10-06_회의노트_원온원.txt",
+    "original_path": "input/organized/2026-10-06_회의노트_원온원.txt",
+    "preserved_path": "raw/report-input/organized/2026-10-06_회의노트_원온원.txt",
+    "source_path": "examples/documents/ch03/start/input/organized/2026-10-06_회의노트_원온원.txt",
+    "sha256": "d5fc21fa6ec23628b77cf7ccceed2de5a4d26835313a0ca53d9e8ff6a9076d15",
+    "artifact_kind": "synthetic-source"
+  },
+  {
+    "document_ref": "DOC-004@r1#2026-10-07_업무노트_준비상태점검.txt",
+    "original_path": "input/organized/2026-10-07_업무노트_준비상태점검.txt",
+    "preserved_path": "raw/report-input/organized/2026-10-07_업무노트_준비상태점검.txt",
+    "source_path": "examples/documents/ch03/start/input/organized/2026-10-07_업무노트_준비상태점검.txt",
+    "sha256": "933028553f258c08a1b0d41b472377727eab07c1f0843bab8af1aeedb01c69f1",
+    "artifact_kind": "synthetic-source"
+  },
+  {
+    "document_ref": "DOC-004@r1#snapshot.json",
+    "original_path": "input/snapshot.json",
+    "preserved_path": "raw/report-input/snapshot.json",
+    "source_path": "examples/documents/ch03/start/input/snapshot.json",
+    "sha256": "55cae40a6f04c5bbeca0f3bdb1996f69a83e2ba11463c7b69739672df072e116",
+    "artifact_kind": "synthetic-source"
+  },
+  {
+    "document_ref": "DOC-004@r1#2026-10-05_업무노트_할일.txt",
+    "original_path": "input/organized/2026-10-05_업무노트_할일.txt",
+    "preserved_path": "raw/report-input/organized/2026-10-05_업무노트_할일.txt",
+    "source_path": "examples/documents/ch03/start/input/organized/2026-10-05_업무노트_할일.txt",
+    "sha256": "98ec89ace2353f88154f84bc1c7bee57903fdbb4645396904f286ca7deba57f0",
+    "artifact_kind": "synthetic-source"
+  },
+  {
+    "document_ref": "DOC-004@r1#2026-10-06_업무노트_회의실문의.txt",
+    "original_path": "input/organized/2026-10-06_업무노트_회의실문의.txt",
+    "preserved_path": "raw/report-input/organized/2026-10-06_업무노트_회의실문의.txt",
+    "source_path": "examples/documents/ch03/start/input/organized/2026-10-06_업무노트_회의실문의.txt",
+    "sha256": "c0306db9ea7a3df6862d789b4481e3bef8aa6e048ab782ee01fa6f667edcd189",
+    "artifact_kind": "synthetic-source"
+  }
+]

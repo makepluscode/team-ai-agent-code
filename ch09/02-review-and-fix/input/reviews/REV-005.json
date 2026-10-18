@@ -1,0 +1,12 @@
+{
+  "review_id": "REV-005",
+  "request_id": "REQ-010",
+  "task_id": "TASK-012",
+  "before_ref": "input/optional-mail.json#REQ-010",
+  "after_ref": "output/REV-005-question.md",
+  "reason": "외부 공유 범위 확인 전 확인 대기 유지. 외부 발송 없음",
+  "source_refs": [
+    "input/optional-mail.json#REQ-010"
+  ],
+  "data_kind": "synthetic"
+}

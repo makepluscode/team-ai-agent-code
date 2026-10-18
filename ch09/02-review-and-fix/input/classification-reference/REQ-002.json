@@ -1,0 +1,13 @@
+{
+  "request_id": "REQ-002",
+  "type": "문서 작성/수정",
+  "owner_candidates": [
+    "M02"
+  ],
+  "urgency": "보통",
+  "needs_confirmation": true,
+  "evidence": "남아 있는 12일 온보딩 가이드를 회의의 최신 결정으로 수정해 주세요.",
+  "confirmation_reason": "추가 증상·범위·기한·출처 또는 사람의 수정 확인 필요",
+  "artifact_kind": "author-reference",
+  "data_kind": "synthetic"
+}

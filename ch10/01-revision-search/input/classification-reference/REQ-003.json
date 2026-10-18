@@ -1,0 +1,13 @@
+{
+  "request_id": "REQ-003",
+  "type": "도구 문제",
+  "owner_candidates": [
+    "M05"
+  ],
+  "urgency": "높음",
+  "needs_confirmation": true,
+  "evidence": "파일이 열리지 않습니다. 오늘 12:00 작업 전에 확인해 주세요. 오류 문구는 아직 전달하지 못했습니다.",
+  "confirmation_reason": "추가 증상·범위·기한·출처 또는 사람의 수정 확인 필요",
+  "artifact_kind": "author-reference",
+  "data_kind": "synthetic"
+}

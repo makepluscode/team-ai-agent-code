@@ -1,0 +1,16 @@
+{
+  "meeting_id": "MTG-001",
+  "data_kind": "synthetic",
+  "audio": null,
+  "audio_sha256": null,
+  "audio_duration_seconds": null,
+  "fallback": "DOC-011_transcript-fallback.md",
+  "fallback_kind": "authored-not-audio-verified",
+  "transcription_executed": false,
+  "speaker_identification": false,
+  "TODO": [
+    "1분 확인 음원·5분 본 음원 제작",
+    "음원 길이·음성·해시·구간 청취 대조",
+    "Windows WSL2와 Mac mini M4 전사 검증"
+  ]
+}

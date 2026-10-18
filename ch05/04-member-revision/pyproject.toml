@@ -1,0 +1,6 @@
+[project]
+name = "ch05-04-member-revision"
+version = "0.1.0"
+description = "5장 위키를 받은 동료의 결과 수정 예제"
+requires-python = ">=3.11"
+dependencies = []

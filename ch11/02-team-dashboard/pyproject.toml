@@ -1,0 +1,11 @@
+[project]
+name = "ch11-02-team-dashboard"
+version = "0.1.0"
+description = "11장 팀 대시보드 조회와 동료 접속 예제"
+requires-python = ">=3.11"
+dependencies = [
+    "fastapi>=0.115.0",
+    "uvicorn[standard]>=0.30.0",
+    "jinja2>=3.1.4",
+    "python-multipart>=0.0.9",
+]

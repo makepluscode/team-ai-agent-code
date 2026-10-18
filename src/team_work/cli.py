@@ -37,7 +37,7 @@ def parser():
         )
     )
     p = commands.add_parser("wiki", help="명시적 원본 등록·정리 제안·사람 확인")
-    p.add_argument("action", choices=["register", "propose", "apply", "search"])
+    p.add_argument("action", choices=["register", "propose", "apply", "apply-draft", "search"])
     p.add_argument("--workspace", type=Path, required=True)
     p.add_argument("--source", type=Path)
     p.add_argument("--proposal", type=Path)
@@ -51,6 +51,8 @@ def parser():
             return wiki.register(a.workspace, a.source)
         if a.action == "propose":
             return wiki.propose(a.workspace)
+        if a.action == "apply-draft":
+            return wiki.apply_draft(a.workspace)
         if a.action == "apply":
             if not a.proposal:
                 raise ValueError("--proposal이 필요합니다.")

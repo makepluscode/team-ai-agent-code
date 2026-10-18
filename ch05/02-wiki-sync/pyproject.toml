@@ -1,0 +1,6 @@
+[project]
+name = "ch05-02-wiki-sync"
+version = "0.1.0"
+description = "5장 위키 동기화 스킬 예제"
+requires-python = ">=3.11"
+dependencies = []

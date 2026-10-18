@@ -1,0 +1,34 @@
+{
+  "chapter": 5,
+  "package_version": "1.7",
+  "sources": {
+    "input/DOC-004_weekly-meetings.md": "6b7964eb758bd13149cf7e6361761db31928e201f6f75bca44ed2fe6af1ee7a7",
+    "input/raw-registry.json": "826a60d66c4cefa613d3b15af60a79ba95fc75c23040693f10b5883737c44f61",
+    "input/report-source-map.json": "58ab85829e85a1c129f9ca6e69dcf6d23cefa2d069ad5ee4b1f8e2fb9471adec",
+    "input/snapshot.json": "55cae40a6f04c5bbeca0f3bdb1996f69a83e2ba11463c7b69739672df072e116",
+    "raw/DOC-001_onboarding.md": "ae5f61026f5286dcad9cb41e791edc9b4cd05585b1ba8300b9cf9ecb3cd2e58d",
+    "raw/DOC-002_library-rules.md": "7ba1c8734df98eeb8b9d57500a32cafa7e0ecdedf71fc15369f339b8c5152756",
+    "raw/DOC-003_retrospective.md": "eb6dd72e963558ced837415d28a134fa95fb07e0e65b3af90a4d9e4a25e80323",
+    "raw/DOC-004_weekly-meetings.md": "6b7964eb758bd13149cf7e6361761db31928e201f6f75bca44ed2fe6af1ee7a7",
+    "raw/DOC-009_weekly-report.r1.md": "411ca8cbafc43b15fdab35db78d9a5d66327b639c8b64eb0f295366083eee3eb",
+    "raw/report-input/README.md": "3d39ddfdd043ff6eb7e1ce26293acc188c560204b49a4d0702fb32de3841f4d0",
+    "raw/report-input/organized/2026-10-02_회의노트_주간회의.md": "4cc501917c74b057ad9990eed11e8fae6850805c3f973477d65d25697913445f",
+    "raw/report-input/organized/2026-10-05_업무노트_할일.txt": "98ec89ace2353f88154f84bc1c7bee57903fdbb4645396904f286ca7deba57f0",
+    "raw/report-input/organized/2026-10-05_회의노트_주간회의.md": "09608240752cdb5c48b3fb45bb09ffd3bad75652b1b0999f4ac415e810f1af1c",
+    "raw/report-input/organized/2026-10-06_대화기록_온보딩준비.txt": "ba1c96b191c1fdf8b19cd5c8f7766d726285d1d6afafddb3a249bd6ed720f6dc",
+    "raw/report-input/organized/2026-10-06_업무노트_비교표작성.md": "7b96c12336ef17f827588efc94cc30962a33726106bd0a8202f2c3d82ce8ef99",
+    "raw/report-input/organized/2026-10-06_업무노트_회의실문의.txt": "c0306db9ea7a3df6862d789b4481e3bef8aa6e048ab782ee01fa6f667edcd189",
+    "raw/report-input/organized/2026-10-06_회의노트_원온원.txt": "d5fc21fa6ec23628b77cf7ccceed2de5a4d26835313a0ca53d9e8ff6a9076d15",
+    "raw/report-input/organized/2026-10-07_업무노트_준비상태점검.txt": "933028553f258c08a1b0d41b472377727eab07c1f0843bab8af1aeedb01c69f1",
+    "raw/report-input/snapshot.json": "55cae40a6f04c5bbeca0f3bdb1996f69a83e2ba11463c7b69739672df072e116"
+  },
+  "data_kind": "synthetic",
+  "reference_kind": "edited-reference",
+  "editable_settings": [],
+  "example": "ch05/01-share-repo",
+  "wiki_base": {
+    "guides/onboarding.md": "94565ed490d9367c9db0254690699fe49957b38f188a341cce4e058edf0bd7f3",
+    "index.md": "38fcc9c0224367d3d74b308baca9d84eafbd86965de66b68183bdbb501f15c71",
+    "log.md": "6e39a8d71edb2b45292f04f9025fef65f1e83c4b5c6f167e18c60839ed44d8eb"
+  }
+}

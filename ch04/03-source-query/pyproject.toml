@@ -1,0 +1,6 @@
+[project]
+name = "ch04-03-source-query"
+version = "0.1.0"
+description = "4장 위키 출처 조회 예제"
+requires-python = ">=3.11"
+dependencies = []

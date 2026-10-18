@@ -301,6 +301,7 @@ def review(workspace, path, actor, human=False):
         # Six human reviews make a criteria draft; the team approves it separately.
         if len(rows(db, "reviews")) == 6:
             criteria = Path(workspace) / "output" / "DOC-013_r1.md"
+            criteria.parent.mkdir(parents=True, exist_ok=True)
             if not criteria.exists():
                 text = ("# DOC-013@r1\ndocument_id: DOC-013\nrevision: r1\nstate: 초안\n"
                         + f"created_at: {now()}\neffective_at: {now()}\n"
@@ -319,16 +320,43 @@ def validate_classification(value):
         raise ValueError("판정 JSON 필드 누락")
     if value["type"] not in TYPES or value["urgency"] not in {"낮음", "보통", "높음"}:
         raise ValueError("유형/긴급도 값 오류")
-    if not isinstance(value["owner_candidates"], list) or not set(value["owner_candidates"]) <= MEMBERS:
-        raise ValueError("담당 후보 오류")
+    candidates = value["owner_candidates"]
+    if not isinstance(candidates, list) or not candidates or not set(candidates) <= MEMBERS:
+        raise ValueError("담당 후보는 명부의 ID 1명 이상이어야 합니다.")
     if type(value["needs_confirmation"]) is not bool or not isinstance(value["evidence"], str):
         raise ValueError("확인 표시/근거 형식 오류")
+    if not isinstance(value["confirmation_reason"], (str, type(None))):
+        raise ValueError("확인 이유는 문자열이어야 합니다.")  # noqa: TRY004
     if value["needs_confirmation"] and not value["confirmation_reason"]:
         raise ValueError("확인 이유가 필요합니다.")
     return value
 
 
-def classify(workspace, request_id, response_file=None):
+def import_classification(workspace, request_id, path):
+    """헤르메스가 쓴 판정 JSON을 스키마·명부·근거 검사 뒤 실제 실행 결과로 기록한다."""
+    return classify(workspace, request_id, response_file=path, engine="hermes")
+
+
+def import_classification_folder(workspace, folder):
+    """폴더의 REQ-*.json을 요청 ID 순서로 모두 가져온다. 실패한 파일은 실패 기록을 남기고 이어서 진행한다."""
+    results = {}
+    for path in sorted((Path(workspace) / folder).glob("REQ-*.json")):
+        try:
+            value = import_classification(workspace, path.stem, path)
+            results[path.stem] = {"type": value["type"], "needs_confirmation": value["needs_confirmation"]}
+        except ValueError as error:
+            results[path.stem] = {"error": str(error)}
+    if not results:
+        raise ValueError(f"가져올 판정 파일이 없습니다: {folder}/REQ-*.json")
+    failed = [k for k, v in results.items() if "error" in v]
+    if failed:
+        # 실패 기록은 남기고, 명령은 실패로 끝내 다음 단계로 넘어가지 않게 한다
+        detail = "; ".join(f"{k}: {results[k]['error']}" for k in failed)
+        raise ValueError(f"판정 {len(failed)}건을 기록하지 못했습니다. 해당 파일을 고치고 다시 실행하세요. {detail}")
+    return results
+
+
+def classify(workspace, request_id, response_file=None, engine=None):
     from .models import call_commercial
     with database(workspace, True) as db:
         row = db.execute("SELECT data FROM requests WHERE id=?", (request_id,)).fetchone()
@@ -338,12 +366,16 @@ def classify(workspace, request_id, response_file=None):
         roles = rows(db, "roles")
     run_id, started = "RUN-OBS-" + uuid.uuid4().hex, now()
     run = {"run_id": run_id, "event_id": None, "task_id": request.get("task_id"),
-           "data_kind": "observed", "engine": "reference-import" if response_file else "commercial",
+           "data_kind": "observed", "engine": engine or ("reference-import" if response_file else "commercial"),
            "started_at": started, "finished_at": None, "status": "failed", "usage": None, "cost": None, "error": None}
     try:
         if response_file:
             value = read_json(response_file)
-            run["data_kind"] = "synthetic"
+            # 편집 예시(합성 표식이 있는 파일)를 헤르메스 결과로 가져오면 실제 실행 결과로 바뀌므로 거부한다
+            if engine == "hermes" and isinstance(value, dict) and (
+                    value.get("data_kind") == "synthetic" or value.get("artifact_kind") == "author-reference"):
+                raise ValueError("편집 예시(expected/)는 헤르메스 결과로 가져오지 않습니다.")
+            run["data_kind"] = "observed" if engine == "hermes" else "synthetic"
             result = {"usage": None}
         else:
             payload = {"request": request, "roles": roles}
@@ -363,14 +395,16 @@ def classify(workspace, request_id, response_file=None):
         if value["evidence"] not in request["body"] or not value["evidence"].strip():
             raise ValueError("근거는 요청 원문에 있는 문장이어야 합니다.")
         value.update(request_id=request_id, run_id=run_id, data_kind=run["data_kind"],
-                     artifact_kind="author-reference" if response_file else "model-output")
-        run.update(status="reference-read" if response_file else "succeeded", usage=result.get("usage"))
+                     artifact_kind="hermes-output" if engine == "hermes" else ("author-reference" if response_file else "model-output"))
+        run.update(status="reference-read" if response_file and engine != "hermes" else "succeeded", usage=result.get("usage"))
         with database(workspace) as db:
             previous = db.execute("SELECT data FROM classifications WHERE id=?", (request_id,)).fetchone()
             run["classification"] = value
-            change = event(db, request.get("task_id", request_id), "commercial" if not response_file else "reference-reader",
-                           json.loads(previous[0]) if previous else None, value,
-                           "상용 판정 결과 기록" if not response_file else "편집 비교 결과 읽기; 모델 호출 없음", [request["source_ref"]])
+            actor = "hermes" if engine == "hermes" else ("commercial" if not response_file else "reference-reader")
+            reason = {"hermes": "헤르메스 판정 결과 가져오기", "commercial": "상용 판정 결과 기록"}.get(
+                actor, "편집 비교 결과 읽기; 모델 호출 없음")
+            change = event(db, request.get("task_id", request_id), actor,
+                           json.loads(previous[0]) if previous else None, value, reason, [request["source_ref"]])
             run["event_id"] = change["event_id"]
             save(db, "classifications", request_id, value, True)
     except Exception as error:  # noqa: BLE001 - record all provider/parse failures without secret bodies
@@ -705,8 +739,10 @@ def register_parser(subparsers):
         if command in {"init", "intake", "list"}:
             p.add_argument("--json", action="store_true", help="저장된 모든 필드를 JSON으로 출력")
         if command == "classify":
-            p.add_argument("--request-id", required=True)
+            p.add_argument("--request-id")
             p.add_argument("--reference", type=Path, help="편집 예시 읽기; 모델 호출 성공 아님")
+            p.add_argument("--hermes-dir", type=Path, help="헤르메스가 쓴 REQ-*.json 판정 파일 폴더를 모두 가져오기")
+            p.add_argument("--hermes-result", type=Path, help="헤르메스가 쓴 판정 JSON을 검사해 기록")
         if command in {"review", "transition"}:
             p.add_argument("--actor", required=True)
             p.add_argument("--human-confirmed", action="store_true")
@@ -751,6 +787,12 @@ def handle_request(args):
         print(brief(data))
         return 0
     if command == "classify":
+        if args.hermes_dir:
+            return import_classification_folder(root, args.hermes_dir)
+        if not args.request_id:
+            raise ValueError("--request-id가 필요합니다.")
+        if args.hermes_result:
+            return import_classification(root, args.request_id, args.hermes_result)
         return classify(root, args.request_id, args.reference)
     if command == "review":
         return review(root, args.input, args.actor, args.human_confirmed)

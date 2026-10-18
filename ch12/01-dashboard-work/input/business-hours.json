@@ -1,0 +1,15 @@
+{
+  "timezone": "Asia/Seoul",
+  "weekdays": [
+    0,
+    1,
+    2,
+    3,
+    4
+  ],
+  "opens": "09:00",
+  "closes": "18:00",
+  "holidays": [],
+  "overnight": "다음 업무일09:00 아침 브리핑",
+  "data_kind": "synthetic"
+}

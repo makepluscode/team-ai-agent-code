@@ -1,0 +1,6 @@
+[project]
+name = "ch10-01-revision-search"
+version = "0.1.0"
+description = "10장 문서 버전 관리와 위키 검색 예제"
+requires-python = ">=3.11"
+dependencies = []

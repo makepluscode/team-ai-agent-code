@@ -1,0 +1,6 @@
+[project]
+name = "ch10-02-source-answers"
+version = "0.1.0"
+description = "10장 출처가 있는 답변 예제"
+requires-python = ">=3.11"
+dependencies = []

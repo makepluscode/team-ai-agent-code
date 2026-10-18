@@ -1,0 +1,914 @@
+[
+  {
+    "request_id": "REQ-101",
+    "situation_id": "SIT-001",
+    "split": "development",
+    "type": "자료 확인",
+    "owner_candidates": [
+      "M03"
+    ],
+    "urgency": "보통",
+    "needs_confirmation": false,
+    "evidence": "교육비 신청에 필요한 영수증 보관 기간을 규정에서 찾아 알려 주세요.",
+    "confirmation_reason": "",
+    "artifact_kind": "author-reference",
+    "review_status": "저자 전건 검수 전; reviewed-gold 아님"
+  },
+  {
+    "request_id": "REQ-102",
+    "situation_id": "SIT-001",
+    "split": "development",
+    "type": "자료 확인",
+    "owner_candidates": [
+      "M03"
+    ],
+    "urgency": "보통",
+    "needs_confirmation": false,
+    "evidence": "교육비 신청에 필요한 영수증 보관 기간을 규정에서 찾아 알려주세요.",
+    "confirmation_reason": "",
+    "artifact_kind": "author-reference",
+    "review_status": "저자 전건 검수 전; reviewed-gold 아님"
+  },
+  {
+    "request_id": "REQ-103",
+    "situation_id": "SIT-001",
+    "split": "development",
+    "type": "자료 확인",
+    "owner_candidates": [
+      "M03"
+    ],
+    "urgency": "보통",
+    "needs_confirmation": false,
+    "evidence": "이 건 부탁드려요. 교육비 신청에 필요한 영수증 보관 기간을 규정에서 찾아 알려 주세요.",
+    "confirmation_reason": "",
+    "artifact_kind": "author-reference",
+    "review_status": "저자 전건 검수 전; reviewed-gold 아님"
+  },
+  {
+    "request_id": "REQ-104",
+    "situation_id": "SIT-002",
+    "split": "evaluation",
+    "type": "자료 확인",
+    "owner_candidates": [
+      "M03"
+    ],
+    "urgency": "보통",
+    "needs_confirmation": false,
+    "evidence": "장비 대여대장의 반납 수치가 어느 원본에서 왔는지 대조해 주세요.",
+    "confirmation_reason": "",
+    "artifact_kind": "author-reference",
+    "review_status": "저자 전건 검수 전; reviewed-gold 아님"
+  },
+  {
+    "request_id": "REQ-105",
+    "situation_id": "SIT-002",
+    "split": "evaluation",
+    "type": "자료 확인",
+    "owner_candidates": [
+      "M03"
+    ],
+    "urgency": "보통",
+    "needs_confirmation": false,
+    "evidence": "장비 대여대장의 반납 수치가 어느 원본에서 왔는지 대조 부탁합니다.",
+    "confirmation_reason": "",
+    "artifact_kind": "author-reference",
+    "review_status": "저자 전건 검수 전; reviewed-gold 아님"
+  },
+  {
+    "request_id": "REQ-106",
+    "situation_id": "SIT-002",
+    "split": "evaluation",
+    "type": "자료 확인",
+    "owner_candidates": [
+      "M03"
+    ],
+    "urgency": "보통",
+    "needs_confirmation": false,
+    "evidence": "이 건 부탁드려요. 장비 대여대장의 반납 수치가 어느 원본에서 왔는지 대조해 주세요.",
+    "confirmation_reason": "",
+    "artifact_kind": "author-reference",
+    "review_status": "저자 전건 검수 전; reviewed-gold 아님"
+  },
+  {
+    "request_id": "REQ-107",
+    "situation_id": "SIT-003",
+    "split": "evaluation",
+    "type": "자료 확인",
+    "owner_candidates": [
+      "M04"
+    ],
+    "urgency": "보통",
+    "needs_confirmation": false,
+    "evidence": "팀 로고의 흰 배경 버전과 투명 버전 중 사용 기준이 어디에 있는지 찾아 주세요.",
+    "confirmation_reason": "",
+    "artifact_kind": "author-reference",
+    "review_status": "저자 전건 검수 전; reviewed-gold 아님"
+  },
+  {
+    "request_id": "REQ-108",
+    "situation_id": "SIT-003",
+    "split": "evaluation",
+    "type": "자료 확인",
+    "owner_candidates": [
+      "M04"
+    ],
+    "urgency": "보통",
+    "needs_confirmation": false,
+    "evidence": "팀 로고의 흰 배경 버전과 투명 버전 중 사용 기준이 어디에 있는지 찾아 주세요.",
+    "confirmation_reason": "",
+    "artifact_kind": "author-reference",
+    "review_status": "저자 전건 검수 전; reviewed-gold 아님"
+  },
+  {
+    "request_id": "REQ-109",
+    "situation_id": "SIT-003",
+    "split": "evaluation",
+    "type": "자료 확인",
+    "owner_candidates": [
+      "M04"
+    ],
+    "urgency": "보통",
+    "needs_confirmation": false,
+    "evidence": "이 건 부탁드려요. 팀 로고의 흰 배경 버전과 투명 버전 중 사용 기준이 어디에 있는지 찾아 주세요.",
+    "confirmation_reason": "",
+    "artifact_kind": "author-reference",
+    "review_status": "저자 전건 검수 전; reviewed-gold 아님"
+  },
+  {
+    "request_id": "REQ-110",
+    "situation_id": "SIT-004",
+    "split": "evaluation",
+    "type": "자료 확인",
+    "owner_candidates": [
+      "M03"
+    ],
+    "urgency": "보통",
+    "needs_confirmation": true,
+    "evidence": "설문 응답 CSV의 공란이 응답 거부인지 수집 실패인지 확인해 주세요.",
+    "confirmation_reason": "조건·담당 조율 또는 기술 증상 추가 확인",
+    "artifact_kind": "author-reference",
+    "review_status": "저자 전건 검수 전; reviewed-gold 아님"
+  },
+  {
+    "request_id": "REQ-111",
+    "situation_id": "SIT-004",
+    "split": "evaluation",
+    "type": "자료 확인",
+    "owner_candidates": [
+      "M03"
+    ],
+    "urgency": "보통",
+    "needs_confirmation": true,
+    "evidence": "설문 응답 CSV의 공란이 응답 거부인지 수집 실패인지 확인 부탁합니다.",
+    "confirmation_reason": "조건·담당 조율 또는 기술 증상 추가 확인",
+    "artifact_kind": "author-reference",
+    "review_status": "저자 전건 검수 전; reviewed-gold 아님"
+  },
+  {
+    "request_id": "REQ-112",
+    "situation_id": "SIT-004",
+    "split": "evaluation",
+    "type": "자료 확인",
+    "owner_candidates": [
+      "M03"
+    ],
+    "urgency": "보통",
+    "needs_confirmation": true,
+    "evidence": "이 건 부탁드려요. 설문 응답 CSV의 공란이 응답 거부인지 수집 실패인지 확인해 주세요.",
+    "confirmation_reason": "조건·담당 조율 또는 기술 증상 추가 확인",
+    "artifact_kind": "author-reference",
+    "review_status": "저자 전건 검수 전; reviewed-gold 아님"
+  },
+  {
+    "request_id": "REQ-113",
+    "situation_id": "SIT-005",
+    "split": "development",
+    "type": "문서 작성/수정",
+    "owner_candidates": [
+      "M02"
+    ],
+    "urgency": "보통",
+    "needs_confirmation": false,
+    "evidence": "복지 제도 안내의 어려운 문장을 쉬운 표현으로 바꿔 주세요. 제도 내용은 유지해 주세요.",
+    "confirmation_reason": "",
+    "artifact_kind": "author-reference",
+    "review_status": "저자 전건 검수 전; reviewed-gold 아님"
+  },
+  {
+    "request_id": "REQ-114",
+    "situation_id": "SIT-005",
+    "split": "development",
+    "type": "문서 작성/수정",
+    "owner_candidates": [
+      "M02"
+    ],
+    "urgency": "보통",
+    "needs_confirmation": false,
+    "evidence": "복지 제도 안내의 어려운 문장을 쉬운 표현으로 바꿔 주세요. 제도 내용은 유지 부탁합니다.",
+    "confirmation_reason": "",
+    "artifact_kind": "author-reference",
+    "review_status": "저자 전건 검수 전; reviewed-gold 아님"
+  },
+  {
+    "request_id": "REQ-115",
+    "situation_id": "SIT-005",
+    "split": "development",
+    "type": "문서 작성/수정",
+    "owner_candidates": [
+      "M02"
+    ],
+    "urgency": "보통",
+    "needs_confirmation": false,
+    "evidence": "이 건 부탁드려요. 복지 제도 안내의 어려운 문장을 쉬운 표현으로 바꿔 주세요. 제도 내용은 유지해 주세요.",
+    "confirmation_reason": "",
+    "artifact_kind": "author-reference",
+    "review_status": "저자 전건 검수 전; reviewed-gold 아님"
+  },
+  {
+    "request_id": "REQ-116",
+    "situation_id": "SIT-006",
+    "split": "evaluation",
+    "type": "문서 작성/수정",
+    "owner_candidates": [
+      "M04"
+    ],
+    "urgency": "보통",
+    "needs_confirmation": false,
+    "evidence": "행사 포스터의 글자 대비를 높이고 로고 위치를 오른쪽 아래로 옮겨 주세요.",
+    "confirmation_reason": "",
+    "artifact_kind": "author-reference",
+    "review_status": "저자 전건 검수 전; reviewed-gold 아님"
+  },
+  {
+    "request_id": "REQ-117",
+    "situation_id": "SIT-006",
+    "split": "evaluation",
+    "type": "문서 작성/수정",
+    "owner_candidates": [
+      "M04"
+    ],
+    "urgency": "보통",
+    "needs_confirmation": false,
+    "evidence": "행사 포스터의 글자 대비를 높이고 로고 위치를 오른쪽 아래로 옮겨 주세요.",
+    "confirmation_reason": "",
+    "artifact_kind": "author-reference",
+    "review_status": "저자 전건 검수 전; reviewed-gold 아님"
+  },
+  {
+    "request_id": "REQ-118",
+    "situation_id": "SIT-006",
+    "split": "evaluation",
+    "type": "문서 작성/수정",
+    "owner_candidates": [
+      "M04"
+    ],
+    "urgency": "보통",
+    "needs_confirmation": false,
+    "evidence": "이 건 부탁드려요. 행사 포스터의 글자 대비를 높이고 로고 위치를 오른쪽 아래로 옮겨 주세요.",
+    "confirmation_reason": "",
+    "artifact_kind": "author-reference",
+    "review_status": "저자 전건 검수 전; reviewed-gold 아님"
+  },
+  {
+    "request_id": "REQ-119",
+    "situation_id": "SIT-007",
+    "split": "evaluation",
+    "type": "문서 작성/수정",
+    "owner_candidates": [
+      "M02"
+    ],
+    "urgency": "보통",
+    "needs_confirmation": true,
+    "evidence": "채용 공고 초안의 원격 근무 문구를 수정해 주세요. 허용 일수는 아직 승인 전입니다.",
+    "confirmation_reason": "조건·담당 조율 또는 기술 증상 추가 확인",
+    "artifact_kind": "author-reference",
+    "review_status": "저자 전건 검수 전; reviewed-gold 아님"
+  },
+  {
+    "request_id": "REQ-120",
+    "situation_id": "SIT-007",
+    "split": "evaluation",
+    "type": "문서 작성/수정",
+    "owner_candidates": [
+      "M02"
+    ],
+    "urgency": "보통",
+    "needs_confirmation": true,
+    "evidence": "채용 공고 초안의 원격 근무 문구를 수정 부탁합니다. 허용 일수는 아직 승인 전입니다.",
+    "confirmation_reason": "조건·담당 조율 또는 기술 증상 추가 확인",
+    "artifact_kind": "author-reference",
+    "review_status": "저자 전건 검수 전; reviewed-gold 아님"
+  },
+  {
+    "request_id": "REQ-121",
+    "situation_id": "SIT-007",
+    "split": "evaluation",
+    "type": "문서 작성/수정",
+    "owner_candidates": [
+      "M02"
+    ],
+    "urgency": "보통",
+    "needs_confirmation": true,
+    "evidence": "이 건 부탁드려요. 채용 공고 초안의 원격 근무 문구를 수정해 주세요. 허용 일수는 아직 승인 전입니다.",
+    "confirmation_reason": "조건·담당 조율 또는 기술 증상 추가 확인",
+    "artifact_kind": "author-reference",
+    "review_status": "저자 전건 검수 전; reviewed-gold 아님"
+  },
+  {
+    "request_id": "REQ-122",
+    "situation_id": "SIT-008",
+    "split": "evaluation",
+    "type": "문서 작성/수정",
+    "owner_candidates": [
+      "M04",
+      "M03"
+    ],
+    "urgency": "보통",
+    "needs_confirmation": true,
+    "evidence": "교육 설문 결과를 새 도식으로 그려 주세요. 숫자 검토는 자료 담당과 함께 부탁합니다.",
+    "confirmation_reason": "조건·담당 조율 또는 기술 증상 추가 확인",
+    "artifact_kind": "author-reference",
+    "review_status": "저자 전건 검수 전; reviewed-gold 아님"
+  },
+  {
+    "request_id": "REQ-123",
+    "situation_id": "SIT-008",
+    "split": "evaluation",
+    "type": "문서 작성/수정",
+    "owner_candidates": [
+      "M04",
+      "M03"
+    ],
+    "urgency": "보통",
+    "needs_confirmation": true,
+    "evidence": "교육 설문 결과를 새 도식으로 그려 주세요. 숫자 검토는 자료 담당과 함께 부탁합니다.",
+    "confirmation_reason": "조건·담당 조율 또는 기술 증상 추가 확인",
+    "artifact_kind": "author-reference",
+    "review_status": "저자 전건 검수 전; reviewed-gold 아님"
+  },
+  {
+    "request_id": "REQ-124",
+    "situation_id": "SIT-008",
+    "split": "evaluation",
+    "type": "문서 작성/수정",
+    "owner_candidates": [
+      "M04",
+      "M03"
+    ],
+    "urgency": "보통",
+    "needs_confirmation": true,
+    "evidence": "이 건 부탁드려요. 교육 설문 결과를 새 도식으로 그려 주세요. 숫자 검토는 자료 담당과 함께 부탁합니다.",
+    "confirmation_reason": "조건·담당 조율 또는 기술 증상 추가 확인",
+    "artifact_kind": "author-reference",
+    "review_status": "저자 전건 검수 전; reviewed-gold 아님"
+  },
+  {
+    "request_id": "REQ-125",
+    "situation_id": "SIT-009",
+    "split": "development",
+    "type": "일정 조정",
+    "owner_candidates": [
+      "M01"
+    ],
+    "urgency": "보통",
+    "needs_confirmation": true,
+    "evidence": "월례 점검이 다른 행사와 겹칩니다. 참석자에게 가능한 대체 날짜를 확인해 주세요.",
+    "confirmation_reason": "조건·담당 조율 또는 기술 증상 추가 확인",
+    "artifact_kind": "author-reference",
+    "review_status": "저자 전건 검수 전; reviewed-gold 아님"
+  },
+  {
+    "request_id": "REQ-126",
+    "situation_id": "SIT-009",
+    "split": "development",
+    "type": "일정 조정",
+    "owner_candidates": [
+      "M01"
+    ],
+    "urgency": "보통",
+    "needs_confirmation": true,
+    "evidence": "월례 점검이 다른 행사와 겹칩니다. 참석자에게 가능한 대체 날짜를 확인 부탁합니다.",
+    "confirmation_reason": "조건·담당 조율 또는 기술 증상 추가 확인",
+    "artifact_kind": "author-reference",
+    "review_status": "저자 전건 검수 전; reviewed-gold 아님"
+  },
+  {
+    "request_id": "REQ-127",
+    "situation_id": "SIT-009",
+    "split": "development",
+    "type": "일정 조정",
+    "owner_candidates": [
+      "M01"
+    ],
+    "urgency": "보통",
+    "needs_confirmation": true,
+    "evidence": "이 건 부탁드려요. 월례 점검이 다른 행사와 겹칩니다. 참석자에게 가능한 대체 날짜를 확인해 주세요.",
+    "confirmation_reason": "조건·담당 조율 또는 기술 증상 추가 확인",
+    "artifact_kind": "author-reference",
+    "review_status": "저자 전건 검수 전; reviewed-gold 아님"
+  },
+  {
+    "request_id": "REQ-128",
+    "situation_id": "SIT-010",
+    "split": "evaluation",
+    "type": "일정 조정",
+    "owner_candidates": [
+      "M01"
+    ],
+    "urgency": "보통",
+    "needs_confirmation": true,
+    "evidence": "공용 장비 점검 시간을 오전에서 오후로 옮기는 안을 담당자와 조율해 주세요.",
+    "confirmation_reason": "조건·담당 조율 또는 기술 증상 추가 확인",
+    "artifact_kind": "author-reference",
+    "review_status": "저자 전건 검수 전; reviewed-gold 아님"
+  },
+  {
+    "request_id": "REQ-129",
+    "situation_id": "SIT-010",
+    "split": "evaluation",
+    "type": "일정 조정",
+    "owner_candidates": [
+      "M01"
+    ],
+    "urgency": "보통",
+    "needs_confirmation": true,
+    "evidence": "공용 장비 점검 시간을 오전에서 오후로 옮기는 안을 담당자와 조율 부탁합니다.",
+    "confirmation_reason": "조건·담당 조율 또는 기술 증상 추가 확인",
+    "artifact_kind": "author-reference",
+    "review_status": "저자 전건 검수 전; reviewed-gold 아님"
+  },
+  {
+    "request_id": "REQ-130",
+    "situation_id": "SIT-010",
+    "split": "evaluation",
+    "type": "일정 조정",
+    "owner_candidates": [
+      "M01"
+    ],
+    "urgency": "보통",
+    "needs_confirmation": true,
+    "evidence": "이 건 부탁드려요. 공용 장비 점검 시간을 오전에서 오후로 옮기는 안을 담당자와 조율해 주세요.",
+    "confirmation_reason": "조건·담당 조율 또는 기술 증상 추가 확인",
+    "artifact_kind": "author-reference",
+    "review_status": "저자 전건 검수 전; reviewed-gold 아님"
+  },
+  {
+    "request_id": "REQ-131",
+    "situation_id": "SIT-011",
+    "split": "evaluation",
+    "type": "일정 조정",
+    "owner_candidates": [
+      "M01"
+    ],
+    "urgency": "높음",
+    "needs_confirmation": true,
+    "evidence": "오늘 16:00 교육 직전에 강사 일정이 취소되어 교육을 진행할 수 없습니다. 새 일정을 조율해 주세요.",
+    "confirmation_reason": "조건·담당 조율 또는 기술 증상 추가 확인",
+    "artifact_kind": "author-reference",
+    "review_status": "저자 전건 검수 전; reviewed-gold 아님"
+  },
+  {
+    "request_id": "REQ-132",
+    "situation_id": "SIT-011",
+    "split": "evaluation",
+    "type": "일정 조정",
+    "owner_candidates": [
+      "M01"
+    ],
+    "urgency": "높음",
+    "needs_confirmation": true,
+    "evidence": "오늘 16:00 교육 직전에 강사 일정이 취소되어 교육을 진행할 수 없습니다. 새 일정을 조율 부탁합니다.",
+    "confirmation_reason": "조건·담당 조율 또는 기술 증상 추가 확인",
+    "artifact_kind": "author-reference",
+    "review_status": "저자 전건 검수 전; reviewed-gold 아님"
+  },
+  {
+    "request_id": "REQ-133",
+    "situation_id": "SIT-011",
+    "split": "evaluation",
+    "type": "일정 조정",
+    "owner_candidates": [
+      "M01"
+    ],
+    "urgency": "높음",
+    "needs_confirmation": true,
+    "evidence": "이 건 부탁드려요. 오늘 16:00 교육 직전에 강사 일정이 취소되어 교육을 진행할 수 없습니다. 새 일정을 조율해 주세요.",
+    "confirmation_reason": "조건·담당 조율 또는 기술 증상 추가 확인",
+    "artifact_kind": "author-reference",
+    "review_status": "저자 전건 검수 전; reviewed-gold 아님"
+  },
+  {
+    "request_id": "REQ-134",
+    "situation_id": "SIT-012",
+    "split": "evaluation",
+    "type": "일정 조정",
+    "owner_candidates": [
+      "M01"
+    ],
+    "urgency": "보통",
+    "needs_confirmation": true,
+    "evidence": "자율 학습 시간을 바꾸고 싶습니다. 가능한 요일은 아직 묻지 못했습니다.",
+    "confirmation_reason": "조건·담당 조율 또는 기술 증상 추가 확인",
+    "artifact_kind": "author-reference",
+    "review_status": "저자 전건 검수 전; reviewed-gold 아님"
+  },
+  {
+    "request_id": "REQ-135",
+    "situation_id": "SIT-012",
+    "split": "evaluation",
+    "type": "일정 조정",
+    "owner_candidates": [
+      "M01"
+    ],
+    "urgency": "보통",
+    "needs_confirmation": true,
+    "evidence": "자율 학습 시간을 바꾸고 싶습니다. 가능한 요일은 아직 묻지 못했습니다.",
+    "confirmation_reason": "조건·담당 조율 또는 기술 증상 추가 확인",
+    "artifact_kind": "author-reference",
+    "review_status": "저자 전건 검수 전; reviewed-gold 아님"
+  },
+  {
+    "request_id": "REQ-136",
+    "situation_id": "SIT-012",
+    "split": "evaluation",
+    "type": "일정 조정",
+    "owner_candidates": [
+      "M01"
+    ],
+    "urgency": "보통",
+    "needs_confirmation": true,
+    "evidence": "이 건 부탁드려요. 자율 학습 시간을 바꾸고 싶습니다. 가능한 요일은 아직 묻지 못했습니다.",
+    "confirmation_reason": "조건·담당 조율 또는 기술 증상 추가 확인",
+    "artifact_kind": "author-reference",
+    "review_status": "저자 전건 검수 전; reviewed-gold 아님"
+  },
+  {
+    "request_id": "REQ-137",
+    "situation_id": "SIT-013",
+    "split": "development",
+    "type": "도구 문제",
+    "owner_candidates": [
+      "M05"
+    ],
+    "urgency": "보통",
+    "needs_confirmation": true,
+    "evidence": "업무 노트 프로그램 시작 시 오류 코드 E201이 표시됩니다. 재시작해도 동일합니다. 점검해 주세요.",
+    "confirmation_reason": "조건·담당 조율 또는 기술 증상 추가 확인",
+    "artifact_kind": "author-reference",
+    "review_status": "저자 전건 검수 전; reviewed-gold 아님"
+  },
+  {
+    "request_id": "REQ-138",
+    "situation_id": "SIT-013",
+    "split": "development",
+    "type": "도구 문제",
+    "owner_candidates": [
+      "M05"
+    ],
+    "urgency": "보통",
+    "needs_confirmation": true,
+    "evidence": "업무 노트 프로그램 시작 시 오류 코드 E201이 표시됩니다. 재시작해도 동일합니다. 점검 부탁합니다.",
+    "confirmation_reason": "조건·담당 조율 또는 기술 증상 추가 확인",
+    "artifact_kind": "author-reference",
+    "review_status": "저자 전건 검수 전; reviewed-gold 아님"
+  },
+  {
+    "request_id": "REQ-139",
+    "situation_id": "SIT-013",
+    "split": "development",
+    "type": "도구 문제",
+    "owner_candidates": [
+      "M05"
+    ],
+    "urgency": "보통",
+    "needs_confirmation": true,
+    "evidence": "이 건 부탁드려요. 업무 노트 프로그램 시작 시 오류 코드 E201이 표시됩니다. 재시작해도 동일합니다. 점검해 주세요.",
+    "confirmation_reason": "조건·담당 조율 또는 기술 증상 추가 확인",
+    "artifact_kind": "author-reference",
+    "review_status": "저자 전건 검수 전; reviewed-gold 아님"
+  },
+  {
+    "request_id": "REQ-140",
+    "situation_id": "SIT-014",
+    "split": "evaluation",
+    "type": "도구 문제",
+    "owner_candidates": [
+      "M05"
+    ],
+    "urgency": "높음",
+    "needs_confirmation": true,
+    "evidence": "프린터가 대기열에서 멈추어 오늘 11:00 교육 자료를 인쇄할 수 없습니다. 연결은 켜져 있습니다.",
+    "confirmation_reason": "조건·담당 조율 또는 기술 증상 추가 확인",
+    "artifact_kind": "author-reference",
+    "review_status": "저자 전건 검수 전; reviewed-gold 아님"
+  },
+  {
+    "request_id": "REQ-141",
+    "situation_id": "SIT-014",
+    "split": "evaluation",
+    "type": "도구 문제",
+    "owner_candidates": [
+      "M05"
+    ],
+    "urgency": "높음",
+    "needs_confirmation": true,
+    "evidence": "프린터가 대기열에서 멈추어 오늘 11:00 교육 자료를 인쇄할 수 없습니다. 연결은 켜져 있습니다.",
+    "confirmation_reason": "조건·담당 조율 또는 기술 증상 추가 확인",
+    "artifact_kind": "author-reference",
+    "review_status": "저자 전건 검수 전; reviewed-gold 아님"
+  },
+  {
+    "request_id": "REQ-142",
+    "situation_id": "SIT-014",
+    "split": "evaluation",
+    "type": "도구 문제",
+    "owner_candidates": [
+      "M05"
+    ],
+    "urgency": "높음",
+    "needs_confirmation": true,
+    "evidence": "이 건 부탁드려요. 프린터가 대기열에서 멈추어 오늘 11:00 교육 자료를 인쇄할 수 없습니다. 연결은 켜져 있습니다.",
+    "confirmation_reason": "조건·담당 조율 또는 기술 증상 추가 확인",
+    "artifact_kind": "author-reference",
+    "review_status": "저자 전건 검수 전; reviewed-gold 아님"
+  },
+  {
+    "request_id": "REQ-143",
+    "situation_id": "SIT-015",
+    "split": "evaluation",
+    "type": "도구 문제",
+    "owner_candidates": [
+      "M05"
+    ],
+    "urgency": "보통",
+    "needs_confirmation": true,
+    "evidence": "공용 달력의 새 일정이 휴대전화에만 보이지 않습니다. 동기화 설정을 확인해 주세요.",
+    "confirmation_reason": "조건·담당 조율 또는 기술 증상 추가 확인",
+    "artifact_kind": "author-reference",
+    "review_status": "저자 전건 검수 전; reviewed-gold 아님"
+  },
+  {
+    "request_id": "REQ-144",
+    "situation_id": "SIT-015",
+    "split": "evaluation",
+    "type": "도구 문제",
+    "owner_candidates": [
+      "M05"
+    ],
+    "urgency": "보통",
+    "needs_confirmation": true,
+    "evidence": "공용 달력의 새 일정이 휴대전화에만 보이지 않습니다. 동기화 설정을 확인 부탁합니다.",
+    "confirmation_reason": "조건·담당 조율 또는 기술 증상 추가 확인",
+    "artifact_kind": "author-reference",
+    "review_status": "저자 전건 검수 전; reviewed-gold 아님"
+  },
+  {
+    "request_id": "REQ-145",
+    "situation_id": "SIT-015",
+    "split": "evaluation",
+    "type": "도구 문제",
+    "owner_candidates": [
+      "M05"
+    ],
+    "urgency": "보통",
+    "needs_confirmation": true,
+    "evidence": "이 건 부탁드려요. 공용 달력의 새 일정이 휴대전화에만 보이지 않습니다. 동기화 설정을 확인해 주세요.",
+    "confirmation_reason": "조건·담당 조율 또는 기술 증상 추가 확인",
+    "artifact_kind": "author-reference",
+    "review_status": "저자 전건 검수 전; reviewed-gold 아님"
+  },
+  {
+    "request_id": "REQ-146",
+    "situation_id": "SIT-016",
+    "split": "evaluation",
+    "type": "도구 문제",
+    "owner_candidates": [
+      "M05"
+    ],
+    "urgency": "보통",
+    "needs_confirmation": true,
+    "evidence": "등록 폼이 이상합니다. 잘 안 되는 부분과 오류 메시지는 아직 설명하지 못했습니다.",
+    "confirmation_reason": "조건·담당 조율 또는 기술 증상 추가 확인",
+    "artifact_kind": "author-reference",
+    "review_status": "저자 전건 검수 전; reviewed-gold 아님"
+  },
+  {
+    "request_id": "REQ-147",
+    "situation_id": "SIT-016",
+    "split": "evaluation",
+    "type": "도구 문제",
+    "owner_candidates": [
+      "M05"
+    ],
+    "urgency": "보통",
+    "needs_confirmation": true,
+    "evidence": "등록 폼이 이상합니다. 잘 안 되는 부분과 오류 메시지는 아직 설명하지 못했습니다.",
+    "confirmation_reason": "조건·담당 조율 또는 기술 증상 추가 확인",
+    "artifact_kind": "author-reference",
+    "review_status": "저자 전건 검수 전; reviewed-gold 아님"
+  },
+  {
+    "request_id": "REQ-148",
+    "situation_id": "SIT-016",
+    "split": "evaluation",
+    "type": "도구 문제",
+    "owner_candidates": [
+      "M05"
+    ],
+    "urgency": "보통",
+    "needs_confirmation": true,
+    "evidence": "이 건 부탁드려요. 등록 폼이 이상합니다. 잘 안 되는 부분과 오류 메시지는 아직 설명하지 못했습니다.",
+    "confirmation_reason": "조건·담당 조율 또는 기술 증상 추가 확인",
+    "artifact_kind": "author-reference",
+    "review_status": "저자 전건 검수 전; reviewed-gold 아님"
+  },
+  {
+    "request_id": "REQ-149",
+    "situation_id": "SIT-017",
+    "split": "development",
+    "type": "기타/복합",
+    "owner_candidates": [
+      "M02",
+      "M04"
+    ],
+    "urgency": "보통",
+    "needs_confirmation": true,
+    "evidence": "설문 보고서 문장을 고치고 결과 차트의 색도 바꿔 주세요. 문서와 시각자료 작업을 나눠 주세요.",
+    "confirmation_reason": "조건·담당 조율 또는 기술 증상 추가 확인",
+    "artifact_kind": "author-reference",
+    "review_status": "저자 전건 검수 전; reviewed-gold 아님"
+  },
+  {
+    "request_id": "REQ-150",
+    "situation_id": "SIT-017",
+    "split": "development",
+    "type": "기타/복합",
+    "owner_candidates": [
+      "M02",
+      "M04"
+    ],
+    "urgency": "보통",
+    "needs_confirmation": true,
+    "evidence": "설문 보고서 문장을 고치고 결과 차트의 색도 바꿔 주세요. 문서와 시각자료 작업을 나눠 주세요.",
+    "confirmation_reason": "조건·담당 조율 또는 기술 증상 추가 확인",
+    "artifact_kind": "author-reference",
+    "review_status": "저자 전건 검수 전; reviewed-gold 아님"
+  },
+  {
+    "request_id": "REQ-151",
+    "situation_id": "SIT-017",
+    "split": "development",
+    "type": "기타/복합",
+    "owner_candidates": [
+      "M02",
+      "M04"
+    ],
+    "urgency": "보통",
+    "needs_confirmation": true,
+    "evidence": "이 건 부탁드려요. 설문 보고서 문장을 고치고 결과 차트의 색도 바꿔 주세요. 문서와 시각자료 작업을 나눠 주세요.",
+    "confirmation_reason": "조건·담당 조율 또는 기술 증상 추가 확인",
+    "artifact_kind": "author-reference",
+    "review_status": "저자 전건 검수 전; reviewed-gold 아님"
+  },
+  {
+    "request_id": "REQ-152",
+    "situation_id": "SIT-018",
+    "split": "evaluation",
+    "type": "기타/복합",
+    "owner_candidates": [
+      "M03",
+      "M05"
+    ],
+    "urgency": "보통",
+    "needs_confirmation": true,
+    "evidence": "행사 사진의 중복을 정리하면서 손상되어 열리지 않는 파일도 점검해 주세요.",
+    "confirmation_reason": "조건·담당 조율 또는 기술 증상 추가 확인",
+    "artifact_kind": "author-reference",
+    "review_status": "저자 전건 검수 전; reviewed-gold 아님"
+  },
+  {
+    "request_id": "REQ-153",
+    "situation_id": "SIT-018",
+    "split": "evaluation",
+    "type": "기타/복합",
+    "owner_candidates": [
+      "M03",
+      "M05"
+    ],
+    "urgency": "보통",
+    "needs_confirmation": true,
+    "evidence": "행사 사진의 중복을 정리하면서 손상되어 열리지 않는 파일도 점검 부탁합니다.",
+    "confirmation_reason": "조건·담당 조율 또는 기술 증상 추가 확인",
+    "artifact_kind": "author-reference",
+    "review_status": "저자 전건 검수 전; reviewed-gold 아님"
+  },
+  {
+    "request_id": "REQ-154",
+    "situation_id": "SIT-018",
+    "split": "evaluation",
+    "type": "기타/복합",
+    "owner_candidates": [
+      "M03",
+      "M05"
+    ],
+    "urgency": "보통",
+    "needs_confirmation": true,
+    "evidence": "이 건 부탁드려요. 행사 사진의 중복을 정리하면서 손상되어 열리지 않는 파일도 점검해 주세요.",
+    "confirmation_reason": "조건·담당 조율 또는 기술 증상 추가 확인",
+    "artifact_kind": "author-reference",
+    "review_status": "저자 전건 검수 전; reviewed-gold 아님"
+  },
+  {
+    "request_id": "REQ-155",
+    "situation_id": "SIT-019",
+    "split": "evaluation",
+    "type": "기타/복합",
+    "owner_candidates": [
+      "M01"
+    ],
+    "urgency": "보통",
+    "needs_confirmation": true,
+    "evidence": "팀 행사 준비를 도와 주세요. 구체적인 결과물과 담당 범위는 아직 정하지 않았습니다.",
+    "confirmation_reason": "조건·담당 조율 또는 기술 증상 추가 확인",
+    "artifact_kind": "author-reference",
+    "review_status": "저자 전건 검수 전; reviewed-gold 아님"
+  },
+  {
+    "request_id": "REQ-156",
+    "situation_id": "SIT-019",
+    "split": "evaluation",
+    "type": "기타/복합",
+    "owner_candidates": [
+      "M01"
+    ],
+    "urgency": "보통",
+    "needs_confirmation": true,
+    "evidence": "팀 행사 준비를 도와 주세요. 구체적인 결과물과 담당 범위는 아직 정하지 않았습니다.",
+    "confirmation_reason": "조건·담당 조율 또는 기술 증상 추가 확인",
+    "artifact_kind": "author-reference",
+    "review_status": "저자 전건 검수 전; reviewed-gold 아님"
+  },
+  {
+    "request_id": "REQ-157",
+    "situation_id": "SIT-019",
+    "split": "evaluation",
+    "type": "기타/복합",
+    "owner_candidates": [
+      "M01"
+    ],
+    "urgency": "보통",
+    "needs_confirmation": true,
+    "evidence": "이 건 부탁드려요. 팀 행사 준비를 도와 주세요. 구체적인 결과물과 담당 범위는 아직 정하지 않았습니다.",
+    "confirmation_reason": "조건·담당 조율 또는 기술 증상 추가 확인",
+    "artifact_kind": "author-reference",
+    "review_status": "저자 전건 검수 전; reviewed-gold 아님"
+  },
+  {
+    "request_id": "REQ-158",
+    "situation_id": "SIT-020",
+    "split": "development",
+    "type": "기타/복합",
+    "owner_candidates": [
+      "M03",
+      "M01"
+    ],
+    "urgency": "보통",
+    "needs_confirmation": true,
+    "evidence": "연수 신청 자료를 모으고 접수 마감일을 관련 담당자와 다시 협의해 주세요.",
+    "confirmation_reason": "조건·담당 조율 또는 기술 증상 추가 확인",
+    "artifact_kind": "author-reference",
+    "review_status": "저자 전건 검수 전; reviewed-gold 아님"
+  },
+  {
+    "request_id": "REQ-159",
+    "situation_id": "SIT-020",
+    "split": "development",
+    "type": "기타/복합",
+    "owner_candidates": [
+      "M03",
+      "M01"
+    ],
+    "urgency": "보통",
+    "needs_confirmation": true,
+    "evidence": "연수 신청 자료를 모으고 접수 마감일을 관련 담당자와 다시 협의 부탁합니다.",
+    "confirmation_reason": "조건·담당 조율 또는 기술 증상 추가 확인",
+    "artifact_kind": "author-reference",
+    "review_status": "저자 전건 검수 전; reviewed-gold 아님"
+  },
+  {
+    "request_id": "REQ-160",
+    "situation_id": "SIT-020",
+    "split": "development",
+    "type": "기타/복합",
+    "owner_candidates": [
+      "M03",
+      "M01"
+    ],
+    "urgency": "보통",
+    "needs_confirmation": true,
+    "evidence": "이 건 부탁드려요. 연수 신청 자료를 모으고 접수 마감일을 관련 담당자와 다시 협의해 주세요.",
+    "confirmation_reason": "조건·담당 조율 또는 기술 증상 추가 확인",
+    "artifact_kind": "author-reference",
+    "review_status": "저자 전건 검수 전; reviewed-gold 아님"
+  }
+]

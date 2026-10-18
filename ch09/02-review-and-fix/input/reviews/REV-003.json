@@ -1,0 +1,31 @@
+{
+  "review_id": "REV-003",
+  "request_id": "REQ-008",
+  "task_id": "TASK-008",
+  "before_ref": "input/internal-requests.json#REQ-008",
+  "after_ref": "output/REV-003-question.md",
+  "reason": "기존 TASK-009 연결; 접근 문제 TASK-010 추가. 하위 완료 전 부모 완료 금지",
+  "source_refs": [
+    "raw/DOC-012_r1.md#task-01"
+  ],
+  "data_kind": "synthetic",
+  "children": [
+    "TASK-009",
+    "TASK-010"
+  ],
+  "new_tasks": [
+    {
+      "task_id": "TASK-010",
+      "title": "복합 요청의 접근 문제",
+      "request_id": "REQ-008",
+      "status": "확인 대기",
+      "owner_id": "M05",
+      "due_at": null,
+      "children": [],
+      "source_refs": [
+        "input/internal-requests.json#REQ-008"
+      ],
+      "data_kind": "synthetic"
+    }
+  ]
+}

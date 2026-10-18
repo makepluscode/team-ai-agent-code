@@ -1,0 +1,6 @@
+[project]
+name = "ch04-01-wiki-folder"
+version = "0.1.0"
+description = "4장 로컬 위키 폴더와 정리 규칙 확인 예제"
+requires-python = ">=3.11"
+dependencies = []

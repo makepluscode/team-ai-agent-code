@@ -1,0 +1,13 @@
+{
+  "review_id": "REV-004",
+  "request_id": "REQ-003",
+  "task_id": "TASK-004",
+  "before_ref": "input/internal-requests.json#REQ-003",
+  "after_ref": "output/REV-004-question.md",
+  "reason": "오류 문구와 접근 조건 요청. 원인과 복구 성공 미확정",
+  "source_refs": [
+    "input/internal-requests.json#REQ-003"
+  ],
+  "data_kind": "synthetic",
+  "copy_artifact": "input/review-corrections/REV-004-question.md"
+}

@@ -1,0 +1,13 @@
+{
+  "review_id": "REV-006",
+  "request_id": "REQ-007",
+  "task_id": "TASK-007",
+  "before_ref": "input/internal-requests.json#REQ-007",
+  "after_ref": "output/REV-006-question.md",
+  "reason": "대상·기한 확인 질문. 담당·기한 임의 확정 금지",
+  "source_refs": [
+    "input/internal-requests.json#REQ-007"
+  ],
+  "data_kind": "synthetic",
+  "copy_artifact": "input/review-corrections/REV-006-question.md"
+}

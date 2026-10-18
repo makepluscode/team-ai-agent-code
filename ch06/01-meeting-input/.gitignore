@@ -1,0 +1,9 @@
+.env
+.env.*
+*.mp3
+*.m4a
+*.wav
+work*/
+output/
+state/
+.venv/

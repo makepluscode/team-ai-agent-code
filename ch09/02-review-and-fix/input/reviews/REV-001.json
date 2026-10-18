@@ -1,0 +1,12 @@
+{
+  "review_id": "REV-001",
+  "request_id": "REQ-002",
+  "task_id": "TASK-002",
+  "before_ref": "raw/DOC-007_r2.md#온보딩 가이드",
+  "after_ref": "output/DOC-007_r3.md#schedule",
+  "reason": "회의 확정 일정으로 수정. 옛 12일 계획 제외",
+  "source_refs": [
+    "raw/DOC-012_r1.md#decision-01"
+  ],
+  "data_kind": "synthetic"
+}

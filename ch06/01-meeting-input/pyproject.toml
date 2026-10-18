@@ -1,0 +1,9 @@
+[project]
+name = "ch06-01-meeting-input"
+version = "0.1.0"
+description = "6장 회의 입력 자료와 로컬 전사 예제"
+requires-python = ">=3.11"
+dependencies = []
+
+[project.optional-dependencies]
+transcription = ["faster-whisper>=1.0.0"]

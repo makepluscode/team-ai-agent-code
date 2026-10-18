@@ -1,0 +1,6 @@
+[project]
+name = "ch04-02-first-page"
+version = "0.1.0"
+description = "4장 첫 위키 페이지 정리 예제"
+requires-python = ">=3.11"
+dependencies = []

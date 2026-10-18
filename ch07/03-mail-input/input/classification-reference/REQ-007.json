@@ -1,0 +1,13 @@
+{
+  "request_id": "REQ-007",
+  "type": "기타/복합",
+  "owner_candidates": [
+    "M01"
+  ],
+  "urgency": "보통",
+  "needs_confirmation": true,
+  "evidence": "다음 안내도 정리해 주세요.",
+  "confirmation_reason": "추가 증상·범위·기한·출처 또는 사람의 수정 확인 필요",
+  "artifact_kind": "author-reference",
+  "data_kind": "synthetic"
+}

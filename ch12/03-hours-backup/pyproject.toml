@@ -1,0 +1,6 @@
+[project]
+name = "ch12-03-hours-backup"
+version = "0.1.0"
+description = "12장 업무시간 운영과 백업·복구 예제"
+requires-python = ">=3.11"
+dependencies = []

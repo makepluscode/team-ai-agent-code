@@ -1,0 +1,13 @@
+{
+  "request_id": "REQ-001",
+  "type": "자료 확인",
+  "owner_candidates": [
+    "M03"
+  ],
+  "urgency": "보통",
+  "needs_confirmation": false,
+  "evidence": "최신 자료함 이용 규칙은 어디에서 확인하나요?",
+  "confirmation_reason": "",
+  "artifact_kind": "author-reference",
+  "data_kind": "synthetic"
+}

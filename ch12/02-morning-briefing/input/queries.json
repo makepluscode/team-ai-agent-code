@@ -1,0 +1,142 @@
+[
+  {
+    "query_id": "Q01",
+    "question": "확정 날짜는?",
+    "key": "date",
+    "as_of": "2026-10-16T10:00:00+09:00",
+    "kind": "현재 조건"
+  },
+  {
+    "query_id": "Q02",
+    "question": "확정 시각은?",
+    "key": "time",
+    "as_of": "2026-10-16T10:00:00+09:00",
+    "kind": "현재 조건"
+  },
+  {
+    "query_id": "Q03",
+    "question": "확정 장소는?",
+    "key": "place",
+    "as_of": "2026-10-16T10:00:00+09:00",
+    "kind": "현재 조건"
+  },
+  {
+    "query_id": "Q04",
+    "question": "현재 안내 일정은?",
+    "key": "schedule",
+    "as_of": "2026-10-16T10:00:00+09:00",
+    "kind": "현재 조건"
+  },
+  {
+    "query_id": "Q05",
+    "question": "자료함 이용 규칙 위치는?",
+    "key": "rules",
+    "as_of": "2026-10-16T10:00:00+09:00",
+    "kind": "현재 조건"
+  },
+  {
+    "query_id": "Q06",
+    "question": "자료함 정리 담당과 기한은?",
+    "key": "owner",
+    "as_of": "2026-10-16T10:00:00+09:00",
+    "kind": "현재 조건"
+  },
+  {
+    "query_id": "Q07",
+    "question": "10/05 잠정 일정은?",
+    "key": "schedule",
+    "as_of": "2026-10-05T12:00:00+09:00",
+    "kind": "변경 전후"
+  },
+  {
+    "query_id": "Q08",
+    "question": "10/08 변경 뒤 일정은?",
+    "key": "schedule",
+    "as_of": "2026-10-08T12:00:00+09:00",
+    "kind": "변경 전후"
+  },
+  {
+    "query_id": "Q09",
+    "question": "날짜만 바꾼 뒤 시각은?",
+    "key": "time",
+    "as_of": "2026-10-08T12:00:00+09:00",
+    "kind": "변경 전후"
+  },
+  {
+    "query_id": "Q10",
+    "question": "회의에서 확정한 일정은?",
+    "key": "schedule",
+    "as_of": "2026-10-16T10:00:00+09:00",
+    "kind": "변경 전후"
+  },
+  {
+    "query_id": "Q11",
+    "question": "가이드 수정 담당과 기한은?",
+    "key": "guide-task",
+    "as_of": "2026-10-16T10:00:00+09:00",
+    "kind": "할 일과 검토"
+  },
+  {
+    "query_id": "Q12",
+    "question": "보고와 복합 요청 검토 이유는?",
+    "key": "review-reason",
+    "as_of": "2026-10-16T10:00:00+09:00",
+    "kind": "할 일과 검토"
+  },
+  {
+    "query_id": "Q13",
+    "question": "자료함 작업 담당은 누구인가요?",
+    "key": "owner",
+    "as_of": "2026-10-16T10:00:00+09:00",
+    "kind": "할 일과 검토"
+  },
+  {
+    "query_id": "Q14",
+    "question": "후속 안내 최종 검토자는?",
+    "key": "next-reviewer",
+    "as_of": "2026-10-16T10:00:00+09:00",
+    "kind": "확인 필요"
+  },
+  {
+    "query_id": "Q15",
+    "question": "후속 안내 일정은?",
+    "key": "next-date",
+    "as_of": "2026-10-16T10:00:00+09:00",
+    "kind": "확인 필요"
+  },
+  {
+    "query_id": "Q16",
+    "question": "다음 안내 예산은?",
+    "key": "unknown-budget",
+    "as_of": "2026-10-16T10:00:00+09:00",
+    "kind": "확인 필요"
+  },
+  {
+    "query_id": "Q17",
+    "question": "옛 가이드의12일을 현재 안내로 재사용한 점검 자료는 최신 결정과 충돌하나요?",
+    "key": "conflict-old",
+    "as_of": "2026-10-16T10:00:00+09:00",
+    "kind": "모순"
+  },
+  {
+    "query_id": "Q18",
+    "question": "10/08 미정 조건을 현재 안내로 재사용한 점검 자료는 최신 회의와 충돌하나요?",
+    "key": "conflict-middle",
+    "as_of": "2026-10-16T10:00:00+09:00",
+    "kind": "모순"
+  },
+  {
+    "query_id": "Q19",
+    "question": "10/12 계획을 현재 일정으로 써도 되나요?",
+    "key": "old-cancelled",
+    "as_of": "2026-10-16T10:00:00+09:00",
+    "kind": "취소"
+  },
+  {
+    "query_id": "Q20",
+    "question": "회의에서 나온10/14 안이 현재 일정인가요?",
+    "key": "alternative-rejected",
+    "as_of": "2026-10-16T10:00:00+09:00",
+    "kind": "취소"
+  }
+]

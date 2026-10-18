@@ -1,0 +1,90 @@
+[
+  {
+    "request_id": "REQ-001",
+    "source_kind": "internal",
+    "received_at": "2026-10-13T09:00:00+09:00",
+    "requester_id": "M02",
+    "body": "최신 자료함 이용 규칙은 어디에서 확인하나요?",
+    "source_ref": "input/internal-requests.json#REQ-001",
+    "task_id": "TASK-003",
+    "due_at": null,
+    "data_kind": "synthetic"
+  },
+  {
+    "request_id": "REQ-002",
+    "source_kind": "internal",
+    "received_at": "2026-10-13T09:05:00+09:00",
+    "requester_id": "M01",
+    "body": "남아 있는 12일 온보딩 가이드를 회의의 최신 결정으로 수정해 주세요.",
+    "source_ref": "input/internal-requests.json#REQ-002",
+    "task_id": "TASK-002",
+    "due_at": null,
+    "data_kind": "synthetic"
+  },
+  {
+    "request_id": "REQ-003",
+    "source_kind": "internal",
+    "received_at": "2026-10-13T09:10:00+09:00",
+    "requester_id": "M04",
+    "body": "파일이 열리지 않습니다. 오늘 12:00 작업 전에 확인해 주세요. 오류 문구는 아직 전달하지 못했습니다.",
+    "source_ref": "input/internal-requests.json#REQ-003",
+    "task_id": "TASK-004",
+    "due_at": "2026-10-13T12:00:00+09:00",
+    "data_kind": "synthetic"
+  },
+  {
+    "request_id": "REQ-004",
+    "source_kind": "internal",
+    "received_at": "2026-10-13T09:20:00+09:00",
+    "requester_id": "M03",
+    "body": "안내의 확정 시각과 장소를 확인해 주세요.",
+    "source_ref": "input/internal-requests.json#REQ-004",
+    "task_id": "TASK-005",
+    "due_at": null,
+    "data_kind": "synthetic"
+  },
+  {
+    "request_id": "REQ-005",
+    "source_kind": "internal",
+    "received_at": "2026-10-13T09:30:00+09:00",
+    "requester_id": "M02",
+    "body": "슬라이드에 남은 옛 날짜를 최신 날짜로 수정해 주세요.",
+    "source_ref": "input/internal-requests.json#REQ-005",
+    "task_id": "TASK-006",
+    "due_at": null,
+    "data_kind": "synthetic"
+  },
+  {
+    "request_id": "REQ-006",
+    "source_kind": "internal",
+    "received_at": "2026-10-13T09:40:00+09:00",
+    "requester_id": "M01",
+    "body": "확인 대기 주간 보고의 누락값과 근거를 확인해 주세요. 미입력을 0으로 채우면 안 됩니다.",
+    "source_ref": "input/internal-requests.json#REQ-006",
+    "task_id": "TASK-001",
+    "due_at": null,
+    "data_kind": "synthetic"
+  },
+  {
+    "request_id": "REQ-007",
+    "source_kind": "internal",
+    "received_at": "2026-10-13T09:50:00+09:00",
+    "requester_id": "M04",
+    "body": "다음 안내도 정리해 주세요.",
+    "source_ref": "input/internal-requests.json#REQ-007",
+    "task_id": "TASK-007",
+    "due_at": null,
+    "data_kind": "synthetic"
+  },
+  {
+    "request_id": "REQ-008",
+    "source_kind": "internal",
+    "received_at": "2026-10-13T10:00:00+09:00",
+    "requester_id": "M02",
+    "body": "회의에서 정한 파일 이름 정리 건의 진행 확인과 자료함 접근 실패 해결을 함께 부탁합니다.",
+    "source_ref": "input/internal-requests.json#REQ-008",
+    "task_id": "TASK-008",
+    "due_at": null,
+    "data_kind": "synthetic"
+  }
+]
