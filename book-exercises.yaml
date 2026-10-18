@@ -1,0 +1,256 @@
+{
+  "version": "1.7",
+  "format": "JSON-compatible YAML",
+  "reference_kind": "edited-reference",
+  "chapters": [
+    {
+      "chapter": 1,
+      "example": "examples/documents/ch01",
+      "title": "온보딩 계획",
+      "commands": [
+        "uv run team-work prepare --chapter 1 --workspace work/ch01",
+        "uv run team-work documents generate --task onboarding-plan --workspace work/ch01"
+      ],
+      "checks": [
+        "DOC-005 저장 뒤 재열기",
+        "12일 10:00 잠정·장소/검토자 미정·출처"
+      ],
+      "limits": [
+        "상용 API 실제 호출·Hermes 설치/연계·두 기준 장비는 TODO(검증)"
+      ]
+    },
+    {
+      "chapter": 2,
+      "example": "examples/documents/ch02",
+      "title": "지침과 자료 비교",
+      "commands": [
+        "uv run team-work prepare --chapter 2 --workspace work/ch02",
+        "uv run team-work documents organize --workspace work/ch02",
+        "uv run team-work documents generate --task comparison --workspace work/ch02"
+      ],
+      "checks": [
+        "원본 6개 해시 유지",
+        "확인 필요 파일 별도",
+        "DOC-006 공통점/차이/확인"
+      ],
+      "limits": [
+        "상용 API 실제 호출·Hermes 설치/연계·두 기준 장비는 TODO(검증)"
+      ]
+    },
+    {
+      "chapter": 3,
+      "example": "examples/documents/ch03",
+      "title": "반복 업무와 개인 예약",
+      "commands": [
+        "uv run team-work prepare --chapter 3 --workspace work/ch03",
+        "uv run team-work documents generate --task onboarding-guide --workspace work/ch03",
+        "uv run team-work documents generate --task improvement-memo --workspace work/ch03",
+        "uv run team-work documents generate --task weekly-report --workspace work/ch03",
+        "uv run team-work schedule create --at 2026-10-09T17:00:00+09:00 --workspace work/ch03",
+        "uv run team-work schedule status --workspace work/ch03",
+        "uv run team-work schedule run-due --confirm --workspace work/ch03",
+        "uv run team-work schedule pause --workspace work/ch03"
+      ],
+      "checks": [
+        "DOC-007/008/009 사실·제안·미정",
+        "관측 완료 4건·미입력 구별",
+        "개인 스킬 하나·예약 하나·실제 실행/다음 실행 구별"
+      ],
+      "limits": [
+        "상용 API 실제 호출·Hermes 설치/연계·두 기준 장비는 TODO(검증)",
+        "제공 개인 예약은 run-due를 직접 호출하는 실행기입니다. 백그라운드 서비스나 Hermes 예약 등록 성공을 뜻하지 않습니다."
+      ],
+      "shared_examples": [
+        "examples/operations/personal-weekly-report"
+      ]
+    },
+    {
+      "chapter": 4,
+      "example": "examples/wiki/ch04",
+      "title": "로컬 위키",
+      "commands": [
+        "uv run team-work prepare --chapter 4 --workspace work/ch04",
+        "uv run team-work wiki propose --workspace work/ch04",
+        "uv run team-work wiki apply --proposal work/ch04/output/wiki-proposal.json --confirm --workspace work/ch04",
+        "uv run team-work wiki search --query 잠정 --workspace work/ch04"
+      ],
+      "checks": [
+        "초기 원본 4건·등록 출처/해시",
+        "페이지·목록·기록·출처 조회"
+      ],
+      "limits": [
+        "상용 API 실제 호출·Hermes 설치/연계·두 기준 장비는 TODO(검증)"
+      ]
+    },
+    {
+      "chapter": 5,
+      "example": "examples/wiki/ch05",
+      "title": "동료 변경 인계",
+      "commands": [
+        "uv run team-work prepare --chapter 5 --workspace work/ch05",
+        "uv run team-work wiki register --source work/ch05/input/DOC-010_schedule-change.md --workspace work/ch05",
+        "uv run team-work wiki propose --workspace work/ch05",
+        "uv run team-work wiki apply --proposal work/ch05/output/wiki-proposal.json --confirm --workspace work/ch05",
+        "uv run team-work documents generate --task handoff-guide --workspace work/ch05"
+      ],
+      "checks": [
+        "동료 원본→담당 위키→동료 DOC-007@r2",
+        "EVT-006·DOC-010·15일 날짜/시각·장소 미정",
+        "충돌 시 중단"
+      ],
+      "limits": [
+        "상용 API 실제 호출·Hermes 설치/연계·두 기준 장비는 TODO(검증)",
+        "온라인 GitHub 인증/초대·skills tap은 TODO(검증). 두 폴더는 로컬 인계 대안입니다."
+      ]
+    },
+    {
+      "chapter": 6,
+      "example": "examples/meetings/ch06",
+      "title": "회의 결정",
+      "commands": [
+        "uv run team-work prepare --chapter 6 --workspace work/ch06",
+        "uv run team-work documents generate --task meeting-notes --workspace work/ch06",
+        "uv run team-work wiki register --source work/ch06/output/DOC-012_meeting-notes.md --workspace work/ch06",
+        "uv run team-work wiki propose --workspace work/ch06",
+        "uv run team-work wiki apply --proposal work/ch06/output/wiki-proposal.json --confirm --workspace work/ch06"
+      ],
+      "checks": [
+        "15일 10:00 회의실 A",
+        "12일 취소/14일 미채택",
+        "TASK-009/TASK-002·담당·기한",
+        "원음 대조가 없으면 전사·음원 검증 미완료"
+      ],
+      "limits": [
+        "상용 API 실제 호출·Hermes 설치/연계·두 기준 장비는 TODO(검증)",
+        "음원 미제작·청취/전사 미실행. 제공 합성 대본으로 결정 추출 대안만 진행합니다."
+      ]
+    },
+    {
+      "chapter": 7,
+      "example": "examples/requests/ch07",
+      "title": "팀 요청의 접수와 기록",
+      "commands": [
+        "uv run team-work prepare --chapter 7 --workspace work/ch07",
+        "uv run team-work requests init --workspace work/ch07",
+        "uv run team-work requests list --workspace work/ch07",
+        "uv run team-work requests intake --workspace work/ch07 --input work/ch07/input/internal-requests.json",
+        "uv run team-work requests intake --workspace work/ch07 --input work/ch07/input/optional-mail.json",
+        "uv run team-work requests-mcp --workspace work/ch07"
+      ],
+      "checks": [
+        "내부8+메일2·원문해시·중복업무방지",
+        "MCP get_request/get_roles만"
+      ],
+      "limits": [
+        "실제 상용·선택 연결·기준 장비 검증은 TODO(검증)"
+      ]
+    },
+    {
+      "chapter": 8,
+      "example": "examples/requests/ch08",
+      "title": "요청 분류와 담당 제안",
+      "commands": [
+        "uv run team-work prepare --chapter 8 --workspace work/ch08",
+        "uv run team-work requests init --workspace work/ch08",
+        "uv run team-work requests list --workspace work/ch08",
+        "uv run team-work requests classify --workspace work/ch08 --request-id REQ-001",
+        "uv run team-work requests classify --workspace work/ch08 --request-id REQ-001 --reference work/ch08/input/classification-reference/REQ-001.json",
+        "uv run team-work requests evaluate --predictions predictions.json --gold examples/requests/ch08/reference/evaluation-gold.json --split evaluation"
+      ],
+      "checks": [
+        "모델입력 정답배제·스키마/명부/근거 검사",
+        "실패 확인 필요·승인 금지"
+      ],
+      "limits": [
+        "실제 상용·선택 연결·기준 장비 검증은 TODO(검증)"
+      ]
+    },
+    {
+      "chapter": 9,
+      "example": "examples/requests/ch09",
+      "title": "사람의 검토와 결과 수정",
+      "commands": [
+        "uv run team-work prepare --chapter 9 --workspace work/ch09",
+        "uv run team-work requests init --workspace work/ch09",
+        "uv run team-work requests list --workspace work/ch09",
+        "uv run team-work requests review --workspace work/ch09 --input work/ch09/input/reviews/REV-001.json --actor M01 --human-confirmed"
+      ],
+      "checks": [
+        "검토6·원본r1보존·결과r3/r2",
+        "하위 완료 전 부모 완료 금지·DOC-013"
+      ],
+      "limits": [
+        "실제 상용·선택 연결·기준 장비 검증은 TODO(검증)"
+      ]
+    },
+    {
+      "chapter": 10,
+      "example": "examples/requests/ch10",
+      "title": "출처로 답하는 팀 위키",
+      "commands": [
+        "uv run team-work prepare --chapter 10 --workspace work/ch10",
+        "uv run team-work requests init --workspace work/ch10",
+        "uv run team-work requests list --workspace work/ch10",
+        "uv run team-work wiki-qa --workspace work/ch10 --query-id Q01",
+        "uv run team-work wiki-qa --workspace work/ch10 --check"
+      ],
+      "checks": [
+        "질문20·판/적용시각/출처앵커",
+        "미정/취소/근거 없음"
+      ],
+      "limits": [
+        "Gmail·실제 상용/Laya·동료 접속·권한·기준 장비·실제 한 달 운영은 TODO(검증)",
+        "출처 조회는 구조화된 제공 질의 기준이며 생성/자유질문 품질을 뜻하지 않음"
+      ]
+    },
+    {
+      "chapter": 11,
+      "example": "examples/requests/ch11",
+      "title": "팀이 함께 보는 대시보드",
+      "commands": [
+        "uv run team-work prepare --chapter 11 --workspace work/ch11",
+        "uv run team-work requests init --workspace work/ch11",
+        "uv run team-work requests list --workspace work/ch11",
+        "uv run team-work dashboard --workspace work/ch11",
+        "uv run team-work team-ops init --workspace work/ch11 --owner M01",
+        "uv run team-work team-ops gate --workspace work/ch11 --at 2026-10-19T09:00:00+09:00",
+        "uv run team-work team-ops briefing --workspace work/ch11 --at 2026-10-19T09:00:00+09:00",
+        "uv run team-work team-ops run-due --workspace work/ch11 --owner M01 --at 2026-10-19T09:00:00+09:00"
+      ],
+      "checks": [
+        "요청10/업무12·상태5/2/5",
+        "API/UI 동일"
+      ],
+      "limits": [
+        "실제 상용·선택 연결·기준 장비 검증은 TODO(검증)"
+      ]
+    },
+    {
+      "chapter": 12,
+      "example": "examples/requests/ch12",
+      "title": "대시보드에서 일하기",
+      "commands": [
+        "uv run team-work prepare --chapter 12 --workspace work/ch12",
+        "uv run team-work requests init --workspace work/ch12",
+        "uv run team-work requests list --workspace work/ch12",
+        "uv run team-work requests intake --workspace work/ch12 --input work/ch12/input/dashboard-request.json",
+        "uv run team-work dashboard --workspace work/ch12 --writable",
+        "uv run team-work team-ops init --workspace work/ch12 --owner M01",
+        "uv run team-work team-ops gate --workspace work/ch12 --at 2026-10-19T09:00:00+09:00",
+        "uv run team-work team-ops briefing --workspace work/ch12 --at 2026-10-19T09:00:00+09:00",
+        "uv run team-work team-ops run-due --workspace work/ch12 --owner M01 --at 2026-10-19T09:00:00+09:00"
+      ],
+      "checks": [
+        "요청11/업무13·상태6/2/5",
+        "사람확인·EVT-019 trace·백업복구",
+        "팀 단일 담당·동시 실행 잠금·업무시간9~18·아침 원문 근거 집계",
+        "SQLite 일관 백업·해시/DB 무결성 복구"
+      ],
+      "limits": [
+        "실제 상용·선택 연결·기준 장비 검증은 TODO(검증)",
+        "team-ops는 수동 실행·단일 폴더 잠금이며 Hermes background 등록·분산 잠금·실제 메일 연결을 뜻하지 않음",
+        "합성 --at와 실제 실행 시각·모델 호출 없음·미측정 시간/비용 구별"
+      ]
+    }
+  ]
+}

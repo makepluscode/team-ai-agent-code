@@ -1,0 +1,30 @@
+{
+  "onboarding-guide": {
+    "inputs": [
+      "input/DOC-001_onboarding.md",
+      "input/my-instructions.md"
+    ],
+    "prompt": "onboarding-guide.txt",
+    "output": "DOC-007_onboarding-guide.r1.md",
+    "task_id": "TASK-002"
+  },
+  "improvement-memo": {
+    "inputs": [
+      "input/DOC-001_onboarding.md",
+      "input/DOC-006_comparison.md",
+      "input/my-instructions.md"
+    ],
+    "prompt": "improvement-memo.txt",
+    "output": "DOC-008_improvement.md"
+  },
+  "weekly-report": {
+    "inputs": [
+      "input/DOC-004_weekly-activity.md",
+      "input/weekly-activity.csv",
+      "input/my-instructions.md"
+    ],
+    "prompt": "weekly-report.txt",
+    "output": "DOC-009_weekly-report.r1.md",
+    "task_id": "TASK-001"
+  }
+}

@@ -1,0 +1,227 @@
+"""Explicit wiki registration, proposed edits and confirmation; reuse sync skill."""
+
+import hashlib
+import json
+import shutil
+import subprocess
+import sys
+import uuid
+from datetime import UTC, datetime
+from pathlib import Path
+
+from . import models
+from .io import read_text, write_json, write_new
+from .workspace import PACKAGE_ROOT, hashes, verify
+
+
+def register(workspace, source):
+    if Path(source).is_symlink():
+        raise ValueError("심볼릭 링크 원본은 등록하지 않습니다.")
+    work, source = Path(workspace).resolve(), Path(source).resolve()
+    verify(work)
+    if not (work / "wiki").is_dir():
+        raise ValueError("4장 이후 위키 작업 폴더가 필요합니다.")
+    if not source.is_file() or source.is_symlink():
+        raise ValueError("원본 파일을 확인하세요.")
+    target = work / "raw" / source.name
+    if target.exists():
+        raise ValueError("동일 이름의 원본을 보존합니다. 새 버전 이름을 쓰세요.")
+    marker = work / "output" / f"{source.name}.registration.json"
+    if marker.exists() or not target.resolve().is_relative_to(work / "raw"):
+        raise ValueError("기존 등록 기록이나 원본 경로를 확인하세요.")
+    text = read_text(source)
+    # Use the same source hashing convention as legacy wiki.py, without its auto-commit.
+    sha = hashlib.sha256(source.read_bytes()).hexdigest()
+    write_new(target, text)
+    write_json(
+        marker,
+        {
+            "original_path": str(source),
+            "registered_path": f"raw/{source.name}",
+            "sha256": sha,
+            "actor_id": "wiki-curator",
+            "data_kind": "actual-file-registration",
+        },
+    )
+    metadata = json.loads(read_text(work / ".exercise.json"))
+    metadata["sources"][f"raw/{source.name}"] = sha
+    (work / ".exercise.json").write_text(
+        json.dumps(metadata, ensure_ascii=False, indent=2) + "\n", encoding="utf-8"
+    )
+    return {"registered": str(target), "sha256": sha}
+
+
+def _suffix(number):
+    return "" if number == 1 else f"-{number}"
+
+
+def propose(workspace):
+    work = Path(workspace).resolve()
+    verify(work)
+    # Earlier proposals and run logs stay as records; a repeat gets the next number.
+    number = 1
+    while any((work / f"output/wiki-proposal{_suffix(number)}{ext}").exists() for ext in (".json", ".run.json")):
+        number += 1
+    proposal = work / f"output/wiki-proposal{_suffix(number)}.json"
+    log = work / f"output/wiki-proposal{_suffix(number)}.run.json"
+    before = hashes(work / "wiki")
+    attachments = [("AGENTS.md", work / "AGENTS.md")]
+    attachments += [
+        (p.relative_to(work).as_posix(), p)
+        for folder in ("raw", "wiki")
+        for p in sorted((work / folder).rglob("*.md"))
+    ]
+    llm = models.legacy_module("llm")
+    legacy = models.legacy_module("wiki")
+    record = {
+        "data_kind": "observed",
+        "artifact_kind": "execution-log",
+        "status": "failed",
+        "run_id": "RUN-OBS-" + uuid.uuid4().hex,
+        "actor_id": "wiki-curator",
+        "usage": None,
+    }
+    try:
+        response = models.call_commercial(
+            "wiki-curator 한 곳이 위키를 정리합니다. 원본·과거 버전은 보존하고 현재 결정·취소·미정을 구별합니다.",
+            read_text(work / "prompts/wiki.txt") + legacy.API_FORMAT + llm.attach(attachments),
+            json_output=True,
+        )
+        record.update(
+            {k: response.get(k) for k in ("provider", "model", "usage", "elapsed_seconds")}
+        )
+        verify(work)
+        if hashes(work / "wiki") != before:
+            raise ValueError("제안 중 위키가 바뀌었습니다. 충돌로 중단합니다.")
+        data = models.parse_json(response["text"])
+        if (
+            not isinstance(data, dict)
+            or not isinstance(data.get("files"), list)
+            or not data["files"]
+        ):
+            raise ValueError("제안 파일 목록이 없습니다. 위키는 바뀌지 않았습니다.")
+        seen = set()
+        for item in data["files"]:
+            if not isinstance(item, dict):
+                raise ValueError("잘못된 위키 제안 항목입니다.")  # noqa: TRY004
+            relative = item.get("path", "")
+            path = (work / relative).resolve()
+            if (
+                not relative.startswith("wiki/")
+                or not relative.endswith(".md")
+                or not path.is_relative_to(work / "wiki")
+                or relative in seen
+                or not isinstance(item.get("content"), str)
+            ):
+                raise ValueError("위키 밖 경로·중복·잘못된 내용으로 중단합니다.")
+            seen.add(relative)
+            item["before_sha256"] = before.get(path.relative_to(work / "wiki").as_posix())
+        data.update(
+            {
+                "data_kind": "observed",
+                "artifact_kind": "actual-model-proposal",
+                "actor_id": "wiki-curator",
+                "provider": response["provider"],
+                "model": response["model"],
+                "usage": response["usage"],
+            }
+        )
+        write_json(proposal, data)
+        record["status"] = "proposed-awaiting-confirmation"
+    except Exception:
+        record["error_kind"] = "proposal-or-validation-failed"
+        write_json(log, record)
+        raise
+    write_json(log, record)
+    return {"proposal": proposal.relative_to(work).as_posix(), "applied": False}
+
+
+def apply(workspace, proposal, confirmed=False):
+    if not confirmed:
+        raise ValueError("파일 제안과 출처를 읽고 --confirm으로 적용하세요.")
+    work = Path(workspace).resolve()
+    verify(work)
+    data = json.loads(read_text(proposal))
+    if not isinstance(data.get("files"), list) or not data["files"]:
+        raise ValueError("빈 제안입니다.")
+    stem = Path(proposal).stem
+    suffix = stem.removeprefix("wiki-proposal") if stem.startswith("wiki-proposal-") else ""
+    marker = work / f"output/wiki-applied{suffix}.json"
+    if marker.exists():
+        raise ValueError("이미 적용한 제안입니다.")
+    plans, seen = [], set()
+    for item in data["files"]:
+        relative = item.get("path", "")
+        target = (work / relative).resolve()
+        if (
+            not relative.startswith("wiki/")
+            or not relative.endswith(".md")
+            or not target.is_relative_to(work / "wiki")
+            or relative in seen
+            or not isinstance(item.get("content"), str)
+        ):
+            raise ValueError("잘못된 제안 경로·내용입니다. 아무 파일도 적용하지 않았습니다.")
+        seen.add(relative)
+        sha = hashlib.sha256(target.read_bytes()).hexdigest() if target.exists() else None
+        if "before_sha256" not in item or sha != item["before_sha256"]:
+            raise ValueError(f"제안 뒤 파일이 바뀌었습니다. 충돌로 중단합니다: {relative}")
+        plans.append((target, item["content"]))
+    backup = work / f"output/wiki-before{suffix}"
+    if backup.exists():
+        raise ValueError("기존 복구 자료를 보존합니다.")
+    shutil.copytree(work / "wiki", backup)
+    log = work / "wiki/log.md"
+    try:
+        for target, content in plans:
+            target.parent.mkdir(parents=True, exist_ok=True)
+            target.write_text(content + ("" if content.endswith("\n") else "\n"), encoding="utf-8")
+        # The curation record must not depend on whether the model proposed log.md.
+        entry = (
+            f"- {datetime.now(UTC).isoformat(timespec='seconds')} · wiki-curator · 사람 확인 후 적용 · "
+            + ", ".join(t.relative_to(work).as_posix() for t, _ in plans)
+            + f" · 제안 {Path(proposal).name}\n"
+        )
+        text = log.read_text(encoding="utf-8") if log.exists() else "# 정리 기록\n\n"
+        log.write_text(text + ("" if text.endswith("\n") else "\n") + entry, encoding="utf-8")
+    except OSError:
+        for target, _ in plans + [(log, None)]:
+            old = backup / target.relative_to(work / "wiki")
+            if old.exists():
+                shutil.copy2(old, target)
+            elif target.exists():
+                target.unlink()
+        raise ValueError(
+            "적용 중 IO 오류로 이전 위키 파일을 복구했습니다. 백업을 확인하세요."
+        ) from None
+    write_json(
+        marker,
+        {
+            "actor_id": "wiki-curator",
+            "confirmed": True,
+            "source": str(proposal),
+            "backup": backup.relative_to(work).as_posix(),
+        },
+    )
+    return {"applied": len(plans), "backup": str(backup)}
+
+
+def search(workspace, query):
+    work = Path(workspace).resolve()
+    verify(work)
+    return [
+        {"source": p.relative_to(work).as_posix(), "line": i, "text": line}
+        for p in sorted((work / "wiki").rglob("*.md"))
+        for i, line in enumerate(read_text(p).splitlines(), 1)
+        if any(term in line for term in query.split())
+    ]
+
+
+def sync(workspace, arguments):
+    work = Path(workspace).resolve()
+    script = work / "skills/wiki-sync/scripts/wiki_sync.py"
+    if not script.is_file():
+        script = PACKAGE_ROOT / "ch02/wiki-starter/skills/wiki-sync/scripts/wiki_sync.py"
+    # The reused skill handles selected files, rejects force and stops on conflict.
+    return subprocess.run(
+        [sys.executable, str(script), *arguments], cwd=work, check=False
+    ).returncode

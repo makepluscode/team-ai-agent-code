@@ -1,0 +1,10 @@
+{
+  "onboarding-plan": {
+    "inputs": [
+      "input/DOC-001_onboarding.md",
+      "input/my-instructions.md"
+    ],
+    "prompt": "onboarding-plan.txt",
+    "output": "DOC-005_first-summary.md"
+  }
+}

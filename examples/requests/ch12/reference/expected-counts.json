@@ -1,0 +1,11 @@
+{
+  "artifact_kind": "author-reference",
+  "request_count": 10,
+  "task_count": 12,
+  "counts": {
+    "완료": 5,
+    "진행": 2,
+    "확인 대기": 5
+  },
+  "applies": "9장 검토 뒤~11장; 7~9장 시작 상태와 구별"
+}

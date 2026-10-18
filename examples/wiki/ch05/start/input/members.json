@@ -1,0 +1,27 @@
+[
+  {
+    "member_id": "M01",
+    "name": "매니저",
+    "role": "매니저"
+  },
+  {
+    "member_id": "M02",
+    "name": "박다인",
+    "role": "문서"
+  },
+  {
+    "member_id": "M03",
+    "name": "서윤호",
+    "role": "자료"
+  },
+  {
+    "member_id": "M04",
+    "name": "윤가람",
+    "role": "시각자료"
+  },
+  {
+    "member_id": "M05",
+    "name": "정하늘",
+    "role": "도구 지원"
+  }
+]

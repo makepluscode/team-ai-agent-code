@@ -1,0 +1,107 @@
+[
+  {
+    "event_id": "EVT-018-01",
+    "occurred_at": "2026-10-20T09:10:00+09:00",
+    "actor_id": "M02",
+    "target_refs": [
+      "TASK-013"
+    ],
+    "source_refs": [
+      "input/dashboard-request.json#REQ-011"
+    ],
+    "before": null,
+    "after": "접수",
+    "reason": "새 지시 접수",
+    "data_kind": "synthetic"
+  },
+  {
+    "event_id": "EVT-018-02",
+    "occurred_at": "2026-10-20T09:11:00+09:00",
+    "actor_id": "M02",
+    "target_refs": [
+      "TASK-013"
+    ],
+    "source_refs": [
+      "input/dashboard-request.json#REQ-011"
+    ],
+    "before": "접수",
+    "after": "진행",
+    "reason": "초안 작성 시작",
+    "data_kind": "synthetic"
+  },
+  {
+    "event_id": "EVT-019-01",
+    "occurred_at": "2026-10-21T13:00:00+09:00",
+    "actor_id": "M02",
+    "target_refs": [
+      "TASK-013"
+    ],
+    "source_refs": [
+      "input/dashboard-request.json#REQ-011"
+    ],
+    "before": "진행",
+    "after": "확인 대기",
+    "reason": "사람 확인과 수정 이유를 남긴 합성 사례",
+    "data_kind": "synthetic"
+  },
+  {
+    "event_id": "EVT-019-02",
+    "occurred_at": "2026-10-21T13:10:00+09:00",
+    "actor_id": "M01",
+    "target_refs": [
+      "TASK-013"
+    ],
+    "source_refs": [
+      "input/dashboard-request.json#REQ-011"
+    ],
+    "before": "확인 대기",
+    "after": "수정 필요",
+    "reason": "사람 확인과 수정 이유를 남긴 합성 사례",
+    "data_kind": "synthetic"
+  },
+  {
+    "event_id": "EVT-019-03",
+    "occurred_at": "2026-10-21T13:20:00+09:00",
+    "actor_id": "M02",
+    "target_refs": [
+      "TASK-013"
+    ],
+    "source_refs": [
+      "input/dashboard-request.json#REQ-011"
+    ],
+    "before": "수정 필요",
+    "after": "진행",
+    "reason": "사람 확인과 수정 이유를 남긴 합성 사례",
+    "data_kind": "synthetic"
+  },
+  {
+    "event_id": "EVT-019-04",
+    "occurred_at": "2026-10-21T13:50:00+09:00",
+    "actor_id": "M02",
+    "target_refs": [
+      "TASK-013"
+    ],
+    "source_refs": [
+      "input/dashboard-request.json#REQ-011"
+    ],
+    "before": "진행",
+    "after": "확인 대기",
+    "reason": "사람 확인과 수정 이유를 남긴 합성 사례",
+    "data_kind": "synthetic"
+  },
+  {
+    "event_id": "EVT-019-05",
+    "occurred_at": "2026-10-21T14:00:00+09:00",
+    "actor_id": "M01",
+    "target_refs": [
+      "TASK-013"
+    ],
+    "source_refs": [
+      "input/dashboard-request.json#REQ-011"
+    ],
+    "before": "확인 대기",
+    "after": "완료",
+    "reason": "사람 확인과 수정 이유를 남긴 합성 사례",
+    "data_kind": "synthetic"
+  }
+]

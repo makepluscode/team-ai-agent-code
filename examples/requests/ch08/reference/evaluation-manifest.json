@@ -1,0 +1,11 @@
+{
+  "data_kind": "synthetic",
+  "situations": 20,
+  "variants": 60,
+  "development": 18,
+  "evaluation": 42,
+  "review_status": "저자 전건 검수 전",
+  "independence": "7장 요청10건·9장 검토6사례를 재사용하지 않은 독립 원상황",
+  "model_response_count": 0,
+  "local_model_status": "TODO(검증)"
+}

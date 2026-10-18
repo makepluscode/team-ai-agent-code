@@ -1,0 +1,26 @@
+[
+  {
+    "registered_path": "raw/DOC-001_onboarding.md",
+    "original_path": "input/DOC-001_onboarding.md",
+    "sha256": "44197c7610e958e664e16e341411dd9fed167a7aeff4ae5b9855eb90fb9dc2f2",
+    "origin_kind": "synthetic-source"
+  },
+  {
+    "registered_path": "raw/DOC-002_library-rules.md",
+    "original_path": "input/DOC-002_library-rules.md",
+    "sha256": "6ff75f747fa4101c2e4db29573da3f21f235635830d309c69029fc0d0b923484",
+    "origin_kind": "synthetic-source"
+  },
+  {
+    "registered_path": "raw/DOC-003_retrospective.md",
+    "original_path": "input/DOC-003_retrospective.md",
+    "sha256": "bb39bec081d0590ed87c88d25b1b21033e515669acb312bd07472768518a85e9",
+    "origin_kind": "synthetic-source"
+  },
+  {
+    "registered_path": "raw/DOC-009_weekly-report.r1.md",
+    "original_path": "output/DOC-009_weekly-report.r1.md",
+    "sha256": "8c7307b04dfa4370b9d38859c05772753b7cd628a3f589d878cf864983021b16",
+    "origin_kind": "edited-reference"
+  }
+]

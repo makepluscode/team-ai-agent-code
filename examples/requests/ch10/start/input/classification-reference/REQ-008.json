@@ -1,0 +1,14 @@
+{
+  "request_id": "REQ-008",
+  "type": "기타/복합",
+  "owner_candidates": [
+    "M03",
+    "M05"
+  ],
+  "urgency": "보통",
+  "needs_confirmation": true,
+  "evidence": "회의에서 정한 파일 이름 정리 건의 진행 확인과 자료함 접근 실패 해결을 함께 부탁합니다.",
+  "confirmation_reason": "추가 증상·범위·기한·출처 또는 사람의 수정 확인 필요",
+  "artifact_kind": "author-reference",
+  "data_kind": "synthetic"
+}

@@ -1,0 +1,10 @@
+{
+  "meeting-notes": {
+    "inputs": [
+      "input/DOC-011_transcript-fallback.md",
+      "input/meeting-manifest.json"
+    ],
+    "prompt": "meeting-notes.txt",
+    "output": "DOC-012_meeting-notes.md"
+  }
+}

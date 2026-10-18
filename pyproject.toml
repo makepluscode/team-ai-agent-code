@@ -11,10 +11,14 @@ dependencies = [
     "pydantic>=2.8.0",
     "python-multipart>=0.0.9",
     "httpx>=0.27.0",
-    "mcp>=1.0.0",
+    "mcp>=2.0.0,<3",
 ]
 
+[project.scripts]
+team-work = "team_work.cli:main"
+
 [project.optional-dependencies]
+transcription = ["faster-whisper>=1.0.0"]
 dev = [
     "pytest>=8.0.0",
     "pytest-asyncio>=0.23.0",
@@ -27,7 +31,16 @@ requires = ["hatchling"]
 build-backend = "hatchling.build"
 
 [tool.hatch.build.targets.wheel]
-packages = ["src"]
+packages = ["src/team_work"]
+
+[tool.hatch.build.targets.wheel.force-include]
+"src/app" = "src/app"
+"src/mcp" = "src/mcp"
+"llm.py" = "llm.py"
+"wiki.py" = "wiki.py"
+"examples" = "examples"
+"book-exercises.yaml" = "book-exercises.yaml"
+"ch02/wiki-starter/skills/wiki-sync" = "ch02/wiki-starter/skills/wiki-sync"
 
 [tool.ruff]
 line-length = 100
@@ -36,3 +49,4 @@ target-version = "py311"
 [tool.pytest.ini_options]
 asyncio_mode = "auto"
 testpaths = ["tests"]
+pythonpath = ["."]

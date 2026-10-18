@@ -1,3 +1,35 @@
+# v1.7 기능별 실습
+
+새 실습은 `src/team_work/`와 `examples/`를 사용합니다. `book-exercises.yaml`은 장→시작 자료·지시문·편집 비교 결과·명령·확인 기준 연결표입니다. 파일 내용은 JSON 호환 YAML입니다. 기존 chNN/·run.py·part3.py·wiki.py는 구판 재현용으로 보존합니다.
+
+```sh
+uv sync --extra dev
+uv run team-work --help
+uv run team-work prepare --chapter 1 --workspace work/ch01
+uv run team-work verify --workspace work/ch01
+uv run team-work bundle --chapter 1 --destination dist/ch01.zip
+uv run team-work reference --chapter 1
+uv run python -m pytest tests ch02/tests -q
+```
+
+독자 배포의 기본 경로는 이 저장소를 `git clone https://github.com/makepluscode/team-ai-agent-code.git code`로 받는 것입니다(출간 이후 공개로 전환하면 계정 불필요. 집필 중에는 비공개). 보조 배포 자료는 세 종류입니다. `uv build --sdist`의 소스 압축은 pyproject.toml·src/·examples/·공통 호출과 연결표를 포함하므로 Git 계정 없이 내려받아 풀고 그 폴더에서 uv 명령을 실행합니다. `team-work bundle`은 한 장의 일반 폴더·지시문·편집 비교 자료만 묶으며 파이썬 코드 전체 배포를 대신하지 않습니다. `uv build --wheel` 결과는 설치용 패키지이며 예제 자료와 기존 공통 모듈·위키 동기화 실행 파일도 포함합니다. 로컬 생성·분리 설치는 검사했고 외부 발행·업로드는 하지 않았습니다.
+
+1~3장 준비는 Git/위키 없이 일반 input/·prompts/·output/ 폴더를 만듭니다. bundle 압축도 Git 계정 없이 풀어 같은 일반 폴더 자료로 사용합니다. 4장부터 raw/·wiki/·규칙 파일을 명시 준비합니다. prepare는 비어 있는 폴더만 사용하며 reference를 실제 output/에 복사하지 않습니다. 각 예제 README와 RECOVERY를 따릅니다. 코드 실행은 이 code/ 소스 배포 폴더에서 합니다.
+
+문서 생성은 기존 llm.py 공통 상용 호출을 재사용합니다. Claude 기준 `ANTHROPIC_API_KEY`와 공식 문서에서 확인한 `TEAM_AGENT_MODEL` 환경 변수가 필요합니다. 레거시 기본 모델명을 새 경로가 자동 사용하지 않습니다. 키를 Git·결과·로그에 쓰지 않습니다. 생성 성공은 업무 승인과 구별하며 실패 기록도 남깁니다. OpenAI/Gemini 전환·Hermes 설치/등록·실제 API·Windows WSL2/Mac 장비는 TODO(검증)입니다.
+
+`input/my-instructions.md`는 독자가 말투·불확실성 기준을 바꾸는 설정입니다. 업무 원본의 불변 해시와 구별하며 생성 기록에는 실제 사용한 파일 경로를 남깁니다.
+
+백업은 실행 중인 개인 예약·팀 작업의 잠금이 있으면 멈춥니다. SQLite는 backup API로 일관된 사본을 만들고 무결성을 확인하며, 복구는 새 폴더에 해시와 DB 무결성을 확인한 뒤 수행합니다. 공동 운영 전체의 장비·권한 검증은 남아 있습니다.
+
+3장 개인 예약은 제공 실행기의 한 건 예약입니다. `schedule run-due --confirm`을 호출해야 실행하고 output/scheduled-1/에 결과를 남깁니다. 예약 파일 생성은 Hermes 예약 등록이나 상시 서비스 동작을 뜻하지 않습니다. 6장 음원은 제작 전이며 합성 대본 대안으로 이어 갑니다. 실제 음원 전사·원음 구간 대조는 미완료입니다. 선택 전사 환경은 `uv sync --extra transcription`으로 분리했습니다. 5장 두 폴더는 로컬 인계이며 실제 계정 초대 검증이 아닙니다.
+
+---
+
+## 구판 자료
+
+아래는 기존 패키지의 재현 안내입니다. v1.7 장 번호·데이터·완료 기준과 구별합니다.
+
 # 팀 AI 에이전트 실전 — 예제 코드 및 대시보드 저장소
 
 이 저장소는 『팀 AI 에이전트 실전』 도서의 장별 실습 코드와 통합 팀 대시보드 구현체를 담고 있습니다.

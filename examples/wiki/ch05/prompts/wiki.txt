@@ -1,0 +1,1 @@
+raw/와 현재 wiki/를 읽고 위키를 정리하세요. 문서 버전·적용 시각·출처를 적고 과거 결정은 보존하세요. 현재/이전/취소/미정을 나눕니다. guides/onboarding.md, decisions/onboarding.md, index.md, log.md를 갱신하는 JSON 제안을 작성하세요. 원본은 바꾸지 않습니다.

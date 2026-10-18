@@ -1,0 +1,11 @@
+{
+  "comparison": {
+    "inputs": [
+      "input/DOC-002_library-rules.md",
+      "input/DOC-003_retrospective.md",
+      "input/my-instructions.md"
+    ],
+    "prompt": "compare.txt",
+    "output": "DOC-006_comparison.md"
+  }
+}

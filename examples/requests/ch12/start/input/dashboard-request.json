@@ -1,0 +1,13 @@
+[
+  {
+    "request_id": "REQ-011",
+    "task_id": "TASK-013",
+    "source_kind": "internal",
+    "requester_id": "M02",
+    "received_at": "2026-10-20T09:10:00+09:00",
+    "body": "다음 안내 문구 수정 초안을 만들고 매니저 확인 뒤 확정해 주세요.",
+    "source_ref": "input/dashboard-request.json#REQ-011",
+    "due_at": null,
+    "data_kind": "synthetic"
+  }
+]

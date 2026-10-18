@@ -1,0 +1,26 @@
+{
+  "kind": "author-designed-answer-not-model-output",
+  "decision-01": {
+    "date": "2026-10-15",
+    "time": "10:00",
+    "place": "회의실 A",
+    "cancelled": "2026-10-12",
+    "rejected": "2026-10-14",
+    "audio_segment": null
+  },
+  "task-01": {
+    "task_id": "TASK-009",
+    "owner": "M03",
+    "due_at": "2026-10-14T17:00:00+09:00"
+  },
+  "task-02": {
+    "task_id": "TASK-002",
+    "owner": "M02",
+    "due_at": "2026-10-14T17:00:00+09:00",
+    "state": "확인 대기"
+  },
+  "pending-01": {
+    "reviewer": null,
+    "due_at": null
+  }
+}

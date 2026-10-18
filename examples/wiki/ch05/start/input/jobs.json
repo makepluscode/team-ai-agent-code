@@ -1,0 +1,12 @@
+{
+  "handoff-guide": {
+    "inputs": [
+      "input/DOC-007_onboarding-guide.r1.md",
+      "raw/DOC-010_schedule-change.md",
+      "wiki/decisions/onboarding.md"
+    ],
+    "prompt": "handoff-guide.txt",
+    "output": "DOC-007_onboarding-guide.r2.md",
+    "task_id": "TASK-002"
+  }
+}
