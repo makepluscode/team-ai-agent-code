@@ -1,21 +1,21 @@
-# 2장 지침과 자료 비교
+# 2장 지침과 회의 자료 정리
 
-합성 업무 자료 v1.7. 입력은 start/, 지시문은 prompts/, 편집 비교 결과는 reference/입니다. 앞 장 결과 없이 독립 시작합니다.
+저자 편집 합성 입력 8개(텍스트7·문구만 있는 PNG1), 정리7/확인 필요1입니다.
+본문 날짜와 attachments.json이 날짜 근거이며 파일 시각이나 이미지 판독은 쓰지 않습니다.
 
-## 두 실행 경로
+저장소 루트에서 실행합니다.
 
-지시문 경로: 준비 후 prompts/ 파일을 헤르메스에 파일 입력하거나 복사합니다. 입력과 출력 경로·확인 기준을 함께 전달합니다. 제공 코드 경로는 아래 명령을 사용합니다. 상용 호출은 환경 변수 ANTHROPIC_API_KEY와 공식 문서로 확인한 TEAM_AGENT_MODEL을 지정합니다. 키를 파일·결과·캡처에 넣지 않습니다.
-
-```sh
-uv run team-work prepare --chapter 2 --workspace work/ch02
-uv run team-work documents organize --workspace work/ch02
-uv run team-work documents generate --task comparison --workspace work/ch02
+```bash
+uv run team-work prepare --chapter 2 --workspace /tmp/book-ch02
+uv run team-work documents organize --confirm --workspace /tmp/book-ch02
+uv run team-work verify --workspace /tmp/book-ch02
+uv run team-work documents generate --task comparison --workspace /tmp/book-ch02
 ```
 
-검사: 원본 6개 해시 유지 / 확인 필요 파일 별도 / DOC-006 공통점/차이/확인
-
-편집 비교: `uv run team-work reference --chapter 2`로 위치를 확인하고 실제 output/과 나란히 읽습니다. 실제 응답에는 .run.json이 붙습니다. reference를 모델 응답으로 바꾸지 않습니다.
-
-복구는 RECOVERY.md를 따릅니다.
-
-TODO: 상용 API 실제 호출·Hermes 설치/연계·두 기준 장비는 TODO(검증)
+organize는 사람이 input/filing-map.json·filing-reasons.json을 확인한 뒤 제공 대응표로 복사합니다. 모델 판정 결과가 아닙니다.
+헤르메스 경로는 prompts/organize.txt로 목록·본문·첨부 목록을 읽어 먼저 제안하고 사람 확인을 기다립니다.
+확인한 제안은 output/filing-proposal.json(JSON 객체)에 저장하고 --plan output/filing-proposal.json --confirm으로 복사합니다.
+이 경로의 source-map은 실제 복사 기록이며 모델 품질을 자동 판정하지 않습니다.
+comparison은 정리본의 두 주간회의만 읽습니다. API 키·모델은 제공 설정을 사용합니다.
+완료: 원본8개 해시 보존·정리7/확인 필요1·공통점/변화/제안/미정·파일/절 출처.
+새 회의 예제 상용 모델·헤르메스·두 기준 장비 검증과 그림2.3·2.4·2.5 재촬영은 TODO입니다.

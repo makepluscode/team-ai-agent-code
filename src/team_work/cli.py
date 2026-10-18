@@ -27,9 +27,11 @@ def parser():
     p.add_argument("--workspace", type=Path, required=True)
     p.add_argument("--task")
     p.add_argument("--transcript", type=Path)
+    p.add_argument("--plan", type=Path, help="작업 폴더 기준 파일 정리 대응표")
+    p.add_argument("--confirm", action="store_true", help="복사 전 대응표 확인")
     p.set_defaults(
         func=lambda a: (
-            documents.organize(a.workspace)
+            documents.organize(a.workspace, plan=a.plan, confirmed=a.confirm)
             if a.action == "organize"
             else documents.generate(a.workspace, a.task, transcript=a.transcript)
         )

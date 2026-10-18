@@ -87,6 +87,8 @@ def complete(prompt, *, json_output=False, max_tokens=8192, timeout=180, retries
                               "messages": [{"role": "user", "content": prompt}]},
                              {"x-api-key": key, "anthropic-version": "2023-06-01"}, timeout)
                 text = "".join(b.get("text", "") for b in body.get("content", []) if b.get("type") == "text")
+                if body.get("stop_reason") == "max_tokens":  # 잘린 문서를 완성본으로 저장하지 않음
+                    raise ModelError(f"출력 한도({max_tokens} 토큰)에서 응답이 잘렸습니다. 지시를 줄이거나 한도를 늘리세요.", status=400)
                 u = body.get("usage", {})
                 usage = {"input_tokens": u.get("input_tokens"), "output_tokens": u.get("output_tokens"),
                          "cache_read_tokens": u.get("cache_read_input_tokens"),
@@ -116,6 +118,8 @@ def complete(prompt, *, json_output=False, max_tokens=8192, timeout=180, retries
                 if not candidates:
                     raise ModelError(f"응답 후보가 없습니다: {json.dumps(body.get('promptFeedback'), ensure_ascii=False)}")
                 text = "".join(p.get("text", "") for p in candidates[0].get("content", {}).get("parts", []))
+                if candidates[0].get("finishReason") == "MAX_TOKENS":
+                    raise ModelError(f"출력 한도({max_tokens} 토큰)에서 응답이 잘렸습니다. 지시를 줄이거나 한도를 늘리세요.", status=400)
                 u = body.get("usageMetadata", {})
                 output = u.get("candidatesTokenCount")
                 if output is not None and u.get("thoughtsTokenCount"):

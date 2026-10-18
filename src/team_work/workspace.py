@@ -45,6 +45,29 @@ def verify(workspace):
             or hashlib.sha256(path.read_bytes()).hexdigest() != expected
         ):
             raise ValueError(f"시작 원본이 바뀌었습니다. 새 폴더에 복구하세요: {relative}")
+    source_map = work / "output/source-map.json"
+    if metadata["chapter"] == 2 and source_map.exists():
+        report = json.loads(source_map.read_text(encoding="utf-8"))
+        rows = report["files"]
+        originals = {f"input/files/{p.name}" for p in (work / "input/files").iterdir()}
+        if {row["source"] for row in rows} != originals or len(rows) != len(originals):
+            raise ValueError("정리 대응표의 원본 파일 목록을 확인하세요.")
+        targets = set()
+        for row in rows:
+            original, copied = work / row["source"], work / row["copy"]
+            if (
+                copied.is_symlink()
+                or not copied.resolve().is_relative_to(work / "output/organized")
+                or copied.resolve() in targets
+                or not copied.is_file()
+                or original.read_bytes() != copied.read_bytes()
+            ):
+                raise ValueError("정리본의 경로·중복·원본 바이트를 확인하세요.")
+            targets.add(copied.resolve())
+        if report["review_count"] != sum(
+            row["copy"].startswith("output/organized/확인-필요/") for row in rows
+        ):
+            raise ValueError("확인 필요 건수를 확인하세요.")
     return metadata
 
 

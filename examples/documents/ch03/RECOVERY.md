@@ -1,5 +1,6 @@
 # 복구
 
-기존 폴더를 보존하고 `uv run team-work prepare --chapter 3 --workspace work/ch03-retry`로 새로 시작합니다.
-
-원본 해시 오류는 원본 복사본을 새 폴더에서 다시 읽어 확인합니다. 결과가 있으면 덮어쓰지 않습니다. 확인한 작업 폴더는 `uv run team-work backup --source work/ch03 --destination work/ch03-backup`으로 보관하고 `restore --source work/ch03-backup --destination work/ch03-restored`로 새 폴더에 복구합니다. 위키 적용 전 사본은 output/wiki-before/에 남습니다.
+기존 작업 폴더와 실행 기록을 보존하고 빈 새 경로에 prepare를 다시 실행합니다.
+verify가 실패하면 시작 원본을 덮어 고치지 말고 새 폴더와 대조합니다.
+기존 결과 이름이나 정리본이 있으면 작업을 중단합니다. API 호출 실패 뒤에는 새 폴더에서 다시 실행합니다.
+reference는 비교용 편집 예시이며 결과 파일에 복사해 실행 성공으로 표시하지 않습니다.

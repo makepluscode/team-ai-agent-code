@@ -69,7 +69,8 @@ def propose(workspace):
     attachments += [
         (p.relative_to(work).as_posix(), p)
         for folder in ("raw", "wiki")
-        for p in sorted((work / folder).rglob("*.md"))
+        for p in sorted((work / folder).rglob("*"))
+        if p.is_file() and p.suffix in {".md", ".txt", ".json"}
     ]
     llm = models.legacy_module("llm")
     legacy = models.legacy_module("wiki")

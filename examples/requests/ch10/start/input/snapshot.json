@@ -704,7 +704,7 @@
       ],
       "source_refs": [
         "raw/DOC-009_r1.md#주간 보고",
-        "raw/DOC-004_r1.md#주간 활동표 설명"
+        "raw/DOC-004_r1.md#주간 보고 입력 묶음(회의 자료 정리본)"
       ],
       "before": "input/review-fixtures/REV-002-input.md#summary",
       "after": "output/DOC-009_r2.md#summary",
@@ -720,7 +720,7 @@
       ],
       "source_refs": [
         "raw/DOC-009_r1.md#주간 보고",
-        "raw/DOC-004_r1.md#주간 활동표 설명"
+        "raw/DOC-004_r1.md#주간 보고 입력 묶음(회의 자료 정리본)"
       ],
       "before": "확인 대기",
       "after": "완료",
@@ -1000,7 +1000,7 @@
       "reason": "미입력 0 오류 복구. 관측 완료 4건 유지, M03 누락 확인과 M01 검토 추가",
       "source_refs": [
         "raw/DOC-009_r1.md#주간 보고",
-        "raw/DOC-004_r1.md#주간 활동표 설명"
+        "raw/DOC-004_r1.md#주간 보고 입력 묶음(회의 자료 정리본)"
       ],
       "event_id": "EVT-014-02",
       "data_kind": "synthetic"

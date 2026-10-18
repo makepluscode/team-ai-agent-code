@@ -4,40 +4,52 @@
   "review_count": 1,
   "files": [
     {
-      "source": "input/files/온보딩 메모 최종.md",
-      "copy": "output/organized/onboarding/DOC-001.r1.md",
+      "source": "input/files/회의록 최종.md",
+      "copy": "output/organized/2026-10-02_주간회의_안내준비점검.md",
       "status": "organized",
-      "reason": "온보딩 자료 본문과 DOC-001 판에 따른 분류"
+      "reason": "본문의 날짜와 회의/메모 종류·주제"
     },
     {
-      "source": "input/files/이용 규칙 1.md",
-      "copy": "output/organized/rules/DOC-002.r1.md",
+      "source": "input/files/주간회의(2).md",
+      "copy": "output/organized/2026-10-05_주간회의_온보딩준비.md",
       "status": "organized",
-      "reason": "자료함 규칙 본문과 DOC-002 판에 따른 분류"
+      "reason": "본문의 날짜와 회의/메모 종류·주제"
     },
     {
-      "source": "input/files/회고 복사.md",
-      "copy": "output/organized/retrospective/DOC-003.r1.md",
+      "source": "input/files/1on1 메모.txt",
+      "copy": "output/organized/2026-10-06_원온원_자료접근점검.txt",
       "status": "organized",
-      "reason": "지난 공지 관찰·개선 제안 본문과 DOC-003 판에 따른 분류"
+      "reason": "본문의 날짜와 회의/메모 종류·주제"
     },
     {
-      "source": "input/files/이번주.csv",
-      "copy": "output/organized/activity/weekly-activity.csv",
+      "source": "input/files/업무 메모.md",
+      "copy": "output/organized/2026-10-06_업무메모_비교표작성.md",
       "status": "organized",
-      "reason": "날짜별 활동 수 표에 따른 분류"
+      "reason": "본문의 날짜와 회의/메모 종류·주제"
     },
     {
-      "source": "input/files/표지.txt",
-      "copy": "output/organized/cover/cover.txt",
+      "source": "input/files/대화 내보내기.txt",
+      "copy": "output/organized/2026-10-06_대화기록_온보딩준비.txt",
       "status": "organized",
-      "reason": "온보딩 자료 묶음 표지 설명문"
+      "reason": "본문의 날짜와 회의/메모 종류·주제"
+    },
+    {
+      "source": "input/files/IMG_2041.png",
+      "copy": "output/organized/2026-10-05_회의사진_준비항목.png",
+      "status": "organized",
+      "reason": "input/attachments.json의 첨부 기록 날짜·종류·주제"
+    },
+    {
+      "source": "input/files/새 텍스트 문서.txt",
+      "copy": "output/organized/2026-10-07_상태메모_준비업무점검.txt",
+      "status": "organized",
+      "reason": "본문의 날짜와 회의/메모 종류·주제"
     },
     {
       "source": "input/files/이름 없음.txt",
       "copy": "output/organized/확인-필요/이름 없음.txt",
       "status": "needs_review",
-      "reason": "분류 정보가 없어 원래 이름을 유지하고 확인 필요로 분리"
+      "reason": "날짜·종류·주제 근거 없음. 원래 이름으로 확인 필요 보존"
     }
   ]
 }

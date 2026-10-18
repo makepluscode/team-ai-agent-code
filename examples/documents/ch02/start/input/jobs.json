@@ -1,8 +1,8 @@
 {
   "comparison": {
     "inputs": [
-      "input/DOC-002_library-rules.md",
-      "input/DOC-003_retrospective.md",
+      "output/organized/2026-10-02_주간회의_안내준비점검.md",
+      "output/organized/2026-10-05_주간회의_온보딩준비.md",
       "input/my-instructions.md"
     ],
     "prompt": "compare.txt",

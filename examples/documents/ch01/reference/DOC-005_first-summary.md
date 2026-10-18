@@ -26,3 +26,5 @@ data_kind: "edited-reference"
 날짜·시각 확정 여부, 장소, 후속 안내자료 최종 검토자.
 
 출처: input/DOC-001_onboarding.md (DOC-001@r1).
+
+작성: 자비스(에이전트) · 확인: 매니저

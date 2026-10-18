@@ -79,10 +79,22 @@ def generate(workspace, task, *, output_subdir=None, transcript=None):
     return {"saved": str(target), "business_status": "확인 대기"}
 
 
-def organize(workspace):
+def organize(workspace, *, plan=None, confirmed=False):
     work = Path(workspace).resolve()
     verify(work)
-    mapping = json.loads(read_text(work / "input/filing-map.json"))
+    if not confirmed:
+        raise ValueError("대응표를 확인한 뒤 --confirm으로 복사하세요.")
+    plan_path = (work / (plan or "input/filing-map.json")).resolve()
+    if not plan_path.is_relative_to(work) or not plan_path.is_file():
+        raise ValueError("작업 폴더 안의 대응표를 고르세요.")
+    mapping = json.loads(read_text(plan_path))
+    if not isinstance(mapping, dict) or not mapping or not all(
+        isinstance(k, str) and isinstance(v, str) for k, v in mapping.items()
+    ):
+        raise ValueError("대응표는 원래 파일명과 정리본 이름의 JSON 객체여야 합니다.")
+    originals = {p.name for p in (work / "input/files").iterdir() if p.is_file()}
+    if set(mapping) != originals:
+        raise ValueError("대응표는 원본 파일을 빠짐없이 한 번씩 포함해야 합니다.")
     reasons_path = work / "input/filing-reasons.json"
     reasons = json.loads(read_text(reasons_path)) if reasons_path.exists() else {}
     target = work / "output/organized"
@@ -112,7 +124,10 @@ def organize(workspace):
             "source": f"input/files/{source}",
             "copy": f"output/organized/{destination}",
             "status": "needs_review" if destination.startswith("확인-필요/") else "organized",
-            "reason": reasons.get(source, "제공 파일 대응표의 분류"),
+            "reason": (
+                "본문·첨부 목록의 근거와 목적지를 사람이 확인한 제안"
+                if plan else reasons.get(source, "제공 편집 대응표의 분류")
+            ),
         }
         for _, _, source, destination in rows
     ]
@@ -121,6 +136,9 @@ def organize(workspace):
         {
             "data_kind": "observed",
             "artifact_kind": "deterministic-file-operation",
+            "plan_kind": "human-confirmed-proposal" if plan else "provided-edited-mapping",
+            "plan": plan_path.relative_to(work).as_posix(),
+            "human_confirmed": True,
             "originals_preserved": True,
             "review_count": sum(item["status"] == "needs_review" for item in files),
             "files": files,

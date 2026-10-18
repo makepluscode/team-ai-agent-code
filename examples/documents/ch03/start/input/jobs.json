@@ -8,19 +8,16 @@
     "output": "DOC-007_onboarding-guide.r1.md",
     "task_id": "TASK-002"
   },
-  "improvement-memo": {
-    "inputs": [
-      "input/DOC-001_onboarding.md",
-      "input/DOC-006_comparison.md",
-      "input/my-instructions.md"
-    ],
-    "prompt": "improvement-memo.txt",
-    "output": "DOC-008_improvement.md"
-  },
   "weekly-report": {
     "inputs": [
-      "input/DOC-004_weekly-activity.md",
-      "input/weekly-activity.csv",
+      "input/DOC-004_weekly-meetings.md",
+      "input/snapshot.json",
+      "input/organized/2026-10-02_주간회의_안내준비점검.md",
+      "input/organized/2026-10-05_주간회의_온보딩준비.md",
+      "input/organized/2026-10-06_원온원_자료접근점검.txt",
+      "input/organized/2026-10-06_업무메모_비교표작성.md",
+      "input/organized/2026-10-06_대화기록_온보딩준비.txt",
+      "input/organized/2026-10-07_상태메모_준비업무점검.txt",
       "input/my-instructions.md"
     ],
     "prompt": "weekly-report.txt",

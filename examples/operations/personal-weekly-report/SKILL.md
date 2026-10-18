@@ -1,12 +1,18 @@
 ---
 name: weekly-report
-description: 활동표에서 미입력과 0을 구별하며 주간 보고 작성
-version: 1.7.0
+description: 회의 자료에서 항목키 중복을 제외하고 변화·남은 일·누락을 보고
+version: 1.7.1
 ---
 
-input/DOC-004_weekly-activity.md와 input/weekly-activity.csv, input/my-instructions.md를 읽습니다.
-보고 기간과 작성 시점을 적고 관측값을 합산합니다. 미입력·미확인을 0으로 채우지 않습니다.
-output/DOC-009_weekly-report.r1.md에 새로 저장하고 다시 읽어 출처와 확인할 항목을 점검합니다.
-기존 결과가 있으면 멈추고 새 작업 폴더에서 실행합니다.
+실행할 작업 폴더와 결과 경로를 받습니다. 없으면 먼저 확인합니다. 개인 경로나 API 키를 저장하지 않습니다.
+input/DOC-004_weekly-meetings.md, input/snapshot.json, input/my-instructions.md를 읽습니다.
+묶음에 지정된 input/organized/ 텍스트 회의 자료만 읽습니다. 이미지·확인 필요 파일은 제외합니다.
+이번 주 완료는 항목키별로 중복 제거하고 지난주 완료는 제외합니다. 완료마다 근거 파일·절 또는 항목키를 적습니다.
+지난주 대비 변화·제안·미정, 남은 액션의 담당·기한·상태·출처, 확인할 누락을 적습니다.
+상태 미기재·미입력을 0으로 바꾸지 않고 특정 메모의 신규 완료 0건은 그 관측 범위를 적습니다.
+관측 기간과 기준 시각은 snapshot.json을 사용합니다. 금요일 예약이나 나중 실행에도 관측 기준을 실행 시각으로 바꾸지 않습니다.
+업무 TASK-001은 확인 대기입니다. 원본을 보존하고 output/ 아래 새 파일에 저장한 뒤 다시 읽습니다.
+기존 결과가 있으면 멈추고 새 작업 폴더를 씁니다.
 제공 코드 경로: uv run team-work documents generate --workspace 작업폴더 --task weekly-report
-Hermes 설치·스킬 등록·예약 연계는 TODO(두 기준 장비 검증). 이 파일이 있다는 사실은 등록 성공을 뜻하지 않습니다.
+제공 코드 호출은 이 SKILL.md를 실행하는 경로와 별개입니다. 내용·기준을 같은 입력으로 비교합니다.
+새 회의 예제의 실제 모델·Hermes 스킬 등록·금요일 예약·두 기준 장비는 TODO(검증)입니다.

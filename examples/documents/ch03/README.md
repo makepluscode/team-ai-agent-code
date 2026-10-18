@@ -1,27 +1,18 @@
-# 3장 반복 업무와 개인 예약
+# 3장 회의 자료 주간 보고와 재사용
 
-합성 업무 자료 v1.7. 입력은 start/, 지시문은 prompts/, 편집 비교 결과는 reference/입니다. 앞 장 결과 없이 독립 시작합니다.
+일반 폴더에서 온보딩 가이드 한 건을 짧게 작성하고 회의 자료로 주간 보고를 만듭니다. DOC-008은 삭제·결번입니다.
+독립 시작 input/organized/는 2장 정리본과 같은 8개이며 보고 입력은 텍스트6개만 사용합니다.
+DOC-004_weekly-meetings.md는 묶음 목록입니다. 사진·확인 필요 제외, 지난주는 변화 비교만 합니다.
 
-## 두 실행 경로
-
-지시문 경로: 준비 후 prompts/ 파일을 헤르메스에 파일 입력하거나 복사합니다. 입력과 출력 경로·확인 기준을 함께 전달합니다. 제공 코드 경로는 아래 명령을 사용합니다. 상용 호출은 환경 변수 ANTHROPIC_API_KEY와 공식 문서로 확인한 TEAM_AGENT_MODEL을 지정합니다. 키를 파일·결과·캡처에 넣지 않습니다.
-
-```sh
-uv run team-work prepare --chapter 3 --workspace work/ch03
-uv run team-work documents generate --task onboarding-guide --workspace work/ch03
-uv run team-work documents generate --task improvement-memo --workspace work/ch03
-uv run team-work documents generate --task weekly-report --workspace work/ch03
-uv run team-work schedule create --at 2026-10-09T17:00:00+09:00 --workspace work/ch03
-uv run team-work schedule status --workspace work/ch03
-uv run team-work schedule run-due --confirm --workspace work/ch03
-uv run team-work schedule pause --workspace work/ch03
+```bash
+uv run team-work prepare --chapter 3 --workspace /tmp/book-ch03
+uv run team-work documents generate --task onboarding-guide --workspace /tmp/book-ch03
+uv run team-work documents generate --task weekly-report --workspace /tmp/book-ch03
+uv run team-work verify --workspace /tmp/book-ch03
 ```
 
-검사: DOC-007/008/009 사실·제안·미정 / 관측 완료 4건·미입력 구별 / 개인 스킬 하나·예약 하나·실제 실행/다음 실행 구별
-
-편집 비교: `uv run team-work reference --chapter 3`로 위치를 확인하고 실제 output/과 나란히 읽습니다. 실제 응답에는 .run.json이 붙습니다. reference를 모델 응답으로 바꾸지 않습니다.
-
-복구는 RECOVERY.md를 따릅니다.
-
-TODO: 상용 API 실제 호출·Hermes 설치/연계·두 기준 장비는 TODO(검증)
-TODO: 제공 개인 예약은 run-due를 직접 호출하는 실행기입니다. 백그라운드 서비스나 Hermes 예약 등록 성공을 뜻하지 않습니다.
+완료 기준: 항목키별 중복 제외 관측 완료4건·지난주 대비 변화·남은 액션 담당/기한/상태/출처·상태 미기재/미입력과 메모 범위0건 구별.
+관측 기간10/05~10/09·기준10/07은 snapshot.json에서 읽고 금요일 예약 실행 시각으로 바꾸지 않습니다.
+스킬은 start/skills/weekly-report, 제공 실행기는 operations/personal-weekly-report를 참조합니다.
+예약 등록·실제 실행·관측 기준을 구별합니다. 실습 뒤 중지하고 새 폴더에서 수동 복구합니다.
+새 회의 예제의 상용 생성·헤르메스 스킬·금요일 예약·두 기준 장비 검증 및 관련 화면 재촬영은 TODO입니다.

@@ -47,8 +47,8 @@ def test_organize_keeps_binary_bytes_timestamp_and_unknown(tmp_path):
     work = tmp_path / "work"
     prepare(2, work)
     # Existing real source copies remain byte-for-byte identical.
-    result = documents.organize(work)
-    assert result["copied"] == 6
+    result = documents.organize(work, confirmed=True)
+    assert result["copied"] == 8
     report = read(work / "output/source-map.json")
     assert report["originals_preserved"] is True
     assert report["review_count"] == 1
@@ -59,7 +59,7 @@ def test_organize_keeps_binary_bytes_timestamp_and_unknown(tmp_path):
         assert original.stat().st_mtime_ns == copy.stat().st_mtime_ns
     assert (work / "output/organized/확인-필요/이름 없음.txt").is_file()
     with pytest.raises(ValueError):
-        documents.organize(work)
+        documents.organize(work, confirmed=True)
     verify(work)
 
 
@@ -200,7 +200,7 @@ def test_backup_restore_hash_check(tmp_path):
     operations.backup(work, copy)
     operations.restore(copy, restored)
     verify(restored)
-    (copy / "input/weekly-activity.csv").write_text("tampered")
+    (copy / "input/organized/2026-10-07_상태메모_준비업무점검.txt").write_text("tampered")
     with pytest.raises(ValueError, match="해시"):
         operations.restore(copy, tmp_path / "bad-restore")
 
@@ -412,3 +412,14 @@ def test_failed_schedule_reports_check_needed_without_completing(tmp_path, monke
     assert state["run_count"] == 0
     assert not (work / "output/personal-schedule.lock").exists()
     assert not (work / "output/scheduled-1/DOC-009_weekly-report.r1.md").exists()
+
+
+def test_claude_truncated_response_is_failure(monkeypatch):
+    import llm
+    monkeypatch.setenv("TEAM_AGENT_PROVIDER", "claude")
+    monkeypatch.setenv("ANTHROPIC_API_KEY", "test")
+    monkeypatch.setattr(llm, "_post", lambda *a, **k: {"content": [{"type": "text", "text": "| 잘린"}],
+                                                       "stop_reason": "max_tokens", "usage": {}})
+    import pytest
+    with pytest.raises(llm.ModelError, match="잘렸습니다"):
+        llm.complete("보고서", retries=0)
