@@ -1,0 +1,89 @@
+{
+  "data_kind": "edited-reference",
+  "files": [
+    {
+      "source": "input/files/회의록 최종.md",
+      "copy": "output/organized/2026-10-02_회의노트_주간회의.md",
+      "status": "organized",
+      "date_basis": "본문의 회의 날짜(2026-10-02)와 '회의 노트'",
+      "sha256": "4cc501917c74b057ad9990eed11e8fae6850805c3f973477d65d25697913445f"
+    },
+    {
+      "source": "input/files/회의록 최종 - 복사본.md",
+      "copy": null,
+      "status": "duplicate",
+      "date_basis": "회의록 최종.md와 내용이 같음. 정리본을 하나만 둠",
+      "sha256": "4cc501917c74b057ad9990eed11e8fae6850805c3f973477d65d25697913445f"
+    },
+    {
+      "source": "input/files/주간회의(2).md",
+      "copy": "output/organized/2026-10-05_회의노트_주간회의.md",
+      "status": "organized",
+      "date_basis": "본문의 회의 날짜(2026-10-05)와 '회의 노트'",
+      "sha256": "09608240752cdb5c48b3fb45bb09ffd3bad75652b1b0999f4ac415e810f1af1c"
+    },
+    {
+      "source": "input/files/1on1 메모.txt",
+      "copy": "output/organized/2026-10-06_회의노트_원온원.txt",
+      "status": "organized",
+      "date_basis": "본문의 면담 날짜(2026-10-06)와 '회의 노트(원온원)'",
+      "sha256": "d5fc21fa6ec23628b77cf7ccceed2de5a4d26835313a0ca53d9e8ff6a9076d15"
+    },
+    {
+      "source": "input/files/오늘 할 일.txt",
+      "copy": "output/organized/2026-10-05_업무노트_할일.txt",
+      "status": "organized",
+      "date_basis": "본문 첫 줄의 날짜(2026-10-05)와 '업무 노트'",
+      "sha256": "98ec89ace2353f88154f84bc1c7bee57903fdbb4645396904f286ca7deba57f0"
+    },
+    {
+      "source": "input/files/업무 메모.md",
+      "copy": "output/organized/2026-10-06_업무노트_비교표작성.md",
+      "status": "organized",
+      "date_basis": "본문의 기록 날짜(2026-10-06)와 '업무 노트'",
+      "sha256": "7b96c12336ef17f827588efc94cc30962a33726106bd0a8202f2c3d82ce8ef99"
+    },
+    {
+      "source": "input/files/전화 메모.txt",
+      "copy": "output/organized/2026-10-06_업무노트_회의실문의.txt",
+      "status": "organized",
+      "date_basis": "본문의 기록 날짜(2026-10-06)와 '업무 노트(통화 메모)'",
+      "sha256": "c0306db9ea7a3df6862d789b4481e3bef8aa6e048ab782ee01fa6f667edcd189"
+    },
+    {
+      "source": "input/files/새 텍스트 문서.txt",
+      "copy": "output/organized/2026-10-07_업무노트_준비상태점검.txt",
+      "status": "organized",
+      "date_basis": "본문의 기록 날짜(2026-10-07)와 '업무 노트'",
+      "sha256": "933028553f258c08a1b0d41b472377727eab07c1f0843bab8af1aeedb01c69f1"
+    },
+    {
+      "source": "input/files/대화 내보내기.txt",
+      "copy": "output/organized/2026-10-06_대화기록_온보딩준비.txt",
+      "status": "organized",
+      "date_basis": "본문의 대화 날짜(2026-10-06)와 '메신저 대화 내보내기'",
+      "sha256": "ba1c96b191c1fdf8b19cd5c8f7766d726285d1d6afafddb3a249bd6ed720f6dc"
+    },
+    {
+      "source": "input/files/IMG_2041.png",
+      "copy": "output/organized/2026-10-05_회의사진_화이트보드.png",
+      "status": "organized",
+      "date_basis": "대화 기록: 10-06에 받았고 '어제(10월 5일) 주간회의' 사진이라고 적힘. 이름에는 회의 날짜를 씀",
+      "sha256": "28d21661231c0311cb27507cedc4bcd6a29a702e343962fb20e8bed87975de02"
+    },
+    {
+      "source": "input/files/받은 이미지 (1).png",
+      "copy": "output/organized/2026-10-06_받은이미지_안내슬라이드시안.png",
+      "status": "organized",
+      "date_basis": "대화 기록: 10-06 14:32에 받은 안내 슬라이드 시안. 회의 사진이 아니므로 받은 날짜를 씀",
+      "sha256": "518aaec74c6f861f568717b255102ea75adae0194a75abe2991aa2dcd505dea8"
+    },
+    {
+      "source": "input/files/이름 없음.txt",
+      "copy": "output/organized/확인-필요/이름 없음.txt",
+      "status": "needs_review",
+      "date_basis": "날짜·종류·주제 근거 없음. 원래 이름으로 보존",
+      "sha256": "8691a69e58ce0cecc4484b0f79880de44b362ae08e4297fec2fd7f23e4f5b583"
+    }
+  ]
+}

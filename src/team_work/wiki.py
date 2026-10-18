@@ -221,7 +221,7 @@ def sync(workspace, arguments):
     work = Path(workspace).resolve()
     script = work / "skills/wiki-sync/scripts/wiki_sync.py"
     if not script.is_file():
-        script = PACKAGE_ROOT / "ch02/wiki-starter/skills/wiki-sync/scripts/wiki_sync.py"
+        script = PACKAGE_ROOT / "legacy/ch02/wiki-starter/skills/wiki-sync/scripts/wiki_sync.py"
     # The reused skill handles selected files, rejects force and stops on conflict.
     return subprocess.run(
         [sys.executable, str(script), *arguments], cwd=work, check=False

@@ -68,14 +68,14 @@ class Part03Tests(unittest.TestCase):
         self.assertIsNone(app.evaluation([row],True)['accuracy'])
         with self.assertRaises(ValueError):app.evaluation([row,row],True)
     def test_reference_minutes_keep_tentative_cancelled_unknown_and_pending_publication(self):
-        app.save(self.work/'output/transcript.json',app.read(BASE/'ch09/completed/transcript.json'))
+        app.save(self.work/'output/transcript.json',app.read(BASE/'legacy/ch09/completed/transcript.json'))
         r=app.extract_minutes(self.work,True);self.assertEqual(r['actions'][1]['due'],None)
         self.assertTrue(any(d['status']=='tentative' for d in r['decisions']));self.assertTrue(r['cancelled'])
         publication=app.publish_bundle(self.work);self.assertFalse(publication['external_writes']);self.assertFalse(publication['wiki_built'])
         self.assertIn('publication_pending',(self.work/'output/wiki-input/meeting.md').read_text())
         with self.assertRaises(ValueError):app.publish_bundle(self.work)
     def test_foreign_meeting_and_missing_evidence_rejected(self):
-        r=app.read(BASE/'ch09/completed/minutes.json');r['meeting_id']='OTHER'
+        r=app.read(BASE/'legacy/ch09/completed/minutes.json');r['meeting_id']='OTHER'
         with self.assertRaises(ValueError):app.validate_minutes(r,app.read(self.work/'input/meeting.json'))
         r['meeting_id']='MEET-BB-1008';r['decisions'][0]['evidence']=''
         with self.assertRaises(ValueError):app.validate_minutes(r,app.read(self.work/'input/meeting.json'))
@@ -137,7 +137,7 @@ class Part03Tests(unittest.TestCase):
         self.assertIn('확인 책임자 없음 → PM',text);self.assertIn('판정과 같았던 확인 1건',text)
         body=app.inquiry(self.work,self.ident)['body'];self.assertNotIn(body,text)
     def test_publish_writes_raw_named_files_with_all_lists_and_redaction(self):
-        t=app.read(BASE/'ch09/completed/transcript.json');t['segments'].append({'start':12.0,'end':18.5,'text':'연락은 pm@studiomerry.example 또는 010-1234-5678로 주세요.'})
+        t=app.read(BASE/'legacy/ch09/completed/transcript.json');t['segments'].append({'start':12.0,'end':18.5,'text':'연락은 pm@studiomerry.example 또는 010-1234-5678로 주세요.'})
         app.save(self.work/'output/transcript.json',t);app.extract_minutes(self.work,True)
         out=app.publish_bundle(self.work);self.assertEqual(out['redactions'],2);self.assertEqual(out['evidence_missing_after_redaction'],[])
         meeting=(self.work/'output/wiki-input/20261008_BB_CAMP-BB-202610_meeting.md').read_text()
@@ -151,8 +151,8 @@ class Part03Tests(unittest.TestCase):
         r=app.evaluation(rows,development=True);self.assertIsNone(r['accuracy']);self.assertEqual(r['development_accuracy'],{'category':1.0,'role':0.0})
         with self.assertRaises(ValueError):app.evaluation([{**rows[0],'data_origin':'authored-fixture'}],development=True)
     def test_publish_rejects_evidence_missing_from_transcript(self):
-        app.save(self.work/'output/transcript.json',app.read(BASE/'ch09/completed/transcript.json'))
-        r=app.read(BASE/'ch09/completed/minutes.json');r['decisions'][0]['evidence']='회의에서 나오지 않은 문장'
+        app.save(self.work/'output/transcript.json',app.read(BASE/'legacy/ch09/completed/transcript.json'))
+        r=app.read(BASE/'legacy/ch09/completed/minutes.json');r['decisions'][0]['evidence']='회의에서 나오지 않은 문장'
         app.save(self.work/'output/minutes.json',r)
         with self.assertRaises(ValueError):app.publish_bundle(self.work)
 

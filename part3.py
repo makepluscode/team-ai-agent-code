@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Part 3 (chapters 7~9) prepared exercises. Data in ch07~ch09/start, prompts in chNN/prompts. Standard-library pipeline; models are optional.
+"""Part 3 (chapters 7~9) prepared exercises. Data in ch07~legacy/ch09/start, prompts in chNN/prompts. Standard-library pipeline; models are optional.
 Reference mode is an authored fixture, never inference or evaluation evidence.
 Judgment runs locally (Laya via Ollama or Python) or on a commercial API
 (--transport api) with the same result format.
@@ -45,8 +45,8 @@ def prepare(work,wiki_from='ch06',with_wiki=True):
         raise ValueError('빈 작업 폴더에서 시작합니다. 이전 결과는 보존합니다.')
     work.mkdir(parents=True,exist_ok=True)
     for chapter in CHAPTERS:
-        shutil.copytree(BASE/chapter/'start',work/'input',dirs_exist_ok=True)
-        shutil.copytree(BASE/chapter/'start',work/'model-input',dirs_exist_ok=True)
+        shutil.copytree(BASE/'legacy'/chapter/'start',work/'input',dirs_exist_ok=True)
+        shutil.copytree(BASE/'legacy'/chapter/'start',work/'model-input',dirs_exist_ok=True)
     (work/'model-input/comparison-structure.json').unlink(missing_ok=True)
     rows=read(work/'input/inquiries.json')
     target=work/'model-input/inquiries.json'
@@ -83,7 +83,7 @@ LAST_CALL={}  # 응답을 해석하기 전에 호출 기록을 남긴다(해석�
 
 def commercial_decide(work,body,criteria=None):
     """Same questions to a commercial model; converted to the Laya answer format."""
-    prompt=(BASE/'ch07/prompts/ch07-classify.txt').read_text(encoding='utf-8').replace('{{INPUT}}','첨부 자료')
+    prompt=(BASE/'legacy/ch07/prompts/ch07-classify.txt').read_text(encoding='utf-8').replace('{{INPUT}}','첨부 자료')
     prompt+='\n\n# 판정 질문(questions.json)\n'+json.dumps(body['questions'],ensure_ascii=False,indent=2)
     prompt+='\n\n# 문의\n'+json.dumps(body['state'],ensure_ascii=False,indent=2)
     if criteria:
@@ -263,7 +263,7 @@ def extract_minutes(work,reference=False,engine=None):
     target=work/'output/minutes.json'
     if target.exists():raise ValueError('기존 회의록을 보존합니다.')
     if reference:
-        result=read(BASE/'ch09/completed/minutes.json');save(target,result)
+        result=read(BASE/'legacy/ch09/completed/minutes.json');save(target,result)
     elif (engine or ('hermes' if shutil.which('hermes') else 'api' if llm.available() else 'hermes'))=='api':
         prompt=(work/'prompts/ch09-extract.txt').read_text(encoding='utf-8')
         prompt+='\n\n# 답하는 형식\n파일을 직접 저장할 수 없으니 minutes.json에 들어갈 JSON 하나로만 답해 줘. version은 정수, decisions의 각 항목은 id·status·value·evidence(·supersedes)를 가진다.'
@@ -523,7 +523,7 @@ def main():
                 if not a.predictions:raise ValueError('--predictions에 비교할 기록을 지정합니다. 내 판정 결과로 재려면 --dev를 씁니다.')
                 result=evaluation(read(a.predictions),a.reference);save(work/'output/comparison.json',result)
         elif a.command=='transcript-reference':
-            result=read(BASE/'ch09/completed/transcript.json');save(work/'output/transcript.json',result)
+            result=read(BASE/'legacy/ch09/completed/transcript.json');save(work/'output/transcript.json',result)
         elif a.command=='extract':result=extract_minutes(work,a.reference,a.engine);meta=result.get('_meta')
         elif a.command=='publish':result=publish_bundle(work)
         elif a.command=='confirm':result=confirm_bundle(work,a.by)
@@ -536,7 +536,7 @@ def main():
         else:
             uv=shutil.which('uv')
             if not uv:raise ValueError('uv 설치를 확인합니다.')
-            cmd=['run','--no-project','--python','3.11','--with-requirements',str(BASE/'ch07/requirements-mcp.txt'),'python',str(BASE/'ch07/mcp_server.py'),'--database',str(work/'output/team.db')]
+            cmd=['run','--no-project','--python','3.11','--with-requirements',str(BASE/'legacy/ch07/requirements-mcp.txt'),'python',str(BASE/'legacy/ch07/mcp_server.py'),'--database',str(work/'output/team.db')]
             print('mcp_servers:\n  studio_merry_readonly:\n    command: '+json.dumps(uv)+'\n    args: '+json.dumps(cmd,ensure_ascii=False));result={'configuration_printed':True}
         unchanged(work)
         if a.command!='decide-all':record(work,a.command,'ok',time.monotonic()-started,meta)

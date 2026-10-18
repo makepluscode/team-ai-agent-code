@@ -30,8 +30,9 @@ from datetime import datetime
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent
-STARTER = ROOT / "ch02" / "wiki-starter"
-TASKS = {t["id"]: t for path in sorted(ROOT.glob("ch0*/tasks.json"))
+LEGACY = ROOT / "legacy"
+STARTER = LEGACY / "ch02" / "wiki-starter"
+TASKS = {t["id"]: t for path in sorted(LEGACY.glob("ch0*/tasks.json"))
          for t in json.loads(path.read_text(encoding="utf-8")).get("wiki", [])}
 CHAPTERS = ["ch02", "ch03", "ch04", "ch05", "ch06", "ch07", "ch08", "ch09"]
 CONFLICT = {
@@ -42,7 +43,7 @@ SOURCE_MARK = "(출처: raw/"
 
 
 def snapshot(chapter):
-    return ROOT / chapter / "completed" / "studio-merry-wiki"
+    return LEGACY / chapter / "completed" / "studio-merry-wiki"
 
 
 def git(wiki, *args, check=True):
@@ -120,7 +121,7 @@ def put_raws(task, wiki, outputs):
         if raw.get("output") and outputs and (Path(outputs) / raw["output"]).is_file():
             source, origin = Path(outputs) / raw["output"], "reader-output"
         else:
-            source, origin = ROOT / raw["fixture"], "package-fixture"
+            source, origin = LEGACY / raw["fixture"], "package-fixture"
         text = source.read_text(encoding="utf-8")
         if raw.get("header"):
             meta = {**raw["header"], "made_from": origin}
@@ -153,7 +154,7 @@ def raw_date(name):
 
 
 def ingest_prompt(task, raw_name):
-    template = (ROOT / "ch03" / "prompts" / "wiki-ingest.txt").read_text(encoding="utf-8")
+    template = (LEGACY / "ch03" / "prompts" / "wiki-ingest.txt").read_text(encoding="utf-8")
     return (template.replace("{{RAW}}", f"raw/{raw_name}")
             .replace("{{CONFLICT}}", CONFLICT[task.get("conflict", "keep")])
             .replace("{{EXTRA}}", task.get("instruction", "").strip())

@@ -1,0 +1,6 @@
+[project]
+name = "ch02-03-compare-meetings"
+version = "0.1.0"
+description = "2장 두 주간회의 비교 예제의 결과 확인 (표준 라이브러리만 사용)"
+requires-python = ">=3.11"
+dependencies = []

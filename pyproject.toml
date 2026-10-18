@@ -40,7 +40,7 @@ packages = ["src/team_work"]
 "wiki.py" = "wiki.py"
 "examples" = "examples"
 "book-exercises.yaml" = "book-exercises.yaml"
-"ch02/wiki-starter/skills/wiki-sync" = "ch02/wiki-starter/skills/wiki-sync"
+"legacy/ch02/wiki-starter/skills/wiki-sync" = "legacy/ch02/wiki-starter/skills/wiki-sync"
 
 [tool.ruff]
 line-length = 100

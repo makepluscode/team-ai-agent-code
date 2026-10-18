@@ -29,12 +29,12 @@ import llm  # noqa: E402
 import wiki as team_wiki  # noqa: E402
 
 TASKS = {t["id"]: t for chapter in CHAPTERS
-         for t in json.loads((BASE / chapter / "tasks.json").read_text(encoding="utf-8"))["tasks"]}
+         for t in json.loads((BASE / "legacy" / chapter / "tasks.json").read_text(encoding="utf-8"))["tasks"]}
 
 
 def chapter_file(task, kind):
     """chNN/prompts/<id>.txt or chNN/completed/<output> of the task's own chapter."""
-    folder = BASE / task["id"][:4]
+    folder = BASE / "legacy" / task["id"][:4]
     return folder / "prompts" / f"{task['id']}.txt" if kind == "prompt" else folder / "completed" / task["output"]
 
 
@@ -74,7 +74,7 @@ def prepare(workspace, wiki_from="ch02", wiki=None):
         raise ValueError("자료 보존을 위해 빈 작업 폴더를 지정해 주세요. 복구도 새 폴더에서 시작합니다.")
     workspace.mkdir(parents=True, exist_ok=True)
     for chapter in CHAPTERS:
-        shutil.copytree(BASE / chapter / "start", workspace / "input", dirs_exist_ok=True)
+        shutil.copytree(BASE / "legacy" / chapter / "start", workspace / "input", dirs_exist_ok=True)
     (workspace / "output").mkdir()
     (workspace / "prompts").mkdir()
     if wiki:
@@ -477,8 +477,8 @@ def main():
             uv = shutil.which("uv")
             if not uv:
                 raise ValueError("uv 설치를 확인해 주세요.")
-            command_args = ["run","--no-project","--python","3.11","--with-requirements",str(BASE/"ch05/requirements-mcp.txt"),
-                            "python",str(BASE/"ch05/mcp_server.py"),"--workspace",str(args.workspace.resolve())]
+            command_args = ["run","--no-project","--python","3.11","--with-requirements",str(BASE/"legacy/ch05/requirements-mcp.txt"),
+                            "python",str(BASE/"legacy/ch05/mcp_server.py"),"--workspace",str(args.workspace.resolve())]
             print("mcp_servers:\n  studio_merry_practice:\n    command: "+json.dumps(uv)+"\n    args: "+json.dumps(command_args,ensure_ascii=False))
         else:
             if args.task not in TASKS:

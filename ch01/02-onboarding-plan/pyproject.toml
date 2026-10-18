@@ -1,0 +1,6 @@
+[project]
+name = "ch01-02-onboarding-plan"
+version = "0.1.0"
+description = "1장 온보딩 계획 예제의 결과 확인 (표준 라이브러리만 사용)"
+requires-python = ">=3.11"
+dependencies = []

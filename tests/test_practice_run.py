@@ -11,7 +11,7 @@ from unittest.mock import patch
 
 BASE=Path(__file__).resolve().parents[1]
 sys.path.insert(0,str(BASE))
-sys.path.insert(0,str(BASE/"ch06"))
+sys.path.insert(0,str(BASE/"legacy"/"ch06"))
 from scheduled_job import scheduled
 spec=importlib.util.spec_from_file_location("practice_run",BASE/"run.py")
 app=importlib.util.module_from_spec(spec)

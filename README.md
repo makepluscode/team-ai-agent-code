@@ -1,6 +1,66 @@
-# v1.7 기능별 실습
+# 팀 AI 에이전트 실전 — 예제 코드
 
-새 실습은 `src/team_work/`와 `examples/`를 사용합니다. `book-exercises.yaml`은 장→시작 자료·지시문·편집 비교 결과·명령·확인 기준 연결표입니다. 파일 내용은 JSON 호환 YAML입니다. 기존 chNN/·run.py·part3.py·wiki.py는 구판 재현용으로 보존합니다.
+『팀 AI 에이전트 실전』의 실습 예제입니다. 장과 예제 순서대로 폴더를 나눴고, 예제 폴더 하나에 그 실습에 필요한 지시문·입력 자료·비교용 결과·확인 스크립트가 모두 들어 있습니다.
+
+## 예제 구성(1~3장)
+
+| 디렉터리 | 주제 | 책 |
+|---|---|---|
+| [ch01/01-hello-jarvis](ch01/01-hello-jarvis/) | SOUL.md로 헤르메스에 이름 붙이기 | 1.3.1항 |
+| [ch01/02-onboarding-plan](ch01/02-onboarding-plan/) | 온보딩 자료로 첫 계획 저장·재확인 | 1.4절 |
+| [ch02/01-answer-rules](ch02/01-answer-rules/) | 에이전트 답변 규칙 적용과 전후 비교 | 2.1절 |
+| [ch02/02-organize-notes](ch02/02-organize-notes/) | 회의 노트·업무 노트·메신저 자료 12개 정리 | 2.2절 |
+| [ch02/03-compare-meetings](ch02/03-compare-meetings/) | 지난주·이번 주 주간회의 비교표 | 2.3절 |
+| [ch03/01-onboarding-guide](ch03/01-onboarding-guide/) | 온보딩 가이드 잠정안 | 3.1절 |
+| [ch03/02-weekly-report](ch03/02-weekly-report/) | 노트 8개로 주간 보고 | 3.2절 |
+| [ch03/03-weekly-skill](ch03/03-weekly-skill/) | 주간 보고 스킬 등록과 짧은 요청 재실행 | 3.3절 |
+| [ch03/04-weekly-schedule](ch03/04-weekly-schedule/) | 금요일 개인 예약 등록·즉시 실행·중지 | 3.4절 |
+
+4~12장은 아직 아래 'v1.7 기능별 실습'의 `src/team_work/`·`examples/` 구성을 씁니다. 같은 장·예제 폴더 구조로 옮기는 작업이 남아 있습니다.
+
+## 실행 방법
+
+받은 저장소는 원본으로 두고, 장 폴더를 작업 폴더로 복사한 뒤 예제 폴더에서 실행합니다.
+
+```bash
+git clone https://github.com/makepluscode/team-ai-agent-code.git ~/team-ai-agent/code
+mkdir -p ~/agent-work
+cp -r ~/team-ai-agent/code/ch01 ~/agent-work/ch01
+cd ~/agent-work/ch01/02-onboarding-plan
+hermes chat --query-file prompt.md
+uv run check.py
+```
+
+- `hermes chat --query-file prompt.md`: prompt.md를 첫 요청으로 보내고 대화를 이어 갑니다. 끝나면 `/exit`.
+- `uv run check.py`: 표준 라이브러리만 쓰는 확인 스크립트입니다. 원본 보존·결과 저장처럼 기계로 판정할 수 있는 것만 판정하고, 내용이 맞는지는 '사람이 확인할 항목'으로 보여 줍니다.
+- 다시 할 때는 기존 사본을 두고 `cp -r ~/team-ai-agent/code/ch01 ~/agent-work/ch01-retry`처럼 새 이름으로 복사합니다.
+- expected/는 저자가 편집한 비교용 결과이며 실제 모델 응답이 아닙니다.
+
+## 예제 폴더의 파일
+
+| 파일 | 역할 |
+|---|---|
+| README.md | 예제가 하는 일·실행 명령·폴더 구성 |
+| prompt.md | 헤르메스에 보내는 지시문 |
+| SOUL.md | 이름·역할·말투를 정하는 기본 규칙(~/.hermes/SOUL.md로 복사해 적용) |
+| input/ | 지시문이 읽는 원본(합성 자료). 실습 중에 고치지 않습니다 |
+| expected/ | 비교용 편집 결과 |
+| skills/ | 헤르메스 스킬(~/.hermes/skills/로 복사해 등록) |
+| check.py, pyproject.toml | 결과 확인 스크립트와 uv 실행 설정 |
+
+코드 주석은 한국어로 씁니다. 파일 머리 설명에 무엇·입력·출력·실행을 적고, 실제 처리 단계에만 `# 1. …` 번호 주석을 붙입니다.
+
+## 검사
+
+```sh
+uv run --extra dev python -m pytest tests legacy/ch02/tests -q
+```
+
+---
+
+## v1.7 기능별 실습(4~12장)
+
+4~12장 실습은 `src/team_work/`와 `examples/`를 사용합니다. `book-exercises.yaml`은 장→시작 자료·지시문·편집 비교 결과·명령·확인 기준 연결표입니다. 파일 내용은 JSON 호환 YAML입니다. 구판 legacy/chNN/·run.py·part3.py·wiki.py는 재현용으로 보존합니다. examples/documents/ch01~ch03은 1~3장 예제 폴더로 옮기기 전 구성이며 prepare 호환을 위해 남겨 둡니다.
 
 ```sh
 uv sync --extra dev
@@ -9,7 +69,7 @@ uv run team-work prepare --chapter 1 --workspace work/ch01
 uv run team-work verify --workspace work/ch01
 uv run team-work bundle --chapter 1 --destination dist/ch01.zip
 uv run team-work reference --chapter 1
-uv run python -m pytest tests ch02/tests -q
+uv run python -m pytest tests legacy/ch02/tests -q
 ```
 
 독자 배포의 기본 경로는 이 저장소를 `git clone https://github.com/makepluscode/team-ai-agent-code.git code`로 받는 것입니다(출간 이후 공개로 전환하면 계정 불필요. 집필 중에는 비공개). 보조 배포 자료는 세 종류입니다. `uv build --sdist`의 소스 압축은 pyproject.toml·src/·examples/·공통 호출과 연결표를 포함하므로 Git 계정 없이 내려받아 풀고 그 폴더에서 uv 명령을 실행합니다. `team-work bundle`은 한 장의 일반 폴더·지시문·편집 비교 자료만 묶으며 파이썬 코드 전체 배포를 대신하지 않습니다. `uv build --wheel` 결과는 설치용 패키지이며 예제 자료와 기존 공통 모듈·위키 동기화 실행 파일도 포함합니다. 로컬 생성·분리 설치는 검사했고 외부 발행·업로드는 하지 않았습니다.
@@ -22,7 +82,7 @@ uv run python -m pytest tests ch02/tests -q
 
 백업은 실행 중인 개인 예약·팀 작업의 잠금이 있으면 멈춥니다. SQLite는 backup API로 일관된 사본을 만들고 무결성을 확인하며, 복구는 새 폴더에 해시와 DB 무결성을 확인한 뒤 수행합니다. 공동 운영 전체의 장비·권한 검증은 남아 있습니다.
 
-3장 개인 예약은 제공 실행기의 한 건 예약입니다. `schedule run-due --confirm`을 호출해야 실행하고 output/scheduled-1/에 결과를 남깁니다. 예약 파일 생성은 Hermes 예약 등록이나 상시 서비스 동작을 뜻하지 않습니다. 6장 음원은 제작 전이며 합성 대본 대안으로 이어 갑니다. 실제 음원 전사·원음 구간 대조는 미완료입니다. 선택 전사 환경은 `uv sync --extra transcription`으로 분리했습니다. 5장 두 폴더는 로컬 인계이며 실제 계정 초대 검증이 아닙니다.
+6장 음원은 제작 전이며 합성 대본 대안으로 이어 갑니다. 실제 음원 전사·원음 구간 대조는 미완료입니다. 선택 전사 환경은 `uv sync --extra transcription`으로 분리했습니다. 5장 두 폴더는 로컬 인계이며 실제 계정 초대 검증이 아닙니다.
 
 ---
 
@@ -40,15 +100,15 @@ uv run python -m pytest tests ch02/tests -q
 
 | 장 | 실습 안내 | 이 장에서 손에 쥐는 것 |
 |---|---|---|
-| 1장 완성 화면과 전체 구조 | [ch01/README.md](ch01/README.md) | 완성 화면 읽기, 팀 위키 구조, 위키에 넣을 첫 자료 작업지 |
-| 2장 설치와 팀 위키 받기 | [ch02/README.md](ch02/README.md) | 헤르메스·상용 AI 연결, 팀 위키 저장소, 첫 파일 작업 |
-| 3장 팀 위키에 기준 쌓기 | [ch03/README.md](ch03/README.md) | 레시피 열두 개, 위키 정리와 동기화, 스킬 배포, 예약 |
-| 4장 콘텐츠 업무 자동화 | [ch04/README.md](ch04/README.md) | 조사·SNS·뉴스레터·주간 보고와 캠페인 페이지 |
-| 5장 외부 서비스 연결과 위키 쌓기 | [ch05/README.md](ch05/README.md) | 메일·캘린더·알림 연결, 변경 규칙, 드라이브 사본 |
-| 6장 예약 실행과 비용 | [ch06/README.md](ch06/README.md) | 업무시간 예약, 아침 브리핑, 사용량 기록, 운영 기준 페이지 |
-| 7장 문의 분류와 담당 지정 | [ch07/README.md](ch07/README.md) | 조회 전용 MCP, 상용·로컬 판정, 판정 경로 결정 페이지 |
-| 8장 견적 초안과 사람의 확인 | [ch08/README.md](ch08/README.md) | 견적 계산, 사람 확인 이력, 판단 기준 페이지와 반영 전후 비교 |
-| 9장 회의 자동화 | [ch09/README.md](ch09/README.md) | 로컬 전사, 회의록 추출, 결정 페이지 |
+| 1장 완성 화면과 전체 구조 | [legacy/ch01/README.md](legacy/ch01/README.md) | 완성 화면 읽기, 팀 위키 구조, 위키에 넣을 첫 자료 작업지 |
+| 2장 설치와 팀 위키 받기 | [legacy/ch02/README.md](legacy/ch02/README.md) | 헤르메스·상용 AI 연결, 팀 위키 저장소, 첫 파일 작업 |
+| 3장 팀 위키에 기준 쌓기 | [legacy/ch03/README.md](legacy/ch03/README.md) | 레시피 열두 개, 위키 정리와 동기화, 스킬 배포, 예약 |
+| 4장 콘텐츠 업무 자동화 | [legacy/ch04/README.md](legacy/ch04/README.md) | 조사·SNS·뉴스레터·주간 보고와 캠페인 페이지 |
+| 5장 외부 서비스 연결과 위키 쌓기 | [legacy/ch05/README.md](legacy/ch05/README.md) | 메일·캘린더·알림 연결, 변경 규칙, 드라이브 사본 |
+| 6장 예약 실행과 비용 | [legacy/ch06/README.md](legacy/ch06/README.md) | 업무시간 예약, 아침 브리핑, 사용량 기록, 운영 기준 페이지 |
+| 7장 문의 분류와 담당 지정 | [legacy/ch07/README.md](legacy/ch07/README.md) | 조회 전용 MCP, 상용·로컬 판정, 판정 경로 결정 페이지 |
+| 8장 견적 초안과 사람의 확인 | [legacy/ch08/README.md](legacy/ch08/README.md) | 견적 계산, 사람 확인 이력, 판단 기준 페이지와 반영 전후 비교 |
+| 9장 회의 자동화 | [legacy/ch09/README.md](legacy/ch09/README.md) | 로컬 전사, 회의록 추출, 결정 페이지 |
 
 ### 폴더 구성
 
@@ -58,7 +118,7 @@ team-ai-agent-code/
 ├── part3.py      # 7~9장 실습 실행기(판정·라우팅·견적·상태·확인·전사 후처리·위키)
 ├── wiki.py       # 연습 팀 위키: 만들기·원본 넣기·정리·검사·드라이브 내보내기
 ├── llm.py        # 헤르메스 없이 상용 API(클로드·OpenAI·제미나이)를 직접 부르는 경로
-├── ch01/ … ch09/ # 장 폴더
+├── legacy/ch01/ … legacy/ch09/ # 장 폴더
 │   ├── README.md      # 그 장의 실습 안내
 │   ├── tasks.json     # 실습 정의(입력·결과·확인 기준, 위키 정리 실습)
 │   ├── start/         # 시작 자료(합성)
@@ -77,7 +137,7 @@ python3 run.py run ch04-sns --workspace work                  # 헤르메스
 python3 run.py run ch04-sns --workspace work --engine api     # 상용 API 직접(키는 환경 변수)
 python3 part3.py prepare --workspace work-part03
 python3 -m unittest tests/test_practice_run.py tests/test_practice_part3.py
-python3 -m unittest discover -s ch02/tests                     # 위키 동기화 실행 파일 시험
+python3 -m unittest discover -s legacy/ch02/tests                     # 위키 동기화 실행 파일 시험
 ```
 
 ### 확인 범위
