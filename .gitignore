@@ -42,3 +42,4 @@ tmp/
 ch*/*/output/
 ch*/*/.venv/
 ch*/*/state/
+ch*/*/uv.lock
