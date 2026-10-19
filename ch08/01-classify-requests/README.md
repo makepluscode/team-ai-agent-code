@@ -6,7 +6,7 @@
 ## 실행 방법
 
 ```bash
-cp -r ~/team-ai-agent/code/ch08 ~/agent-work/ch08
+mkdir -p ~/agent-work && cp -r --update=none ~/team-ai-agent/code/ch08 ~/agent-work/
 cd ~/agent-work/ch08/01-classify-requests
 uv run main.py setup
 hermes chat --query-file prompt.md

@@ -414,7 +414,7 @@ def guide_from(spec):
     results = [r for r in spec.get("check", {}).get("results", []) if r.startswith("output/") and "wiki-base" not in r]
     guide = []
     for command in spec["readme"]["run"]:
-        if command.startswith(("cp ", "cd ")):
+        if command.startswith(("cp ", "cd ", "mkdir -p ~/agent-work")):
             continue
         if command in markers:
             found = markers[command]

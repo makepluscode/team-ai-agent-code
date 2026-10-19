@@ -5,7 +5,8 @@
 ## 실행 방법
 
 ```bash
-cp -r ~/team-ai-agent/code/ch02 ~/agent-work/ch02
+mkdir -p ~/agent-work
+cp -r --update=none ~/team-ai-agent/code/ch02 ~/agent-work/
 cd ~/agent-work/ch02/01-answer-rules
 hermes chat --query-file question.md      # 적용 전 답 확인
 hermes chat --query-file prompt.md        # 규칙 초안 작성 → 확인 → output/SOUL.md 저장 승인

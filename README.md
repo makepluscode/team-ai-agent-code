@@ -6,8 +6,8 @@
 
 | 디렉터리 | 주제 | 책 |
 |---|---|---|
-| [ch01/01-hello-jarvis](ch01/01-hello-jarvis/) | SOUL.md로 헤르메스에 이름 붙이기 | 1.3.1항 |
-| [ch01/02-onboarding-plan](ch01/02-onboarding-plan/) | 온보딩 자료로 첫 계획 저장·재확인 | 1.4절 |
+| [ch01/01-hello-jarvis](ch01/01-hello-jarvis/) | 연결 확인, SOUL.md로 이름 붙이기, 메모리 저장·확인·삭제, CLI 실행 방식 | 1.3~1.5절 |
+| [ch01/02-onboarding-plan](ch01/02-onboarding-plan/) | 온보딩 자료로 첫 계획 저장·재확인 | 1.6절 |
 | [ch02/01-answer-rules](ch02/01-answer-rules/) | 에이전트 답변 규칙 적용과 전후 비교 | 2.1절 |
 | [ch02/02-organize-notes](ch02/02-organize-notes/) | 회의 노트·업무 노트·메신저 자료 12개 정리 | 2.2절 |
 | [ch02/03-compare-meetings](ch02/03-compare-meetings/) | 지난주·이번 주 주간회의 비교표 | 2.3절 |
@@ -47,12 +47,12 @@
 
 ## 실행 방법
 
-받은 저장소는 원본으로 두고, 장 폴더를 작업 폴더로 복사한 뒤 예제 폴더에서 실행합니다.
+받은 저장소는 원본으로 두고, 처음 한 번 모든 장 폴더를 작업 폴더 ~/agent-work로 복사한 뒤 예제 폴더에서 실행합니다. 실습 결과와 위키 수정은 사본에만 남으므로 원본과 비교하거나 새 사본으로 다시 하기 쉽고, `git -C ~/team-ai-agent/code pull`로 예제를 갱신해도 실습 결과와 섞이지 않습니다. `--update=none`은 이미 있는 파일을 덮어쓰지 않으므로 복사 명령을 다시 실행해도 됩니다.
 
 ```bash
 git clone https://github.com/makepluscode/team-ai-agent-code.git ~/team-ai-agent/code
 mkdir -p ~/agent-work
-cp -r ~/team-ai-agent/code/ch01 ~/agent-work/ch01
+cp -r --update=none ~/team-ai-agent/code/ch[0-9][0-9] ~/agent-work/
 cd ~/agent-work/ch01/02-onboarding-plan
 hermes chat --query-file prompt.md
 uv run check.py

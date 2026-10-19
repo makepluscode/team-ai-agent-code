@@ -6,7 +6,7 @@
 ## 실행 방법
 
 ```bash
-cp -r ~/team-ai-agent/code/ch05 ~/agent-work/ch05
+mkdir -p ~/agent-work && cp -r --update=none ~/team-ai-agent/code/ch05 ~/agent-work/
 cp -r ~/agent-work/ch05/01-share-repo ~/studio-merry-wiki
 cd ~/studio-merry-wiki
 hermes chat --query-file prompt.md

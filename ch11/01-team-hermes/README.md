@@ -6,7 +6,7 @@
 ## 실행 방법
 
 ```bash
-cp -r ~/team-ai-agent/code/ch11 ~/agent-work/ch11
+mkdir -p ~/agent-work && cp -r --update=none ~/team-ai-agent/code/ch11 ~/agent-work/
 cd ~/agent-work/ch11/01-team-hermes
 cp --update=none ~/.hermes/SOUL.md ~/.hermes/SOUL.md.orig
 cp SOUL.md ~/.hermes/SOUL.md

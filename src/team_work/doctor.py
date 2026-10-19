@@ -50,7 +50,7 @@ def doctor(workspace, mcp=(), skills=(), soul=False, cron=False):
             first = next((x.strip() for x in path.read_text(encoding="utf-8").splitlines() if x.strip()), "")
             lines.append(f"[정상] SOUL.md 첫 줄: {first[:80]}")
         else:
-            lines.append("[확인 필요] ~/.hermes/SOUL.md가 없습니다. 1.3절의 이름 붙이기를 먼저 하세요.")
+            lines.append("[확인 필요] ~/.hermes/SOUL.md가 없습니다. 1.4.1항의 이름 붙이기를 먼저 하세요.")
             problems += 1
 
     # 3. 설치된 스킬이 이 예제의 스킬과 같은지 본다

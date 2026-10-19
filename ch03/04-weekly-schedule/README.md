@@ -18,7 +18,7 @@ hermes cron pause weekly-report-practice
 ```
 
 - check.py는 output/scheduled/에서 오늘 날짜가 붙은 보고를 찾습니다. 다른 날의 결과는 `uv run check.py 2026-10-23`처럼 날짜를 넘깁니다.
-- 연습이 끝나면 예약을 멈추거나(`pause`) 지웁니다(`hermes cron remove weekly-report-practice`). 같은 이름의 예약이 남아 있으면 다시 만들 때 중복됩니다.
+- 연습이 끝나면 예약을 멈추거나(`pause`) 지웁니다(`hermes cron remove weekly-report-practice`). 등록 명령을 다시 실행하기 전에는 `hermes cron list`로 같은 이름의 예약이 이미 있는지 확인합니다(같은 이름 재등록 동작은 검증하지 않았습니다).
 - 정해진 시각의 자동 실행은 게이트웨이가 켜져 있어야 합니다(`hermes cron status`).
 
 ## 폴더 구성

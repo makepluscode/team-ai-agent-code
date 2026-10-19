@@ -4,7 +4,7 @@
 main(uv run main.py 단계), check(check.py 설정), deps(pyproject 의존성), readme(README 내용).
 """
 
-CP = "cp -r ~/team-ai-agent/code/ch{n:02} ~/agent-work/ch{n:02}"
+CP = "mkdir -p ~/agent-work && cp -r --update=none ~/team-ai-agent/code/ch{n:02} ~/agent-work/"
 
 WIKI_RULES = """
 # 스튜디오 메리 위키 정리 규칙 (wiki-curator)

@@ -6,7 +6,7 @@ MTG-001 회의의 입력 자료(회의 정보·용어표·기준 전사문)를 �
 ## 실행 방법
 
 ```bash
-cp -r ~/team-ai-agent/code/ch06 ~/agent-work/ch06
+mkdir -p ~/agent-work && cp -r --update=none ~/team-ai-agent/code/ch06 ~/agent-work/
 cd ~/agent-work/ch06/01-meeting-input
 hermes chat --query-file prompt.md
 uv run check.py

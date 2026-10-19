@@ -6,7 +6,7 @@
 ## 실행 방법
 
 ```bash
-cp -r ~/team-ai-agent/code/ch04 ~/agent-work/ch04
+mkdir -p ~/agent-work && cp -r --update=none ~/team-ai-agent/code/ch04 ~/agent-work/
 cd ~/agent-work/ch04/01-wiki-folder
 hermes chat --query-file prompt.md
 uv run check.py

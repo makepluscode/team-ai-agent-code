@@ -6,7 +6,7 @@ facts.json의 구조화 출처로 같은 질문의 근거를 확인합니다. �
 ## 실행 방법
 
 ```bash
-cp -r ~/team-ai-agent/code/ch10 ~/agent-work/ch10
+mkdir -p ~/agent-work && cp -r --update=none ~/team-ai-agent/code/ch10 ~/agent-work/
 cd ~/agent-work/ch10/01-revision-search
 hermes chat --query-file prompt.md
 hermes chat --query-file search.md

@@ -6,7 +6,7 @@
 ## 실행 방법
 
 ```bash
-cp -r ~/team-ai-agent/code/ch12 ~/agent-work/ch12
+mkdir -p ~/agent-work && cp -r --update=none ~/team-ai-agent/code/ch12 ~/agent-work/
 cd ~/agent-work/ch12/01-dashboard-work
 uv run main.py setup
 uv run main.py serve

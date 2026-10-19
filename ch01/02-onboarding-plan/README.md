@@ -1,12 +1,12 @@
 # 02-onboarding-plan: 온보딩 자료로 첫 계획 만들기
 
-매니저의 온보딩 자료(DOC-001)를 헤르메스가 읽고, 새 팀원용 가이드와 첫 일정이 담긴 온보딩 계획(DOC-005)을 저장한 뒤 다시 읽어 보여 주는 예제입니다. 책 1.4절에 대응합니다.
+매니저의 온보딩 자료(DOC-001)를 헤르메스가 읽고, 새 팀원용 가이드와 첫 일정이 담긴 온보딩 계획(DOC-005)을 저장한 뒤 다시 읽어 보여 주는 예제입니다. 책 1.6절에 대응합니다.
 
 ## 실행 방법
 
 ```bash
 mkdir -p ~/agent-work
-cp -r ~/team-ai-agent/code/ch01 ~/agent-work/ch01
+cp -r --update=none ~/team-ai-agent/code/ch01 ~/agent-work/
 cd ~/agent-work/ch01/02-onboarding-plan
 hermes chat --query-file prompt.md
 uv run check.py
