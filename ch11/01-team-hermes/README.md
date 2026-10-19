@@ -11,6 +11,7 @@ cd ~/agent-work/ch11/01-team-hermes
 cp --update=none ~/.hermes/SOUL.md ~/.hermes/SOUL.md.orig
 cp SOUL.md ~/.hermes/SOUL.md
 uv run main.py setup
+uv run main.py doctor
 hermes chat --query-file prompt.md
 uv run check.py
 ```
@@ -24,8 +25,8 @@ uv run check.py
 | input/business-hours.json | 업무시간 규칙 |
 | wiki/·raw/ | 9장까지의 위키와 원본 |
 | prompt.md | 이관 점검표 지시문 |
-| main.py | setup: DB 준비·담당 지정 / gate: 업무시간 확인 |
 | check.py | 원본 보존·공동 기록 건수 확인 |
+| main.py | 단계 setup / gate / doctor / list. 인자 없이 실행하면 할 일과 단계를 안내 |
 
 
 SOUL.md 복사는 공동 컴퓨터에서만 합니다. 매니저 개인 컴퓨터의 자비스와 이름이 구별됩니다.

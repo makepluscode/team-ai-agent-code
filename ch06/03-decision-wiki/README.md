@@ -9,6 +9,7 @@
 cd ~/agent-work/ch06/03-decision-wiki
 uv run main.py register
 hermes chat --query-file prompt.md
+uv run main.py preview
 uv run main.py apply
 uv run check.py
 ```
@@ -20,6 +21,6 @@ uv run check.py
 | input/DOC-012_meeting-notes.md | 확인한 회의록(비교용 편집 예시를 확인본으로 사용) |
 | raw/·wiki/ | 5장까지의 원본과 위키 |
 | prompt.md | 결정 반영 지시문 |
-| main.py | register: 회의록 등록 / apply: 변경안 적용 |
 | expected/wiki/ | 비교용 결정 페이지 |
 | check.py | 원본 보존·등록·페이지 저장 확인 |
+| main.py | 단계 register / preview / apply. 인자 없이 실행하면 할 일과 단계를 안내 |

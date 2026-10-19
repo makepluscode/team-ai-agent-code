@@ -27,9 +27,9 @@ uv run check.py
 | input/review-fixtures/REV-002-input.md | 오류를 일부러 넣은 주간 보고 파생 자료(현재 사실 아님) |
 | input/review-rules.json | 상태 전이와 사람 확인 기준 |
 | prompt.md | 수정 문서·질문 기록 지시문 |
-| main.py | setup / review: 검토 6건 기록 / task-002: 상태 전이 / list |
 | expected/review-corrections/ | 비교용 수정본·질문 기록 |
 | check.py | 원본 보존·검토 6건·TASK-002 완료 확인 |
+| main.py | 단계 setup / review / task-002 / list. 인자 없이 실행하면 할 일과 단계를 안내 |
 
 
-review와 task-002는 사람 확인을 기록하는 명령입니다. 헤르메스가 만든 결과를 직접 읽고 맞는지 확인한 뒤 실행합니다.
+review는 검토 6건을 실행할 때마다 한 건씩 기록합니다. 화면에 나온 검토 내용과 헤르메스 결과(output/)를 대조하고 y로 답합니다. task-002도 실행할 때마다 한 단계씩(수정 필요 → 진행 → 확인 대기 → 완료) 옮기며, 진행 위치는 state/progress.json에 남습니다.

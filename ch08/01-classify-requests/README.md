@@ -11,6 +11,7 @@ cd ~/agent-work/ch08/01-classify-requests
 uv run main.py setup
 hermes chat --query-file prompt.md
 hermes chat --query-file routing.md
+uv run main.py preview
 uv run main.py record
 uv run main.py list
 hermes chat --query-file status.md
@@ -29,6 +30,6 @@ uv run check.py
 | prompt.md | 분류·담당 제안 지시문 |
 | routing.md | 담당 후보 점검 지시문 |
 | status.md | 판정 기록 현황(DOC-014@r3) 지시문 |
-| main.py | setup / record: 판정 검사·기록 / list / json |
 | expected/classification/ | 저자가 편집한 비교용 판정(헤르메스에 주지 않음) |
 | check.py | 원본 보존·판정 10건 기록 확인 |
+| main.py | 단계 setup / preview / record / list / json. 인자 없이 실행하면 할 일과 단계를 안내 |

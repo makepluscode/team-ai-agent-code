@@ -21,5 +21,5 @@ uv run check.py
 | input/queries.json | 질문 20개와 질문별 기준 시각(as_of) |
 | input/qa-fixtures/ | 대조용 옛 문서(현재 사실 아님) |
 | prompt.md | 모순 점검 지시문 |
-| main.py | qa / check |
 | check.py | 원본 보존·보고서 저장 확인 |
+| main.py | 단계 qa / sources. 인자 없이 실행하면 할 일과 단계를 안내 |

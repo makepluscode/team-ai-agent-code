@@ -7,6 +7,7 @@
 
 ```bash
 cd ~/agent-work/ch05/04-member-revision
+uv run main.py receive
 hermes chat --query-file prompt.md
 uv run check.py
 ```
@@ -21,7 +22,7 @@ uv run check.py
 | prompt.md | 가이드 수정 지시문 |
 | expected/DOC-007_onboarding-guide.r2.md | 비교용 2번째 버전 |
 | check.py | 원본 보존·결과 저장 확인 |
+| main.py | 단계 receive. 인자 없이 실행하면 할 일과 단계를 안내 |
 
 
-GitHub으로 공유했다면 동료 폴더(~/studio-merry-wiki-member)에서 '위키 동기화해 줘'로 받은 뒤 같은 지시문을 씁니다.
-이 예제 폴더는 GitHub 없이 인계를 연습하는 대안이며 실제 다른 계정 초대 검증이 아닙니다.
+receive는 같은 장 폴더의 03-change-memo를 마친 뒤 실행해 실제 결과를 넘겨받는 인계입니다. 03을 건너뛰었다면 receive 없이 미리 넣어 둔 위키(03 완료 상태의 비교용 예시)로 연습할 수 있지만 그것은 인계 확인이 아닙니다. GitHub으로 공유했다면 동료 폴더(~/studio-merry-wiki-member)에서 '위키 동기화해 줘'로 받은 뒤 같은 지시문을 씁니다.

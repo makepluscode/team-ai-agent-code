@@ -20,5 +20,5 @@ uv run check.py
 | raw/ | 문서 버전별 원본(DOC-001~DOC-013) |
 | input/queries.json | 질문 20개와 질문별 기준 시각(as_of) |
 | prompt.md | 질문 16개 답변 지시문 |
-| main.py | qa: 질문 하나 구조화 조회 / check |
 | check.py | 원본 보존·답변 저장 확인 |
+| main.py | 단계 qa / sources. 인자 없이 실행하면 할 일과 단계를 안내 |

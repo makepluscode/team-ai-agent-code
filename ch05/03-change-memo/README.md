@@ -9,6 +9,7 @@
 cd ~/agent-work/ch05/03-change-memo
 uv run main.py register
 hermes chat --query-file prompt.md
+uv run main.py preview
 uv run main.py apply
 uv run check.py
 ```
@@ -20,6 +21,6 @@ uv run check.py
 | input/DOC-010_schedule-change.md | M03이 쓴 일정 변경 메모(등록 전) |
 | raw/·wiki/ | 4장까지의 원본과 위키 |
 | prompt.md | 변경 메모 반영 지시문 |
-| main.py | register: 메모를 raw/에 등록 / apply: 변경안 적용 |
 | expected/wiki/ | 비교용 위키 페이지 |
 | check.py | 원본 보존·등록·페이지 저장 확인 |
+| main.py | 단계 register / preview / apply. 인자 없이 실행하면 할 일과 단계를 안내 |

@@ -8,6 +8,9 @@
 ```bash
 cp -r ~/agent-work/ch05/02-wiki-sync/skills ~/studio-merry-wiki/
 cd ~/studio-merry-wiki
+uv run skills/wiki-sync/scripts/wiki_sync.py status
+uv run skills/wiki-sync/scripts/wiki_sync.py commit -m "[매니저] 위키 동기화 스킬 추가 · 팀 공용 설치" skills/wiki-sync/SKILL.md skills/wiki-sync/scripts/wiki_sync.py
+uv run skills/wiki-sync/scripts/wiki_sync.py push
 hermes skills tap add <내 GitHub 계정>/studio-merry-wiki
 hermes skills install <내 GitHub 계정>/studio-merry-wiki/skills/wiki-sync
 uv run skills/wiki-sync/scripts/wiki_sync.py status

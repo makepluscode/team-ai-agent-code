@@ -20,5 +20,5 @@ uv run check.py
 | input/snapshot.json | 공동 기록 |
 | input/business-hours.json | 업무시간 규칙(월~금 09~18시) |
 | prompt.md | 브리핑 문서 지시문 |
-| main.py | setup / briefing / json |
 | check.py | 원본 보존·브리핑 저장 확인 |
+| main.py | 단계 setup / briefing / json / list. 인자 없이 실행하면 할 일과 단계를 안내 |

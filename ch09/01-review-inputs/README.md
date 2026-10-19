@@ -27,6 +27,6 @@ uv run check.py
 | input/review-rules.json | 상태 전이와 사람 확인 기준 |
 | prompt.md | 검토 대상 점검 지시문 |
 | plan.md | 조치 계획 지시문 |
-| main.py | setup: DB 준비·목록 / json |
 | expected/review-corrections/ | 저자가 편집한 비교용 수정본·질문 기록 |
 | check.py | 원본 보존·점검 결과 저장 확인 |
+| main.py | 단계 setup / json / list. 인자 없이 실행하면 할 일과 단계를 안내 |

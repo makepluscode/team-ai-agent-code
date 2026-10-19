@@ -1,5 +1,6 @@
 """Explicit wiki registration, proposed edits and confirmation; reuse sync skill."""
 
+import difflib
 import hashlib
 import json
 import shutil
@@ -215,21 +216,18 @@ def _wiki_base(work):
     return json.loads(read_text(work / ".exercise.json")).get("wiki_base", {})
 
 
-def apply_draft(workspace, draft="output/wiki-draft"):
-    """헤르메스가 output/wiki-draft/에 쓴 변경안을 사람이 확인한 뒤 위키에 적용한다.
-
-    변경안 폴더의 상대 경로가 wiki/ 아래 경로가 된다(예: wiki-draft/guides/onboarding.md).
-    위키가 마지막 적용 뒤에 바뀌었으면 충돌로 멈추고, 적용 전 위키는 output/wiki-before-N에 남긴다.
-    """
-    work = Path(workspace).resolve()
-    verify(work)
+def _read_draft(work, draft):
+    """변경안 폴더를 읽어 (폴더, 기준 해시, 파일 목록)을 돌려준다. 위키가 마지막 적용 뒤 바뀌었으면 멈춘다."""
     folder = (work / draft).resolve()
     if not folder.is_dir() or not folder.is_relative_to(work / "output"):
-        raise ValueError(f"변경안 폴더가 없습니다: {draft}. 헤르메스가 변경안을 저장했는지 확인하세요.")
+        raise ValueError(f"변경안 폴더가 없습니다: {draft}. 헤르메스 지시문(prompt.md)을 실행해 변경안을 저장했는지 확인하세요.")
     # 1. 위키가 마지막 적용 상태 그대로인지 확인한다(직접 고친 흔적이 있으면 멈춘다)
     base = _wiki_base(work)
-    if hashes(work / "wiki") != base:
-        raise ValueError("마지막 적용 뒤 wiki/가 바뀌었습니다. 충돌로 중단합니다. 바뀐 파일을 확인하세요.")
+    current = hashes(work / "wiki")
+    if current != base:
+        changed = sorted(k for k in set(base) | set(current) if base.get(k) != current.get(k))
+        raise ValueError("마지막 적용 뒤 wiki/가 바뀌었습니다. 충돌로 중단합니다. 바뀐 파일: " + ", ".join(changed)
+                         + ". 직접 고친 내용은 변경안(output/wiki-draft/)에 옮기고 새 사본에서 다시 하세요.")
     # 2. 변경안을 기존 apply가 읽는 제안 파일 형식으로 옮긴다
     files = []
     for path in sorted(folder.rglob("*")):
@@ -241,6 +239,38 @@ def apply_draft(workspace, draft="output/wiki-draft"):
                           "before_sha256": base.get(relative)})
     if not files:
         raise ValueError("변경안 폴더가 비어 있습니다.")
+    return folder, files
+
+
+def preview_draft(workspace, draft="output/wiki-draft"):
+    """변경안이 위키에 적용되면 바뀔 줄을 diff로 돌려준다. 파일은 바꾸지 않는다."""
+    work = Path(workspace).resolve()
+    verify(work)
+    _, files = _read_draft(work, draft)
+    parts = []
+    for item in files:
+        target = work / item["path"]
+        old = read_text(target).splitlines(keepends=True) if target.exists() else []
+        new = item["content"].splitlines(keepends=True)
+        label = "새 파일" if not target.exists() else "수정"
+        diff = "".join(difflib.unified_diff(old, new, f"현재 {item['path']}", f"변경안 {item['path']}"))
+        parts.append(f"=== {label}: {item['path']}\n" + (diff or "(바뀌는 줄 없음)\n"))
+    parts.append("=== 자동 추가: wiki/log.md에 적용 시각·wiki-curator·적용 파일 목록 한 줄\n")
+    return "".join(parts)
+
+
+def apply_draft(workspace, draft="output/wiki-draft", confirmed=False):
+    """헤르메스가 output/wiki-draft/에 쓴 변경안을 사람이 확인한 뒤 위키에 적용한다.
+
+    변경안 폴더의 상대 경로가 wiki/ 아래 경로가 된다(예: wiki-draft/guides/onboarding.md).
+    confirmed가 아니면 적용하지 않는다(CLI는 diff를 보여 준 뒤 y로 확인받는다).
+    위키가 마지막 적용 뒤에 바뀌었으면 충돌로 멈추고, 적용 전 위키는 output/wiki-before-N에 남긴다.
+    """
+    if not confirmed:
+        raise ValueError("변경안을 확인한 뒤 적용하세요(uv run main.py preview로 diff 확인).")
+    work = Path(workspace).resolve()
+    verify(work)
+    folder, files = _read_draft(work, draft)
     number = 1
     while (work / f"output/wiki-proposal{_suffix(number)}.json").exists():
         number += 1
@@ -252,9 +282,62 @@ def apply_draft(workspace, draft="output/wiki-draft"):
     # 기준 상태는 적용할 때마다 덮어쓴다(write_json은 새 파일 전용이라 두 번째 적용에서 멈춘다)
     (work / "output" / "wiki-base.json").write_text(
         json.dumps(hashes(work / "wiki"), ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
-    folder.rename(work / f"output/wiki-draft-applied{_suffix(number)}")
+    kept = work / f"output/wiki-draft-applied{_suffix(number)}"
+    folder.rename(kept)
     return {**result, "proposal": proposal.relative_to(work).as_posix(),
-            "files": [item["path"] for item in files]}
+            "files": [item["path"] for item in files], "draft_kept": kept.relative_to(work).as_posix(),
+            "next": "적용한 변경안은 위의 보관 폴더로 옮겼습니다. 다시 바꾸려면 헤르메스에 새 변경안을 output/wiki-draft/에 쓰게 한 뒤 preview부터 합니다. 결과 확인: uv run check.py"}
+
+
+def receive(workspace, source):
+    """다른 작업 폴더(담당자)의 위키를 이 폴더(동료)로 받아 온다. 원본(raw/)이 같을 때만 받는다.
+
+    받기 전 위키는 output/wiki-before-receive-N에 남기고, 받은 위키를 다음 적용의 기준 상태로 삼는다.
+    """
+    work, other = Path(workspace).resolve(), Path(source).expanduser().resolve()
+    verify(work)
+    if not (other / "wiki").is_dir() or other == work:
+        raise ValueError(f"받을 위키가 없습니다: {other}/wiki. 담당 폴더 경로를 확인하세요.")
+    # 1. 같은 이름의 원본이 두 폴더에서 같은지 확인한다(다르면 서로 다른 자료로 정리한 위키다)
+    mine, theirs = hashes(work / "raw"), hashes(other / "raw")
+    differ = sorted(k for k in set(mine) & set(theirs) if mine[k] != theirs[k])
+    if differ:
+        raise ValueError("두 폴더의 같은 이름 원본이 다릅니다: " + ", ".join(differ))
+    only = sorted(set(theirs) ^ set(mine))
+    if only:
+        raise ValueError("한쪽 폴더에만 있는 원본이 있습니다: " + ", ".join(only)
+                         + ". 담당 폴더에서 원본 등록(uv run main.py register)과 위키 적용을 마쳤는지 확인하세요.")
+    # 2. 담당 폴더가 변경안을 적용한 뒤 위키를 그대로 두었는지 확인한다(적용 전 위키나 직접 고친 위키는 받지 않는다)
+    base = other / "output" / "wiki-base.json"
+    if not base.is_file() or json.loads(read_text(base)) != hashes(other / "wiki"):
+        raise ValueError("담당 폴더의 위키가 적용을 마친 상태가 아닙니다. 담당 폴더에서 uv run main.py preview와 "
+                         "uv run main.py apply를 마친 뒤 받으세요.")
+    # 3. 받을 위키를 임시 폴더에 먼저 복사하고, 받기 전 위키를 보관한 뒤 바꾼다(복사가 실패하면 지금 위키는 그대로다)
+    number = 1
+    while (work / f"output/wiki-before-receive{_suffix(number)}").exists():
+        number += 1
+    backup = work / f"output/wiki-before-receive{_suffix(number)}"
+    incoming = work / "output" / ".wiki-receiving"
+    if incoming.exists():
+        shutil.rmtree(incoming)
+    shutil.copytree(other / "wiki", incoming, symlinks=False)
+    shutil.copytree(work / "wiki", backup)
+    try:
+        shutil.rmtree(work / "wiki")
+        incoming.rename(work / "wiki")
+    except OSError:
+        if (work / "wiki").exists():
+            shutil.rmtree(work / "wiki")
+        shutil.copytree(backup, work / "wiki")
+        raise ValueError(f"위키를 바꾸지 못해 받기 전 위키로 되돌렸습니다. 보관본: {backup.relative_to(work)}") from None
+    with (work / "wiki" / "log.md").open("a", encoding="utf-8") as log:
+        stamp = datetime.now(ZoneInfo("Asia/Seoul")).isoformat(timespec="seconds")
+        log.write(f"- {stamp} · 위키 받기 · {other.name}에서 받음(받기 전 위키: {backup.relative_to(work).as_posix()})\n")
+    # 4. 받은 위키를 다음 변경안 적용의 기준 상태로 삼는다
+    (work / "output" / "wiki-base.json").write_text(
+        json.dumps(hashes(work / "wiki"), ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
+    return {"received_from": str(other), "backup": backup.relative_to(work).as_posix(),
+            "files": sorted(hashes(work / "wiki"))}
 
 
 def search(workspace, query):

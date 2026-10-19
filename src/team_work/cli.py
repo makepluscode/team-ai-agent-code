@@ -2,9 +2,12 @@
 
 import argparse
 import json
+import os
 from pathlib import Path
 
 from . import documents, meetings, operations, wiki
+from .io import ask
+from .text import readable
 from .workspace import bundle, prepare, verify
 
 
@@ -37,12 +40,13 @@ def parser():
         )
     )
     p = commands.add_parser("wiki", help="명시적 원본 등록·정리 제안·사람 확인")
-    p.add_argument("action", choices=["register", "propose", "apply", "apply-draft", "search"])
+    p.add_argument("action", choices=["register", "propose", "apply", "apply-draft", "preview-draft", "receive", "search"])
     p.add_argument("--workspace", type=Path, required=True)
     p.add_argument("--source", type=Path)
     p.add_argument("--proposal", type=Path)
     p.add_argument("--query")
     p.add_argument("--confirm", action="store_true")
+    p.add_argument("--yes", action="store_true", help="확인 질문 생략(충돌·원본 검사는 유지)")
 
     def wiki_action(a):
         if a.action == "register":
@@ -51,8 +55,21 @@ def parser():
             return wiki.register(a.workspace, a.source)
         if a.action == "propose":
             return wiki.propose(a.workspace)
+        if a.action == "receive":
+            if not a.source:
+                raise ValueError("--source(담당 폴더)가 필요합니다.")
+            return wiki.receive(a.workspace, a.source)
+        if a.action == "preview-draft":
+            print(wiki.preview_draft(a.workspace), end="")
+            return None
         if a.action == "apply-draft":
-            return wiki.apply_draft(a.workspace)
+            # 사람이 diff를 읽고 y로 답해야 적용한다. --yes는 확인 질문만 생략하고 충돌·원본 검사는 그대로 한다
+            if not a.yes:
+                print(wiki.preview_draft(a.workspace), end="")
+                if not ask("위 변경을 wiki/에 적용할까요? [y/N] "):
+                    print("적용하지 않았습니다. 위키와 변경안은 그대로입니다.")
+                    return None
+            return wiki.apply_draft(a.workspace, confirmed=True)
         if a.action == "apply":
             if not a.proposal:
                 raise ValueError("--proposal이 필요합니다.")
@@ -91,8 +108,9 @@ def parser():
             "model_output": False,
         }
     )
-    from . import requests, team_operations
+    from . import doctor, requests, team_operations
 
+    doctor.register_parser(commands)
     requests.register_parser(commands)
     team_operations.register_parser(commands)
     return root
@@ -106,7 +124,11 @@ def main(argv=None):
         if isinstance(result, int):
             return result
         if result is not None:
-            print(json.dumps(result, ensure_ascii=False, indent=2, default=str))
+            # 예제의 main.py는 사람이 읽는 형식을, json 단계와 직접 호출은 JSON을 쓴다
+            if os.environ.get("TEAM_WORK_TEXT") == "1":
+                print(readable(json.loads(json.dumps(result, default=str))))
+            else:
+                print(json.dumps(result, ensure_ascii=False, indent=2, default=str))
         return 0
     except (ValueError, FileNotFoundError, KeyError, OSError) as error:
         root.exit(1, f"확인 필요: {error}\n")

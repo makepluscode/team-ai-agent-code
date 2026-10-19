@@ -337,6 +337,10 @@ SPECS.append({
             강제로 올리지 않습니다. 책 5.2절에 대응합니다. 이 폴더의 skills/를 5.1절에서 만든 위키 저장소에 복사해 함께 올립니다.
         """,
         "run": ["cp -r ~/agent-work/ch05/02-wiki-sync/skills ~/studio-merry-wiki/", "cd ~/studio-merry-wiki",
+                "uv run skills/wiki-sync/scripts/wiki_sync.py status",
+                ('uv run skills/wiki-sync/scripts/wiki_sync.py commit -m "[매니저] 위키 동기화 스킬 추가 · 팀 공용 설치" '
+                 "skills/wiki-sync/SKILL.md skills/wiki-sync/scripts/wiki_sync.py"),
+                "uv run skills/wiki-sync/scripts/wiki_sync.py push",
                 "hermes skills tap add <내 GitHub 계정>/studio-merry-wiki",
                 "hermes skills install <내 GitHub 계정>/studio-merry-wiki/skills/wiki-sync",
                 "uv run skills/wiki-sync/scripts/wiki_sync.py status", "hermes chat --query-file ~/agent-work/ch05/02-wiki-sync/prompt.md"],
@@ -1438,3 +1442,134 @@ SPECS.append({
         "notes": "백업은 작업 폴더 밖의 새 폴더에만 만들고, 복구도 새 폴더에만 합니다. 기존 폴더를 덮어쓰지 않습니다.",
     },
 })
+
+
+# ---------------------------------------------------------------------------
+# 독자 실습 보강(2026-10-19, Codex 상의): 확인 단계·한 단계씩 진행·설정 점검·실제 인계
+# 위의 명세를 고치지 않고 여기서 덧붙여, 어떤 예제에 무엇을 더했는지 한곳에서 보이게 한다.
+# ---------------------------------------------------------------------------
+
+def _spec(chapter, name):
+    return next(s for s in SPECS if s["chapter"] == chapter and s["name"] == name)
+
+
+def _insert_step(spec, before, name, desc, commands):
+    steps = spec["main"]["steps"]
+    items = list(steps.items())
+    index = next((i for i, (k, _) in enumerate(items) if k == before), len(items))
+    items.insert(index, (name, (desc, commands)))
+    spec["main"]["steps"] = dict(items)
+
+
+def _insert_run(spec, before, command):
+    run = spec["readme"]["run"]
+    index = run.index(before) if before in run else len(run)
+    run.insert(index, command)
+
+
+def _ensure_main(spec, title):
+    spec.setdefault("main", {"title": title, "steps": {}})
+
+
+# 1. 위키 변경안은 diff를 먼저 보고(preview) 적용한다(apply는 diff를 다시 보여 주고 y/N을 묻는다)
+for spec in SPECS:
+    steps = spec.get("main", {}).get("steps", {})
+    if any(c[:2] == ["wiki", "apply-draft"] for _, cmds in steps.values() for c in cmds):
+        steps["apply"] = ("변경안 diff를 보여 주고 y로 확인하면 충돌 검사·백업과 함께 wiki/에 적용", steps["apply"][1])
+        _insert_step(spec, "apply", "preview", "변경안이 적용되면 바뀔 줄(diff)을 보여 줌. 파일은 바꾸지 않음",
+                     [["wiki", "preview-draft"]])
+        _insert_run(spec, "uv run main.py apply", "uv run main.py preview")
+
+# 2. 8장 판정은 기록하기 전에 요약표·근거·오류를 한꺼번에 본다
+spec = _spec(8, "01-classify-requests")
+_insert_step(spec, "record", "preview", "판정 파일 10개를 기록하지 않고 검사해 요약표·근거·오류를 보여 줌",
+             [["requests", "classify", "--hermes-dir", "output/classification", "--preview"]])
+_insert_run(spec, "uv run main.py record", "uv run main.py preview")
+
+# 3. 사람 확인을 기록하는 단계는 한 번에 한 건씩, 내용을 보여 주고 y/N을 묻는다
+spec = _spec(9, "02-review-and-fix")
+spec["main"]["one_at_a_time"] = ["review", "task-002"]
+spec["main"]["show"] = {"review": [f"input/reviews/{rid}.json" for rid in REVIEW_ACTORS]}
+spec["main"]["steps"]["review"] = ("검토 1건 기록(실행할 때마다 다음 검토, 내용을 보여 주고 y/N 확인)", spec["main"]["steps"]["review"][1])
+spec["main"]["steps"]["task-002"] = ("TASK-002 상태 전이 1단계(실행할 때마다 다음 단계)", spec["main"]["steps"]["task-002"][1])
+spec["readme"]["notes"] = ("review는 검토 6건을 실행할 때마다 한 건씩 기록합니다. 화면에 나온 검토 내용과 헤르메스 결과(output/)를 대조하고 y로 답합니다. "
+                           "task-002도 실행할 때마다 한 단계씩(수정 필요 → 진행 → 확인 대기 → 완료) 옮기며, 진행 위치는 state/progress.json에 남습니다.")
+spec = _spec(12, "01-dashboard-work")
+spec["main"]["one_at_a_time"] = ["task-013"]
+spec["main"]["steps"]["task-013"] = ("TASK-013 상태 전이 1단계(실행할 때마다 다음 단계, 완료는 사람 확인)", spec["main"]["steps"]["task-013"][1])
+spec["check"]["counts"].append(["완료된 TASK-013", "SELECT COUNT(*) FROM tasks WHERE id='TASK-013' AND json_extract(data, '$.status')='완료'", 1])
+spec["readme"]["notes"] = ("대시보드 화면에서 일부 상태를 바꿨다면 task-013은 맞지 않는 첫 상태에서 멈춥니다. 화면 경로와 task-013 경로 가운데 하나만 끝까지 따릅니다. "
+                           "서버(serve)는 터미널 하나를 차지하므로 다른 명령은 새 터미널에서 실행하고, 다음 예제로 가기 전에 Ctrl+C로 끕니다.")
+
+# 4. 헤르메스 설정(MCP·스킬·이름 규칙·예약)이 앞 실습에서 남았는지 점검한다. 설정은 바꾸지 않는다
+DOCTORS = {
+    (7, "02-mcp-lookup"): (["doctor", "--mcp", "team-requests"], 'hermes mcp add team-requests --command uv --args run --directory "$PWD" main.py mcp'),
+    (5, "05-skill-share"): (["doctor", "--skill", "weekly-report"], "hermes skills check"),
+    (11, "01-team-hermes"): (["doctor", "--soul", "--cron"], "hermes chat --query-file prompt.md"),
+}
+for (chapter, name), (command, before) in DOCTORS.items():
+    spec = _spec(chapter, name)
+    _ensure_main(spec, f"{chapter}장 {spec['title']} 예제: 헤르메스 설정을 점검한다.")
+    spec["main"]["steps"]["doctor"] = ("헤르메스 설정 점검(이 예제와 관련된 MCP·스킬·이름 규칙·예약). 바꾸지 않음", [command])
+    _insert_run(spec, before, "uv run main.py doctor")
+_spec(7, "02-mcp-lookup")["check"]["human"] = [["hermes mcp test team-requests에서 도구 2개(get_request·get_roles)를 확인했는가", []],
+                                                ["uv run main.py doctor가 이 폴더를 가리킨다고 했는가", []]]
+
+# 5. 5장 실제 인계: 담당 폴더(03-change-memo)에서 정리한 위키를 동료 폴더로 받아 온다
+spec = _spec(5, "04-member-revision")
+_ensure_main(spec, "5장 동료 폴더 예제: 담당 폴더의 위키를 받아 오고 그 위키로 가이드를 고친다.")
+spec["main"]["steps"]["receive"] = ("담당 폴더(../03-change-memo)에서 정리한 위키를 받아 옴(원본이 같을 때만, 받기 전 위키 보관)",
+                                    [["wiki", "receive", "--source", "../03-change-memo"]])
+spec["main"]["markers"] = {"uv run main.py receive": ["output/wiki-before-receive"]}
+_insert_run(spec, "hermes chat --query-file prompt.md", "uv run main.py receive")
+spec["readme"]["notes"] = ("receive는 같은 장 폴더의 03-change-memo를 마친 뒤 실행해 실제 결과를 넘겨받는 인계입니다. 03을 건너뛰었다면 receive 없이 "
+                           "미리 넣어 둔 위키(03 완료 상태의 비교용 예시)로 연습할 수 있지만 그것은 인계 확인이 아닙니다. "
+                           "GitHub으로 공유했다면 동료 폴더(~/studio-merry-wiki-member)에서 '위키 동기화해 줘'로 받은 뒤 같은 지시문을 씁니다.")
+
+# 7. 10장의 main.py check(출처 자료 점검)를 결과 파일 검사(check.py)와 구별해 sources로 부른다
+for spec in SPECS:
+    if spec["chapter"] == 10:
+        steps = spec["main"]["steps"]
+        spec["main"]["steps"] = {("sources" if k == "check" else k): v for k, v in steps.items()}
+        spec["readme"]["run"] = [c.replace("uv run main.py check", "uv run main.py sources") for c in spec["readme"]["run"]]
+
+# 8. 6장 전사는 음원이 있을 때만 하는 선택 단계이므로 기본 실행 순서에서 뺀다
+spec = _spec(6, "01-meeting-input")
+spec["readme"]["run"] = [c for c in spec["readme"]["run"] if "transcribe" not in c]
+spec["readme"]["notes"] = ("음원이 있을 때만(선택): uv run --extra transcription main.py transcribe <음원 경로>. 결과는 이 폴더의 "
+                           "output/transcript.json이고, 다음 예제(02-meeting-notes)에서는 ../01-meeting-input/output/transcript.json으로 읽습니다. "
+                           "전사는 CPU·base·int8 구성을 검토 기준으로 둡니다. 실제 음원의 전사와 원음 청취 대조는 두 기준 장비에서 TODO(검증)입니다.")
+
+# 9. 12장 복구는 DB까지 새 폴더에 돌아왔는지 확인한다
+_spec(12, "03-hours-backup")["check"]["results"].append("../03-hours-backup-restored/state/requests.sqlite3")
+
+# 10. 7장: 등록 뒤에도 doctor로 이 폴더를 가리키는지 다시 본다. 접수는 intake 단계로 부른다
+spec = _spec(7, "02-mcp-lookup")
+_insert_run(spec, "hermes chat --query-file prompt.md", "uv run main.py doctor")
+for name in ("01-request-intake", "03-mail-input"):
+    spec = _spec(7, name)
+    spec["readme"]["run"] = ["uv run main.py intake" if c == "uv run main.py" else c for c in spec["readme"]["run"]]
+
+# 11. 단계가 끝났는지 알려 주는 표시(안내판용). 기본 규칙으로 알 수 없는 단계만 적는다
+_spec(12, "01-dashboard-work")["main"]["markers"] = {"uv run main.py intake": ["db:SELECT COUNT(*) FROM requests WHERE id='REQ-011'"]}
+_spec(8, "01-classify-requests")["main"]["markers"] = {"uv run main.py record": [
+    "db:SELECT COUNT(*) FROM classifications WHERE json_extract(data, '$.artifact_kind')='hermes-output'"]}
+_spec(12, "03-hours-backup")["main"]["markers"] = {"uv run main.py backup": ["../03-hours-backup-backup"],
+                                                   "uv run main.py restore": ["../03-hours-backup-restored"]}
+
+# 12. 기록 DB를 쓰는 예제에는 목록(list) 단계를 둔다(check.py와 원고의 복구 안내가 쓴다)
+for spec in SPECS:
+    steps = spec.get("main", {}).get("steps", {})
+    uses_db = any(c[:1] == ["requests"] or c[:1] == ["team-ops"] for _, cmds in steps.values() for c in cmds)
+    if uses_db and "list" not in steps:
+        steps["list"] = ("요청·업무·판정 목록 출력", [["requests", "list"]])
+
+# 6. README의 main.py 설명은 실제 단계 목록에서 만든다
+for spec in SPECS:
+    if "main" in spec:
+        names = " / ".join(spec["main"]["steps"])
+        desc = f"단계 {names}. 인자 없이 실행하면 할 일과 단계를 안내"
+        files = [f for f in spec["readme"]["files"] if f[0] != "main.py"]
+        spec["readme"]["files"] = files + [("main.py", desc)]
+
+

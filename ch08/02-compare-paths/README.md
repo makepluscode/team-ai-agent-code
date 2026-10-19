@@ -19,9 +19,9 @@ uv run check.py
 | input/evaluation/ | 개발용 18건·평가용 42건(합성, 정답 없음) |
 | input/routing-criteria.json | 판정 기준 |
 | prompt.md | 개발·평가 판정 지시문 |
-| main.py | evaluate: 정답과 비교 |
 | expected/evaluation-gold.json | 저자 기준 정답(저자 전건 검수 전). 헤르메스에 주지 않음 |
 | check.py | 원본 보존·판정 저장 확인 |
+| main.py | 단계 evaluate. 인자 없이 실행하면 할 일과 단계를 안내 |
 
 
 evaluate는 main.py 위치를 기준으로 상대 경로를 읽으므로 이 폴더에서 실행합니다.

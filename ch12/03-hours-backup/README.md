@@ -23,8 +23,8 @@ uv run check.py
 | input/business-hours.json | 업무시간 규칙 |
 | input/month-end-snapshot.json | 월말 비교 자료(저자 편집) |
 | prompt.md | 월말 보고서 지시문 |
-| main.py | setup / gate / run / backup / restore / json |
 | check.py | 원본 보존·보고서 저장 확인 |
+| main.py | 단계 setup / gate / run / backup / restore / json / list. 인자 없이 실행하면 할 일과 단계를 안내 |
 
 
 백업은 작업 폴더 밖의 새 폴더에만 만들고, 복구도 새 폴더에만 합니다. 기존 폴더를 덮어쓰지 않습니다.

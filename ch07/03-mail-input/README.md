@@ -7,7 +7,7 @@
 
 ```bash
 cd ~/agent-work/ch07/03-mail-input
-uv run main.py
+uv run main.py intake
 hermes chat --query-file prompt.md
 uv run check.py
 ```
@@ -23,5 +23,5 @@ uv run check.py
 | input/optional-mail.json | 제공 메일 2건(합성, REQ-009·010) |
 | input/mail/ | 메일 원문(.eml, 합성) |
 | prompt.md | 메일 요청 정리 지시문 |
-| main.py | intake(기본): 내부 8건+메일 2건 접수 / json |
 | check.py | 원본 보존·요청 10건 확인 |
+| main.py | 단계 intake / json / list. 인자 없이 실행하면 할 일과 단계를 안내 |

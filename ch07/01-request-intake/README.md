@@ -8,7 +8,7 @@
 ```bash
 cp -r ~/team-ai-agent/code/ch07 ~/agent-work/ch07
 cd ~/agent-work/ch07/01-request-intake
-uv run main.py
+uv run main.py intake
 hermes chat --query-file prompt.md
 hermes chat --query-file status.md
 uv run check.py
@@ -24,8 +24,8 @@ uv run check.py
 | raw/ | 6장까지의 원본(문서 버전별) |
 | prompt.md | 접수 형식 점검 지시문 |
 | status.md | 처리 현황 표(DOC-014@r1) 지시문 |
-| main.py | intake(기본): DB 준비·접수·목록 / list / json |
 | check.py | 원본 보존·접수 건수 확인 |
+| main.py | 단계 intake / list / json. 인자 없이 실행하면 할 일과 단계를 안내 |
 
 
 다시 할 때는 새 사본을 만듭니다. 같은 폴더에서 intake를 두 번 실행하면 '이미 초기화한 상태'로 멈춥니다.

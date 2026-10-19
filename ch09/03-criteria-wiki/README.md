@@ -10,6 +10,7 @@ cd ~/agent-work/ch09/03-criteria-wiki
 hermes chat --query-file prompt.md
 uv run main.py register
 hermes chat --query-file wiki.md
+uv run main.py preview
 uv run main.py apply
 uv run check.py
 ```
@@ -28,6 +29,6 @@ uv run check.py
 | wiki/ | 6장까지 정리한 위키 |
 | prompt.md | 기준 문서 작성 지시문 |
 | wiki.md | 위키 반영 지시문 |
-| main.py | register: 기준 문서 등록 / apply: 변경안 적용 |
 | expected/wiki/criteria/ | 비교용 기준 페이지 |
 | check.py | 원본 보존·등록·페이지 저장 확인 |
+| main.py | 단계 register / preview / apply. 인자 없이 실행하면 할 일과 단계를 안내 |

@@ -19,6 +19,6 @@ uv run check.py
 | wiki/ | 4.3절 결과와 같은 위키(비교용 편집 예시) |
 | raw/ | 초기 원본과 근거 묶음 |
 | prompt.md | 질문 세 개와 저장 위치 |
-| main.py | search: 검색어가 있는 위키 줄 찾기 |
 | expected/ch04-query-check.md | 비교용 답변 |
 | check.py | 원본 보존·답변 저장 확인 |
+| main.py | 단계 search. 인자 없이 실행하면 할 일과 단계를 안내 |

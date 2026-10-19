@@ -150,18 +150,27 @@ def test_wiki_examples_apply_draft(tmp_path, name):
         source = "input/DOC-010_schedule-change.md" if "ch05" in name else "input/DOC-012_meeting-notes.md"
         assert run(folder, "wiki", "register", "--source", source) == 0
     copy_expected_wiki(folder)
+    from team_work.workspace import hashes
+
+    before = hashes(folder / "wiki")
+    # preview와, 확인 없이(입력 없음) 실행한 apply는 diff만 보여 주고 아무것도 바꾸지 않는다
+    assert run(folder, "wiki", "preview-draft") == 0
     assert run(folder, "wiki", "apply-draft") == 0
+    assert hashes(folder / "wiki") == before and (folder / "output" / "wiki-draft").is_dir()
+    assert not (folder / "output" / "wiki-base.json").exists()
+    assert run_check(folder).returncode == 1
+    assert run(folder, "wiki", "apply-draft", "--yes") == 0
     done = run_check(folder)
     assert done.returncode == 0, done.stdout
     # 두 번째 변경안도 적용되고 기준 상태가 갱신된다
     copy_expected_wiki(folder)
-    assert run(folder, "wiki", "apply-draft") == 0
+    assert run(folder, "wiki", "apply-draft", "--yes") == 0
     assert (folder / "output" / "wiki-applied-2.json").exists()
     # 적용 뒤 위키를 직접 고치면 다음 적용은 충돌로 멈춘다
     (folder / "wiki" / "index.md").write_text("# 직접 고친 목록\n", encoding="utf-8")
     copy_expected_wiki(folder)
     with pytest.raises(SystemExit):
-        run(folder, "wiki", "apply-draft")
+        run(folder, "wiki", "apply-draft", "--yes")
 
 
 def test_ch07_intake_counts(tmp_path):
@@ -264,3 +273,147 @@ def test_examples_are_generated_from_specs(tmp_path):
                    cwd=ROOT, check=True, capture_output=True)
     for n in names:
         assert files(ROOT, n) == files(tmp_path, n), n
+
+
+def main_py(folder: Path, *args: str, stdin: str = "") -> subprocess.CompletedProcess:
+    """독자처럼 예제 폴더의 main.py를 실행한다(입력은 stdin으로 준다)."""
+    import os
+
+    env = {**os.environ, "TEAM_AGENT_CODE": str(ROOT)}
+    return subprocess.run([sys.executable, "main.py", *args], cwd=folder, input=stdin, capture_output=True,
+                          text=True, encoding="utf-8", env=env, check=False)
+
+
+def test_main_guide_and_one_step_reviews(tmp_path):
+    folder = copy_example(tmp_path, "ch09/02-review-and-fix")
+    guide = main_py(folder)
+    assert guide.returncode == 0 and "다음: uv run main.py setup" in guide.stdout
+    assert main_py(folder, "setup").returncode == 0
+    (folder / "output").mkdir()
+    for path in (folder / "expected" / "review-corrections").iterdir():
+        shutil.copy(path, folder / "output" / path.name)
+    # 확인하지 않으면(N) 기록하지 않고 진행 위치도 그대로다
+    refused = main_py(folder, "review", stdin="n\n")
+    assert refused.returncode == 1 and "REV-001" in refused.stdout
+    assert "(0/6)" in main_py(folder).stdout
+    for number in range(1, 7):
+        done = main_py(folder, "review", stdin="y\n")
+        assert done.returncode == 0, done.stdout + done.stderr
+        assert f"review {number}/6 완료" in done.stdout
+    for _ in range(4):
+        assert main_py(folder, "task-002", "--yes").returncode == 0
+    assert "모두 마쳤습니다" in main_py(folder, "task-002").stdout
+    assert run_check(folder).returncode == 0
+
+
+def test_ch08_preview_lists_errors_without_writing(tmp_path):
+    folder = copy_example(tmp_path, "ch08/01-classify-requests")
+    assert main_py(folder, "setup").returncode == 0
+    shutil.copytree(folder / "expected" / "classification", folder / "output" / "classification")
+    preview = main_py(folder, "preview")
+    assert preview.returncode == 1 and "편집 예시" in preview.stdout
+    for path in (folder / "output" / "classification").glob("REQ-*.json"):
+        data = json.loads(path.read_text(encoding="utf-8"))
+        data.pop("data_kind"), data.pop("artifact_kind")
+        path.write_text(json.dumps(data, ensure_ascii=False), encoding="utf-8")
+    (folder / "output" / "classification" / "REQ-010.json").unlink()
+    preview = main_py(folder, "preview")
+    assert preview.returncode == 1 and "REQ-010" in preview.stdout and "REQ-001 근거" in preview.stdout
+    assert "판정" not in main_py(folder, "list").stdout.split("업무")[0]
+
+
+def test_ch05_receive_from_owner_folder(tmp_path):
+    owner = tmp_path / "03-change-memo"
+    member = tmp_path / "04-member-revision"
+    shutil.copytree(ROOT / "ch05/03-change-memo", owner, ignore=shutil.ignore_patterns("output", ".venv"))
+    shutil.copytree(ROOT / "ch05/04-member-revision", member, ignore=shutil.ignore_patterns("output", ".venv"))
+    # 담당 폴더에서 아직 원본을 등록하지 않았으면 받지 않는다
+    assert main_py(member, "receive").returncode == 1
+    assert run(owner, "wiki", "register", "--source", "input/DOC-010_schedule-change.md") == 0
+    # 등록만 하고 위키 적용 전이면 받지 않는다(지금 위키는 그대로)
+    from team_work.workspace import hashes
+
+    before = hashes(member / "wiki")
+    refused = main_py(member, "receive")
+    assert refused.returncode == 1 and "적용을 마친 상태가 아닙니다" in refused.stdout + refused.stderr
+    assert hashes(member / "wiki") == before
+    copy_expected_wiki(owner)
+    assert run(owner, "wiki", "apply-draft", "--yes") == 0
+    received = main_py(member, "receive")
+    assert received.returncode == 0, received.stdout + received.stderr
+    assert (member / "wiki" / "guides" / "onboarding.md").read_bytes() == (owner / "wiki" / "guides" / "onboarding.md").read_bytes()
+    assert (member / "output" / "wiki-before-receive").is_dir()
+
+
+def test_doctor_reports_stale_mcp(tmp_path, monkeypatch):
+    folder = copy_example(tmp_path, "ch07/02-mcp-lookup")
+    home = tmp_path / "hermes"
+    home.mkdir()
+    (home / "config.yaml").write_text(
+        "mcp_servers:\n  team-requests:\n    command: uv\n    args: [run, --directory, /old/ch07, main.py, mcp]\n",
+        encoding="utf-8")
+    monkeypatch.setenv("HERMES_HOME", str(home))
+    from team_work.doctor import doctor
+
+    assert doctor(folder, mcp=["team-requests"]) == 1
+    (home / "config.yaml").write_text(
+        f"mcp_servers:\n  team-requests:\n    command: uv\n    args: [run, --directory, {folder}, main.py, mcp]\n",
+        encoding="utf-8")
+    import shutil as _shutil
+
+    monkeypatch.setattr(_shutil, "which", lambda name: "/usr/bin/" + name)
+    assert doctor(folder, mcp=["team-requests"]) == 0
+
+
+def test_ch12_task013_one_step_and_backup_check(tmp_path):
+    folder = copy_example(tmp_path, "ch12/01-dashboard-work")
+    for step in ("setup", "intake"):
+        assert main_py(folder, step).returncode == 0
+    total = len(json.loads((folder / "main.py").read_text(encoding="utf-8").split("STEPS = ")[1].split("\n# ")[0])["task-013"][1])
+    for number in range(1, total + 1):
+        done = main_py(folder, "task-013", "--yes")
+        assert done.returncode == 0, done.stdout + done.stderr
+    (folder / "output").mkdir(exist_ok=True)
+    (folder / "output" / "evt-018-instruct.json").write_text("{}", encoding="utf-8")
+    checked = run_check(folder)
+    assert checked.returncode == 0 and "완료된 TASK-013: 1건" in checked.stdout, checked.stdout
+
+    hours = tmp_path / "ch12" / "03-hours-backup"
+    shutil.copytree(ROOT / "ch12/03-hours-backup", hours, ignore=shutil.ignore_patterns("output", ".venv"))
+    for step in ("setup", "gate", "run", "backup", "restore"):
+        assert main_py(hours, step).returncode == 0, step
+    (hours / "output" / "monthly-ops-report.md").write_text("보고서\n", encoding="utf-8")
+    checked = run_check(hours)
+    assert checked.returncode == 0, checked.stdout
+
+
+def test_guide_next_step_after_setup_and_failed_step_keeps_progress(tmp_path):
+    folder = copy_example(tmp_path, "ch12/01-dashboard-work")
+    assert main_py(folder, "setup").returncode == 0
+    # setup만 끝났으면 접수(intake)는 아직이다
+    guide = main_py(folder).stdout
+    assert "✓ uv run main.py intake" not in guide
+    # 접수 전에 상태 전이를 하면 실패하고 진행 위치는 그대로다
+    failed = main_py(folder, "task-013", "--yes")
+    assert failed.returncode != 0 and "[멈춤]" in failed.stdout
+    assert "(0/" in main_py(folder).stdout
+    assert main_py(folder, "intake").returncode == 0
+    assert "✓ uv run main.py intake" in main_py(folder).stdout
+    done = main_py(folder, "task-013", "--yes")
+    assert done.returncode == 0 and "기록할 상태 전이" in done.stdout
+
+
+def test_doctor_cron_failure_is_reported(tmp_path, monkeypatch):
+    folder = copy_example(tmp_path, "ch11/01-team-hermes")
+    home = tmp_path / "hermes"
+    home.mkdir()
+    (home / "SOUL.md").write_text("# 프라이데이\n", encoding="utf-8")
+    monkeypatch.setenv("HERMES_HOME", str(home))
+    import shutil as _shutil
+    import subprocess as _subprocess
+
+    from team_work import doctor as doctor_module
+
+    monkeypatch.setattr(_shutil, "which", lambda name: "/usr/bin/" + name)
+    monkeypatch.setattr(_subprocess, "run", lambda *a, **k: _subprocess.CompletedProcess(a, 1, "", "gateway error"))
+    assert doctor_module.doctor(folder, soul=True, cron=True) == 1

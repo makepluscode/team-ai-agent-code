@@ -25,5 +25,8 @@ uv run check.py
 | input/snapshot.json | 10/19 기준 공동 기록 |
 | prompt.md | 지시 레코드 지시문 |
 | history.md | 상태 이력표 지시문 |
-| main.py | setup / serve: 쓰기 대시보드 / intake: 파일로 접수 / task-013: 상태 전이 / json / list |
 | check.py | 원본 보존·요청 11·업무 13 확인 |
+| main.py | 단계 setup / intake / serve / task-013 / json / list. 인자 없이 실행하면 할 일과 단계를 안내 |
+
+
+대시보드 화면에서 일부 상태를 바꿨다면 task-013은 맞지 않는 첫 상태에서 멈춥니다. 화면 경로와 task-013 경로 가운데 하나만 끝까지 따릅니다. 서버(serve)는 터미널 하나를 차지하므로 다른 명령은 새 터미널에서 실행하고, 다음 예제로 가기 전에 Ctrl+C로 끕니다.

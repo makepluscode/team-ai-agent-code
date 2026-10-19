@@ -24,9 +24,9 @@ uv run check.py
 | setup-check.md | 설정 점검 지시문 |
 | prompt.md | 현황 요약 지시문 |
 | peer.md | 동료 접속 안내 지시문 |
-| main.py | setup / serve: 조회 대시보드 / share: 동료 접속용 / list |
 | pyproject.toml | 대시보드에 필요한 fastapi·uvicorn |
 | check.py | 원본 보존·기록 건수·요약 저장 확인 |
+| main.py | 단계 setup / serve / share / list. 인자 없이 실행하면 할 일과 단계를 안내 |
 
 
 serve와 share는 끌 때까지 실행됩니다(Ctrl+C). 다른 터미널에서 hermes를 실행합니다. 사내 접속 범위와 방화벽 설정은 11.4절과 TODO(검증)를 따릅니다.

@@ -21,3 +21,11 @@ def write_new(path, text):
 
 def write_json(path, data):
     return write_new(path, json.dumps(data, ensure_ascii=False, indent=2) + "\n")
+
+
+def ask(question):
+    """사람에게 y/N을 묻는다. 입력이 없거나(자동 실행) y가 아니면 False다."""
+    try:
+        return input(question).strip().lower() in {"y", "yes", "예", "네"}
+    except (EOFError, OSError):  # 입력이 없는 자동 실행
+        return False

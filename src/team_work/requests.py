@@ -4,6 +4,7 @@ from __future__ import annotations
 import hashlib
 import html
 import json
+import os
 import re
 import secrets
 import sqlite3
@@ -99,7 +100,8 @@ def init_workspace(workspace):
                 raise ValueError("독립 시작 시각 뒤 사건이 섞여 있습니다.")
         with database(workspace) as db:
             if db.execute("SELECT COUNT(*) FROM tasks").fetchone()[0]:
-                raise ValueError("이미 초기화한 상태입니다. 다른 작업 폴더로 복구하세요.")
+                raise ValueError("이미 기록 DB가 있습니다(state/requests.sqlite3). 목록은 uv run main.py list로 보고, "
+                                 "처음부터 하려면 장 폴더를 새 이름으로 다시 복사하세요.")
             for table in ("roles", "tasks", "events", "reviews", "runs", "classifications"):
                 key = {"roles": "member_id", "tasks": "task_id", "events": "event_id",
                        "reviews": "review_id", "runs": "run_id", "classifications": "request_id"}[table]
@@ -202,6 +204,14 @@ def brief(data):
         lines.append(_pad(r["request_id"], 10) + _pad(r["source_kind"], 15) + _pad(r["requester_id"], 8)
                      + _pad(r["received_at"][:16].replace("T", " "), 18) + _pad(r.get("task_id"), 10)
                      + (r.get("duplicate_of") or ""))
+    if data.get("classifications"):
+        # 현재 판정(요청마다 마지막 기록)과 그 기록의 종류
+        lines += ["", _pad("판정", 10) + _pad("유형", 13) + _pad("담당 후보", 12) + _pad("긴급도", 7)
+                  + _pad("확인 필요", 10) + "기록"]
+        for c in data["classifications"]:
+            lines.append(_pad(c.get("request_id"), 10) + _pad(c.get("type"), 13)
+                         + _pad(",".join(c.get("owner_candidates") or []), 12) + _pad(c.get("urgency"), 7)
+                         + _pad("예" if c.get("needs_confirmation") else "아니요", 10) + str(c.get("artifact_kind", "")))
     lines += ["", _pad("업무", 10) + _pad("상태", 12) + _pad("담당", 6) + _pad("기한", 18) + "비고"]
     for t in data["tasks"]:
         lines.append(_pad(t["task_id"], 10) + _pad(t["status"], 12) + _pad(t.get("owner_id"), 6)
@@ -222,7 +232,7 @@ def transition(workspace, task_id, status, actor, reason, refs, *, human=False, 
         task = json.loads(row[0])
         before = task["status"]
         if expected and expected != before:
-            raise ValueError("현황이 바뀌었습니다. 다시 조회하세요.")
+            raise ValueError(f"현황이 바뀌었습니다. {task_id}의 현재 상태는 {before}입니다(예상 {expected}). uv run main.py list로 현재 상태를 확인하세요.")
         if status not in STATES[before]:
             raise ValueError(f"허용하지 않은 상태 변경: {before} → {status}")
         if status == "완료":
@@ -356,6 +366,44 @@ def import_classification_folder(workspace, folder):
     return results
 
 
+def preview_classification_folder(workspace, folder):
+    """기록하기 전에 판정 파일을 검사하고 요약표를 만든다. 기록 DB는 바꾸지 않는다."""
+    with database(workspace, True) as db:
+        bodies = {row["request_id"]: row for row in rows(db, "requests")}
+    paths = sorted((Path(workspace) / folder).glob("REQ-*.json"))
+    if not paths:
+        raise ValueError(f"판정 파일이 없습니다: {folder}/REQ-*.json. 헤르메스 지시문(prompt.md)을 먼저 실행하세요.")
+    table = [_pad("요청", 9) + _pad("유형", 13) + _pad("담당 후보", 12) + _pad("긴급도", 7) + "확인 필요"]
+    details, errors = [], []
+    for path in paths:
+        request_id = path.stem
+        try:
+            value = validate_classification(read_json(path))
+            request = bodies.get(request_id)
+            if not request:
+                raise ValueError("기록 DB에 없는 요청입니다")
+            if not value["evidence"].strip() or value["evidence"] not in request["body"]:
+                raise ValueError("근거(evidence)가 요청 원문에 없는 문장입니다")
+            if value.get("data_kind") == "synthetic" or value.get("artifact_kind") == "author-reference":
+                raise ValueError("편집 예시(expected/)를 복사한 파일입니다")
+        except (ValueError, json.JSONDecodeError) as error:
+            errors.append(f"[오류] {path.relative_to(workspace)}: {error}")
+            continue
+        table.append(_pad(request_id, 9) + _pad(value["type"], 13) + _pad(",".join(value["owner_candidates"]), 12)
+                     + _pad(value["urgency"], 7) + ("예" if value["needs_confirmation"] else "아니요"))
+        details.append(f"{request_id} 근거: {value['evidence']}")
+        if value["needs_confirmation"]:
+            details.append(f"{request_id} 확인 이유: {value['confirmation_reason']}")
+    missing = sorted(set(bodies) - {p.stem for p in paths})
+    lines = table + [""] + details
+    if missing:
+        errors.append("[누락] 판정 파일이 없는 요청: " + ", ".join(missing))
+    lines += [""] + (errors or ["[통과] 모든 판정 파일의 형식·명부·근거 검사 통과"])
+    lines.append("다음: 표와 근거를 확인하고 고칠 파일은 직접 고친 뒤 uv run main.py record" if not errors
+                 else "다음: 오류 파일을 고치거나 헤르메스에 다시 쓰게 한 뒤 uv run main.py preview")
+    return "\n".join(lines), not errors
+
+
 def classify(workspace, request_id, response_file=None, engine=None):
     from .models import call_commercial
     with database(workspace, True) as db:
@@ -416,7 +464,9 @@ def classify(workspace, request_id, response_file=None, engine=None):
             save(db, "classifications", request_id, {"request_id": request_id, "run_id": run_id,
                  "needs_confirmation": True, "confirmation_reason": "호출/응답 검사 실패; 사람 확인 필요",
                  "artifact_kind": "failure", "owner_candidates": []}, True)
-        raise ValueError("판정 실패. 실패 기록을 확인하고 다시 실행하세요.") from None
+        # 판정 파일 검사 오류는 고칠 자리를 알려 준다. 상용 호출 오류는 응답 본문을 남기지 않는다
+        detail = f": {error}" if response_file and isinstance(error, ValueError) else ""
+        raise ValueError(f"판정 실패{detail}. 실패 기록을 남겼습니다.") from None
     finally:
         run["finished_at"] = now()
         with database(workspace) as db:
@@ -712,7 +762,12 @@ def evaluate(predictions_path, gold_path, split="evaluation"):
             failures += 1
             confirmation_misses += int(g["needs_confirmation"] and p is None)
             continue
-        validate_classification(p)
+        try:
+            validate_classification(p)
+        except ValueError:  # 형식이 틀린 판정은 실패로 센다(평가를 멈추지 않는다)
+            failures += 1
+            confirmation_misses += int(g["needs_confirmation"])
+            continue
         category += int(p["type"] == g["type"])
         owner += int(set(p["owner_candidates"]) == set(g["owner_candidates"]))
         urgency_errors += int(p["urgency"] != g["urgency"])
@@ -721,7 +776,9 @@ def evaluate(predictions_path, gold_path, split="evaluation"):
         auto_errors += int(not p["needs_confirmation"] and (p["type"] != g["type"] or
                            set(p["owner_candidates"]) != set(g["owner_candidates"]) or g["needs_confirmation"]))
         part["correct"] += int(p["type"] == g["type"])
-    return {"split": split, "count": total, "type_correct": category, "owner_set_correct": owner,
+    gold_ids = {g["request_id"] for g in gold}
+    return {"split": split, "count": total, "missing_ids": sorted(gold_ids - set(by_id)),
+            "extra_ids": sorted(set(by_id) - gold_ids), "type_correct": category, "owner_set_correct": owner,
             "urgency_errors": urgency_errors, "confirmation_misses": confirmation_misses,
             "handed_to_person": handed, "handed_ratio": handed / total if total else None,
             "call_or_missing_failures": failures, "automatic_errors": auto_errors, "per_type": per_type,
@@ -743,6 +800,7 @@ def register_parser(subparsers):
             p.add_argument("--reference", type=Path, help="편집 예시 읽기; 모델 호출 성공 아님")
             p.add_argument("--hermes-dir", type=Path, help="헤르메스가 쓴 REQ-*.json 판정 파일 폴더를 모두 가져오기")
             p.add_argument("--hermes-result", type=Path, help="헤르메스가 쓴 판정 JSON을 검사해 기록")
+            p.add_argument("--preview", action="store_true", help="--hermes-dir의 판정을 기록하지 않고 검사·요약만")
         if command in {"review", "transition"}:
             p.add_argument("--actor", required=True)
             p.add_argument("--human-confirmed", action="store_true")
@@ -773,6 +831,11 @@ def register_parser(subparsers):
     p.add_argument("--writable", action="store_true")
     def serve(args):
         import uvicorn
+
+        # 어느 예제의 서버인지, 쓰기가 되는지 먼저 보여 준다(앞 예제의 서버가 남아 있으면 포트가 겹친다)
+        print(f"대시보드: http://{args.host}:{args.port}  예제 폴더: {Path(args.workspace).resolve()}\n"
+              f"모드: {'입력·상태 변경 가능' if args.writable else '조회 전용'}  끄기: Ctrl+C"
+              "(다른 명령은 새 터미널에서 실행합니다)", flush=True)
         uvicorn.run(create_dashboard(args.workspace, args.writable), host=args.host, port=args.port)
     p.set_defaults(func=serve)
 
@@ -787,8 +850,16 @@ def handle_request(args):
         print(brief(data))
         return 0
     if command == "classify":
+        if args.hermes_dir and args.preview:
+            text, ok = preview_classification_folder(root, args.hermes_dir)
+            print(text)
+            return 0 if ok else 1
         if args.hermes_dir:
-            return import_classification_folder(root, args.hermes_dir)
+            results = import_classification_folder(root, args.hermes_dir)
+            if os.environ.get("TEAM_WORK_TEXT") == "1":
+                print(f"판정 {len(results)}건을 기록했습니다. 현재 판정은 uv run main.py list, 모든 필드는 uv run main.py json")
+                return 0
+            return results
         if not args.request_id:
             raise ValueError("--request-id가 필요합니다.")
         if args.hermes_result:

@@ -10,7 +10,7 @@ cp -r ~/team-ai-agent/code/ch10 ~/agent-work/ch10
 cd ~/agent-work/ch10/01-revision-search
 hermes chat --query-file prompt.md
 hermes chat --query-file search.md
-uv run main.py check
+uv run main.py sources
 uv run check.py
 ```
 
@@ -23,5 +23,5 @@ uv run check.py
 | input/queries.json | 질문 20개와 질문별 기준 시각(as_of) |
 | prompt.md | 문서 버전 정리 지시문 |
 | search.md | 근거 위치 검색 지시문 |
-| main.py | check: 질문 20개 구조화 조회 점검 / qa: 질문 하나 조회 |
 | check.py | 원본 보존·결과 저장 확인 |
+| main.py | 단계 sources / qa. 인자 없이 실행하면 할 일과 단계를 안내 |

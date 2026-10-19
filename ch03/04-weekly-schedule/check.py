@@ -3,7 +3,7 @@
 입력: input/organized/(회의 노트·업무 노트 정리본 8개), input/DOC-004_weekly-meetings.md, input/snapshot.json
 결과: output/scheduled/오늘날짜_DOC-009_weekly-report.r1.md(예약이 오늘 남긴 보고)
 출력: 화면에 자동 확인 결과와 사람이 직접 확인할 항목을 출력한다. 파일은 바꾸지 않는다.
-실행: 이 폴더에서 `uv run check.py`
+실행: 이 폴더에서 `uv run check.py` (다른 날의 결과는 `uv run check.py 2026-10-23`처럼 날짜를 넘긴다)
 """
 
 import hashlib
@@ -45,10 +45,17 @@ def sha256(path: Path) -> str:
 
 
 def find_result() -> Path | None:
-    # 예약 실행은 실행 날짜를 붙인 새 파일을 남긴다. 예전 결과로 통과하지 않게 오늘 날짜 파일만 본다
-    today = date.today().isoformat()
-    path = HERE / "output" / "scheduled" / f"{today}_DOC-009_weekly-report.r1.md"
-    return path if path.exists() else None
+    # 예약 실행은 실행 날짜를 붙인 새 파일을 남긴다. 예전 결과로 통과하지 않게 기본은 오늘 날짜 파일만 본다.
+    # 다음 날 확인할 때는 날짜를 넘긴다: uv run check.py 2026-10-23
+    day = sys.argv[1] if len(sys.argv) > 1 else date.today().isoformat()
+    path = HERE / "output" / "scheduled" / f"{day}_DOC-009_weekly-report.r1.md"
+    if not path.exists():
+        found = sorted((HERE / "output" / "scheduled").glob("*_DOC-009_weekly-report.r1.md"))
+        if found:
+            print(f"    → {day} 결과가 없습니다. 있는 결과: {', '.join(f.name[:10] for f in found)}. "
+                  "그날 결과를 확인하려면 uv run check.py <날짜>")
+        return None
+    return path
 
 
 def main() -> int:
