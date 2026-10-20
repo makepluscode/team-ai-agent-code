@@ -6,22 +6,22 @@
     {
       "chapter": 1,
       "example": "ch01",
-      "title": "온보딩 계획",
+      "title": "온보딩 안내문 점검",
       "commands": [
-        "cp -r ~/team-ai-agent/code/ch01 ~/agent-work/ch01",
+        "cp -r --update=none ~/team-ai-agent/code/ch[0-9][0-9] ~/agent-work/",
         "hermes chat --query-file prompt.md",
         "uv run check.py"
       ],
       "checks": [
         "자기소개에 이름 반영",
-        "DOC-005 저장·원본 해시·잠정/미정·출처(사람 확인)"
+        "DOC-005 점검표 저장·원본과 자료함 해시·경로 상태와 잠정/미정(사람 확인)"
       ],
       "limits": [
-        "2026-10-18 Windows+WSL2 테스트베드에서 헤르메스 v0.22.1·claude-haiku-5-5로 확인. 맥 기준 장비는 TODO(검증)"
+        "01-hello-jarvis의 이름 적용은 2026-10-18 Windows+WSL2 테스트베드(헤르메스 v0.22.1·claude-haiku-5-5)에서 확인. 02-guide-check(2026-10-20 새 예제)의 헤르메스 실행과 맥 기준 장비는 TODO(검증)"
       ],
       "examples": [
         "ch01/01-hello-jarvis",
-        "ch01/02-onboarding-plan"
+        "ch01/02-guide-check"
       ]
     },
     {
