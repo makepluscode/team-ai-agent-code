@@ -101,7 +101,7 @@ def init_workspace(workspace):
         with database(workspace) as db:
             if db.execute("SELECT COUNT(*) FROM tasks").fetchone()[0]:
                 raise ValueError("이미 기록 DB가 있습니다(state/requests.sqlite3). 목록은 uv run main.py list로 보고, "
-                                 "처음부터 하려면 장 폴더를 새 이름으로 다시 복사하세요.")
+                                 "처음부터 하려면 uv run reset.py로 예제 폴더를 처음 상태로 되돌리세요.")
             for table in ("roles", "tasks", "events", "reviews", "runs", "classifications"):
                 key = {"roles": "member_id", "tasks": "task_id", "events": "event_id",
                        "reviews": "review_id", "runs": "run_id", "classifications": "request_id"}[table]
@@ -628,7 +628,7 @@ def create_dashboard(workspace, writable=False):
         judged = next((c for c in data["classifications"] if c["request_id"] == task.get("request_id")), None)
         if judged:
             kind = judged.get("artifact_kind")
-            label, css = {"model-output": ("상용 AI 판정", "ai"), "failure": ("판정 실패·확인 필요", "warn"),
+            label, css = {"model-output": ("AI 챗봇 판정", "ai"), "failure": ("판정 실패·확인 필요", "warn"),
                           "local-output": ("로컬 판정", "local")}.get(kind, ("편집 예시 판정", "ref"))
             marks.append((label, css, judged.get("run_id")))
         people = [e for e in data["events"] if task["task_id"] in e["target_refs"] and e["actor_id"] in MEMBERS]

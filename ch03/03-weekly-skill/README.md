@@ -5,7 +5,7 @@
 ## 실행 방법
 
 ```bash
-cd ~/agent-work/ch03/03-weekly-skill
+cd ~/team-ai-agent/code/ch03/03-weekly-skill
 hermes chat --query-file make-skill.md
 mkdir -p ~/.hermes/skills/weekly-report
 cp output/skills/weekly-report/SKILL.md ~/.hermes/skills/weekly-report/SKILL.md
@@ -22,6 +22,8 @@ uv run check.py
 
 이미 같은 이름의 스킬(예: 앞 실습의 weekly-report)이 ~/.hermes/skills/에 있으면 덮어씁니다. 덮어쓰기 전에 기존 파일을 다른 이름으로 복사해 두고, 두 파일이 다르면 어느 쪽을 쓸지 먼저 정합니다.
 
+처음부터 다시 할 때는 이 폴더에서 `uv run reset.py`를 실행해 받은 처음 상태로 되돌린 뒤 실행 방법을 다시 따라 합니다.
+
 ## 폴더 구성
 
 | 파일 | 역할 |
@@ -33,3 +35,4 @@ uv run check.py
 | input/ | 3.2절과 같은 회의 노트·업무 노트 정리본, 입력 묶음, 관측 기준 |
 | expected/DOC-009_weekly-report.r1.md | 비교용 주간 보고 |
 | check.py | 원본 보존과 결과 저장을 확인하고 사람이 대조할 줄을 보여 줍니다 |
+| reset.py | 예제 폴더를 받은 처음 상태로 되돌리기(다시 할 때) |

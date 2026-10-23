@@ -6,10 +6,12 @@
 ## 실행 방법
 
 ```bash
-cd ~/agent-work/ch06/02-meeting-notes
+cd ~/team-ai-agent/code/ch06/02-meeting-notes
 hermes chat --query-file prompt.md
 uv run check.py
 ```
+
+처음부터 다시 할 때는 이 폴더에서 `uv run reset.py`를 실행해 받은 처음 상태로 되돌린 뒤 실행 방법을 다시 따라 합니다.
 
 ## 폴더 구성
 
@@ -21,3 +23,4 @@ uv run check.py
 | prompt.md | 회의록 초안 지시문 |
 | expected/DOC-012_meeting-notes.md | 비교용 회의록 |
 | check.py | 원본 보존·결과 저장 확인 |
+| reset.py | 예제 폴더를 받은 처음 상태로 되돌리기(다시 할 때) |

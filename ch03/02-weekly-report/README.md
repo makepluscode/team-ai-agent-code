@@ -5,12 +5,14 @@
 ## 실행 방법
 
 ```bash
-cd ~/agent-work/ch03/02-weekly-report
+cd ~/team-ai-agent/code/ch03/02-weekly-report
 hermes chat --query-file prompt.md
 uv run check.py
 ```
 
 헤르메스가 결과를 저장하고 다시 읽어 보여 주면 `/exit`로 대화를 마친 뒤 check.py를 실행합니다.
+
+처음부터 다시 할 때는 이 폴더에서 `uv run reset.py`를 실행해 받은 처음 상태로 되돌린 뒤 실행 방법을 다시 따라 합니다.
 
 ## 폴더 구성
 
@@ -22,3 +24,4 @@ uv run check.py
 | input/snapshot.json | 관측 기간과 고정된 관측 기준 시각 |
 | expected/DOC-009_weekly-report.r1.md | 저자가 편집한 비교용 결과(관측 완료 4건) |
 | check.py | 원본 보존과 결과 저장을 확인하고, 사람이 대조할 줄을 보여 줍니다 |
+| reset.py | 예제 폴더를 받은 처음 상태로 되돌리기(다시 할 때) |

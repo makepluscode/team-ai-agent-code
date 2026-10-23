@@ -6,13 +6,14 @@
 ## 실행 방법
 
 ```bash
-mkdir -p ~/agent-work && cp -r --update=none ~/team-ai-agent/code/ch07 ~/agent-work/
-cd ~/agent-work/ch07/01-request-intake
+cd ~/team-ai-agent/code/ch07/01-request-intake
 uv run main.py intake
 hermes chat --query-file prompt.md
 hermes chat --query-file status.md
 uv run check.py
 ```
+
+처음부터 다시 할 때는 이 폴더에서 `uv run reset.py`를 실행해 받은 처음 상태로 되돌린 뒤 실행 방법을 다시 따라 합니다.
 
 ## 폴더 구성
 
@@ -26,6 +27,7 @@ uv run check.py
 | status.md | 처리 현황 표(DOC-014@r1) 지시문 |
 | check.py | 원본 보존·접수 건수 확인 |
 | main.py | 단계 intake / list / json. 인자 없이 실행하면 할 일과 단계를 안내 |
+| reset.py | 예제 폴더를 받은 처음 상태로 되돌리기(다시 할 때) |
 
 
-다시 할 때는 새 사본을 만듭니다. 같은 폴더에서 intake를 두 번 실행하면 '이미 초기화한 상태'로 멈춥니다.
+다시 할 때는 uv run reset.py로 처음 상태로 되돌립니다. 되돌리지 않고 intake를 두 번 실행하면 '이미 초기화한 상태'로 멈춥니다.

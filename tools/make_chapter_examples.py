@@ -57,6 +57,8 @@ def doc009_r2(r1):
             .replace('state: "초안"', 'state: "확정"')
             .replace('source_refs: ["DOC-004@r1"]', 'source_refs: ["DOC-004@r1", "DOC-009@r1"]\nsupersedes: "DOC-009@r1"'))
     body = body.replace("업무 TASK-001 상태: 확인 대기.", "업무 TASK-001 상태: 완료.")
+    # r2는 매니저가 검토해 확정한 버전이므로 작성 표시도 확인을 마친 것으로 바꾼다
+    body = body.replace("작성: 자비스(에이전트) · 매니저 확인 대기", "작성: 자비스(에이전트) · 확인: 매니저")
     body = body.replace("\n출처:", "\n누락값은 여전히 확인되지 않아 미입력으로 보존합니다. M03이 10/14 15:00 누락 확인을 수행했고 "
                         "M01이 15:02 검토했습니다. TASK-001은 보고 검토 완료로 처리합니다. 입력 기간 전체의 활동 완료를 "
                         "뜻하지 않습니다.\n\n출처:", 1)
@@ -197,6 +199,7 @@ def build(spec):
     if "main" in spec:
         write_main(folder, spec)
     write_check(folder, spec)
+    write_reset(folder, reset_extra(spec))
     write_pyproject(folder, spec)
     write_readme(folder, spec)
     return folder
@@ -211,8 +214,8 @@ MAIN = r'''"""__TITLE__
   uv run main.py <단계>     단계 실행. 사람 확인이 필요한 단계는 내용을 보여 주고 y/N을 묻는다
   uv run main.py <단계> --yes   확인 질문만 생략(충돌·원본 검사는 그대로)
 __STEPS_DOC__
-제공 코드(team_work)는 ~/team-ai-agent/code에서 찾는다. 다른 곳에 받았다면 환경 변수 TEAM_AGENT_CODE에
-그 경로를 지정한다. 단계의 실제 처리는 code/src/team_work/에 있고, 이 파일은 단계 이름과 명령을 잇기만 한다.
+제공 코드(team_work)는 이 예제 폴더가 들어 있는 code 폴더에서 찾는다. 예제 폴더를 다른 곳으로 옮겼다면
+환경 변수 TEAM_AGENT_CODE에 받은 code 폴더 경로를 지정한다. 단계의 실제 처리는 code/src/team_work/에 있고, 이 파일은 단계 이름과 명령을 잇기만 한다.
 """
 
 import json
@@ -221,7 +224,8 @@ import sys
 from pathlib import Path
 
 HERE = Path(__file__).resolve().parent
-CODE = Path(os.environ.get("TEAM_AGENT_CODE", Path.home() / "team-ai-agent" / "code")).expanduser()
+# 예제 폴더(code/chNN/NN-이름)의 두 단계 위가 받은 code 폴더다. 다른 곳에서 쓸 때만 TEAM_AGENT_CODE를 지정한다
+CODE = Path(os.environ.get("TEAM_AGENT_CODE", HERE.parents[1])).expanduser()
 NEEDED_VERSION = "1.7"
 # 단계 이름 → 설명과 team-work 명령 목록
 STEPS = __STEPS__
@@ -243,7 +247,7 @@ def load_team_work():
     from team_work.cli import main
 
     if not team_work.__version__.startswith(NEEDED_VERSION):
-        sys.exit(f"제공 코드 버전 {team_work.__version__}은 이 예제({NEEDED_VERSION})와 다릅니다. git -C {CODE} pull 뒤 예제를 다시 복사하세요.")
+        sys.exit(f"제공 코드 버전 {team_work.__version__}은 이 예제({NEEDED_VERSION})와 다릅니다. git -C {CODE} pull로 제공 코드를 새로 받으세요.")
     return main
 
 
@@ -498,7 +502,7 @@ def main() -> int:
     for name in changed:
         print(f"[실패] 원본이 없거나 바뀌었습니다: {{name}}")
     if changed:
-        print("    → 원본은 고치지 않습니다. 장 폴더를 새 이름으로 다시 복사해 시작하세요.")
+        print("    → 원본은 고치지 않습니다. uv run reset.py로 예제 폴더를 처음 상태로 되돌린 뒤 다시 시작하세요.")
     failures += len(changed)
     if not changed:
         print(f"[통과] 원본 {{len(sources)}}개 보존")
@@ -565,6 +569,120 @@ def write_check(folder, spec):
     (folder / "check.py").write_text(text, encoding="utf-8")
 
 
+RESET = r'''"""이 예제 폴더를 받은 처음 상태로 되돌린다.
+
+입력: 이 폴더(받은 code 저장소 안의 예제 폴더)와 저장소의 변경 이력
+출력: 실습으로 생긴 파일(output/·state/ 등)을 지우고, 바뀐 제공 파일(wiki/·raw/ 등)을 받은 내용으로 되돌린다.
+      헤르메스 설정(~/.hermes의 SOUL.md·메모리·스킬·예약)은 바꾸지 않는다.
+실행: 이 폴더에서 `uv run reset.py`(지울·되돌릴 목록을 보여 주고 y/N을 묻는다), 묻지 않으려면 `uv run reset.py --yes`
+"""
+
+import shutil
+import subprocess
+import sys
+from pathlib import Path
+
+HERE = Path(__file__).resolve().parent
+# 이 예제가 폴더 밖(같은 장 폴더 안)에 만드는 결과 폴더
+EXTRA = __EXTRA__
+# 실행 환경(uv가 만드는 파일)은 지우지 않는다
+KEEP = {".venv", "uv.lock"}
+
+
+def git(*args):
+    try:
+        return subprocess.run(["git", "-C", str(HERE), *args], capture_output=True, text=True, encoding="utf-8")
+    except FileNotFoundError:  # git이 설치되지 않은 경우
+        return subprocess.CompletedProcess(args, 1, "", "git을 찾지 못했습니다")
+
+
+def main() -> int:
+    # 1. 받은 code 저장소의 예제 폴더인지 확인한다(다른 저장소 안에 풀어 둔 폴더는 건드리지 않는다)
+    top = git("rev-parse", "--show-toplevel")
+    prefix = git("rev-parse", "--show-prefix")
+    if top.returncode or prefix.returncode or Path(top.stdout.strip()).resolve() != HERE.parents[1] \
+            or git("cat-file", "-e", f"HEAD:{prefix.stdout.strip()}README.md").returncode:
+        print("이 폴더는 git clone으로 받은 code 폴더의 예제 폴더가 아니어서 되돌릴 수 없습니다(1.2.3항 예제 다운로드).\n"
+              "git이 설치돼 있는지(git --version) 확인하고, 압축 파일로 받았다면 git clone으로 다시 받으세요.")
+        return 1
+    prefix = prefix.stdout.strip()
+    # 2. 바뀐 파일과 새로 생긴 파일을 모은다(-z: 한글·공백이 든 경로도 그대로 받는다)
+    status = git("status", "--porcelain", "-z", "--untracked-files=all", "--ignored", "--", ".")
+    if status.returncode:
+        print("파일 상태를 읽지 못해 멈춥니다:", status.stderr.strip())
+        return 1
+    changed, created = [], []
+    for line in filter(None, status.stdout.split("\0")):
+        code, path = line[:2], line[3:]
+        if code[0] not in " ?!":  # git add·이름 바꾸기처럼 직접 Git으로 등록한 변경은 여기서 되돌리지 않는다
+            print(f"Git에 등록(스테이지)된 변경이 있어 멈춥니다: {path}\n"
+                  "이 책의 실습에서는 생기지 않는 상태입니다. 직접 Git 명령을 썼다면 그 변경을 먼저 정리하세요.")
+            return 1
+        relative = path[len(prefix):] if path.startswith(prefix) else path
+        if relative.split("/")[0] in KEEP:
+            continue
+        (created if code in {"??", "!!"} else changed).append(relative)
+    extra = [HERE / p for p in EXTRA if (HERE / p).exists()]
+    if not (changed or created or extra):
+        print("이미 받은 처음 상태입니다. 바꿀 것이 없습니다.")
+        return 0
+    # 3. 무엇을 되돌리고 지우는지 보여 주고 사람에게 묻는다
+    for title, items in (("되돌릴 제공 파일", changed), ("삭제할 추가 파일", created),
+                         ("지울 결과 폴더", [p.name for p in extra])):
+        if items:
+            print(f"{title} {len(items)}개:")
+            for item in items[:20]:
+                print(f"  {item}")
+            if len(items) > 20:
+                print(f"  … 외 {len(items) - 20}개")
+    if "--yes" not in sys.argv:
+        try:
+            answer = input("직접 고친 내용도 함께 사라집니다. 처음 상태로 되돌릴까요? [y/N] ")
+        except (EOFError, OSError):
+            answer = ""
+        if answer.strip().lower() not in {"y", "yes", "예", "네"}:
+            print("되돌리지 않았습니다.")
+            return 1
+    # 4. 제공 파일은 받은 내용으로 되돌리고, 실습 결과는 지운다
+    if changed:
+        result = git("checkout", "HEAD", "--", ".")
+        if result.returncode != 0:
+            print(result.stderr.strip())
+            return 1
+    for relative in created:
+        target = HERE / relative
+        if target.is_dir() and not target.is_symlink():
+            shutil.rmtree(target)
+        elif target.exists() or target.is_symlink():
+            target.unlink()
+    for target in extra:
+        shutil.rmtree(target)
+    # 5. 비게 된 폴더를 정리한다
+    for folder in sorted((p for p in HERE.rglob("*") if p.is_dir()), key=lambda p: len(p.parts), reverse=True):
+        if KEEP & set(folder.relative_to(HERE).parts):  # 실행 환경 안은 건드리지 않는다
+            continue
+        if not any(folder.iterdir()) and not git("ls-files", "--", str(folder)).stdout:
+            folder.rmdir()
+    print("처음 상태로 되돌렸습니다. README.md의 실행 방법 첫 단계부터 다시 하세요.")
+    return 0
+
+
+if __name__ == "__main__":
+    sys.exit(main())
+'''
+
+
+def reset_extra(spec):
+    """check 결과 가운데 폴더 밖(../)에 생기는 결과 폴더 이름을 모은다(예: 12장 백업)."""
+    results = spec.get("check", {}).get("results", [])
+    return sorted({"/".join(r.split("/")[:2]) for r in results if r.startswith("../")})
+
+
+def write_reset(folder, extra=()):
+    text = RESET.replace("__EXTRA__", json.dumps(list(extra), ensure_ascii=False))
+    (folder / "reset.py").write_text(text, encoding="utf-8")
+
+
 def write_pyproject(folder, spec):
     deps = spec.get("deps", [])
     lines = ",\n".join(f'    "{d}"' for d in deps)
@@ -578,11 +696,13 @@ def write_pyproject(folder, spec):
 
 
 def write_readme(folder, spec):
-    rows = "\n".join(f"| {name} | {role} |" for name, role in spec["readme"]["files"])
+    files = list(spec["readme"]["files"]) + [("reset.py", "예제 폴더를 받은 처음 상태로 되돌리기(다시 할 때)")]
+    rows = "\n".join(f"| {name} | {role} |" for name, role in files)
     run = "\n".join(spec["readme"]["run"])
     notes = ("\n\n" + dedent(spec["readme"]["notes"])) if spec["readme"].get("notes") else "\n"
     text = (f"# {spec['name']}: {spec['title']}\n\n{dedent(spec['readme']['intro'])}\n## 실행 방법\n\n"
-            f"```bash\n{run}\n```\n\n## 폴더 구성\n\n| 파일 | 역할 |\n|---|---|\n{rows}\n{notes}")
+            f"```bash\n{run}\n```\n\n처음부터 다시 할 때는 이 폴더에서 `uv run reset.py`를 실행해 받은 처음 상태로 되돌린 뒤 "
+            f"실행 방법을 다시 따라 합니다.\n\n## 폴더 구성\n\n| 파일 | 역할 |\n|---|---|\n{rows}\n{notes}")
     (folder / "README.md").write_text(text.rstrip() + "\n", encoding="utf-8")
 
 
@@ -593,3 +713,8 @@ if __name__ == "__main__":
         OUT = Path(sys.argv[2]).resolve()
     for spec in SPECS:
         print("built", build(spec).relative_to(OUT))
+    # 1~3장 예제 폴더는 손으로 관리하므로 reset.py만 같은 내용으로 쓴다
+    for folder in sorted(CODE.glob("ch0[1-3]/[0-9][0-9]-*")):
+        if OUT == CODE and folder.is_dir():
+            write_reset(folder)
+            print("reset", folder.relative_to(CODE))

@@ -15,8 +15,8 @@
   json: 저장된 모든 필드를 JSON으로 출력
   list: 요청·업무 목록 출력
 
-제공 코드(team_work)는 ~/team-ai-agent/code에서 찾는다. 다른 곳에 받았다면 환경 변수 TEAM_AGENT_CODE에
-그 경로를 지정한다. 단계의 실제 처리는 code/src/team_work/에 있고, 이 파일은 단계 이름과 명령을 잇기만 한다.
+제공 코드(team_work)는 이 예제 폴더가 들어 있는 code 폴더에서 찾는다. 예제 폴더를 다른 곳으로 옮겼다면
+환경 변수 TEAM_AGENT_CODE에 받은 code 폴더 경로를 지정한다. 단계의 실제 처리는 code/src/team_work/에 있고, 이 파일은 단계 이름과 명령을 잇기만 한다.
 """
 
 import json
@@ -25,7 +25,8 @@ import sys
 from pathlib import Path
 
 HERE = Path(__file__).resolve().parent
-CODE = Path(os.environ.get("TEAM_AGENT_CODE", Path.home() / "team-ai-agent" / "code")).expanduser()
+# 예제 폴더(code/chNN/NN-이름)의 두 단계 위가 받은 code 폴더다. 다른 곳에서 쓸 때만 TEAM_AGENT_CODE를 지정한다
+CODE = Path(os.environ.get("TEAM_AGENT_CODE", HERE.parents[1])).expanduser()
 NEEDED_VERSION = "1.7"
 # 단계 이름 → 설명과 team-work 명령 목록
 STEPS = {
@@ -233,7 +234,7 @@ def load_team_work():
     from team_work.cli import main
 
     if not team_work.__version__.startswith(NEEDED_VERSION):
-        sys.exit(f"제공 코드 버전 {team_work.__version__}은 이 예제({NEEDED_VERSION})와 다릅니다. git -C {CODE} pull 뒤 예제를 다시 복사하세요.")
+        sys.exit(f"제공 코드 버전 {team_work.__version__}은 이 예제({NEEDED_VERSION})와 다릅니다. git -C {CODE} pull로 제공 코드를 새로 받으세요.")
     return main
 
 

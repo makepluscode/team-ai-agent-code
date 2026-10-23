@@ -13,7 +13,7 @@ ROOT = Path(__file__).resolve().parents[1]
 
 # 예제 폴더 → (expected/ 안의 파일, output/ 안에 둘 이름)
 SIMPLE = {
-    "ch01/02-guide-check": ("DOC-005_guide-check.md", "DOC-005_guide-check.md"),
+    "ch01/02-notice-check": ("DOC-005_notice-check.md", "DOC-005_notice-check.md"),
     "ch02/03-compare-meetings": ("DOC-006_comparison.md", "DOC-006_comparison.md"),
     "ch03/01-onboarding-guide": (
         "DOC-007_onboarding-guide.r1.md",

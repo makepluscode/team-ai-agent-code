@@ -50,4 +50,4 @@ data_kind: "edited-reference"
 
 출처: input/DOC-004_weekly-meetings.md (DOC-004@r1), input/snapshot.json, 묶음의 텍스트 자료 8개.
 
-작성: 자비스(에이전트) · 확인: 매니저
+작성: 자비스(에이전트) · 매니저 확인 대기

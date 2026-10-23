@@ -6,7 +6,7 @@
 ## 실행 방법
 
 ```bash
-cd ~/agent-work/ch09/02-review-and-fix
+cd ~/team-ai-agent/code/ch09/02-review-and-fix
 uv run main.py setup
 hermes chat --query-file prompt.md
 uv run main.py review
@@ -14,6 +14,8 @@ uv run main.py task-002
 uv run main.py list
 uv run check.py
 ```
+
+처음부터 다시 할 때는 이 폴더에서 `uv run reset.py`를 실행해 받은 처음 상태로 되돌린 뒤 실행 방법을 다시 따라 합니다.
 
 ## 폴더 구성
 
@@ -30,6 +32,7 @@ uv run check.py
 | expected/review-corrections/ | 비교용 수정본·질문 기록 |
 | check.py | 원본 보존·검토 6건·TASK-002 완료 확인 |
 | main.py | 단계 setup / review / task-002 / list. 인자 없이 실행하면 할 일과 단계를 안내 |
+| reset.py | 예제 폴더를 받은 처음 상태로 되돌리기(다시 할 때) |
 
 
 review는 검토 6건을 실행할 때마다 한 건씩 기록합니다. 화면에 나온 검토 내용과 헤르메스 결과(output/)를 대조하고 y로 답합니다. task-002도 실행할 때마다 한 단계씩(수정 필요 → 진행 → 확인 대기 → 완료) 옮기며, 진행 위치는 state/progress.json에 남습니다.

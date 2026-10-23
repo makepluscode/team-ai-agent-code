@@ -1,19 +1,15 @@
 # 01-hello-jarvis: 연결 확인·이름 붙이기·메모리·CLI
 
-클로드 연결을 짧은 질문으로 확인하고(책 1.2.4항), 헤르메스의 기본 규칙 파일 SOUL.md에 이름(자비스)과 역할을 적어 자기소개로 적용을 확인합니다(1.4.1항). 이어서 메모리(USER.md·MEMORY.md)에 실습용 항목을 저장·확인·삭제하고(1.4.2항의 선택 실습), 같은 질문을 명령줄과 지시문 파일로 보내 실행 방식을 비교합니다(3.3절 참고 노트).
+클로드 연결을 짧은 질문으로 확인하고(책 1.2.4항), 헤르메스의 기본 규칙 파일 SOUL.md에 이름(자비스)과 역할을 적어 자기소개로 적용을 확인합니다(1.2.5항). 이어서 메모리(USER.md·MEMORY.md)에 예제 위치와 보고 선호를 실습용 항목으로 저장하고 새 대화에서 이어지는지 확인한 뒤 지우고(1.4절), 같은 질문을 명령줄과 지시문 파일로 보내 실행 방식을 비교합니다(3.3절 참고 노트).
 
 ## 실행 방법
 
-처음 한 번 모든 장 폴더를 작업 폴더로 복사합니다(이미 있는 파일은 덮어쓰지 않습니다).
-
 ```bash
-mkdir -p ~/agent-work
-cp -r --update=none ~/team-ai-agent/code/ch[0-9][0-9] ~/agent-work/
-cd ~/agent-work/ch01/01-hello-jarvis
+cd ~/team-ai-agent/code/ch01/01-hello-jarvis
 ```
 
 1. 연결 확인(1.2.4항): `hermes chat`을 열고 question.md의 질문을 입력합니다. 끝나면 `/exit`.
-2. 이름 붙이기(1.4.1항):
+2. 이름 붙이기(1.2.5항):
 
 ```bash
 cp --update=none ~/.hermes/SOUL.md ~/.hermes/SOUL.md.orig
@@ -21,7 +17,7 @@ cp SOUL.md ~/.hermes/SOUL.md
 hermes chat --query-file prompt.md
 ```
 
-3. 메모리(1.4.2항): 대화마다 `/exit`로 나온 뒤 다음 명령을 실행합니다.
+3. 메모리(1.4절): 대화마다 `/exit`로 나온 뒤 다음 명령을 실행합니다.
 
 ```bash
 hermes chat --query-file remember.md
@@ -49,9 +45,10 @@ hermes chat -Q --query-file question.md
 |---|---|
 | SOUL.md | 이름·역할·결과 파일 작성 표시를 정하는 기본 규칙 |
 | question.md | 연결 상태를 확인하는 짧은 업무 질문(1.2.4항) |
-| prompt.md | 자기소개를 요청하는 지시문(1.4.1항) |
-| remember.md | '실습용' 항목 두 개를 USER.md·MEMORY.md에 저장하게 하는 지시문 |
-| recall.md | 새 대화에서 저장한 기억을 말하고 그 선호대로 답하게 하는 지시문 |
+| prompt.md | 자기소개를 요청하는 지시문(1.2.5항) |
+| remember.md | 보고 선호(USER.md)와 예제 위치(MEMORY.md)를 '실습용' 항목으로 저장하게 하는 지시문 |
+| recall.md | 새 대화에서 기억을 말하고, 경로를 알려 주지 않은 채 1장 점검표를 찾아 기억한 선호대로 보고하게 하는 지시문 |
 | forget.md | '실습용' 항목만 지우게 하는 지시문 |
+| reset.py | 예제 폴더를 받은 처음 상태로 되돌리기. 헤르메스의 SOUL.md·메모리는 되돌리지 않습니다 |
 
 자기소개에 자비스라는 이름과 매니저의 업무를 돕는다는 역할이 나오면 적용된 것입니다. 이 폴더에 SOUL.md가 있는 것만으로는 적용되지 않습니다. ~/.hermes/SOUL.md로 복사해야 헤르메스가 읽습니다. 메모리에는 API 키·비밀번호·고객 정보와 바뀌는 업무 사실을 넣지 않습니다.

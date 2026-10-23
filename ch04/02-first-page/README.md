@@ -6,12 +6,14 @@
 ## 실행 방법
 
 ```bash
-cd ~/agent-work/ch04/02-first-page
+cd ~/team-ai-agent/code/ch04/02-first-page
 hermes chat --query-file prompt.md
 uv run main.py preview
 uv run main.py apply
 uv run check.py
 ```
+
+처음부터 다시 할 때는 이 폴더에서 `uv run reset.py`를 실행해 받은 처음 상태로 되돌린 뒤 실행 방법을 다시 따라 합니다.
 
 ## 폴더 구성
 
@@ -24,6 +26,7 @@ uv run check.py
 | expected/wiki/ | 저자가 편집한 비교용 페이지 |
 | check.py | 원본 보존·페이지 저장 확인과 사람이 볼 줄 표시 |
 | main.py | 단계 preview / apply / search. 인자 없이 실행하면 할 일과 단계를 안내 |
+| reset.py | 예제 폴더를 받은 처음 상태로 되돌리기(다시 할 때) |
 
 
 apply는 wiki/가 마지막 적용 뒤에 바뀌었으면 충돌로 멈추고, 적용 전 위키를 output/wiki-before-N/에 남깁니다.

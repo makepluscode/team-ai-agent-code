@@ -43,3 +43,6 @@ ch*/*/output/
 ch*/*/.venv/
 ch*/*/state/
 ch*/*/uv.lock
+# 12장 백업·복원 실습이 같은 장 폴더에 만드는 결과
+ch12/03-hours-backup-backup/
+ch12/03-hours-backup-restored/

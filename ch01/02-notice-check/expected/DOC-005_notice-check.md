@@ -43,4 +43,4 @@ source_refs:
 
 input/DOC-015_notice-draft.md, input/DOC-001_onboarding.md(DOC-001@r1), input/shared/ 아래 파일 목록과 위 파일들
 
-작성: 자비스(에이전트) · 확인: 매니저
+작성: 자비스(에이전트) · 매니저 확인 대기

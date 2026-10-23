@@ -4,7 +4,6 @@
 main(uv run main.py 단계), check(check.py 설정), deps(pyproject 의존성), readme(README 내용).
 """
 
-CP = "mkdir -p ~/agent-work && cp -r --update=none ~/team-ai-agent/code/ch{n:02} ~/agent-work/"
 
 WIKI_RULES = """
 # 스튜디오 메리 위키 정리 규칙 (wiki-curator)
@@ -109,7 +108,7 @@ SPECS.append({
             4장 시작 자료(초기 원본 네 건과 주간 보고 근거 묶음)로 만든 로컬 위키 폴더입니다. 헤르메스가 규칙 파일(AGENTS.md)을
             읽고 원본의 문서 ID·버전·상태를 확인합니다. 책 4.1~4.2절에 대응합니다.
         """,
-        "run": [CP.format(n=4), "cd ~/agent-work/ch04/01-wiki-folder", "hermes chat --query-file prompt.md", "uv run check.py"],
+        "run": ["cd ~/team-ai-agent/code/ch04/01-wiki-folder", "hermes chat --query-file prompt.md", "uv run check.py"],
         "files": [("AGENTS.md", "위키 정리 규칙(작업 폴더 규칙). 이 폴더에서 헤르메스를 실행하면 자동으로 읽힙니다"),
                   ("raw/", "초기 원본 네 건과 주간 보고 근거 묶음(report-input/). 수정하지 않습니다"),
                   ("wiki/", "위키 페이지 폴더(아직 비어 있음)"),
@@ -150,7 +149,7 @@ SPECS.append({
             헤르메스가 wiki-curator 역할로 초기 원본 네 건을 읽어 새 동료 안내 페이지의 변경안을 output/wiki-draft/에 쓰고,
             사람이 확인한 뒤 main.py가 wiki/에 적용합니다. 책 4.3절에 대응합니다.
         """,
-        "run": ["cd ~/agent-work/ch04/02-first-page", "hermes chat --query-file prompt.md", "uv run main.py apply", "uv run check.py"],
+        "run": ["cd ~/team-ai-agent/code/ch04/02-first-page", "hermes chat --query-file prompt.md", "uv run main.py apply", "uv run check.py"],
         "files": [("AGENTS.md", "위키 정리 규칙. 변경안은 output/wiki-draft/에 쓰도록 정했습니다"),
                   ("raw/", "초기 원본 네 건과 근거 묶음"), ("wiki/", "위키 페이지 폴더(적용 전에는 비어 있음)"),
                   ("prompt.md", "첫 페이지 정리 지시문"), ("main.py", "apply: 변경안 적용(충돌 검사·백업·정리 기록) / search: 검색"),
@@ -210,7 +209,7 @@ SPECS.append({
             4.3절에서 만든 것과 같은 위키 페이지가 들어 있는 폴더입니다. 헤르메스에 짧은 질문 세 개를 보내 위키 경로와 원본 출처가
             함께 답에 붙는지, 잠정·미정·미입력이 유지되는지 확인합니다. 책 4.4절에 대응합니다.
         """,
-        "run": ["cd ~/agent-work/ch04/03-source-query", "hermes chat --query-file prompt.md", "uv run main.py search 잠정", "uv run check.py"],
+        "run": ["cd ~/team-ai-agent/code/ch04/03-source-query", "hermes chat --query-file prompt.md", "uv run main.py search 잠정", "uv run check.py"],
         "files": [("wiki/", "4.3절 결과와 같은 위키(비교용 편집 예시)"), ("raw/", "초기 원본과 근거 묶음"),
                   ("prompt.md", "질문 세 개와 저장 위치"), ("main.py", "search: 검색어가 있는 위키 줄 찾기"),
                   ("expected/ch04-query-check.md", "비교용 답변"), ("check.py", "원본 보존·답변 저장 확인")],
@@ -307,7 +306,7 @@ SPECS.append({
             4장에서 정리한 로컬 위키를 GitHub 비공개 저장소로 올릴 준비를 하는 예제입니다. 헤르메스가 로그인 상태와 제외 목록(.gitignore)을
             확인하고, 사람이 올라갈 파일 목록을 확인한 뒤 저장소를 만듭니다. GitHub 계정과 gh 로그인은 부록 B를 따릅니다. 책 5.1절에 대응합니다.
         """,
-        "run": [CP.format(n=5), "cp -r ~/agent-work/ch05/01-share-repo ~/studio-merry-wiki", "cd ~/studio-merry-wiki",
+        "run": ["cp -r ~/team-ai-agent/code/ch05/01-share-repo ~/studio-merry-wiki", "cd ~/studio-merry-wiki",
                 "hermes chat --query-file prompt.md", "uv run check.py"],
         "files": [("AGENTS.md", "위키 정리 규칙"), (".gitignore", "공유하지 않을 파일 목록"), ("raw/·wiki/", "4장까지 정리한 원본과 위키"),
                   ("prompt.md", "로그인·제외 목록 확인과 저장소 준비 지시문"), ("check.py", "원본 보존과 제외 목록 확인")],
@@ -336,14 +335,14 @@ SPECS.append({
             팀 위키 저장소에 들어갈 위키 동기화 스킬(skills/wiki-sync)입니다. 바뀐 파일을 사람이 고른 것만 기록하고, 충돌·거부에서는 멈추며,
             강제로 올리지 않습니다. 책 5.2절에 대응합니다. 이 폴더의 skills/를 5.1절에서 만든 위키 저장소에 복사해 함께 올립니다.
         """,
-        "run": ["cp -r ~/agent-work/ch05/02-wiki-sync/skills ~/studio-merry-wiki/", "cd ~/studio-merry-wiki",
+        "run": ["cp -r ~/team-ai-agent/code/ch05/02-wiki-sync/skills ~/studio-merry-wiki/", "cd ~/studio-merry-wiki",
                 "uv run skills/wiki-sync/scripts/wiki_sync.py status",
                 ('uv run skills/wiki-sync/scripts/wiki_sync.py commit -m "[매니저] 위키 동기화 스킬 추가 · 팀 공용 설치" '
                  "skills/wiki-sync/SKILL.md skills/wiki-sync/scripts/wiki_sync.py"),
                 "uv run skills/wiki-sync/scripts/wiki_sync.py push",
                 "hermes skills tap add <내 GitHub 계정>/studio-merry-wiki",
                 "hermes skills install <내 GitHub 계정>/studio-merry-wiki/skills/wiki-sync",
-                "uv run skills/wiki-sync/scripts/wiki_sync.py status", "hermes chat --query-file ~/agent-work/ch05/02-wiki-sync/prompt.md"],
+                "uv run skills/wiki-sync/scripts/wiki_sync.py status", "hermes chat --query-file ~/team-ai-agent/code/ch05/02-wiki-sync/prompt.md"],
         "files": [("skills/wiki-sync/SKILL.md", "동기화 절차(헤르메스가 읽는 스킬)"),
                   ("skills/wiki-sync/scripts/wiki_sync.py", "status·commit·pull·push를 나눠 처리하는 표준 라이브러리 스크립트"),
                   ("prompt.md", "'위키 동기화해 줘' 지시문"), ("check.py", "원본 보존과 스킬 파일 확인")],
@@ -385,7 +384,7 @@ SPECS.append({
             자료 담당 M03이 쓴 일정 변경 메모(DOC-010@r1)를 raw/에 원본으로 등록하고, 매니저의 헤르메스가 wiki-curator로 위키 변경안을 쓴 뒤
             사람이 확인하고 적용합니다. 책 5.3절에 대응합니다.
         """,
-        "run": ["cd ~/agent-work/ch05/03-change-memo", "uv run main.py register", "hermes chat --query-file prompt.md",
+        "run": ["cd ~/team-ai-agent/code/ch05/03-change-memo", "uv run main.py register", "hermes chat --query-file prompt.md",
                 "uv run main.py apply", "uv run check.py"],
         "files": [("input/DOC-010_schedule-change.md", "M03이 쓴 일정 변경 메모(등록 전)"), ("raw/·wiki/", "4장까지의 원본과 위키"),
                   ("prompt.md", "변경 메모 반영 지시문"), ("main.py", "register: 메모를 raw/에 등록 / apply: 변경안 적용"),
@@ -458,7 +457,7 @@ SPECS.append({
             매니저의 wiki-curator가 갱신한 위키를 받은 동료(M02)의 폴더입니다. 헤르메스가 위키와 변경 원본을 근거로 온보딩 가이드
             2번째 버전(DOC-007@r2)을 만듭니다. 이 단계까지 끝나야 동료 인계가 완료됩니다. 책 5.4절에 대응합니다.
         """,
-        "run": ["cd ~/agent-work/ch05/04-member-revision", "hermes chat --query-file prompt.md", "uv run check.py"],
+        "run": ["cd ~/team-ai-agent/code/ch05/04-member-revision", "hermes chat --query-file prompt.md", "uv run check.py"],
         "files": [("wiki/", "변경 메모가 반영된 위키(5.3절 결과와 같은 비교용 예시)"), ("raw/DOC-010_schedule-change.md", "변경 메모 원본"),
                   ("input/DOC-007_onboarding-guide.r1.md", "수정할 온보딩 가이드 1번째 버전"), ("prompt.md", "가이드 수정 지시문"),
                   ("expected/DOC-007_onboarding-guide.r2.md", "비교용 2번째 버전"), ("check.py", "원본 보존·결과 저장 확인")],
@@ -494,7 +493,7 @@ SPECS.append({
             3장의 주간 보고 스킬을 팀 위키 저장소의 skills/로 공유하기 전에 점검하는 예제입니다. 점검한 스킬을 저장소에 올리면 동료가
             tap으로 설치합니다. 책 5.5절에 대응합니다.
         """,
-        "run": ["cd ~/agent-work/ch05/05-skill-share", "hermes chat --query-file prompt.md", "uv run check.py",
+        "run": ["cd ~/team-ai-agent/code/ch05/05-skill-share", "hermes chat --query-file prompt.md", "uv run check.py",
                 "mkdir -p ~/studio-merry-wiki/skills && cp -r output/skills/weekly-report ~/studio-merry-wiki/skills/",
                 "hermes skills install <내 GitHub 계정>/studio-merry-wiki/skills/weekly-report", "hermes skills check"],
         "files": [("skills/weekly-report/SKILL.md", "3장에서 만든 주간 보고 스킬"), ("prompt.md", "공유 전 점검 지시문"),
@@ -607,7 +606,7 @@ SPECS.append({
             MTG-001 회의의 입력 자료(회의 정보·용어표·기준 전사문)를 점검하고, 음원이 있으면 로컬 Whisper(faster-whisper)로 전사하는
             예제입니다. 이 책의 합성 회의 음원은 아직 제작 전이어서 기준 전사문(DOC-011@r1)으로 6.3절을 이어 갑니다. 책 6.1~6.2절에 대응합니다.
         """,
-        "run": [CP.format(n=6), "cd ~/agent-work/ch06/01-meeting-input", "hermes chat --query-file prompt.md",
+        "run": ["cd ~/team-ai-agent/code/ch06/01-meeting-input", "hermes chat --query-file prompt.md",
                 "uv run --extra transcription main.py transcribe <음원 경로>", "uv run check.py"],
         "files": [("input/meeting-manifest.json", "회의 ID·음원·해시·대안 전사문 정보"), ("input/glossary.txt", "전사 힌트용 용어표"),
                   ("input/DOC-011_transcript-fallback.md", "저자가 쓴 기준 전사문(합성, 원음 대조 전)"), ("prompt.md", "입력 점검 지시문"), ("transcript.md", "전사 결과와 기준 전사문 대조 지시문(음원이 있을 때)"),
@@ -645,7 +644,7 @@ SPECS.append({
             기준 전사문에서 확정 결정·할 일·취소·미정을 구분한 회의록 초안(DOC-012)을 헤르메스가 작성합니다. 사람이 원음 구간과 대조해
             확인해야 위키에 등록할 수 있습니다. 책 6.3절에 대응합니다.
         """,
-        "run": ["cd ~/agent-work/ch06/02-meeting-notes", "hermes chat --query-file prompt.md", "uv run check.py"],
+        "run": ["cd ~/team-ai-agent/code/ch06/02-meeting-notes", "hermes chat --query-file prompt.md", "uv run check.py"],
         "files": [("input/DOC-011_transcript-fallback.md", "기준 전사문(합성)"), ("input/meeting-manifest.json", "회의 정보"),
                   ("wiki/", "5장까지 갱신된 위키"), ("prompt.md", "회의록 초안 지시문"),
                   ("expected/DOC-012_meeting-notes.md", "비교용 회의록"), ("check.py", "원본 보존·결과 저장 확인")],
@@ -686,7 +685,7 @@ SPECS.append({
             사람이 확인한 회의록(DOC-012@r1)을 raw/에 등록하고, 헤르메스가 wiki-curator로 결정 페이지와 안내 페이지의 변경안을 쓴 뒤
             사람이 확인하고 적용합니다. 책 6.4절에 대응합니다.
         """,
-        "run": ["cd ~/agent-work/ch06/03-decision-wiki", "uv run main.py register", "hermes chat --query-file prompt.md",
+        "run": ["cd ~/team-ai-agent/code/ch06/03-decision-wiki", "uv run main.py register", "hermes chat --query-file prompt.md",
                 "uv run main.py apply", "uv run check.py"],
         "files": [("input/DOC-012_meeting-notes.md", "확인한 회의록(비교용 편집 예시를 확인본으로 사용)"),
                   ("raw/·wiki/", "5장까지의 원본과 위키"), ("prompt.md", "결정 반영 지시문"),
@@ -732,11 +731,11 @@ SPECS.append({
             내부 요청 8건을 같은 형식으로 접수해 요청 기록 DB(state/requests.sqlite3)에 남기고, 요청·업무·사건 기록을 목록으로 확인합니다.
             접수는 main.py가 확정적으로 처리하고, 헤르메스는 접수 형식 점검(prompt.md)과 처리 현황 표(status.md)를 맡습니다. 책 7.1~7.2절에 대응합니다.
         """,
-        "run": [CP.format(n=7), "cd ~/agent-work/ch07/01-request-intake", "uv run main.py", "hermes chat --query-file prompt.md",
+        "run": ["cd ~/team-ai-agent/code/ch07/01-request-intake", "uv run main.py", "hermes chat --query-file prompt.md",
                 "hermes chat --query-file status.md", "uv run check.py"],
         "files": REQ_FILES + [("prompt.md", "접수 형식 점검 지시문"), ("status.md", "처리 현황 표(DOC-014@r1) 지시문"),
                               ("main.py", "intake(기본): DB 준비·접수·목록 / list / json"), ("check.py", "원본 보존·접수 건수 확인")],
-        "notes": "다시 할 때는 새 사본을 만듭니다. 같은 폴더에서 intake를 두 번 실행하면 '이미 초기화한 상태'로 멈춥니다.",
+        "notes": "다시 할 때는 uv run reset.py로 처음 상태로 되돌립니다. 되돌리지 않고 intake를 두 번 실행하면 '이미 초기화한 상태'로 멈춥니다.",
     },
 })
 
@@ -758,7 +757,7 @@ SPECS.append({
             요청 기록 DB를 조회만 하는 MCP 서버를 헤르메스에 등록하고, 헤르메스가 get_request·get_roles 도구로 요청과 담당 기준을 읽게 합니다.
             서버에는 쓰기 도구가 없습니다. 책 7.3절에 대응합니다.
         """,
-        "run": ["cd ~/agent-work/ch07/02-mcp-lookup", "uv run main.py setup",
+        "run": ["cd ~/team-ai-agent/code/ch07/02-mcp-lookup", "uv run main.py setup",
                 'hermes mcp add team-requests --command uv --args run --directory "$PWD" main.py mcp',
                 "hermes mcp test team-requests", "hermes chat --query-file prompt.md", "uv run check.py"],
         "files": REQ_FILES + [("prompt.md", "MCP 도구 조회 지시문"), ("main.py", "setup: DB 준비·접수 / mcp: 조회 전용 서버"),
@@ -787,7 +786,7 @@ SPECS.append({
             선택 입력인 외부 메일 2건(합성)을 내부 요청과 같은 형식으로 접수해 요청 10건을 만듭니다. Gmail 실제 연결 없이도 8~12장을 진행할 수
             있게 제공 메일 자료를 씁니다. 실제 Gmail 연결은 부록 C를 따릅니다. 책 7.4절에 대응합니다.
         """,
-        "run": ["cd ~/agent-work/ch07/03-mail-input", "uv run main.py", "hermes chat --query-file prompt.md", "uv run check.py"],
+        "run": ["cd ~/team-ai-agent/code/ch07/03-mail-input", "uv run main.py", "hermes chat --query-file prompt.md", "uv run check.py"],
         "files": REQ_FILES + [("input/optional-mail.json", "제공 메일 2건(합성, REQ-009·010)"), ("input/mail/", "메일 원문(.eml, 합성)"),
                               ("prompt.md", "메일 요청 정리 지시문"), ("main.py", "intake(기본): 내부 8건+메일 2건 접수 / json"),
                               ("check.py", "원본 보존·요청 10건 확인")],
@@ -852,7 +851,7 @@ SPECS.append({
             헤르메스가 요청 10건의 유형·긴급도·담당 후보·확인 필요 여부를 판정해 요청별 JSON으로 저장하고, main.py가 스키마·명부·근거(본문 문장)를
             검사한 뒤 기록 DB에 남깁니다. 검사를 통과하지 못한 판정은 사람 확인 대상으로 기록됩니다. 책 8.1~8.3절에 대응합니다.
         """,
-        "run": [CP.format(n=8), "cd ~/agent-work/ch08/01-classify-requests", "uv run main.py setup", "hermes chat --query-file prompt.md",
+        "run": ["cd ~/team-ai-agent/code/ch08/01-classify-requests", "uv run main.py setup", "hermes chat --query-file prompt.md",
                 "hermes chat --query-file routing.md", "uv run main.py record", "uv run main.py list", "hermes chat --query-file status.md", "uv run check.py"],
         "files": REQ_FILES + [("input/routing-criteria.json", "팀이 정한 유형·긴급도·확인 기준"), ("prompt.md", "분류·담당 제안 지시문"),
                               ("routing.md", "담당 후보 점검 지시문"), ("status.md", "판정 기록 현황(DOC-014@r3) 지시문"),
@@ -886,7 +885,7 @@ SPECS.append({
             개발용 18건으로 기준을 맞춘 뒤 평가용 42건을 헤르메스로 판정하고, main.py가 저자 기준 정답과 비교해 유형 정확도·담당 후보 일치·
             긴급도 오류·확인 필요 누락·사람에게 넘긴 비율을 계산합니다. 선택 로컬 판정(Laya)과의 비교는 TODO(검증)입니다. 책 8.4절에 대응합니다.
         """,
-        "run": ["cd ~/agent-work/ch08/02-compare-paths", "hermes chat --query-file prompt.md", "uv run main.py evaluate", "uv run check.py"],
+        "run": ["cd ~/team-ai-agent/code/ch08/02-compare-paths", "hermes chat --query-file prompt.md", "uv run main.py evaluate", "uv run check.py"],
         "files": [("input/evaluation/", "개발용 18건·평가용 42건(합성, 정답 없음)"), ("input/routing-criteria.json", "판정 기준"),
                   ("prompt.md", "개발·평가 판정 지시문"), ("main.py", "evaluate: 정답과 비교"),
                   ("expected/evaluation-gold.json", "저자 기준 정답(저자 전건 검수 전). 헤르메스에 주지 않음"),
@@ -975,7 +974,7 @@ SPECS.append({
             사람이 검토할 6사례의 근거를 헤르메스가 점검하고(prompt.md) 조치 계획을 세웁니다(plan.md). 오류를 일부러 넣은 파생 자료는
             현재 사실이 아닙니다. 책 9.1~9.2절에 대응합니다.
         """,
-        "run": [CP.format(n=9), "cd ~/agent-work/ch09/01-review-inputs", "uv run main.py setup", "hermes chat --query-file prompt.md",
+        "run": ["cd ~/team-ai-agent/code/ch09/01-review-inputs", "uv run main.py setup", "hermes chat --query-file prompt.md",
                 "hermes chat --query-file plan.md", "uv run check.py"],
         "files": REVIEW_FILES + [("prompt.md", "검토 대상 점검 지시문"), ("plan.md", "조치 계획 지시문"),
                                  ("main.py", "setup: DB 준비·목록 / json"), ("expected/review-corrections/", "저자가 편집한 비교용 수정본·질문 기록"),
@@ -1016,7 +1015,7 @@ SPECS.append({
             헤르메스가 수정 문서(DOC-007@r3·DOC-009@r2)와 확인 질문 기록을 쓰고, 사람이 읽은 뒤 main.py로 검토 6건과 상태 전이를 기록합니다.
             상태는 정해진 경로(확인 대기 → 수정 필요 → 진행 → 확인 대기 → 완료)로만 바뀌고, 완료에는 사람 확인 표시가 필요합니다. 책 9.3절에 대응합니다.
         """,
-        "run": ["cd ~/agent-work/ch09/02-review-and-fix", "uv run main.py setup", "hermes chat --query-file prompt.md",
+        "run": ["cd ~/team-ai-agent/code/ch09/02-review-and-fix", "uv run main.py setup", "hermes chat --query-file prompt.md",
                 "uv run main.py review", "uv run main.py task-002", "uv run main.py list", "uv run check.py"],
         "files": REVIEW_FILES + [("prompt.md", "수정 문서·질문 기록 지시문"),
                                  ("main.py", "setup / review: 검토 6건 기록 / task-002: 상태 전이 / list"),
@@ -1077,7 +1076,7 @@ SPECS.append({
             검토 6사례에서 확인한 기준을 헤르메스가 DOC-013@r1로 정리하고, raw/에 등록한 뒤 wiki-curator로 판단 기준 페이지(wiki/criteria/review.md)를
             만듭니다. 다음 판정과 검토는 이 페이지를 근거로 씁니다. 책 9.4절에 대응합니다.
         """,
-        "run": ["cd ~/agent-work/ch09/03-criteria-wiki", "hermes chat --query-file prompt.md", "uv run main.py register",
+        "run": ["cd ~/team-ai-agent/code/ch09/03-criteria-wiki", "hermes chat --query-file prompt.md", "uv run main.py register",
                 "hermes chat --query-file wiki.md", "uv run main.py apply", "uv run check.py"],
         "files": REVIEW_FILES + [("wiki/", "6장까지 정리한 위키"), ("prompt.md", "기준 문서 작성 지시문"), ("wiki.md", "위키 반영 지시문"),
                                  ("main.py", "register: 기준 문서 등록 / apply: 변경안 적용"), ("expected/wiki/criteria/", "비교용 기준 페이지"),
@@ -1159,7 +1158,7 @@ SPECS.append({
             9장까지 쌓인 문서 버전과 위키를 헤르메스가 정리하고(prompt.md), 질문 20개의 근거 위치를 먼저 찾습니다(search.md). main.py는
             facts.json의 구조화 출처로 같은 질문의 근거를 확인합니다. 책 10.1~10.2절에 대응합니다.
         """,
-        "run": [CP.format(n=10), "cd ~/agent-work/ch10/01-revision-search", "hermes chat --query-file prompt.md",
+        "run": ["cd ~/team-ai-agent/code/ch10/01-revision-search", "hermes chat --query-file prompt.md",
                 "hermes chat --query-file search.md", "uv run main.py check", "uv run check.py"],
         "files": QA_FILES + [("prompt.md", "문서 버전 정리 지시문"), ("search.md", "근거 위치 검색 지시문"),
                              ("main.py", "check: 질문 20개 구조화 조회 점검 / qa: 질문 하나 조회"), ("check.py", "원본 보존·결과 저장 확인")],
@@ -1189,7 +1188,7 @@ SPECS.append({
             헤르메스가 질문 16개에 위키와 원본 출처를 붙여 답하고, main.py의 구조화 조회 결과(qa)와 나란히 대조합니다. 근거가 없는 질문은
             지어내지 않고 확인 필요로 남깁니다. 책 10.3절에 대응합니다.
         """,
-        "run": ["cd ~/agent-work/ch10/02-source-answers", "hermes chat --query-file prompt.md", "uv run main.py qa Q14", "uv run check.py"],
+        "run": ["cd ~/team-ai-agent/code/ch10/02-source-answers", "hermes chat --query-file prompt.md", "uv run main.py qa Q14", "uv run check.py"],
         "files": QA_FILES + [("prompt.md", "질문 16개 답변 지시문"), ("main.py", "qa: 질문 하나 구조화 조회 / check"),
                              ("check.py", "원본 보존·답변 저장 확인")],
     },
@@ -1215,7 +1214,7 @@ SPECS.append({
             옛 온보딩 가이드처럼 현재 결정과 어긋나는 문서를 헤르메스가 찾아 보고합니다. 위키와 원본은 고치지 않고 보고서만 남깁니다.
             책 10.4절에 대응합니다.
         """,
-        "run": ["cd ~/agent-work/ch10/03-wiki-audit", "hermes chat --query-file prompt.md", "uv run main.py qa Q17", "uv run check.py"],
+        "run": ["cd ~/team-ai-agent/code/ch10/03-wiki-audit", "hermes chat --query-file prompt.md", "uv run main.py qa Q17", "uv run check.py"],
         "files": QA_FILES + [("input/qa-fixtures/", "대조용 옛 문서(현재 사실 아님)"), ("prompt.md", "모순 점검 지시문"),
                              ("main.py", "qa / check"), ("check.py", "원본 보존·보고서 저장 확인")],
     },
@@ -1256,7 +1255,7 @@ SPECS.append({
             팀 공동 작업을 사무실 공동 컴퓨터의 헤르메스 한 대로 모읍니다. SOUL.md로 팀 에이전트 이름(프라이데이)을 붙이고, 공동 기록 DB와
             팀 작업 담당·업무시간을 준비합니다. 책 11.1절에 대응합니다.
         """,
-        "run": [CP.format(n=11), "cd ~/agent-work/ch11/01-team-hermes", "cp --update=none ~/.hermes/SOUL.md ~/.hermes/SOUL.md.orig",
+        "run": ["cd ~/team-ai-agent/code/ch11/01-team-hermes", "cp --update=none ~/.hermes/SOUL.md ~/.hermes/SOUL.md.orig",
                 "cp SOUL.md ~/.hermes/SOUL.md", "uv run main.py setup", "hermes chat --query-file prompt.md", "uv run check.py"],
         "files": [("SOUL.md", "팀 에이전트 프라이데이의 기본 규칙(공동 컴퓨터의 ~/.hermes/SOUL.md로 복사)"),
                   ("input/snapshot.json", "10/19 기준 공동 기록(요청 10·업무 12)"), ("input/business-hours.json", "업무시간 규칙"),
@@ -1307,7 +1306,7 @@ SPECS.append({
             공동 기록 DB로 조회 전용 팀 대시보드를 띄우고, 헤르메스가 화면과 대조할 현황 요약과 동료 접속 안내문을 만듭니다.
             11장 기본 모드에서는 새 요청·상태 변경이 거부됩니다. 책 11.2~11.4절에 대응합니다.
         """,
-        "run": ["cd ~/agent-work/ch11/02-team-dashboard", "uv run main.py setup", "hermes chat --query-file setup-check.md", "uv run main.py serve",
+        "run": ["cd ~/team-ai-agent/code/ch11/02-team-dashboard", "uv run main.py setup", "hermes chat --query-file setup-check.md", "uv run main.py serve",
                 "hermes chat --query-file prompt.md", "hermes chat --query-file peer.md", "uv run check.py"],
         "files": [("input/snapshot.json", "10/19 기준 공동 기록"), ("wiki/·raw/", "근거 위키와 원본"),
                   ("setup-check.md", "설정 점검 지시문"), ("prompt.md", "현황 요약 지시문"), ("peer.md", "동료 접속 안내 지시문"),
@@ -1341,7 +1340,7 @@ SPECS.append({
             M02가 요청한 다음 안내 수정 건(input/dashboard-request.json의 REQ-011)을 대시보드에 표시할 레코드로 정리해 줘.
             1. 요청 REQ-011, 요청자 M02, 연결 업무 TASK-013. 이전 완료 업무 TASK-002는 related_task_id로만 참조해 줘.
             2. 위키의 최신 온보딩 가이드(DOC-007@r3), 회의 결정(DOC-012@r1), 사람 확인 기준(DOC-013@r1)을 근거(source_refs)로 연결해 줘.
-            3. 처리 주체(actor_id)와 처리 경로 배지(상용 AI 초안 생성, M01 최종 확인 예정)를 구분하고, 업무 상태는 완료가 아니라 진행으로 적어
+            3. 처리 주체(actor_id)와 처리 경로 배지(AI 챗봇 초안 생성, M01 최종 확인 예정)를 구분하고, 업무 상태는 완료가 아니라 진행으로 적어
                output/evt-018-instruct.json에 저장해 줘. DB는 고치지 마.
         """,
         "history.md": """
@@ -1366,7 +1365,7 @@ SPECS.append({
             대시보드에서 새 요청(REQ-011)을 받아 업무 TASK-013을 만들고, 상태를 정해진 경로로만 바꿉니다. 완료에는 사람 확인 표시가 필요합니다.
             대시보드의 버튼과 main.py의 task-013 단계는 같은 상태 전이 함수를 씁니다. 책 12.1~12.2절에 대응합니다.
         """,
-        "run": [CP.format(n=12), "cd ~/agent-work/ch12/01-dashboard-work", "uv run main.py setup", "uv run main.py serve",
+        "run": ["cd ~/team-ai-agent/code/ch12/01-dashboard-work", "uv run main.py setup", "uv run main.py serve",
                 "uv run main.py intake", "hermes chat --query-file prompt.md", "uv run main.py task-013",
                 "hermes chat --query-file history.md", "uv run check.py"],
         "files": [("input/dashboard-request.json", "새 요청 REQ-011(합성)"), ("input/snapshot.json", "10/19 기준 공동 기록"),
@@ -1396,7 +1395,7 @@ SPECS.append({
             밤사이 접수된 일과 미완료 업무를 원문 근거와 함께 아침 9시 브리핑으로 묶습니다. main.py가 업무시간 기준 브리핑 자료를 만들고,
             헤르메스가 대시보드 패널용 문서로 정리합니다. 책 12.3절에 대응합니다.
         """,
-        "run": ["cd ~/agent-work/ch12/02-morning-briefing", "uv run main.py setup", "uv run main.py briefing",
+        "run": ["cd ~/team-ai-agent/code/ch12/02-morning-briefing", "uv run main.py setup", "uv run main.py briefing",
                 "hermes chat --query-file prompt.md", "uv run check.py"],
         "files": [("input/snapshot.json", "공동 기록"), ("input/business-hours.json", "업무시간 규칙(월~금 09~18시)"),
                   ("prompt.md", "브리핑 문서 지시문"), ("main.py", "setup / briefing / json"), ("check.py", "원본 보존·브리핑 저장 확인")],
@@ -1434,7 +1433,7 @@ SPECS.append({
             평일 업무시간(09~18시) 안에서만 팀 작업을 실행하고 한 명의 담당만 실행하도록 잠그는 동작, 백업과 새 폴더 복구를 연습한 뒤
             헤르메스가 월말 마감 보고서를 씁니다. 책 12.4절에 대응합니다.
         """,
-        "run": ["cd ~/agent-work/ch12/03-hours-backup", "uv run main.py setup", "uv run main.py gate", "uv run main.py run", "uv run main.py backup",
+        "run": ["cd ~/team-ai-agent/code/ch12/03-hours-backup", "uv run main.py setup", "uv run main.py gate", "uv run main.py run", "uv run main.py backup",
                 "uv run main.py restore", "hermes chat --query-file prompt.md", "uv run check.py"],
         "files": [("input/business-hours.json", "업무시간 규칙"), ("input/month-end-snapshot.json", "월말 비교 자료(저자 편집)"),
                   ("prompt.md", "월말 보고서 지시문"), ("main.py", "setup / gate / run / backup / restore / json"),

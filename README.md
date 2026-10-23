@@ -6,8 +6,8 @@
 
 | 디렉터리 | 주제 | 책 |
 |---|---|---|
-| [ch01/01-hello-jarvis](ch01/01-hello-jarvis/) | 연결 확인, SOUL.md로 이름 붙이기, 메모리 저장·확인·삭제 | 1.2.4항·1.4절 |
-| [ch01/02-guide-check](ch01/02-guide-check/) | 온보딩 안내문의 자료 경로를 자료함에서 확인해 점검표 저장 | 1.3절 |
+| [ch01/01-hello-jarvis](ch01/01-hello-jarvis/) | 연결 확인, SOUL.md로 이름 붙이기, 메모리 저장·확인·삭제 | 1.2.4항·1.2.5항·1.4절 |
+| [ch01/02-notice-check](ch01/02-notice-check/) | 온보딩 안내문의 자료 경로를 자료함에서 확인해 점검표 저장 | 1.3절 |
 | [ch02/01-answer-rules](ch02/01-answer-rules/) | 에이전트 답변 규칙 적용과 전후 비교 | 2.1절 |
 | [ch02/02-organize-notes](ch02/02-organize-notes/) | 회의 노트·업무 노트·메신저 자료 12개 정리 | 2.2절 |
 | [ch02/03-compare-meetings](ch02/03-compare-meetings/) | 지난주·이번 주 주간회의 비교표 | 2.3절 |
@@ -47,20 +47,18 @@
 
 ## 실행 방법
 
-받은 저장소는 원본으로 두고, 처음 한 번 모든 장 폴더를 작업 폴더 ~/agent-work로 복사한 뒤 예제 폴더에서 실행합니다. 실습 결과와 위키 수정은 사본에만 남으므로 원본과 비교하거나 새 사본으로 다시 하기 쉽고, `git -C ~/team-ai-agent/code pull`로 예제를 갱신해도 실습 결과와 섞이지 않습니다. `--update=none`은 이미 있는 파일을 덮어쓰지 않으므로 복사 명령을 다시 실행해도 됩니다.
+받은 저장소의 예제 폴더에 들어가 바로 실행합니다. 실습 결과는 예제 폴더의 output/·state/에 생기며 Git이 추적하지 않습니다. 처음부터 다시 할 때는 예제 폴더에서 `uv run reset.py`를 실행합니다. 지울 결과와 되돌릴 제공 파일(4장부터 wiki/·raw/)을 보여 주고 y/N을 물은 뒤 받은 처음 상태로 되돌리며, 헤르메스 설정(~/.hermes)은 바꾸지 않습니다. 예제를 갱신하려면 reset.py로 되돌린 뒤 `git -C ~/team-ai-agent/code pull`을 실행합니다.
 
 ```bash
 git clone https://github.com/makepluscode/team-ai-agent-code.git ~/team-ai-agent/code
-mkdir -p ~/agent-work
-cp -r --update=none ~/team-ai-agent/code/ch[0-9][0-9] ~/agent-work/
-cd ~/agent-work/ch01/02-guide-check
+cd ~/team-ai-agent/code/ch01/02-notice-check
 hermes chat --query-file prompt.md
 uv run check.py
 ```
 
 - `hermes chat --query-file prompt.md`: prompt.md를 첫 요청으로 보내고 대화를 이어 갑니다. 끝나면 `/exit`.
 - `uv run check.py`: 표준 라이브러리만 쓰는 확인 스크립트입니다. 원본 보존·결과 저장처럼 기계로 판정할 수 있는 것만 판정하고, 내용이 맞는지는 '사람이 확인할 항목'으로 보여 줍니다.
-- 다시 할 때는 기존 사본을 두고 `cp -r ~/team-ai-agent/code/ch01 ~/agent-work/ch01-retry`처럼 새 이름으로 복사합니다.
+- `uv run reset.py`: 예제 폴더를 받은 처음 상태로 되돌립니다(다시 할 때).
 - expected/는 저자가 편집한 비교용 결과이며 실제 모델 응답이 아닙니다.
 
 ## 예제 폴더의 파일
@@ -128,7 +126,7 @@ uv run python -m pytest tests legacy/ch02/tests -q
 | 장 | 실습 안내 | 이 장에서 손에 쥐는 것 |
 |---|---|---|
 | 1장 완성 화면과 전체 구조 | [legacy/ch01/README.md](legacy/ch01/README.md) | 완성 화면 읽기, 팀 위키 구조, 위키에 넣을 첫 자료 작업지 |
-| 2장 설치와 팀 위키 받기 | [legacy/ch02/README.md](legacy/ch02/README.md) | 헤르메스·상용 AI 연결, 팀 위키 저장소, 첫 파일 작업 |
+| 2장 설치와 팀 위키 받기 | [legacy/ch02/README.md](legacy/ch02/README.md) | 헤르메스·AI 챗봇 연결, 팀 위키 저장소, 첫 파일 작업 |
 | 3장 팀 위키에 기준 쌓기 | [legacy/ch03/README.md](legacy/ch03/README.md) | 레시피 열두 개, 위키 정리와 동기화, 스킬 배포, 예약 |
 | 4장 콘텐츠 업무 자동화 | [legacy/ch04/README.md](legacy/ch04/README.md) | 조사·SNS·뉴스레터·주간 보고와 캠페인 페이지 |
 | 5장 외부 서비스 연결과 위키 쌓기 | [legacy/ch05/README.md](legacy/ch05/README.md) | 메일·캘린더·알림 연결, 변경 규칙, 드라이브 사본 |
