@@ -6,12 +6,13 @@
 ## 실행 방법
 
 ```bash
-mkdir -p ~/agent-work && cp -r --update=none ~/team-ai-agent/code/ch05 ~/agent-work/
-cp -r ~/agent-work/ch05/01-share-repo ~/studio-merry-wiki
+cp -r ~/team-ai-agent/code/ch05/01-share-repo ~/studio-merry-wiki
 cd ~/studio-merry-wiki
 hermes chat --query-file prompt.md
 uv run check.py
 ```
+
+처음부터 다시 할 때는 이 폴더에서 `uv run reset.py`를 실행해 받은 처음 상태로 되돌린 뒤 실행 방법을 다시 따라 합니다.
 
 ## 폴더 구성
 
@@ -22,6 +23,7 @@ uv run check.py
 | raw/·wiki/ | 4장까지 정리한 원본과 위키 |
 | prompt.md | 로그인·제외 목록 확인과 저장소 준비 지시문 |
 | check.py | 원본 보존과 제외 목록 확인 |
+| reset.py | 예제 폴더를 받은 처음 상태로 되돌리기(다시 할 때) |
 
 
 실제 GitHub 저장소 생성과 올리기는 헤르메스가 gh·git으로 실행합니다. v1.7 예제로 저장소를 새로 만드는 전 과정은 두 기준 장비에서 TODO(검증)입니다.

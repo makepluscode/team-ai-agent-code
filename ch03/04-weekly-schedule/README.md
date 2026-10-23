@@ -9,7 +9,7 @@ weekly-report 스킬이 내 헤르메스에 등록돼 있어야 합니다(`herme
 ## 실행 방법
 
 ```bash
-cd ~/agent-work/ch03/04-weekly-schedule
+cd ~/team-ai-agent/code/ch03/04-weekly-schedule
 hermes cron create "0 17 * * 5" --name weekly-report-practice --skill weekly-report --workdir "$PWD" "$(cat prompt.md)"
 hermes cron list
 hermes cron run weekly-report-practice
@@ -21,6 +21,8 @@ hermes cron pause weekly-report-practice
 - 연습이 끝나면 예약을 멈추거나(`pause`) 지웁니다(`hermes cron remove weekly-report-practice`). 등록 명령을 다시 실행하기 전에는 `hermes cron list`로 같은 이름의 예약이 이미 있는지 확인합니다(같은 이름 재등록 동작은 검증하지 않았습니다).
 - 정해진 시각의 자동 실행은 게이트웨이가 켜져 있어야 합니다(`hermes cron status`).
 
+처음부터 다시 할 때는 이 폴더에서 `uv run reset.py`를 실행해 받은 처음 상태로 되돌린 뒤 실행 방법을 다시 따라 합니다.
+
 ## 폴더 구성
 
 | 파일 | 역할 |
@@ -29,3 +31,4 @@ hermes cron pause weekly-report-practice
 | input/ | 3.2절과 같은 회의 노트·업무 노트 정리본, 입력 묶음, 관측 기준 |
 | expected/DOC-009_weekly-report.r1.md | 비교용 주간 보고 |
 | check.py | 원본 보존과 날짜별 결과 저장을 확인합니다 |
+| reset.py | 예제 폴더를 받은 처음 상태로 되돌리기(다시 할 때) |

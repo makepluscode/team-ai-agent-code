@@ -6,7 +6,7 @@
 ## 실행 방법
 
 ```bash
-cp -r ~/agent-work/ch05/02-wiki-sync/skills ~/studio-merry-wiki/
+cp -r ~/team-ai-agent/code/ch05/02-wiki-sync/skills ~/studio-merry-wiki/
 cd ~/studio-merry-wiki
 uv run skills/wiki-sync/scripts/wiki_sync.py status
 uv run skills/wiki-sync/scripts/wiki_sync.py commit -m "[매니저] 위키 동기화 스킬 추가 · 팀 공용 설치" skills/wiki-sync/SKILL.md skills/wiki-sync/scripts/wiki_sync.py
@@ -14,8 +14,10 @@ uv run skills/wiki-sync/scripts/wiki_sync.py push
 hermes skills tap add <내 GitHub 계정>/studio-merry-wiki
 hermes skills install <내 GitHub 계정>/studio-merry-wiki/skills/wiki-sync
 uv run skills/wiki-sync/scripts/wiki_sync.py status
-hermes chat --query-file ~/agent-work/ch05/02-wiki-sync/prompt.md
+hermes chat --query-file ~/team-ai-agent/code/ch05/02-wiki-sync/prompt.md
 ```
+
+처음부터 다시 할 때는 이 폴더에서 `uv run reset.py`를 실행해 받은 처음 상태로 되돌린 뒤 실행 방법을 다시 따라 합니다.
 
 ## 폴더 구성
 
@@ -25,3 +27,4 @@ hermes chat --query-file ~/agent-work/ch05/02-wiki-sync/prompt.md
 | skills/wiki-sync/scripts/wiki_sync.py | status·commit·pull·push를 나눠 처리하는 표준 라이브러리 스크립트 |
 | prompt.md | '위키 동기화해 줘' 지시문 |
 | check.py | 원본 보존과 스킬 파일 확인 |
+| reset.py | 예제 폴더를 받은 처음 상태로 되돌리기(다시 할 때) |

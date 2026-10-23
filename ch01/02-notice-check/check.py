@@ -1,6 +1,6 @@
 """1장 안내문 점검 예제의 결과를 확인한다.
 
-입력: input/(안내문 초안·온보딩 자료·자료함 사본, 원본), output/DOC-005_guide-check.md(헤르메스가 저장한 점검표)
+입력: input/(안내문 초안·온보딩 자료·자료함 사본, 원본), output/DOC-005_notice-check.md(헤르메스가 저장한 점검표)
 출력: 화면에 자동 확인 결과와 사람이 직접 확인할 항목을 출력한다. 파일은 바꾸지 않는다.
 실행: 이 폴더에서 `uv run check.py`
 """
@@ -10,7 +10,7 @@ import sys
 from pathlib import Path
 
 HERE = Path(__file__).resolve().parent
-RESULT = HERE / "output" / "DOC-005_guide-check.md"
+RESULT = HERE / "output" / "DOC-005_notice-check.md"
 # 제공한 원본과 SHA-256. 자료함(input/shared/)의 파일을 옮기거나 더해도 실패로 본다
 SOURCES = {
     "input/DOC-001_onboarding.md": "ae5f61026f5286dcad9cb41e791edc9b4cd05585b1ba8300b9cf9ecb3cd2e58d",
@@ -68,12 +68,12 @@ def main() -> int:
         print(f"[실패] 자료함에 없던 파일이 생겼습니다: {name}")
         failures += 1
     if failures:
-        print("  다음: 이 사본은 그대로 두고 새 이름으로 다시 복사해 시작합니다(1.2.3항).")
+        print("  다음: uv run reset.py로 예제 폴더를 처음 상태로 되돌린 뒤 다시 시작합니다.")
 
     # 2. 결과 파일이 실제로 저장됐는지 확인한다
     if not RESULT.exists() or not RESULT.read_text(encoding="utf-8").strip():
         print(f"[실패] 결과 파일이 없거나 비어 있습니다: {RESULT.relative_to(HERE)}")
-        print("  다음: 같은 대화에서 'output/DOC-005_guide-check.md로 저장하고 다시 읽어 보여 줘'라고 요청합니다.")
+        print("  다음: 같은 대화에서 'output/DOC-005_notice-check.md로 저장하고 다시 읽어 보여 줘'라고 요청합니다.")
         return 1
     print(f"[통과] 결과 파일 저장: {RESULT.relative_to(HERE)}")
     text = RESULT.read_text(encoding="utf-8")

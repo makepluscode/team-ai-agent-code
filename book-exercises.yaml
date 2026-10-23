@@ -8,7 +8,7 @@
       "example": "ch01",
       "title": "온보딩 안내문 점검",
       "commands": [
-        "cp -r --update=none ~/team-ai-agent/code/ch[0-9][0-9] ~/agent-work/",
+        "cd ~/team-ai-agent/code/ch01/02-notice-check",
         "hermes chat --query-file prompt.md",
         "uv run check.py"
       ],
@@ -17,11 +17,11 @@
         "DOC-005 점검표 저장·원본과 자료함 해시·경로 상태와 잠정/미정(사람 확인)"
       ],
       "limits": [
-        "01-hello-jarvis의 이름 적용은 2026-10-18 Windows+WSL2 테스트베드(헤르메스 v0.22.1·claude-haiku-5-5)에서 확인. 02-guide-check(2026-10-20 새 예제)의 헤르메스 실행과 맥 기준 장비는 TODO(검증)"
+        "01-hello-jarvis의 이름 적용은 2026-10-18 Windows+WSL2 테스트베드(헤르메스 v0.22.1·claude-haiku-5-5)에서 확인. 02-notice-check(2026-10-20 새 예제)의 헤르메스 실행과 맥 기준 장비는 TODO(검증)"
       ],
       "examples": [
         "ch01/01-hello-jarvis",
-        "ch01/02-guide-check"
+        "ch01/02-notice-check"
       ]
     },
     {
@@ -29,7 +29,7 @@
       "example": "ch02",
       "title": "답변 규칙과 자료 정리",
       "commands": [
-        "cp -r ~/team-ai-agent/code/ch02 ~/agent-work/ch02",
+        "cd ~/team-ai-agent/code/ch02/<예제 폴더>",
         "hermes chat --query-file prompt.md",
         "uv run check.py"
       ],
@@ -52,7 +52,7 @@
       "example": "ch03",
       "title": "반복 업무와 내 스킬",
       "commands": [
-        "cp -r ~/team-ai-agent/code/ch03 ~/agent-work/ch03",
+        "cd ~/team-ai-agent/code/ch03/<예제 폴더>",
         "hermes chat --query-file prompt.md",
         "hermes chat -s weekly-report --query-file prompt.md",
         "hermes cron create \"0 17 * * 5\" --name weekly-report-practice --skill weekly-report --workdir \"$PWD\" \"$(cat prompt.md)\"",
@@ -80,7 +80,7 @@
       "example": "ch04",
       "title": "로컬 위키",
       "commands": [
-        "cp -r ~/team-ai-agent/code/ch04 ~/agent-work/ch04",
+        "cd ~/team-ai-agent/code/ch04/<예제 폴더>",
         "hermes chat --query-file prompt.md",
         "uv run main.py <단계>",
         "uv run check.py"
@@ -103,7 +103,7 @@
       "example": "ch05",
       "title": "동료 변경 인계",
       "commands": [
-        "cp -r ~/team-ai-agent/code/ch05 ~/agent-work/ch05",
+        "cd ~/team-ai-agent/code/ch05/<예제 폴더>",
         "hermes chat --query-file prompt.md",
         "uv run main.py <단계>",
         "uv run check.py"
@@ -129,7 +129,7 @@
       "example": "ch06",
       "title": "회의 결정",
       "commands": [
-        "cp -r ~/team-ai-agent/code/ch06 ~/agent-work/ch06",
+        "cd ~/team-ai-agent/code/ch06/<예제 폴더>",
         "hermes chat --query-file prompt.md",
         "uv run main.py <단계>",
         "uv run check.py"
@@ -154,7 +154,7 @@
       "example": "ch07",
       "title": "팀 요청의 접수와 기록",
       "commands": [
-        "cp -r ~/team-ai-agent/code/ch07 ~/agent-work/ch07",
+        "cd ~/team-ai-agent/code/ch07/<예제 폴더>",
         "hermes chat --query-file prompt.md",
         "uv run main.py <단계>",
         "uv run check.py"
@@ -177,7 +177,7 @@
       "example": "ch08",
       "title": "요청 분류와 담당 제안",
       "commands": [
-        "cp -r ~/team-ai-agent/code/ch08 ~/agent-work/ch08",
+        "cd ~/team-ai-agent/code/ch08/<예제 폴더>",
         "hermes chat --query-file prompt.md",
         "uv run main.py <단계>",
         "uv run check.py"
@@ -199,7 +199,7 @@
       "example": "ch09",
       "title": "사람의 검토와 결과 수정",
       "commands": [
-        "cp -r ~/team-ai-agent/code/ch09 ~/agent-work/ch09",
+        "cd ~/team-ai-agent/code/ch09/<예제 폴더>",
         "hermes chat --query-file prompt.md",
         "uv run main.py <단계>",
         "uv run check.py"
@@ -222,7 +222,7 @@
       "example": "ch10",
       "title": "출처로 답하는 팀 위키",
       "commands": [
-        "cp -r ~/team-ai-agent/code/ch10 ~/agent-work/ch10",
+        "cd ~/team-ai-agent/code/ch10/<예제 폴더>",
         "hermes chat --query-file prompt.md",
         "uv run main.py <단계>",
         "uv run check.py"
@@ -245,7 +245,7 @@
       "example": "ch11",
       "title": "팀이 함께 보는 대시보드",
       "commands": [
-        "cp -r ~/team-ai-agent/code/ch11 ~/agent-work/ch11",
+        "cd ~/team-ai-agent/code/ch11/<예제 폴더>",
         "hermes chat --query-file prompt.md",
         "uv run main.py <단계>",
         "uv run check.py"
@@ -267,7 +267,7 @@
       "example": "ch12",
       "title": "대시보드에서 일하기",
       "commands": [
-        "cp -r ~/team-ai-agent/code/ch12 ~/agent-work/ch12",
+        "cd ~/team-ai-agent/code/ch12/<예제 폴더>",
         "hermes chat --query-file prompt.md",
         "uv run main.py <단계>",
         "uv run check.py"

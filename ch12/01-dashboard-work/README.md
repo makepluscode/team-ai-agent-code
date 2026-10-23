@@ -6,8 +6,7 @@
 ## 실행 방법
 
 ```bash
-mkdir -p ~/agent-work && cp -r --update=none ~/team-ai-agent/code/ch12 ~/agent-work/
-cd ~/agent-work/ch12/01-dashboard-work
+cd ~/team-ai-agent/code/ch12/01-dashboard-work
 uv run main.py setup
 uv run main.py serve
 uv run main.py intake
@@ -16,6 +15,8 @@ uv run main.py task-013
 hermes chat --query-file history.md
 uv run check.py
 ```
+
+처음부터 다시 할 때는 이 폴더에서 `uv run reset.py`를 실행해 받은 처음 상태로 되돌린 뒤 실행 방법을 다시 따라 합니다.
 
 ## 폴더 구성
 
@@ -27,6 +28,7 @@ uv run check.py
 | history.md | 상태 이력표 지시문 |
 | check.py | 원본 보존·요청 11·업무 13 확인 |
 | main.py | 단계 setup / intake / serve / task-013 / json / list. 인자 없이 실행하면 할 일과 단계를 안내 |
+| reset.py | 예제 폴더를 받은 처음 상태로 되돌리기(다시 할 때) |
 
 
 대시보드 화면에서 일부 상태를 바꿨다면 task-013은 맞지 않는 첫 상태에서 멈춥니다. 화면 경로와 task-013 경로 가운데 하나만 끝까지 따릅니다. 서버(serve)는 터미널 하나를 차지하므로 다른 명령은 새 터미널에서 실행하고, 다음 예제로 가기 전에 Ctrl+C로 끕니다.

@@ -6,11 +6,13 @@
 ## 실행 방법
 
 ```bash
-cd ~/agent-work/ch08/02-compare-paths
+cd ~/team-ai-agent/code/ch08/02-compare-paths
 hermes chat --query-file prompt.md
 uv run main.py evaluate
 uv run check.py
 ```
+
+처음부터 다시 할 때는 이 폴더에서 `uv run reset.py`를 실행해 받은 처음 상태로 되돌린 뒤 실행 방법을 다시 따라 합니다.
 
 ## 폴더 구성
 
@@ -22,6 +24,7 @@ uv run check.py
 | expected/evaluation-gold.json | 저자 기준 정답(저자 전건 검수 전). 헤르메스에 주지 않음 |
 | check.py | 원본 보존·판정 저장 확인 |
 | main.py | 단계 evaluate. 인자 없이 실행하면 할 일과 단계를 안내 |
+| reset.py | 예제 폴더를 받은 처음 상태로 되돌리기(다시 할 때) |
 
 
 evaluate는 main.py 위치를 기준으로 상대 경로를 읽으므로 이 폴더에서 실행합니다.

@@ -48,7 +48,7 @@ def main() -> int:
     for name in changed:
         print(f"[실패] 원본이 없거나 바뀌었습니다: {name}")
     if changed:
-        print("    → 원본은 고치지 않습니다. 장 폴더를 새 이름으로 다시 복사해 시작하세요.")
+        print("    → 원본은 고치지 않습니다. uv run reset.py로 예제 폴더를 처음 상태로 되돌린 뒤 다시 시작하세요.")
     failures += len(changed)
     if not changed:
         print(f"[통과] 원본 {len(sources)}개 보존")

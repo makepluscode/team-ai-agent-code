@@ -227,7 +227,7 @@ def _read_draft(work, draft):
     if current != base:
         changed = sorted(k for k in set(base) | set(current) if base.get(k) != current.get(k))
         raise ValueError("마지막 적용 뒤 wiki/가 바뀌었습니다. 충돌로 중단합니다. 바뀐 파일: " + ", ".join(changed)
-                         + ". 직접 고친 내용은 변경안(output/wiki-draft/)에 옮기고 새 사본에서 다시 하세요.")
+                         + ". 직접 고친 내용은 예제 폴더 밖에 따로 적어 두고, uv run reset.py로 처음 상태로 되돌린 뒤 그 내용을 지시문에 넣어 다시 하세요.")
     # 2. 변경안을 기존 apply가 읽는 제안 파일 형식으로 옮긴다
     files = []
     for path in sorted(folder.rglob("*")):

@@ -6,8 +6,7 @@
 ## 실행 방법
 
 ```bash
-mkdir -p ~/agent-work && cp -r --update=none ~/team-ai-agent/code/ch11 ~/agent-work/
-cd ~/agent-work/ch11/01-team-hermes
+cd ~/team-ai-agent/code/ch11/01-team-hermes
 cp --update=none ~/.hermes/SOUL.md ~/.hermes/SOUL.md.orig
 cp SOUL.md ~/.hermes/SOUL.md
 uv run main.py setup
@@ -15,6 +14,8 @@ uv run main.py doctor
 hermes chat --query-file prompt.md
 uv run check.py
 ```
+
+처음부터 다시 할 때는 이 폴더에서 `uv run reset.py`를 실행해 받은 처음 상태로 되돌린 뒤 실행 방법을 다시 따라 합니다.
 
 ## 폴더 구성
 
@@ -27,6 +28,7 @@ uv run check.py
 | prompt.md | 이관 점검표 지시문 |
 | check.py | 원본 보존·공동 기록 건수 확인 |
 | main.py | 단계 setup / gate / doctor / list. 인자 없이 실행하면 할 일과 단계를 안내 |
+| reset.py | 예제 폴더를 받은 처음 상태로 되돌리기(다시 할 때) |
 
 
 SOUL.md 복사는 공동 컴퓨터에서만 합니다. 매니저 개인 컴퓨터의 자비스와 이름이 구별됩니다.

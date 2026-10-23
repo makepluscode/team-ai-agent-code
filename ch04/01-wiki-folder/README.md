@@ -6,11 +6,12 @@
 ## 실행 방법
 
 ```bash
-mkdir -p ~/agent-work && cp -r --update=none ~/team-ai-agent/code/ch04 ~/agent-work/
-cd ~/agent-work/ch04/01-wiki-folder
+cd ~/team-ai-agent/code/ch04/01-wiki-folder
 hermes chat --query-file prompt.md
 uv run check.py
 ```
+
+처음부터 다시 할 때는 이 폴더에서 `uv run reset.py`를 실행해 받은 처음 상태로 되돌린 뒤 실행 방법을 다시 따라 합니다.
 
 ## 폴더 구성
 
@@ -22,3 +23,4 @@ uv run check.py
 | input/ | 원본 등록 기록(raw-registry.json·report-source-map.json) |
 | prompt.md | 규칙 요약과 원본 점검 지시문 |
 | check.py | 원본이 그대로인지 확인합니다 |
+| reset.py | 예제 폴더를 받은 처음 상태로 되돌리기(다시 할 때) |

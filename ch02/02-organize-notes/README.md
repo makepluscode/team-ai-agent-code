@@ -5,14 +5,14 @@
 ## 실행 방법
 
 ```bash
-mkdir -p ~/agent-work
-cp -r --update=none ~/team-ai-agent/code/ch02 ~/agent-work/
-cd ~/agent-work/ch02/02-organize-notes
+cd ~/team-ai-agent/code/ch02/02-organize-notes
 hermes chat --query-file prompt.md
 uv run check.py
 ```
 
 헤르메스가 대응표를 먼저 보여 주면 근거를 읽어 보고 "확인했어. 정리해 줘"처럼 답합니다. 정리가 끝나면 `/exit`로 나와 check.py를 실행합니다.
+
+처음부터 다시 할 때는 이 폴더에서 `uv run reset.py`를 실행해 받은 처음 상태로 되돌린 뒤 실행 방법을 다시 따라 합니다.
 
 ## 폴더 구성
 
@@ -24,5 +24,6 @@ uv run check.py
 | output/source-map.json | 원래 이름·정리본·상태·근거를 담은 대응표(헤르메스가 저장) |
 | expected/source-map.json | 저자가 편집한 비교용 대응표와 원본 해시 |
 | check.py | 원본 보존, 정리본 바이트 일치, 이름 형식과 날짜, 중복·확인 필요 처리를 확인합니다 |
+| reset.py | 예제 폴더를 받은 처음 상태로 되돌리기(다시 할 때) |
 
 이름의 주제 부분(예: 주간회의, 할일)은 실행마다 표현이 달라도 됩니다. check.py는 날짜·형식·내용 일치만 확인하고, 종류와 주제가 알맞은지는 사람이 대응표로 판단합니다.
