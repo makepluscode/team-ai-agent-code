@@ -38,7 +38,7 @@
     "document_ref": "DOC-009@r1",
     "source_path": "examples/documents/ch03/reference/DOC-009_weekly-report.r1.md",
     "preserved_path": "raw/DOC-009_r1.md",
-    "sha256": "ae0a5539c62983525a41b84806502426661518c1541c91a3cbd75f153691b381",
+    "sha256": "701630f2a91c20a0cca2bbb5f13df28bd63617d630e2e350edcf1a99bd82a7b4",
     "artifact_kind": "author-reference"
   },
   {
@@ -52,7 +52,7 @@
     "document_ref": "DOC-011@r1",
     "source_path": "examples/meetings/ch06/start/raw/DOC-011_transcript-fallback.md",
     "preserved_path": "raw/DOC-011_r1.md",
-    "sha256": "5fb3bf7f14111965db40cf1480e93ed07f4c1ecbf93f52b3ed428131d3ee7430",
+    "sha256": "e2ad3667ba1c4976445d1902212dda057944757522d650875fe6b28b69391325",
     "artifact_kind": "synthetic-source"
   },
   {
@@ -67,7 +67,7 @@
     "original_path": "input/organized/2026-10-02_회의노트_주간회의.md",
     "preserved_path": "raw/report-input/organized/2026-10-02_회의노트_주간회의.md",
     "source_path": "examples/documents/ch03/start/input/organized/2026-10-02_회의노트_주간회의.md",
-    "sha256": "4cc501917c74b057ad9990eed11e8fae6850805c3f973477d65d25697913445f",
+    "sha256": "f582fd23234d57a1a72cccd7c5d5717588fce17e41fadb42221e9d1de8942ed8",
     "artifact_kind": "synthetic-source"
   },
   {
@@ -75,7 +75,7 @@
     "original_path": "input/organized/2026-10-05_회의노트_주간회의.md",
     "preserved_path": "raw/report-input/organized/2026-10-05_회의노트_주간회의.md",
     "source_path": "examples/documents/ch03/start/input/organized/2026-10-05_회의노트_주간회의.md",
-    "sha256": "09608240752cdb5c48b3fb45bb09ffd3bad75652b1b0999f4ac415e810f1af1c",
+    "sha256": "634cf8aacca8ece123e65fb2abca30e21f9e044b90c806b0281d4768b8b848cc",
     "artifact_kind": "synthetic-source"
   },
   {
@@ -83,7 +83,7 @@
     "original_path": "input/organized/2026-10-06_대화기록_온보딩준비.txt",
     "preserved_path": "raw/report-input/organized/2026-10-06_대화기록_온보딩준비.txt",
     "source_path": "examples/documents/ch03/start/input/organized/2026-10-06_대화기록_온보딩준비.txt",
-    "sha256": "ba1c96b191c1fdf8b19cd5c8f7766d726285d1d6afafddb3a249bd6ed720f6dc",
+    "sha256": "38e7d5c55b99cefc33d3532d3020b9e8f0a3efebeb1668bd783b850dc1dcedc8",
     "artifact_kind": "synthetic-source"
   },
   {
@@ -91,7 +91,7 @@
     "original_path": "input/organized/2026-10-06_업무노트_비교표작성.md",
     "preserved_path": "raw/report-input/organized/2026-10-06_업무노트_비교표작성.md",
     "source_path": "examples/documents/ch03/start/input/organized/2026-10-06_업무노트_비교표작성.md",
-    "sha256": "7b96c12336ef17f827588efc94cc30962a33726106bd0a8202f2c3d82ce8ef99",
+    "sha256": "98e8dc6633fe268f0e270367a9d161deb398b32e874fea4b774cff50303493c9",
     "artifact_kind": "synthetic-source"
   },
   {
@@ -99,7 +99,7 @@
     "original_path": "input/organized/2026-10-06_회의노트_원온원.txt",
     "preserved_path": "raw/report-input/organized/2026-10-06_회의노트_원온원.txt",
     "source_path": "examples/documents/ch03/start/input/organized/2026-10-06_회의노트_원온원.txt",
-    "sha256": "d5fc21fa6ec23628b77cf7ccceed2de5a4d26835313a0ca53d9e8ff6a9076d15",
+    "sha256": "ef8aae9761901055f486662c73bb934dfb389f6c12d12ec801578eb443cda198",
     "artifact_kind": "synthetic-source"
   },
   {
@@ -107,7 +107,7 @@
     "original_path": "input/organized/2026-10-07_업무노트_준비상태점검.txt",
     "preserved_path": "raw/report-input/organized/2026-10-07_업무노트_준비상태점검.txt",
     "source_path": "examples/documents/ch03/start/input/organized/2026-10-07_업무노트_준비상태점검.txt",
-    "sha256": "933028553f258c08a1b0d41b472377727eab07c1f0843bab8af1aeedb01c69f1",
+    "sha256": "00ff4eb90136070d90e098173ffbbe5753763868bb916ad089e5b0cda1f8598c",
     "artifact_kind": "synthetic-source"
   },
   {
@@ -123,7 +123,7 @@
     "original_path": "input/organized/2026-10-05_업무노트_할일.txt",
     "preserved_path": "raw/report-input/organized/2026-10-05_업무노트_할일.txt",
     "source_path": "examples/documents/ch03/start/input/organized/2026-10-05_업무노트_할일.txt",
-    "sha256": "98ec89ace2353f88154f84bc1c7bee57903fdbb4645396904f286ca7deba57f0",
+    "sha256": "10ab65aee8be74690e68e16c986a0d179a16768db1c39b23ee94ab938dcf7a44",
     "artifact_kind": "synthetic-source"
   },
   {

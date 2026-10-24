@@ -20,7 +20,7 @@
   {
     "registered_path": "raw/DOC-009_weekly-report.r1.md",
     "original_path": "output/DOC-009_weekly-report.r1.md",
-    "sha256": "f57eb033b2d02241dc4a60ddd5c64d1677aa17e3333300d9a00ed9d482779102",
+    "sha256": "e96248487d2ea54d3e15cd3783704ec0ff0e5f46442697e8585e1107a998e2ec",
     "origin_kind": "edited-reference"
   },
   {
@@ -32,13 +32,13 @@
   {
     "registered_path": "raw/report-input/organized/2026-10-02_주간회의_안내준비점검.md",
     "original_path": "input/organized/2026-10-02_주간회의_안내준비점검.md",
-    "sha256": "4cc501917c74b057ad9990eed11e8fae6850805c3f973477d65d25697913445f",
+    "sha256": "f582fd23234d57a1a72cccd7c5d5717588fce17e41fadb42221e9d1de8942ed8",
     "origin_kind": "synthetic-source"
   },
   {
     "registered_path": "raw/report-input/organized/2026-10-05_주간회의_온보딩준비.md",
     "original_path": "input/organized/2026-10-05_주간회의_온보딩준비.md",
-    "sha256": "09608240752cdb5c48b3fb45bb09ffd3bad75652b1b0999f4ac415e810f1af1c",
+    "sha256": "634cf8aacca8ece123e65fb2abca30e21f9e044b90c806b0281d4768b8b848cc",
     "origin_kind": "synthetic-source"
   },
   {
@@ -50,25 +50,25 @@
   {
     "registered_path": "raw/report-input/organized/2026-10-06_대화기록_온보딩준비.txt",
     "original_path": "input/organized/2026-10-06_대화기록_온보딩준비.txt",
-    "sha256": "edd1e3b8ac399ed253558d9e07fdf04fe26134b4f02fd726f52c74c382671175",
+    "sha256": "549b13bea91be82d33c0d989593ad87c974c6be43491cdd12dafa7f5295bbcfd",
     "origin_kind": "synthetic-source"
   },
   {
     "registered_path": "raw/report-input/organized/2026-10-06_업무메모_비교표작성.md",
     "original_path": "input/organized/2026-10-06_업무메모_비교표작성.md",
-    "sha256": "a0814c7d29f9f0e05d598737016c83e5ae7a9a9d57193456ac8070e79afac540",
+    "sha256": "b90a0414b955b89889b6ea1d0060162473bf30331aeb098239b20ea5b658e6a5",
     "origin_kind": "synthetic-source"
   },
   {
     "registered_path": "raw/report-input/organized/2026-10-06_원온원_자료접근점검.txt",
     "original_path": "input/organized/2026-10-06_원온원_자료접근점검.txt",
-    "sha256": "24aa854cb0cc2e5de53a7aef1c2c7cacf36a9e501a9aed69a9b27f4802c61f0e",
+    "sha256": "9ac17d0a51a5d45d35890cce571ac25f8e4f254cd85949a63fb0f1ca62ef2d2a",
     "origin_kind": "synthetic-source"
   },
   {
     "registered_path": "raw/report-input/organized/2026-10-07_상태메모_준비업무점검.txt",
     "original_path": "input/organized/2026-10-07_상태메모_준비업무점검.txt",
-    "sha256": "36615ff5694e7d2750f00b9b4979d8c90a7aa44ed86da5fb5162460d14bb9f55",
+    "sha256": "cc346ed09bc9377efbf9b3a2c306403c6d2e84894051aa0e2a6ea18480435dea",
     "origin_kind": "synthetic-source"
   },
   {

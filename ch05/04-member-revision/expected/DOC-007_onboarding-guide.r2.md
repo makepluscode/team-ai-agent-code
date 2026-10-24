@@ -26,6 +26,6 @@ source_refs:
 - 업무 상태: TASK-002 확인 대기 (시각·장소 확정 후 최종 온보딩 가이드 발송 예정)
 
 ## 변경 근거와 출처
-- 변경 사건 및 원본: EVT-006 / raw/DOC-010_schedule-change.md (DOC-010@r1, M03 서윤호)
+- 변경 사건 및 원본: EVT-006 / raw/DOC-010_schedule-change.md (DOC-010@r1, M03 문준서)
 - 참조 위키 페이지: wiki/guides/onboarding.md (EVT-007 갱신본)
 - 이전 온보딩 가이드 버전: DOC-007@r1 (2026-10-12 10:00 잠정안)
