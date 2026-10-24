@@ -6,42 +6,42 @@
       "copy": "output/organized/2026-10-02_회의노트_주간회의.md",
       "status": "organized",
       "date_basis": "본문의 회의 날짜(2026-10-02)와 '회의 노트'",
-      "sha256": "4cc501917c74b057ad9990eed11e8fae6850805c3f973477d65d25697913445f"
+      "sha256": "f582fd23234d57a1a72cccd7c5d5717588fce17e41fadb42221e9d1de8942ed8"
     },
     {
       "source": "input/files/회의록 최종 - 복사본.md",
       "copy": null,
       "status": "duplicate",
       "date_basis": "회의록 최종.md와 내용이 같음. 정리본을 하나만 둠",
-      "sha256": "4cc501917c74b057ad9990eed11e8fae6850805c3f973477d65d25697913445f"
+      "sha256": "f582fd23234d57a1a72cccd7c5d5717588fce17e41fadb42221e9d1de8942ed8"
     },
     {
       "source": "input/files/주간회의(2).md",
       "copy": "output/organized/2026-10-05_회의노트_주간회의.md",
       "status": "organized",
       "date_basis": "본문의 회의 날짜(2026-10-05)와 '회의 노트'",
-      "sha256": "09608240752cdb5c48b3fb45bb09ffd3bad75652b1b0999f4ac415e810f1af1c"
+      "sha256": "634cf8aacca8ece123e65fb2abca30e21f9e044b90c806b0281d4768b8b848cc"
     },
     {
       "source": "input/files/1on1 메모.txt",
       "copy": "output/organized/2026-10-06_회의노트_원온원.txt",
       "status": "organized",
       "date_basis": "본문의 면담 날짜(2026-10-06)와 '회의 노트(원온원)'",
-      "sha256": "d5fc21fa6ec23628b77cf7ccceed2de5a4d26835313a0ca53d9e8ff6a9076d15"
+      "sha256": "ef8aae9761901055f486662c73bb934dfb389f6c12d12ec801578eb443cda198"
     },
     {
       "source": "input/files/오늘 할 일.txt",
       "copy": "output/organized/2026-10-05_업무노트_할일.txt",
       "status": "organized",
       "date_basis": "본문 첫 줄의 날짜(2026-10-05)와 '업무 노트'",
-      "sha256": "98ec89ace2353f88154f84bc1c7bee57903fdbb4645396904f286ca7deba57f0"
+      "sha256": "10ab65aee8be74690e68e16c986a0d179a16768db1c39b23ee94ab938dcf7a44"
     },
     {
       "source": "input/files/업무 메모.md",
       "copy": "output/organized/2026-10-06_업무노트_비교표작성.md",
       "status": "organized",
       "date_basis": "본문의 기록 날짜(2026-10-06)와 '업무 노트'",
-      "sha256": "7b96c12336ef17f827588efc94cc30962a33726106bd0a8202f2c3d82ce8ef99"
+      "sha256": "98e8dc6633fe268f0e270367a9d161deb398b32e874fea4b774cff50303493c9"
     },
     {
       "source": "input/files/전화 메모.txt",
@@ -55,14 +55,14 @@
       "copy": "output/organized/2026-10-07_업무노트_준비상태점검.txt",
       "status": "organized",
       "date_basis": "본문의 기록 날짜(2026-10-07)와 '업무 노트'",
-      "sha256": "933028553f258c08a1b0d41b472377727eab07c1f0843bab8af1aeedb01c69f1"
+      "sha256": "00ff4eb90136070d90e098173ffbbe5753763868bb916ad089e5b0cda1f8598c"
     },
     {
       "source": "input/files/대화 내보내기.txt",
       "copy": "output/organized/2026-10-06_대화기록_온보딩준비.txt",
       "status": "organized",
       "date_basis": "본문의 대화 날짜(2026-10-06)와 '메신저 대화 내보내기'",
-      "sha256": "ba1c96b191c1fdf8b19cd5c8f7766d726285d1d6afafddb3a249bd6ed720f6dc"
+      "sha256": "38e7d5c55b99cefc33d3532d3020b9e8f0a3efebeb1668bd783b850dc1dcedc8"
     },
     {
       "source": "input/files/IMG_2041.png",

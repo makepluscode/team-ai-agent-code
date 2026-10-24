@@ -14,14 +14,14 @@ HERE = Path(__file__).resolve().parent
 # 제공한 원본과 SHA-256
 SOURCES = {
     "input/DOC-004_weekly-meetings.md": "6b7964eb758bd13149cf7e6361761db31928e201f6f75bca44ed2fe6af1ee7a7",
-    "input/organized/2026-10-02_회의노트_주간회의.md": "4cc501917c74b057ad9990eed11e8fae6850805c3f973477d65d25697913445f",
-    "input/organized/2026-10-05_업무노트_할일.txt": "98ec89ace2353f88154f84bc1c7bee57903fdbb4645396904f286ca7deba57f0",
-    "input/organized/2026-10-05_회의노트_주간회의.md": "09608240752cdb5c48b3fb45bb09ffd3bad75652b1b0999f4ac415e810f1af1c",
-    "input/organized/2026-10-06_대화기록_온보딩준비.txt": "ba1c96b191c1fdf8b19cd5c8f7766d726285d1d6afafddb3a249bd6ed720f6dc",
-    "input/organized/2026-10-06_업무노트_비교표작성.md": "7b96c12336ef17f827588efc94cc30962a33726106bd0a8202f2c3d82ce8ef99",
+    "input/organized/2026-10-02_회의노트_주간회의.md": "f582fd23234d57a1a72cccd7c5d5717588fce17e41fadb42221e9d1de8942ed8",
+    "input/organized/2026-10-05_업무노트_할일.txt": "10ab65aee8be74690e68e16c986a0d179a16768db1c39b23ee94ab938dcf7a44",
+    "input/organized/2026-10-05_회의노트_주간회의.md": "634cf8aacca8ece123e65fb2abca30e21f9e044b90c806b0281d4768b8b848cc",
+    "input/organized/2026-10-06_대화기록_온보딩준비.txt": "38e7d5c55b99cefc33d3532d3020b9e8f0a3efebeb1668bd783b850dc1dcedc8",
+    "input/organized/2026-10-06_업무노트_비교표작성.md": "98e8dc6633fe268f0e270367a9d161deb398b32e874fea4b774cff50303493c9",
     "input/organized/2026-10-06_업무노트_회의실문의.txt": "c0306db9ea7a3df6862d789b4481e3bef8aa6e048ab782ee01fa6f667edcd189",
-    "input/organized/2026-10-06_회의노트_원온원.txt": "d5fc21fa6ec23628b77cf7ccceed2de5a4d26835313a0ca53d9e8ff6a9076d15",
-    "input/organized/2026-10-07_업무노트_준비상태점검.txt": "933028553f258c08a1b0d41b472377727eab07c1f0843bab8af1aeedb01c69f1",
+    "input/organized/2026-10-06_회의노트_원온원.txt": "ef8aae9761901055f486662c73bb934dfb389f6c12d12ec801578eb443cda198",
+    "input/organized/2026-10-07_업무노트_준비상태점검.txt": "00ff4eb90136070d90e098173ffbbe5753763868bb916ad089e5b0cda1f8598c",
     "input/snapshot.json": "55cae40a6f04c5bbeca0f3bdb1996f69a83e2ba11463c7b69739672df072e116",
 }
 # 사람이 대조할 질문과, 그 자리를 찾기 쉽게 보여 줄 표현

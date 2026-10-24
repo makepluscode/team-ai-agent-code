@@ -17,8 +17,8 @@ SOURCES = {
     "input/DOC-015_notice-draft.md": "f0a3c7e477a8e7f7b590fd19d57e25541069ff7c7c4ed7e360226bfd20f9ceb1",
     "input/shared/archive/DOC-003_notice-retro.md": "eb6dd72e963558ced837415d28a134fa95fb07e0e65b3af90a4d9e4a25e80323",
     "input/shared/rules/DOC-002_library-rules.md": "7ba1c8734df98eeb8b9d57500a32cafa7e0ecdedf71fc15369f339b8c5152756",
-    "input/shared/team/team-intro_v1.md": "aa18f9849819208530d8d58d851b774b530b584f41543d00a90537377be88cae",
-    "input/shared/team/team-intro_v2.md": "b9c5de9e53297afca5d9e6efa376de47c03d394623aa82e1d67b21b3c2572bc1",
+    "input/shared/team/team-intro_v1.md": "916baf4efb6e9d095a780b9b1b580c9d00395bb8d4ab9fb31d3d358afcf87138",
+    "input/shared/team/team-intro_v2.md": "c2a0e98baba667f3ac78633d624ae48d0bab91a45085c918575e0f9008ec39e4",
     "input/shared/tools/accounts-guide.md": "93d5827422b436a7175faab7e7298f6fddb34aca139d12201e981fc911a13084",
 }
 # 안내문의 경로마다 저자가 확인한 상태. 점검표의 해당 줄과 사람이 대조한다

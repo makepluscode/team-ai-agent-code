@@ -13,8 +13,8 @@ HERE = Path(__file__).resolve().parent
 RESULT = HERE / "output" / "DOC-006_comparison.md"
 # 제공한 원본과 SHA-256
 SOURCES = {
-    "input/2026-10-02_회의노트_주간회의.md": "4cc501917c74b057ad9990eed11e8fae6850805c3f973477d65d25697913445f",
-    "input/2026-10-05_회의노트_주간회의.md": "09608240752cdb5c48b3fb45bb09ffd3bad75652b1b0999f4ac415e810f1af1c",
+    "input/2026-10-02_회의노트_주간회의.md": "f582fd23234d57a1a72cccd7c5d5717588fce17e41fadb42221e9d1de8942ed8",
+    "input/2026-10-05_회의노트_주간회의.md": "634cf8aacca8ece123e65fb2abca30e21f9e044b90c806b0281d4768b8b848cc",
 }
 # 사람이 대조할 질문과, 그 자리를 찾기 쉽게 보여 줄 표현
 HUMAN_CHECKS = [
