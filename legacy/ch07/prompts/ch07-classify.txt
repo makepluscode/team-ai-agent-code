@@ -1,6 +1,0 @@
-스튜디오 메리 대표 문의 메일함에 들어온 문의 한 건을 판정해 줘.
-판정 질문은 {{INPUT}}/questions.json이야. 질문마다 instructions와 criteria를 그대로 따라 줘.
-문의는 {{INPUT}}/inquiries.json에서 지정한 ID의 body와 고객·캠페인 ID만 사용해 줘.
-choice 질문은 criteria의 이름 중 하나만 고르고 confidence(0~1)를 붙여 줘. 고를 수 없으면 choice를 null로 둬.
-score 질문은 criteria 목록의 순번(0부터)을 score로, noul 질문은 0~1 사이 값을 noul로 답해 줘.
-판단 근거가 된 본문 구절을 evidence에 짧게 옮겨 줘. 담당자를 배정하거나 메일을 보내지 마.

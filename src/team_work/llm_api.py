@@ -1,4 +1,3 @@
-#!/usr/bin/env python3
 """Direct commercial-model calls for readers without Hermes. Standard library only.
 
 Provider order: TEAM_AGENT_PROVIDER, else the first key found among
@@ -149,7 +148,7 @@ def complete(prompt, *, json_output=False, max_tokens=8192, timeout=180, retries
 
 def strip_fence(text):
     """Remove one surrounding ``` fence that models often add."""
-    match = re.match(r"^\s*```[a-zA-Z]*\n(.*)\n```\s*$", text, re.S)
+    match = re.match(r"^\s*```[a-zA-Z]*\n(.*)\n```\s*$", text, re.DOTALL)
     return match.group(1) if match else text
 
 
@@ -161,7 +160,7 @@ def repair_escapes(text):
         if body[0] in '"\\/bfnrt' or re.fullmatch(r"u[0-9a-fA-F]{4}", body):
             return match.group(0)
         return "\\\\" + body
-    return re.sub(r'\\(u[0-9a-fA-F]{4}|.)', fix, text, flags=re.S)
+    return re.sub(r'\\(u[0-9a-fA-F]{4}|.)', fix, text, flags=re.DOTALL)
 
 
 def parse_json(text):

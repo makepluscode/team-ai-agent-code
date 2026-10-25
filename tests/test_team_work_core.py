@@ -415,7 +415,7 @@ def test_failed_schedule_reports_check_needed_without_completing(tmp_path, monke
 
 
 def test_claude_truncated_response_is_failure(monkeypatch):
-    import llm
+    from team_work import llm_api as llm
     monkeypatch.setenv("TEAM_AGENT_PROVIDER", "claude")
     monkeypatch.setenv("ANTHROPIC_API_KEY", "test")
     monkeypatch.setattr(llm, "_post", lambda *a, **k: {"content": [{"type": "text", "text": "| 잘린"}],

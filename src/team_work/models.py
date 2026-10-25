@@ -2,8 +2,7 @@
 
 import importlib.util
 import os
-
-from .workspace import PACKAGE_ROOT
+from pathlib import Path
 
 TEAM_SYSTEM = (
     "너는 스튜디오 메리 팀의 내부 업무 에이전트다. 첨부 자료에 있는 사실만 쓰고, "
@@ -11,9 +10,10 @@ TEAM_SYSTEM = (
 )
 
 
-def legacy_module(name):
+def llm_module():
+    # 상용 API 호출부(llm_api.py)를 호출마다 새로 읽는다. 호출부가 자체 시스템 프롬프트를 모듈 상태로 둔다.
     spec = importlib.util.spec_from_file_location(
-        f"team_work_legacy_{name}", PACKAGE_ROOT / f"{name}.py"
+        "team_work_llm_api", Path(__file__).resolve().parent / "llm_api.py"
     )
     module = importlib.util.module_from_spec(spec)
     spec.loader.exec_module(module)
@@ -27,7 +27,7 @@ def call_commercial(system, prompt, *, json_output=False):
         raise ValueError(
             "ANTHROPIC_API_KEY와 확인한 TEAM_AGENT_MODEL을 환경 변수로 설정하세요. 모델 지원은 TODO(검증)입니다."
         )
-    llm = legacy_module("llm")
+    llm = llm_module()
     # Fresh module instance per call: the legacy runner keeps its own system prompt.
     llm.SYSTEM = TEAM_SYSTEM
     try:
@@ -41,4 +41,4 @@ def call_commercial(system, prompt, *, json_output=False):
 
 
 def parse_json(text):
-    return legacy_module("llm").parse_json(text)
+    return llm_module().parse_json(text)

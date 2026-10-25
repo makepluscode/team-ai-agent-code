@@ -1,7 +1,0 @@
-금요일 16:30 위키 드라이브 내보내기 예약안을 만들어 줘. 등록은 하지 마.
-업무시간·휴무일은 {{INPUT}}/business-hours.json을 읽어 줘.
-첫 단계는 위키 동기화 스킬의 받기 전용 동작(pull-only)이고, 멈추면 내보내지 않고 멈춘 이유만 기록해.
-내보낼 범위는 {{WIKI}}/wiki/index.md의 고객·캠페인 페이지로 고정하고 raw·guides·skills는 빼 줘.
-고객 공유 폴더는 예약에서 빼고 사람이 직접 내보내게 해.
-휴무일과 겹친 금요일은 건너뛰고 다음 금요일에 실행한다고 적어 줘.
-결과는 JSON 예약안으로 schedule, timezone, status(not_registered), steps, excluded, check를 담아 {{OUTPUT}}에 저장해 줘.

@@ -1,7 +1,0 @@
-스튜디오 메리의 회의록을 준비해 줘. 새 프로그램을 만들지 말고 업무 결과만 저장해 줘.
-회의 정보는 {{INPUT}}/meeting.json, 실제 사용할 전사문은 {{TRANSCRIPT}}야.
-confirmed, tentative, cancelled를 구분하고 결정마다 실제 전사문에 있는 근거 문장을 남겨 줘.
-기획·PM의 할 일을 task, role, due로 적고 미정 담당자·기한·금액을 만들지 마.
-회의 식별자와 source_event_id, 원문 출처, 버전을 남겨 줘. supersedes는 출처가 있을 때만 적어 줘.
-결과 JSON은 meeting_id, source, source_event_id, version(정수), decisions, cancelled, actions, unknown 필드를 포함해. decisions는 상태별로 묶지 말고 하나의 목록으로, 항목마다 id·status·value·evidence(·supersedes)를 적어. cancelled·unknown은 문자열 목록, actions는 task·role·due 객체 목록이야. {{OUTPUT}}/minutes.json에 저장해 줘.
-외부 게시·발송은 하지 마. 생성한 JSON을 다시 읽어 확인해 줘.
