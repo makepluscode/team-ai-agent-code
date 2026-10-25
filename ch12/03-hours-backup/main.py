@@ -165,7 +165,7 @@ def load_team_work():
     # 1. 제공 코드의 위치와 버전을 확인한다
     package = CODE / "src" / "team_work"
     if not package.is_dir():
-        sys.exit(f"제공 코드를 찾지 못했습니다: {CODE}\n1.2.3항의 git clone 위치를 확인하거나 TEAM_AGENT_CODE를 지정하세요.")
+        sys.exit(f"제공 코드를 찾지 못했습니다: {CODE}\n이 책 사용 설명서 '예제 다운로드'의 git clone 위치를 확인하거나 TEAM_AGENT_CODE를 지정하세요.")
     sys.path.insert(0, str(CODE / "src"))
     import team_work
     from team_work.cli import main

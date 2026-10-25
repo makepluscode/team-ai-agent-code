@@ -7,12 +7,12 @@
 ```bash
 cd ~/team-ai-agent/code/ch02/03-compare-meetings
 hermes chat --query-file prompt.md
-uv run check.py
+cat output/DOC-006_comparison.md
 ```
 
-헤르메스가 결과를 저장하고 다시 읽어 보여 주면 `/exit`로 대화를 마친 뒤 check.py를 실행합니다.
+헤르메스가 결과를 저장하고 다시 읽어 보여 주면 `/exit`로 대화를 마친 뒤 결과 파일을 엽니다.
 
-처음부터 다시 할 때는 이 폴더에서 `uv run reset.py`를 실행해 받은 처음 상태로 되돌린 뒤 실행 방법을 다시 따라 합니다.
+처음부터 다시 할 때는 이 폴더에서 `uv run reset.py`를 실행해 결과 폴더(output/)를 지운 뒤 실행 방법을 다시 따라 합니다. 헤르메스 설정(~/.hermes)은 바뀌지 않습니다.
 
 ## 폴더 구성
 
@@ -20,8 +20,15 @@ uv run check.py
 |---|---|
 | prompt.md | 비교 기준과 저장 위치를 담은 지시문 |
 | input/ | 02-organize-notes의 정리본과 같은 두 주간회의 노트(합성 자료) |
-| expected/DOC-006_comparison.md | 저자가 편집한 비교용 결과. 실제 모델 응답이 아닙니다 |
-| check.py | 원본 보존과 결과 저장을 확인하고, 사람이 대조할 줄을 보여 줍니다 |
-| reset.py | 예제 폴더를 받은 처음 상태로 되돌리기(다시 할 때) |
+| expected/DOC-006_comparison.md | 편집한 비교용 결과. 실제 모델 응답이 아닙니다 |
+| reset.py | 결과 폴더(output/)를 지워 처음부터 다시 하기. ~/.hermes는 바꾸지 않습니다 |
 
 앞 예제를 하지 않았어도 이 폴더의 input/만으로 시작할 수 있습니다.
+
+## 확인할 것
+
+결과 파일을 열어 두 노트와 대조합니다.
+
+- 두 노트의 출처(파일명·절 제목 또는 항목키)가 사실 옆에 적혔는가
+- 최신 경로 병기 의견이 결정이 아니라 제안으로 남았는가
+- 장소·최종 검토자가 '미정'으로 남았는가

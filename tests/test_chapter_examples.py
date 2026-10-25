@@ -1,32 +1,14 @@
-"""장별 예제 폴더(ch01~ch03)의 check.py가 기준 결과로 통과하고 원본 변경을 잡는지 확인한다."""
+"""장별 예제 폴더의 check.py가 기준 결과로 통과하고 원본 변경을 잡는지 확인한다(1~3장은 ch02/02-organize-notes에만 check.py가 있다)."""
 
 import json
 import shutil
 import subprocess
 import sys
-from datetime import date
 from pathlib import Path
 
 import pytest
 
 ROOT = Path(__file__).resolve().parents[1]
-
-# 예제 폴더 → (expected/ 안의 파일, output/ 안에 둘 이름)
-SIMPLE = {
-    "ch01/02-notice-check": ("DOC-005_notice-check.md", "DOC-005_notice-check.md"),
-    "ch02/03-compare-meetings": ("DOC-006_comparison.md", "DOC-006_comparison.md"),
-    "ch03/01-onboarding-guide": (
-        "DOC-007_onboarding-guide.r1.md",
-        "DOC-007_onboarding-guide.r1.md",
-    ),
-    "ch03/02-weekly-report": ("DOC-009_weekly-report.r1.md", "DOC-009_weekly-report.r1.md"),
-    "ch03/03-weekly-skill": ("DOC-009_weekly-report.r1.md", "DOC-009_weekly-report_skill-run.md"),
-    "ch03/04-weekly-schedule": (
-        "DOC-009_weekly-report.r1.md",
-        f"scheduled/{date.today().isoformat()}_DOC-009_weekly-report.r1.md",
-    ),
-}
-
 
 def run_check(folder: Path) -> subprocess.CompletedProcess:
     return subprocess.run(
@@ -43,22 +25,6 @@ def copy_example(tmp_path: Path, name: str) -> Path:
     target = tmp_path / name.replace("/", "_")
     shutil.copytree(ROOT / name, target, ignore=shutil.ignore_patterns("output", ".venv"))
     return target
-
-
-@pytest.mark.parametrize("name", sorted(SIMPLE))
-def test_simple_examples_pass_and_detect_changes(tmp_path, name):
-    folder = copy_example(tmp_path, name)
-    assert run_check(folder).returncode == 1  # 결과 파일이 없으면 실패
-    source, result = SIMPLE[name]
-    (folder / "output" / result).parent.mkdir(parents=True, exist_ok=True)
-    shutil.copy(folder / "expected" / source, folder / "output" / result)
-    done = run_check(folder)
-    assert done.returncode == 0, done.stdout
-    assert "자동 확인: 통과" in done.stdout
-    # 원본을 한 글자 바꾸면 실패해야 한다
-    first = min(p for p in (folder / "input").rglob("*") if p.is_file())
-    first.write_bytes(first.read_bytes() + b"\n")
-    assert run_check(folder).returncode == 1
 
 
 def organize_like_expected(folder: Path) -> list[dict]:
@@ -110,14 +76,6 @@ def test_organize_catches_mistakes(tmp_path, mistake):
     else:
         (folder / "input" / "files" / "이름 없음.txt").unlink()
     write_map(folder, rows)
-    assert run_check(folder).returncode == 1
-
-
-def test_schedule_ignores_old_results(tmp_path):
-    folder = copy_example(tmp_path, "ch03/04-weekly-schedule")
-    old = folder / "output" / "scheduled" / "2026-10-09_DOC-009_weekly-report.r1.md"
-    old.parent.mkdir(parents=True)
-    shutil.copy(folder / "expected" / "DOC-009_weekly-report.r1.md", old)
     assert run_check(folder).returncode == 1
 
 

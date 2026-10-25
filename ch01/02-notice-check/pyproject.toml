@@ -1,6 +1,6 @@
 [project]
 name = "ch01-02-notice-check"
 version = "0.1.0"
-description = "1장 안내문 점검 예제의 결과 확인 (표준 라이브러리만 사용)"
+description = "ch01/02-notice-check 예제 실행 설정(표준 라이브러리만 사용)"
 requires-python = ">=3.11"
 dependencies = []

@@ -10,11 +10,11 @@
       "commands": [
         "cd ~/team-ai-agent/code/ch01/02-notice-check",
         "hermes chat --query-file prompt.md",
-        "uv run check.py"
+        "head output/notice-check.md"
       ],
       "checks": [
         "자기소개에 이름 반영",
-        "DOC-005 점검표 저장·원본과 자료함 해시·경로 상태와 잠정/미정(사람 확인)"
+        "output/notice-check.md 저장, 경로 세 개 가운데 3번만 위치 다름(사람 확인, 1장은 check.py 없음)"
       ],
       "limits": [
         "01-hello-jarvis의 이름 적용은 2026-10-18 Windows+WSL2 테스트베드(헤르메스 v0.22.1·claude-haiku-5-5)에서 확인. 02-notice-check(2026-10-20 새 예제)의 헤르메스 실행과 맥 기준 장비는 TODO(검증)"
@@ -31,7 +31,7 @@
       "commands": [
         "cd ~/team-ai-agent/code/ch02/<예제 폴더>",
         "hermes chat --query-file prompt.md",
-        "uv run check.py"
+        "uv run check.py  # 02-organize-notes만"
       ],
       "checks": [
         "답변 규칙 전후 형식 차이",
@@ -57,10 +57,9 @@
         "hermes chat -s weekly-report --query-file prompt.md",
         "hermes cron create \"0 17 * * 5\" --name weekly-report-practice --skill weekly-report --workdir \"$PWD\" \"$(cat prompt.md)\"",
         "hermes cron run weekly-report-practice",
-        "uv run check.py"
+        "cat output/<결과 파일>  # 1~3장은 02-organize-notes 외에 check.py 없음"
       ],
       "checks": [
-        "DOC-007 잠정·미정",
         "항목키별 완료4건·재언급·개인 메모 제외·관측 기준 유지",
         "스킬 local 등록·짧은 요청 재실행",
         "예약 등록·즉시 실행·결과 파일·삭제"
@@ -69,10 +68,9 @@
         "2026-10-18 Windows+WSL2 테스트베드에서 헤르메스 v0.22.1·claude-haiku-5-5로 확인. 맥 기준 장비는 TODO(검증)"
       ],
       "examples": [
-        "ch03/01-onboarding-guide",
-        "ch03/02-weekly-report",
-        "ch03/03-weekly-skill",
-        "ch03/04-weekly-schedule"
+        "ch03/01-weekly-report",
+        "ch03/02-weekly-skill",
+        "ch03/03-weekly-schedule"
       ]
     },
     {

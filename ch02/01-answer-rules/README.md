@@ -14,10 +14,10 @@ hermes chat --query-file question.md      # 적용 후 답 확인
 ```
 
 - SOUL.md를 저장할 때 헤르메스가 Dangerous Command 상자로 승인을 묻습니다. 저장 경로를 확인한 뒤 Allow once를 고릅니다.
-- 초안 작성을 건너뛰려면 output/SOUL.md 대신 이 폴더의 SOUL.md(저자가 편집한 규칙)를 복사합니다.
+- 초안 작성을 건너뛰려면 output/SOUL.md 대신 이 폴더의 SOUL.md(편집한 규칙)를 복사합니다.
 - 되돌리려면 `cp ~/.hermes/SOUL.md.bak ~/.hermes/SOUL.md`를 실행합니다.
 
-처음부터 다시 할 때는 이 폴더에서 `uv run reset.py`를 실행해 받은 처음 상태로 되돌린 뒤 실행 방법을 다시 따라 합니다.
+처음부터 다시 할 때는 이 폴더에서 `uv run reset.py`를 실행해 결과 폴더(output/)를 지운 뒤 실행 방법을 다시 따라 합니다. 헤르메스 설정(~/.hermes)은 바뀌지 않습니다.
 
 ## 폴더 구성
 
@@ -27,7 +27,7 @@ hermes chat --query-file question.md      # 적용 후 답 확인
 | prompt.md | 메모와 현재 SOUL.md로 규칙 초안을 만드는 지시문 |
 | question.md | 원본에 없는 수치를 묻는 확인 질문 |
 | input/DOC-001_onboarding.md | 확인 질문이 읽는 온보딩 자료(합성 자료) |
-| SOUL.md | 저자가 편집한 이름+답변 규칙. 비교·대체용 |
-| reset.py | 예제 폴더를 받은 처음 상태로 되돌리기(output/ 삭제). ~/.hermes/SOUL.md는 되돌리지 않습니다 |
+| SOUL.md | 편집한 이름+답변 규칙. 비교·대체용 |
+| reset.py | 결과 폴더(output/)를 지워 처음부터 다시 하기. ~/.hermes는 바꾸지 않습니다 |
 
 규칙의 효과는 한 번의 답보다 [확인 필요] 표시, 사실별 출처, '제안:' 구분 같은 형식이 매번 유지되는지로 봅니다. SOUL.md는 모델에 전달하는 규칙이며 파일 쓰기나 외부 전송을 막는 권한 설정이 아닙니다.

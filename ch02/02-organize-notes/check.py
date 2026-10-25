@@ -1,7 +1,7 @@
 """2장 회의 노트·업무 노트 정리 예제의 결과를 확인한다.
 
 입력: input/files/(원본 12개), output/source-map.json(헤르메스가 쓴 대응표), output/organized/(정리본)
-기준: expected/source-map.json(저자가 편집한 대응표와 원본 해시)
+기준: expected/source-map.json(편집한 대응표와 원본 해시)
 출력: 화면에 자동 확인 결과와 사람이 확인할 대응표를 출력한다. 파일은 바꾸지 않는다.
 실행: 이 폴더에서 `uv run check.py`
 
@@ -47,6 +47,7 @@ def main() -> int:
         rows = json.loads(RESULT.read_text(encoding="utf-8"))["files"]
     except (json.JSONDecodeError, KeyError, TypeError):
         print('[실패] output/source-map.json의 형식이 지시문과 다릅니다({"files": [...]}).')
+        print("  → 다음에 할 일: 같은 대화에서 지시문 4번의 형식대로 output/source-map.json을 다시 저장해 달라고 요청한 뒤 uv run check.py를 다시 실행합니다.")
         return 1
     by_source = {}
     for row in rows:
@@ -64,6 +65,8 @@ def main() -> int:
             problems.append(f"대응표에 {item['source']} 줄이 {len(found)}개입니다(1개여야 함)")
             continue
         row = found[0]
+        if str(row.get("copy")).strip().lower() in ("null", "none", ""):
+            row["copy"] = None  # "null"을 문자열로 적은 대응표도 정리본 없음으로 읽는다
         if row.get("status") != item["status"]:
             problems.append(f"{item['source']}: 상태 {row.get('status')} (기준 {item['status']})")
             continue
@@ -102,6 +105,9 @@ def main() -> int:
 
     for line in problems:
         print(f"[실패] {line}")
+    if problems:
+        print("  → 다음에 할 일: 같은 대화에서 [실패] 줄을 보여 주고 대응표와 정리본을 고쳐 달라고 요청한 뒤 uv run check.py를 다시 실행합니다.")
+        print("    처음부터 다시 하려면 uv run reset.py로 결과 폴더를 지웁니다. 원본이 바뀌었으면 git restore input으로 받은 상태로 되돌립니다.")
     if not problems:
         print("[통과] 정리본 10개·중복 1개·확인 필요 1개, 이름 형식·날짜·바이트 일치")
 
