@@ -1,7 +1,7 @@
 [project]
 name = "team-ai-agent-code"
 version = "0.1.0"
-description = "팀 AI 에이전트 실전 실습 예제 및 대시보드 저장소"
+description = "『팀 AI 에이전트 실전』 장별 실습 예제와 제공 코드"
 readme = "README.md"
 requires-python = ">=3.11"
 dependencies = [
@@ -34,13 +34,9 @@ build-backend = "hatchling.build"
 packages = ["src/team_work"]
 
 [tool.hatch.build.targets.wheel.force-include]
-"src/app" = "src/app"
-"src/mcp" = "src/mcp"
-"llm.py" = "llm.py"
-"wiki.py" = "wiki.py"
 "examples" = "examples"
 "book-exercises.yaml" = "book-exercises.yaml"
-"legacy/ch02/wiki-starter/skills/wiki-sync" = "legacy/ch02/wiki-starter/skills/wiki-sync"
+"ch05/02-wiki-sync/skills/wiki-sync" = "ch05/02-wiki-sync/skills/wiki-sync"
 
 [tool.ruff]
 line-length = 100

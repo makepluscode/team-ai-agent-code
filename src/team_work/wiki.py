@@ -15,6 +15,14 @@ from . import models
 from .io import read_text, write_json, write_new
 from .workspace import PACKAGE_ROOT, hashes, verify
 
+API_FORMAT = """
+# 답하는 형식
+너는 파일을 직접 쓸 수 없다. 바꿀 파일의 전체 내용을 JSON 하나로만 답한다.
+{"files": [{"path": "wiki/...", "content": "파일 전체 내용"}], "summary": "바뀐 파일과 변경 내용 요약"}
+- path는 wiki/ 아래만 쓴다. raw/와 AGENTS.md는 바꾸지 않는다.
+- 고치는 파일은 고치지 않은 부분까지 포함한 전체 내용을 다시 적는다.
+- wiki/log.md는 기존 내용 전체 뒤에 한 줄을 덧붙인 전체 내용을 적는다.
+"""
 
 def register(workspace, source):
     if Path(source).is_symlink():
@@ -32,7 +40,6 @@ def register(workspace, source):
     if marker.exists() or not target.resolve().is_relative_to(work / "raw"):
         raise ValueError("기존 등록 기록이나 원본 경로를 확인하세요.")
     text = read_text(source)
-    # Use the same source hashing convention as legacy wiki.py, without its auto-commit.
     sha = hashlib.sha256(source.read_bytes()).hexdigest()
     write_new(target, text)
     write_json(
@@ -74,8 +81,7 @@ def propose(workspace):
         for p in sorted((work / folder).rglob("*"))
         if p.is_file() and p.suffix in {".md", ".txt", ".json"}
     ]
-    llm = models.legacy_module("llm")
-    legacy = models.legacy_module("wiki")
+    llm = models.llm_module()
     record = {
         "data_kind": "observed",
         "artifact_kind": "execution-log",
@@ -87,7 +93,7 @@ def propose(workspace):
     try:
         response = models.call_commercial(
             "wiki-curator 한 곳이 위키를 정리합니다. 원본·과거 버전은 보존하고 현재 결정·취소·미정을 구별합니다.",
-            read_text(work / "prompts/wiki.txt") + legacy.API_FORMAT + llm.attach(attachments),
+            read_text(work / "prompts/wiki.txt") + API_FORMAT + llm.attach(attachments),
             json_output=True,
         )
         record.update(
@@ -355,7 +361,7 @@ def sync(workspace, arguments):
     work = Path(workspace).resolve()
     script = work / "skills/wiki-sync/scripts/wiki_sync.py"
     if not script.is_file():
-        script = PACKAGE_ROOT / "legacy/ch02/wiki-starter/skills/wiki-sync/scripts/wiki_sync.py"
+        script = PACKAGE_ROOT / "ch05/02-wiki-sync/skills/wiki-sync/scripts/wiki_sync.py"
     # The reused skill handles selected files, rejects force and stops on conflict.
     return subprocess.run(
         [sys.executable, str(script), *arguments], cwd=work, check=False

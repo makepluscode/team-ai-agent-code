@@ -1,7 +1,0 @@
-{
-  "timezone": "Asia/Seoul",
-  "local_time": "2026-10-08T09:00:00+09:00",
-  "within_business_hours": true,
-  "action": "작업 실행 가능",
-  "note": "이 코드는 실행 전 조건을 확인합니다. 예약 등록이나 컴퓨터 자동 시작은 별도입니다."
-}
