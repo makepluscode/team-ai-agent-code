@@ -31,7 +31,7 @@ def main() -> int:
     prefix = git("rev-parse", "--show-prefix")
     if top.returncode or prefix.returncode or Path(top.stdout.strip()).resolve() != HERE.parents[1] \
             or git("cat-file", "-e", f"HEAD:{prefix.stdout.strip()}README.md").returncode:
-        print("이 폴더는 git clone으로 받은 code 폴더의 예제 폴더가 아니어서 되돌릴 수 없습니다(1.2.3항 예제 다운로드).\n"
+        print("이 폴더는 git clone으로 받은 code 폴더의 예제 폴더가 아니어서 되돌릴 수 없습니다(이 책 사용 설명서의 '예제 다운로드').\n"
               "git이 설치돼 있는지(git --version) 확인하고, 압축 파일로 받았다면 git clone으로 다시 받으세요.")
         return 1
     prefix = prefix.stdout.strip()

@@ -1,0 +1,6 @@
+[project]
+name = "ch02-01-answer-rules"
+version = "0.1.0"
+description = "ch02/01-answer-rules 예제 실행 설정(표준 라이브러리만 사용)"
+requires-python = ">=3.11"
+dependencies = []

@@ -18,7 +18,7 @@ from pathlib import Path
 
 CODE = Path(__file__).resolve().parents[1]
 EXAMPLES = CODE / "examples"
-CH03 = CODE / "ch03" / "02-weekly-report"
+CH03 = CODE / "ch03" / "01-weekly-report"
 NEW_NOTES = CH03 / "input" / "organized"
 NEW_DOC004 = CH03 / "input" / "DOC-004_weekly-meetings.md"
 NEW_DOC009 = CH03 / "expected" / "DOC-009_weekly-report.r1.md"
@@ -241,7 +241,7 @@ def load_team_work():
     # 1. 제공 코드의 위치와 버전을 확인한다
     package = CODE / "src" / "team_work"
     if not package.is_dir():
-        sys.exit(f"제공 코드를 찾지 못했습니다: {CODE}\n1.2.3항의 git clone 위치를 확인하거나 TEAM_AGENT_CODE를 지정하세요.")
+        sys.exit(f"제공 코드를 찾지 못했습니다: {CODE}\n이 책 사용 설명서 '예제 다운로드'의 git clone 위치를 확인하거나 TEAM_AGENT_CODE를 지정하세요.")
     sys.path.insert(0, str(CODE / "src"))
     import team_work
     from team_work.cli import main
@@ -602,7 +602,7 @@ def main() -> int:
     prefix = git("rev-parse", "--show-prefix")
     if top.returncode or prefix.returncode or Path(top.stdout.strip()).resolve() != HERE.parents[1] \
             or git("cat-file", "-e", f"HEAD:{prefix.stdout.strip()}README.md").returncode:
-        print("이 폴더는 git clone으로 받은 code 폴더의 예제 폴더가 아니어서 되돌릴 수 없습니다(1.2.3항 예제 다운로드).\n"
+        print("이 폴더는 git clone으로 받은 code 폴더의 예제 폴더가 아니어서 되돌릴 수 없습니다(이 책 사용 설명서의 '예제 다운로드').\n"
               "git이 설치돼 있는지(git --version) 확인하고, 압축 파일로 받았다면 git clone으로 다시 받으세요.")
         return 1
     prefix = prefix.stdout.strip()
@@ -713,8 +713,3 @@ if __name__ == "__main__":
         OUT = Path(sys.argv[2]).resolve()
     for spec in SPECS:
         print("built", build(spec).relative_to(OUT))
-    # 1~3장 예제 폴더는 손으로 관리하므로 reset.py만 같은 내용으로 쓴다
-    for folder in sorted(CODE.glob("ch0[1-3]/[0-9][0-9]-*")):
-        if OUT == CODE and folder.is_dir():
-            write_reset(folder)
-            print("reset", folder.relative_to(CODE))

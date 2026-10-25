@@ -18,6 +18,7 @@ input/files/에 뒤섞인 회의 노트·업무 노트·메신저 자료를 정�
 3. 내가 확인하면 원본을 복사(cp)해서 정리본을 만들어 줘. 원본은 옮기거나 고치거나 지우지 마.
    같은 이름의 파일이 이미 있으면 덮어쓰지 말고 멈춰 줘.
 4. 복사를 마치면 대응표를 output/source-map.json에 다음 형식으로 저장해 줘.
-   {"files": [{"source": "input/files/원래 이름", "copy": "output/organized/정리본 이름 또는 null",
+   {"files": [{"source": "input/files/원래 이름", "copy": "output/organized/정리본 이름",
                "status": "organized | duplicate | needs_review", "date_basis": "근거"}]}
+   중복 파일은 정리본이 없으므로 "copy": null처럼 따옴표 없는 null로 적어 줘.
 5. 마지막으로 output/organized/의 목록을 이름순으로 보여 줘.

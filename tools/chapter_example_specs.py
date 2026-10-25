@@ -472,7 +472,7 @@ SPECS.append({
     "chapter": 5, "name": "05-skill-share", "title": "공유 스킬 배포", "base": "wiki/ch05",
     "remove": CH05_REMOVE + ["skills"],
     "files": {"AGENTS.md": WIKI_RULES, ".gitignore": GITIGNORE, **CH04_WIKI},
-    "copy": {"skills/weekly-report/SKILL.md": "ch03/03-weekly-skill/skills/weekly-report/SKILL.md"},
+    "copy": {"skills/weekly-report/SKILL.md": "ch03/02-weekly-skill/skills/weekly-report/SKILL.md"},
     "after": {"prompt.md": """
         3장의 주간 보고 스킬(skills/weekly-report/SKILL.md)을 팀 공유용으로 점검해 줘.
 
@@ -1383,6 +1383,13 @@ SPECS.append({
         2. 미완료 업무마다 연결된 회의 결정(DOC-012) 또는 검토 기준(DOC-013) 출처를 붙여 줘.
         3. 기한(10/14 17:00)이 지난 TASK-009는 기한 초과로 따로 표시하고, 외부 회신이 필요하면 사람이 발송해야 한다고 적어 줘.
         output/dashboard-briefing.md에 저장하고 다시 읽어 보여 줘.
+    """, "slack-briefing.md": """
+        이 폴더에서 uv run main.py briefing을 실행하고, 그 결과로 팀 채널에 보낼 아침 브리핑을 써 줘.
+        1. 밤사이(전 업무일 18:00부터 오늘 09:00까지) 새로 접수된 요청 수와 요청 ID를 첫 줄에 적어 줘.
+        2. 기한이 지난 업무와 확인 대기 업무를 업무 ID·담당·출처와 함께 한 줄씩 적어 줘.
+        3. 외부 회신이 필요한 업무에는 '회신은 사람이 발송'이라고 적어 줘.
+        4. 고객 메일 원문, 외부 발신자의 이름·주소, 키나 토큰 같은 값은 넣지 마.
+        전체를 15줄 안으로 쓰고, 마지막 답에는 채널에 보낼 브리핑 본문만 써 줘.
     """},
     "main": {"title": "12장 아침 브리핑 예제: 원문 근거가 붙은 업무시간 브리핑을 만든다.",
              "steps": {"setup": ("기록 DB 준비", [["requests", "init"]]),
@@ -1398,7 +1405,25 @@ SPECS.append({
         "run": ["cd ~/team-ai-agent/code/ch12/02-morning-briefing", "uv run main.py setup", "uv run main.py briefing",
                 "hermes chat --query-file prompt.md", "uv run check.py"],
         "files": [("input/snapshot.json", "공동 기록"), ("input/business-hours.json", "업무시간 규칙(월~금 09~18시)"),
-                  ("prompt.md", "브리핑 문서 지시문"), ("main.py", "setup / briefing / json"), ("check.py", "원본 보존·브리핑 저장 확인")],
+                  ("prompt.md", "브리핑 문서 지시문"), ("slack-briefing.md", "팀 Slack 채널로 보낼 브리핑 지시문(선택, 12.3.3절)"),
+                  ("main.py", "setup / briefing / json"), ("check.py", "원본 보존·브리핑 저장 확인")],
+        "notes": """
+            ## 선택: 팀 Slack 채널로 브리핑 받기(12.3.3절)
+
+            공동 컴퓨터의 팀 헤르메스 한 대에만 연결합니다. Slack 앱 만들기와 토큰 발급은 책 12.3.3절을 따르고, 토큰은 ~/.hermes/.env에만 둡니다.
+
+            ```bash
+            hermes slack manifest --agent-view --write
+            hermes gateway setup
+            hermes gateway restart
+            hermes cron create "0 9 * * 1-5" --name morning-briefing --deliver slack --workdir "$PWD" "$(cat slack-briefing.md)"
+            hermes cron run morning-briefing
+            hermes cron list
+            hermes cron pause morning-briefing
+            ```
+
+            실제 Slack 연결과 전송은 기준 장비에서 확인하지 않았습니다(TODO(검증)). 연결하지 않아도 prompt.md와 check.py로 이 예제를 마칠 수 있습니다.
+        """,
     },
 })
 
