@@ -1,42 +1,49 @@
 # 03-weekly-schedule: 주간 보고 예약 하나와 실행 확인
 
+> 이 예제는 윈도우의 헤르메스 데스크톱 앱으로 실습합니다. 예제는 홈 폴더의 team-ai-agent\code(C:\Users\로그인 이름\team-ai-agent\code)에 받고, 대화창에 넣을 문장은 [복사용 문장 모음](../../COMMANDS.md)에서 복사합니다. 헤르메스 설정 폴더는 C:\Users\로그인 이름\AppData\Local\hermes입니다.
+
 02-weekly-skill에서 등록한 weekly-report 스킬을 매주 금요일 17시에 실행하는 개인 연습용 예약 하나를 등록하고, 즉시 실행으로 결과 파일을 확인하는 예제입니다. 책 3.3절에 대응합니다.
 
 ## 시작 조건
 
-weekly-report 스킬이 내 헤르메스에 등록돼 있어야 합니다(`hermes skills list`에 local로 표시). 없으면 02-weekly-skill의 등록 명령을 먼저 실행합니다.
+weekly-report 스킬이 내 헤르메스에 등록돼 있어야 합니다(앱 왼쪽 [Capabilities]의 스킬 목록). 없으면 02-weekly-skill을 먼저 실행합니다.
 
 ## 실행 방법
 
-```bash
-cd ~/team-ai-agent/code/ch03/03-weekly-schedule
-hermes cron create "0 17 * * 5" --name weekly-report-practice --skill weekly-report --workdir "$PWD" "$(cat prompt.md)"
-hermes cron list
-hermes cron run weekly-report-practice
-ls output/scheduled
-hermes cron pause weekly-report-practice
+1. 등록: 새 대화에서 다음 문장을 보냅니다.
+
+```text
+매주 금요일 오후 5시에 실행되는 예약을 weekly-report-practice라는 이름으로 등록해 줘. 작업 폴더는 홈 폴더의 team-ai-agent\code\ch03\03-weekly-schedule이고, 예약이 실행할 지시는 그 폴더의 prompt.md 내용 그대로야. 등록한 뒤 예약 목록과 다음 실행 시각을 보여 줘.
 ```
 
-- 예약 실행은 output/scheduled/에 실행 날짜가 붙은 보고를 남깁니다. 실행 전후의 `ls` 결과로 이번 실행의 파일을 구별하고 `cat`으로 엽니다.
-- 연습이 끝나면 예약을 멈추거나(`pause`) 지웁니다(`hermes cron remove weekly-report-practice`). 등록 명령을 다시 실행하기 전에는 `hermes cron list`로 같은 이름의 예약이 이미 있는지 확인합니다(같은 이름 재등록 동작은 검증하지 않았습니다).
-- 정해진 시각의 자동 실행은 게이트웨이가 켜져 있어야 합니다(`hermes cron status`).
+2. 확인과 즉시 실행: 앱 왼쪽 [Scheduled jobs]에서 weekly-report-practice를 고르고 [Trigger now]를 누릅니다. 실행 기록이 생기면 파일 탐색기에서 output\scheduled\에 실행 날짜가 붙은 보고가 생겼는지 확인합니다.
+3. 멈추기: 연습이 끝나면 [Pause]로 멈추거나, 새 대화에서 'weekly-report-practice 예약을 삭제하고, 남은 예약 목록을 보여 줘.'라고 부탁합니다.
 
-처음부터 다시 할 때는 이 폴더에서 `uv run reset.py`를 실행해 결과 폴더(output/)를 지운 뒤 실행 방법을 다시 따라 합니다. 헤르메스 설정(~/.hermes)은 바뀌지 않습니다.
+- 같은 날 다시 실행하면 같은 이름의 파일이 이미 있어 덮어쓰지 않고 멈춥니다. 다시 확인하려면 기존 파일을 예제 폴더 밖으로 옮긴 뒤 실행합니다.
+- 정해진 시각의 자동 실행은 그 시각에 컴퓨터와 헤르메스 앱이 켜져 있어야 합니다.
 
 ## 폴더 구성
 
 | 파일 | 역할 |
 |---|---|
 | prompt.md | 예약 실행이 쓰는 요청(저장 위치에 실행 날짜를 붙임) |
-| input/ | 3.1절과 같은 회의 노트·업무 노트 정리본, 입력 묶음, 관측 기준 |
-| expected/DOC-009_weekly-report.r1.md | 비교용 주간 보고 |
-| reset.py | 결과 폴더(output/)를 지워 처음부터 다시 하기. ~/.hermes는 바꾸지 않습니다 |
+| input\ | 3.1절과 같은 회의 노트·업무 노트 정리본, 입력 묶음, 관측 기준 |
+| expected\DOC-009_weekly-report.r1.md | 비교용 주간 보고 |
+| reset.py | 결과 폴더(output\)를 지우는 스크립트. 앱에서는 '다시 하기'처럼 대화로 지웁니다 |
 
 ## 확인할 것
 
-결과 파일을 열어 원본(input/)과 대조합니다.
+결과 파일을 열어 원본(input\)과 대조합니다.
 
-- 관측 기준 시각이 input/snapshot.json의 값 그대로인가
+- 관측 기준 시각이 input\snapshot.json의 값 그대로인가
 - 완료가 항목키 ITEM-001~004의 네 건이고, 대화의 재언급을 다시 세지 않았는가
 - ITEM-005·006이 완료가 아니라 제안·상태 미기재로 남았는가
 - 보고 업무 TASK-001이 '확인 대기'인가
+
+## 다시 하기
+
+새 대화에서 다음처럼 부탁합니다. 받은 원본(input\)과 헤르메스 설정 폴더는 지우지 않습니다. 예약은 설정에 남으므로 3번처럼 따로 멈추거나 지웁니다.
+
+```text
+작업 폴더는 홈 폴더의 team-ai-agent\code\ch03\03-weekly-schedule이야. output 폴더의 파일 목록을 보여 주고, 내가 확인하면 지워 줘.
+```

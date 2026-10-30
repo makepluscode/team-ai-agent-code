@@ -1,4 +1,4 @@
-input/DOC-004_weekly-meetings.md와 input/snapshot.json을 읽고, 묶음에 적힌 input/organized/의 텍스트 자료로 주간 보고를 써 줘.
+input\DOC-004_weekly-meetings.md와 input\snapshot.json을 읽고, 묶음에 적힌 input\organized\의 텍스트 자료로 주간 보고를 써 줘.
 관측 기간과 기준 시각은 snapshot.json을 사용하고 실행한 시각과 구별해 줘.
 
 1. 이번 주 관측 완료를 항목키별로 중복 제거하고, 각 근거 파일·절 또는 항목키를 적어 줘.
@@ -9,5 +9,5 @@ input/DOC-004_weekly-meetings.md와 input/snapshot.json을 읽고, 묶음에 적
    특정 노트에서 관측한 신규 완료 0건을 주 전체 완료 0건으로 넓히지 마.
 
 한 화면에서 읽을 수 있게 60줄 안팎으로 간결하게 쓰고, 같은 내용을 표와 목록에 되풀이하지 마.
-output/DOC-009_weekly-report.r1.md에 새로 저장한 뒤 다시 읽어 보여 줘. 같은 이름의 파일이 있으면 덮어쓰지 말고 멈춰 줘.
+output\DOC-009_weekly-report.r1.md에 새로 저장한 뒤 다시 읽어 보여 줘. 같은 이름의 파일이 있으면 덮어쓰지 말고 멈춰 줘.
 보고 업무 TASK-001은 확인 대기로 두고 입력 파일은 수정하지 마.

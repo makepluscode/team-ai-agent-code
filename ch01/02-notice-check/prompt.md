@@ -1,5 +1,5 @@
-input/notice.md에 적힌 자료 경로 세 개가 input/shared/에 실제로 있는지 하나씩 열어서 확인해 줘.
-(안내문의 shared/는 input/shared/를 뜻해.)
+input\notice.md에 적힌 자료 경로 세 개가 input\shared\에 실제로 있는지 하나씩 열어서 확인해 줘.
+(안내문의 shared/는 input\shared\를 뜻해.)
 경로에 파일이 없으면 다른 폴더에서 같은 이름을 찾아 줘. 상태는 '정상', '위치 다름', '없음' 가운데 하나로 적어 줘.
-결과는 output/notice-check.md에 '경로 | 상태 | 확인한 내용' 표로 저장하고(확인한 내용은 한 줄로 짧게), 다시 읽어서 보여 줘.
-input/의 파일은 고치지 마.
+결과는 output\notice-check.md에 '경로 | 상태 | 확인한 내용' 표로 저장하고(확인한 내용은 한 줄로 짧게), 다시 읽어서 보여 줘.
+input\의 파일은 고치지 마.
