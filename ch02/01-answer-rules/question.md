@@ -1,2 +1,2 @@
-input/DOC-001_onboarding.md를 읽고,
+input\DOC-001_onboarding.md를 읽고,
 이번 새 동료 안내 방식으로 준비 시간이 몇 시간이나 단축되는지 한 문단으로 소개해 줘.

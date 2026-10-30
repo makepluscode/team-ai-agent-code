@@ -1,29 +1,27 @@
 # 03-compare-meetings: 지난주와 이번 주 회의 비교하기
 
-정리본 가운데 두 주간회의 노트를 헤르메스가 읽고 공통점·변화·제안·미정을 출처와 함께 비교표(DOC-006)로 저장하는 예제입니다. 책 2.3절에 대응합니다.
+> 이 예제는 윈도우의 헤르메스 데스크톱 앱으로 실습합니다. 예제는 홈 폴더의 team-ai-agent\code(C:\Users\로그인 이름\team-ai-agent\code)에 받고, 대화창에 넣을 문장은 [복사용 문장 모음](../../COMMANDS.md)에서 복사합니다. 헤르메스 설정 폴더는 C:\Users\로그인 이름\AppData\Local\hermes입니다.
+
+정리본 가운데 두 주간회의 노트를 헤르메스가 읽고 공통점·변화·제안·미정을 출처와 함께 비교표(DOC-006)로 저장하는 예제입니다. 책 2.3절에 대응합니다. 앞 예제를 하지 않았어도 이 폴더의 input\만으로 시작할 수 있습니다.
 
 ## 실행 방법
 
-```bash
-cd ~/team-ai-agent/code/ch02/03-compare-meetings
-hermes chat --query-file prompt.md
-cat output/DOC-006_comparison.md
+새 대화에서 다음 문장을 보냅니다.
+
+```text
+작업 폴더는 홈 폴더의 team-ai-agent\code\ch02\03-compare-meetings야. 이 폴더의 prompt.md를 읽고 그 지시대로 해 줘. 경로는 모두 작업 폴더 기준이야.
 ```
 
-헤르메스가 결과를 저장하고 다시 읽어 보여 주면 `/exit`로 대화를 마친 뒤 결과 파일을 엽니다.
-
-처음부터 다시 할 때는 이 폴더에서 `uv run reset.py`를 실행해 결과 폴더(output/)를 지운 뒤 실행 방법을 다시 따라 합니다. 헤르메스 설정(~/.hermes)은 바뀌지 않습니다.
+헤르메스가 결과를 저장하고 다시 읽어 보여 주면, 'output\DOC-006_comparison.md를 미리보기 창에 열어 줘.'라고 부탁하거나 파일 탐색기에서 메모장으로 열어 저장된 파일을 확인합니다.
 
 ## 폴더 구성
 
 | 파일 | 역할 |
 |---|---|
 | prompt.md | 비교 기준과 저장 위치를 담은 지시문 |
-| input/ | 02-organize-notes의 정리본과 같은 두 주간회의 노트(합성 자료) |
-| expected/DOC-006_comparison.md | 편집한 비교용 결과. 실제 모델 응답이 아닙니다 |
-| reset.py | 결과 폴더(output/)를 지워 처음부터 다시 하기. ~/.hermes는 바꾸지 않습니다 |
-
-앞 예제를 하지 않았어도 이 폴더의 input/만으로 시작할 수 있습니다.
+| input\ | 02-organize-notes의 정리본과 같은 두 주간회의 노트(합성 자료) |
+| expected\DOC-006_comparison.md | 편집한 비교용 결과. 실제 모델 응답이 아닙니다 |
+| reset.py | 결과 폴더(output\)를 지우는 스크립트. 앱에서는 '다시 하기'처럼 대화로 지웁니다 |
 
 ## 확인할 것
 
@@ -32,3 +30,11 @@ cat output/DOC-006_comparison.md
 - 두 노트의 출처(파일명·절 제목 또는 항목키)가 사실 옆에 적혔는가
 - 최신 경로 병기 의견이 결정이 아니라 제안으로 남았는가
 - 장소·최종 검토자가 '미정'으로 남았는가
+
+## 다시 하기
+
+새 대화에서 다음처럼 부탁합니다. 받은 원본(input\)과 헤르메스 설정 폴더는 지우지 않습니다.
+
+```text
+작업 폴더는 홈 폴더의 team-ai-agent\code\ch02\03-compare-meetings야. output 폴더의 파일 목록을 보여 주고, 내가 확인하면 지워 줘.
+```

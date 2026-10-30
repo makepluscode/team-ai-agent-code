@@ -2,7 +2,7 @@
 
 『팀 AI 에이전트 실전』의 실습 예제입니다. 장과 예제 순서대로 폴더를 나눴고, 예제 폴더 하나에 그 실습에 필요한 지시문·입력 자료·비교용 결과·확인 스크립트가 모두 들어 있습니다.
 
-책에 나오는 설치 명령·실습 명령·대화창 지시문은 [COMMANDS.md](COMMANDS.md)에 순서대로 모여 있습니다. 책을 보고 직접 치지 말고 이 파일에서 복사해 붙여 넣으세요.
+책 1부(1~3장)는 윈도우의 헤르메스 데스크톱 앱으로 실습합니다. 저장소는 홈 폴더의 team-ai-agent\code(C:\Users\로그인 이름\team-ai-agent\code)에 받고, 대화창에 넣는 문장은 [COMMANDS.md](COMMANDS.md)에서 복사해 붙여 넣습니다. 1~3장 예제 폴더의 README도 앱 기준으로 적었습니다. 아래 '실행 방법'의 명령(git clone·hermes chat·uv run)은 4장부터의 터미널 실습용이며 아직 앱 기준으로 바꾸지 않았습니다.
 
 ## 예제 구성
 
@@ -48,7 +48,9 @@
 
 ## 실행 방법
 
-받은 저장소의 예제 폴더에 들어가 바로 실행합니다. 실습 결과는 예제 폴더의 output/·state/에 생기며 Git이 추적하지 않습니다. 처음부터 다시 할 때는 예제 폴더에서 `uv run reset.py`를 실행합니다. 지울 결과(1~3장은 output/, 4장부터는 output/·state/와 되돌릴 wiki/·raw/)를 보여 주고 y/N을 물은 뒤 받은 처음 상태로 되돌리며, 헤르메스 설정(~/.hermes)은 바꾸지 않습니다. 예제를 갱신하려면 reset.py로 되돌린 뒤 `git -C ~/team-ai-agent/code pull`을 실행합니다.
+1~3장(앱): 예제 폴더의 README '실행 방법'처럼 대화창에 '작업 폴더는 홈 폴더의 team-ai-agent\code\ch02\02-organize-notes야. 이 폴더의 prompt.md를 읽고 그 지시대로 진행해 줘.'처럼 보냅니다. 결과는 앱의 미리보기 창이나 파일 탐색기로 열고, 다시 할 때는 대화로 output 폴더를 지워 달라고 부탁합니다. 헤르메스 설정 폴더는 C:\Users\로그인 이름\AppData\Local\hermes입니다.
+
+4장부터(터미널, 1~3장 앱 실습에서는 아래 명령 상자를 쓰지 않음): 받은 저장소의 예제 폴더에 들어가 바로 실행합니다. 실습 결과는 예제 폴더의 output/·state/에 생기며 Git이 추적하지 않습니다. 처음부터 다시 할 때는 예제 폴더에서 `uv run reset.py`를 실행합니다. 지울 결과(1~3장은 output/, 4장부터는 output/·state/와 되돌릴 wiki/·raw/)를 보여 주고 y/N을 물은 뒤 받은 처음 상태로 되돌리며, 헤르메스 설정(~/.hermes)은 바꾸지 않습니다. 예제를 갱신하려면 reset.py로 되돌린 뒤 `git -C ~/team-ai-agent/code pull`을 실행합니다.
 
 ```bash
 git clone https://github.com/makepluscode/team-ai-agent-code.git ~/team-ai-agent/code
@@ -68,10 +70,10 @@ uv run check.py
 |---|---|
 | README.md | 예제가 하는 일·실행 명령·폴더 구성 |
 | prompt.md | 헤르메스에 보내는 지시문 |
-| SOUL.md | 이름·역할·말투를 정하는 기본 규칙(~/.hermes/SOUL.md로 복사해 적용) |
+| SOUL.md | 이름·역할·말투를 정하는 기본 규칙(헤르메스 설정 폴더의 SOUL.md를 이 내용으로 바꿔 적용) |
 | input/ | 지시문이 읽는 원본(합성 자료). 실습 중에 고치지 않습니다 |
 | expected/ | 비교용 편집 결과 |
-| skills/ | 헤르메스 스킬(~/.hermes/skills/로 복사해 등록) |
+| skills/ | 헤르메스 스킬(헤르메스 설정 폴더의 skills 폴더에 등록) |
 | check.py | 결과 확인 스크립트(1~3장은 ch02/02-organize-notes에만, 4장부터는 예제마다) |
 | pyproject.toml, reset.py | uv 실행 설정과 다시 하기 스크립트(모든 예제) |
 
@@ -114,4 +116,4 @@ uv run --extra dev python -m pytest -q tests
 
 ## 확인 범위
 
-1~3장 예제는 2026-10-25 Windows 11 + WSL2(Ubuntu)와 Mac mini M4(macOS 15)에서 헤르메스 v0.22.5와 claude-haiku-5-5로 이 저장소를 받아 끝까지 실행했습니다. 4~12장은 Windows + WSL2 기준 장비에서 지시문과 main.py 단계를 실행했고, 5장 GitHub 공유 저장소와 공유 스킬 배포, 6장 실제 음원 전사, 7.4절 Gmail 연결, 8.4절 로컬 판정, 맥 기준 장비 전 과정은 확인 전입니다. expected/는 편집한 비교용 결과이며 실제 모델 응답이 아닙니다.
+1~3장 예제는 Windows 11의 헤르메스 데스크톱 앱 v0.22.5(WSL 없이)와 claude-haiku-5-5로 대화창 문장대로 끝까지 실행했습니다(2026-10-27·10-29). 맥 앱은 확인 전입니다. 4~12장은 Windows + WSL2 기준 장비에서 지시문과 main.py 단계를 실행했고, 5장 GitHub 공유 저장소와 공유 스킬 배포, 6장 실제 음원 전사, 7.4절 Gmail 연결, 8.4절 로컬 판정, 맥 기준 장비 전 과정은 확인 전입니다. expected/는 편집한 비교용 결과이며 실제 모델 응답이 아닙니다.

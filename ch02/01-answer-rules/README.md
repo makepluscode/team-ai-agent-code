@@ -1,23 +1,27 @@
 # 01-answer-rules: 에이전트 답변 규칙 적용하기
 
+> 이 예제는 윈도우의 헤르메스 데스크톱 앱으로 실습합니다. 예제는 홈 폴더의 team-ai-agent\code(C:\Users\로그인 이름\team-ai-agent\code)에 받고, 대화창에 넣을 문장은 [복사용 문장 모음](../../COMMANDS.md)에서 복사합니다. 헤르메스 설정 폴더는 C:\Users\로그인 이름\AppData\Local\hermes입니다.
+
 말투·불확실성 표시·답변 구성의 규칙을 SOUL.md에 더하고, 원본에 없는 수치를 묻는 질문으로 적용 전후를 비교하는 예제입니다. 책 2.1절에 대응합니다.
 
 ## 실행 방법
 
-```bash
-cd ~/team-ai-agent/code/ch02/01-answer-rules
-hermes chat --query-file question.md      # 적용 전 답 확인
-hermes chat --query-file prompt.md        # 규칙 초안 작성 → 확인 → output/SOUL.md 저장 승인
-cp --update=none ~/.hermes/SOUL.md ~/.hermes/SOUL.md.bak
-cp output/SOUL.md ~/.hermes/SOUL.md
-hermes chat --query-file question.md      # 적용 후 답 확인
+1. 적용 전 답: 새 대화에서 '작업 폴더는 홈 폴더의 team-ai-agent\code\ch02\01-answer-rules야. 이 폴더의 question.md를 읽고 그 질문에 답해 줘.'라고 보냅니다.
+2. 규칙 초안: 새 대화에서 다음 문장을 보내고, 초안을 읽은 뒤 이어지는 '확인' 문장으로 답합니다.
+
+```text
+작업 폴더는 홈 폴더의 team-ai-agent\code\ch02\01-answer-rules야. 이 폴더의 prompt.md를 읽고 그 지시대로 해 줘. 경로는 모두 작업 폴더 기준이야.
 ```
 
-- SOUL.md를 저장할 때 헤르메스가 Dangerous Command 상자로 승인을 묻습니다. 저장 경로를 확인한 뒤 Allow once를 고릅니다.
-- 초안 작성을 건너뛰려면 output/SOUL.md 대신 이 폴더의 SOUL.md(편집한 규칙)를 복사합니다.
-- 되돌리려면 `cp ~/.hermes/SOUL.md.bak ~/.hermes/SOUL.md`를 실행합니다.
+```text
+확인. 초안을 output\SOUL.md에 저장하고, 헤르메스 설정 폴더의 SOUL.md(1장에서 자비스로 바꾼 파일)를 같은 폴더에 SOUL.md.bak으로 백업한 뒤(이미 있으면 덮어쓰지 마) 초안으로 바꿔 줘. 예제 폴더의 SOUL.md는 그대로 둬.
+```
 
-처음부터 다시 할 때는 이 폴더에서 `uv run reset.py`를 실행해 결과 폴더(output/)를 지운 뒤 실행 방법을 다시 따라 합니다. 헤르메스 설정(~/.hermes)은 바뀌지 않습니다.
+3. 실행 승인 상자가 나오면 헤르메스의 설명에서 쓰려는 파일의 위치를 확인한 뒤 [Run]을, 다르거나 불분명하면 [Reject]를 누릅니다.
+4. 적용 후 답: 새 대화에서 1번 문장을 다시 보냅니다.
+
+- 초안 작성을 건너뛰려면 '헤르메스 설정 폴더의 SOUL.md를 같은 폴더에 SOUL.md.bak으로 백업한 뒤(이미 있으면 덮어쓰지 마) 이 예제 폴더의 SOUL.md 내용으로 바꿔 줘.'라고 부탁합니다.
+- 되돌리려면 '헤르메스 설정 폴더의 SOUL.md를 같은 폴더의 SOUL.md.bak 내용으로 되돌려 줘.'라고 부탁하고 새 대화를 엽니다.
 
 ## 폴더 구성
 
@@ -26,8 +30,16 @@ hermes chat --query-file question.md      # 적용 후 답 확인
 | my-rules.md | 내 답변 규칙 메모(초안의 재료) |
 | prompt.md | 메모와 현재 SOUL.md로 규칙 초안을 만드는 지시문 |
 | question.md | 원본에 없는 수치를 묻는 확인 질문 |
-| input/DOC-001_onboarding.md | 확인 질문이 읽는 온보딩 자료(합성 자료) |
+| input\DOC-001_onboarding.md | 확인 질문이 읽는 온보딩 자료(합성 자료) |
 | SOUL.md | 편집한 이름+답변 규칙. 비교·대체용 |
-| reset.py | 결과 폴더(output/)를 지워 처음부터 다시 하기. ~/.hermes는 바꾸지 않습니다 |
+| reset.py | 결과 폴더(output\)를 지우는 스크립트. 앱에서는 '다시 하기'처럼 대화로 지웁니다 |
 
 규칙의 효과는 한 번의 답보다 [확인 필요] 표시, 사실별 출처, '제안:' 구분 같은 형식이 매번 유지되는지로 봅니다. SOUL.md는 모델에 전달하는 규칙이며 파일 쓰기나 외부 전송을 막는 권한 설정이 아닙니다.
+
+## 다시 하기
+
+새 대화에서 다음처럼 부탁합니다. 받은 원본(input\)과 헤르메스 설정 폴더는 지우지 않습니다.
+
+```text
+작업 폴더는 홈 폴더의 team-ai-agent\code\ch02\01-answer-rules야. output 폴더의 파일 목록을 보여 주고, 내가 확인하면 지워 줘.
+```

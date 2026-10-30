@@ -1,35 +1,43 @@
 # 01-weekly-report: 회의 노트·업무 노트로 주간 보고 쓰기
 
+> 이 예제는 윈도우의 헤르메스 데스크톱 앱으로 실습합니다. 예제는 홈 폴더의 team-ai-agent\code(C:\Users\로그인 이름\team-ai-agent\code)에 받고, 대화창에 넣을 문장은 [복사용 문장 모음](../../COMMANDS.md)에서 복사합니다. 헤르메스 설정 폴더는 C:\Users\로그인 이름\AppData\Local\hermes입니다.
+
 2장에서 정리한 회의 노트·업무 노트·대화 기록 8개로 주간 보고(DOC-009)를 만드는 예제입니다. 같은 일을 여러 자료에서 다시 언급해도 항목키로 한 번만 세고, 상태가 비어 있는 일과 회신 대기인 일을 확인할 점으로 남깁니다. 책 3.1절에 대응합니다.
 
 ## 실행 방법
 
-```bash
-cd ~/team-ai-agent/code/ch03/01-weekly-report
-hermes chat --query-file prompt.md
-cat output/DOC-009_weekly-report.r1.md
+새 대화에서 다음 문장을 보냅니다.
+
+```text
+작업 폴더는 홈 폴더의 team-ai-agent\code\ch03\01-weekly-report야. 이 폴더의 prompt.md를 읽고 그 지시대로 해 줘. 경로는 모두 작업 폴더 기준이야.
 ```
 
-헤르메스가 결과를 저장하고 다시 읽어 보여 주면 `/exit`로 대화를 마친 뒤 결과 파일을 엽니다.
-
-처음부터 다시 할 때는 이 폴더에서 `uv run reset.py`를 실행해 결과 폴더(output/)를 지운 뒤 실행 방법을 다시 따라 합니다. 헤르메스 설정(~/.hermes)은 바뀌지 않습니다.
+헤르메스가 결과를 저장하고 다시 읽어 보여 주면, 'output\DOC-009_weekly-report.r1.md를 미리보기 창에 열어 줘.'라고 부탁하거나 파일 탐색기에서 메모장으로 열어 저장된 파일을 확인합니다.
 
 ## 폴더 구성
 
 | 파일 | 역할 |
 |---|---|
 | prompt.md | 집계 규칙과 저장 위치를 담은 지시문 |
-| input/organized/ | 2장 정리본과 같은 텍스트 자료 8개(사진·확인 필요 파일 제외) |
-| input/DOC-004_weekly-meetings.md | 읽을 파일 목록과 집계 원칙(주간 보고 입력 묶음) |
-| input/snapshot.json | 관측 기간과 고정된 관측 기준 시각 |
-| expected/DOC-009_weekly-report.r1.md | 편집한 비교용 결과(관측 완료 4건) |
-| reset.py | 결과 폴더(output/)를 지워 처음부터 다시 하기. ~/.hermes는 바꾸지 않습니다 |
+| input\organized\ | 2장 정리본과 같은 텍스트 자료 8개(사진·확인 필요 파일 제외) |
+| input\DOC-004_weekly-meetings.md | 읽을 파일 목록과 집계 원칙(주간 보고 입력 묶음) |
+| input\snapshot.json | 관측 기간과 고정된 관측 기준 시각 |
+| expected\DOC-009_weekly-report.r1.md | 편집한 비교용 결과(관측 완료 4건) |
+| reset.py | 결과 폴더(output\)를 지우는 스크립트. 앱에서는 '다시 하기'처럼 대화로 지웁니다 |
 
 ## 확인할 것
 
-결과 파일을 열어 원본(input/)과 대조합니다.
+결과 파일을 열어 원본(input\)과 대조합니다.
 
-- 관측 기준 시각이 input/snapshot.json의 값 그대로인가
+- 관측 기준 시각이 input\snapshot.json의 값 그대로인가
 - 완료가 항목키 ITEM-001~004의 네 건이고, 대화의 재언급을 다시 세지 않았는가
 - ITEM-005·006이 완료가 아니라 제안·상태 미기재로 남았는가
 - 보고 업무 TASK-001이 '확인 대기'인가
+
+## 다시 하기
+
+새 대화에서 다음처럼 부탁합니다. 받은 원본(input\)과 헤르메스 설정 폴더는 지우지 않습니다.
+
+```text
+작업 폴더는 홈 폴더의 team-ai-agent\code\ch03\01-weekly-report야. output 폴더의 파일 목록을 보여 주고, 내가 확인하면 지워 줘.
+```
