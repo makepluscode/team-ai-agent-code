@@ -1,18 +1,20 @@
 # 03-source-query: 위키 출처 조회
 
+> 이 예제는 윈도우의 헤르메스 데스크톱 앱으로 실습합니다. 예제는 홈 폴더의 team-ai-agent\code(C:\Users\로그인 이름\team-ai-agent\code)에 받고, 대화창에 넣을 문장은 [복사용 문장 모음](../../COMMANDS.md)에서 복사합니다. main.py·check.py·reset.py는 예제 저장소의 자동 시험용이며 책의 실습에서는 쓰지 않습니다.
+
 4.3절에서 만든 것과 같은 위키 페이지가 들어 있는 폴더입니다. 헤르메스에 짧은 질문 세 개를 보내 위키 경로와 원본 출처가
-함께 답에 붙는지, 잠정·미정·미입력이 유지되는지 확인합니다. 책 4.4절에 대응합니다.
+함께 답에 붙는지, 잠정·미정·미입력이 유지되는지 확인합니다. 책 4.5절에 대응합니다.
 
 ## 실행 방법
 
-```bash
-cd ~/team-ai-agent/code/ch04/03-source-query
-hermes chat --query-file prompt.md
-uv run main.py search 잠정
-uv run check.py
+1. 헤르메스 앱에서 새 대화를 열고 다음 문장을 보냅니다.
+
+```text
+작업 폴더는 홈 폴더의 team-ai-agent\code\ch04\03-source-query야. 이 폴더의 prompt.md를 읽고 그 지시대로 해 줘. 경로는 모두 작업 폴더 기준이야.
 ```
 
-처음부터 다시 할 때는 이 폴더에서 `uv run reset.py`를 실행해 받은 처음 상태로 되돌린 뒤 실행 방법을 다시 따라 합니다.
+2. 저장된 output\ch04-query-check.md를 옵시디언이나 메모장으로 열어 답마다 위키 경로와 원본 문서 ID가 붙었는지, 잠정·미정·미입력·확인 대기가 그대로인지 봅니다.
+3. 옵시디언 왼쪽 위의 검색(돋보기)에 '잠정'을 넣으면 위키와 원본에서 그 말이 있는 줄을 찾을 수 있습니다.
 
 ## 폴더 구성
 
@@ -22,6 +24,8 @@ uv run check.py
 | raw/ | 초기 원본과 근거 묶음 |
 | prompt.md | 질문 세 개와 저장 위치 |
 | expected/ch04-query-check.md | 비교용 답변 |
-| check.py | 원본 보존·답변 저장 확인 |
-| main.py | 단계 search. 인자 없이 실행하면 할 일과 단계를 안내 |
-| reset.py | 예제 폴더를 받은 처음 상태로 되돌리기(다시 할 때) |
+
+
+## 다시 하기
+
+ 새 대화에서 '작업 폴더는 홈 폴더의 team-ai-agent\code\ch04\03-source-query야. output 폴더의 파일 목록을 보여 주고, 내가 확인하면 지워 줘.'라고 부탁합니다.

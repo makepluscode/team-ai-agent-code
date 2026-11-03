@@ -209,3 +209,40 @@ https://github.com/makepluscode/team-ai-agent-code 저장소를 내 홈 폴더�
 ```text
 weekly-report-practice 예약을 삭제하고, 남은 예약 목록을 보여 줘.
 ```
+
+
+---
+
+# 2부 자료를 위키로 쌓고 동료와 잇기
+
+## 4.3 정리 규칙
+
+대화창에 입력:
+
+```text
+작업 폴더는 홈 폴더의 team-ai-agent\code\ch04\01-wiki-folder야. 이 폴더의 prompt.md를 읽고 그 지시대로 해 줘. 경로는 모두 작업 폴더 기준이야.
+```
+
+
+## 4.4 첫 위키 페이지
+
+대화창에 입력:
+
+```text
+작업 폴더는 홈 폴더의 team-ai-agent\code\ch04\02-first-page야. 이 폴더의 prompt.md를 읽고 그 지시대로 해 줘. 경로는 모두 작업 폴더 기준이야.
+```
+
+대화창에 입력:
+
+```text
+확인. 적용해 줘. 확인한 사람은 매니저야.
+```
+
+
+## 4.5 출처 조회
+
+대화창에 입력:
+
+```text
+작업 폴더는 홈 폴더의 team-ai-agent\code\ch04\03-source-query야. 이 폴더의 prompt.md를 읽고 그 지시대로 해 줘. 경로는 모두 작업 폴더 기준이야.
+```

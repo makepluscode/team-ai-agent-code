@@ -695,11 +695,27 @@ def write_pyproject(folder, spec):
         f"dependencies = {body}\n{optional}", encoding="utf-8")
 
 
+APP_NOTE = ("이 예제는 윈도우의 헤르메스 데스크톱 앱으로 실습합니다. 예제는 홈 폴더의 team-ai-agent\\code"
+            "(C:\\Users\\로그인 이름\\team-ai-agent\\code)에 받고, 대화창에 넣을 문장은 [복사용 문장 모음](../../COMMANDS.md)에서 "
+            "복사합니다. main.py·check.py·reset.py는 예제 저장소의 자동 시험용이며 책의 실습에서는 쓰지 않습니다.")
+
+
 def write_readme(folder, spec):
     files = list(spec["readme"]["files"]) + [("reset.py", "예제 폴더를 받은 처음 상태로 되돌리기(다시 할 때)")]
     rows = "\n".join(f"| {name} | {role} |" for name, role in files)
     run = "\n".join(spec["readme"]["run"])
     notes = ("\n\n" + dedent(spec["readme"]["notes"])) if spec["readme"].get("notes") else "\n"
+    if spec["readme"].get("app"):
+        # 앱 버전 장(2026-11-02 4장부터): 실행 방법을 헤르메스 앱 대화창 문장으로 쓴다
+        files = [f for f in files if not f[0].endswith(".py")]
+        rows = "\n".join(f"| {name} | {role} |" for name, role in files)
+        text = (f"# {spec['name']}: {spec['title']}\n\n> {APP_NOTE}\n\n{dedent(spec['readme']['intro'])}\n"
+                f"## 실행 방법\n\n{dedent(spec['readme']['app']).strip()}\n\n## 폴더 구성\n\n| 파일 | 역할 |\n|---|---|\n{rows}\n{notes}"
+                f"\n## 다시 하기\n\n{dedent(spec['readme'].get('reset', '')).strip()} "
+                f"새 대화에서 '작업 폴더는 홈 폴더의 team-ai-agent\\code\\ch{spec['chapter']:02}\\{spec['name']}야. "
+                f"output 폴더의 파일 목록을 보여 주고, 내가 확인하면 지워 줘.'라고 부탁합니다.\n")
+        (folder / "README.md").write_text(text.rstrip() + "\n", encoding="utf-8")
+        return
     text = (f"# {spec['name']}: {spec['title']}\n\n{dedent(spec['readme']['intro'])}\n## 실행 방법\n\n"
             f"```bash\n{run}\n```\n\n처음부터 다시 할 때는 이 폴더에서 `uv run reset.py`를 실행해 받은 처음 상태로 되돌린 뒤 "
             f"실행 방법을 다시 따라 합니다.\n\n## 폴더 구성\n\n| 파일 | 역할 |\n|---|---|\n{rows}\n{notes}")

@@ -2,7 +2,7 @@
 
 『팀 AI 에이전트 실전』의 실습 예제입니다. 장과 예제 순서대로 폴더를 나눴고, 예제 폴더 하나에 그 실습에 필요한 지시문·입력 자료·비교용 결과·확인 스크립트가 모두 들어 있습니다.
 
-책 1부(1~3장)는 윈도우의 헤르메스 데스크톱 앱으로 실습합니다. 저장소는 홈 폴더의 team-ai-agent\code(C:\Users\로그인 이름\team-ai-agent\code)에 받고, 대화창에 넣는 문장은 [COMMANDS.md](COMMANDS.md)에서 복사해 붙여 넣습니다. 1~3장 예제 폴더의 README도 앱 기준으로 적었습니다. 아래 '실행 방법'의 명령(git clone·hermes chat·uv run)은 4장부터의 터미널 실습용이며 아직 앱 기준으로 바꾸지 않았습니다.
+책 1~4장은 윈도우의 헤르메스 데스크톱 앱으로 실습합니다(4장은 옵시디언도 함께 씀). 저장소는 홈 폴더의 team-ai-agent\code(C:\Users\로그인 이름\team-ai-agent\code)에 받고, 대화창에 넣는 문장은 [COMMANDS.md](COMMANDS.md)에서 복사해 붙여 넣습니다. 1~4장 예제 폴더의 README도 앱 기준으로 적었습니다. 아래 '실행 방법'의 명령(git clone·hermes chat·uv run)은 5장부터의 터미널 실습용이며 아직 앱 기준으로 바꾸지 않았습니다.
 
 ## 예제 구성
 
@@ -50,7 +50,7 @@
 
 1~3장(앱): 예제 폴더의 README '실행 방법'처럼 대화창에 '작업 폴더는 홈 폴더의 team-ai-agent\code\ch02\02-organize-notes야. 이 폴더의 prompt.md를 읽고 그 지시대로 진행해 줘.'처럼 보냅니다. 결과는 앱의 미리보기 창이나 파일 탐색기로 열고, 다시 할 때는 대화로 output 폴더를 지워 달라고 부탁합니다. 헤르메스 설정 폴더는 C:\Users\로그인 이름\AppData\Local\hermes입니다.
 
-4장부터(터미널, 1~3장 앱 실습에서는 아래 명령 상자를 쓰지 않음): 받은 저장소의 예제 폴더에 들어가 바로 실행합니다. 실습 결과는 예제 폴더의 output/·state/에 생기며 Git이 추적하지 않습니다. 처음부터 다시 할 때는 예제 폴더에서 `uv run reset.py`를 실행합니다. 지울 결과(1~3장은 output/, 4장부터는 output/·state/와 되돌릴 wiki/·raw/)를 보여 주고 y/N을 물은 뒤 받은 처음 상태로 되돌리며, 헤르메스 설정(~/.hermes)은 바꾸지 않습니다. 예제를 갱신하려면 reset.py로 되돌린 뒤 `git -C ~/team-ai-agent/code pull`을 실행합니다.
+5장부터(터미널, 1~4장 앱 실습에서는 아래 명령 상자를 쓰지 않음): 받은 저장소의 예제 폴더에 들어가 바로 실행합니다. 실습 결과는 예제 폴더의 output/·state/에 생기며 Git이 추적하지 않습니다. 처음부터 다시 할 때는 예제 폴더에서 `uv run reset.py`를 실행합니다. 지울 결과(1~3장은 output/, 4장부터는 output/·state/와 되돌릴 wiki/·raw/)를 보여 주고 y/N을 물은 뒤 받은 처음 상태로 되돌리며, 헤르메스 설정(~/.hermes)은 바꾸지 않습니다. 예제를 갱신하려면 reset.py로 되돌린 뒤 `git -C ~/team-ai-agent/code pull`을 실행합니다.
 
 ```bash
 git clone https://github.com/makepluscode/team-ai-agent-code.git ~/team-ai-agent/code
