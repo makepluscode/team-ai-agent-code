@@ -1,7 +1,7 @@
 """첫 위키 페이지 정리 예제의 결과를 확인한다.
 
 입력: .exercise.json(이 예제가 제공한 원본의 기준 해시)
-결과: output/wiki-base.json, wiki/guides/onboarding.md, wiki/index.md, wiki/log.md
+결과: wiki/guides/onboarding.md, wiki/index.md, wiki/log.md
 출력: 화면에 자동 확인 결과와 사람이 직접 확인할 항목을 출력한다. 파일은 바꾸지 않는다.
 실행: 이 폴더에서 `uv run check.py`
 """
@@ -14,7 +14,7 @@ from pathlib import Path
 
 HERE = Path(__file__).resolve().parent
 # 있어야 하는 결과 파일(이 폴더 기준)
-RESULTS = ["output/wiki-base.json", "wiki/guides/onboarding.md", "wiki/index.md", "wiki/log.md"]
+RESULTS = ["wiki/guides/onboarding.md", "wiki/index.md", "wiki/log.md"]
 # SQLite 기록 확인: (설명, 질의, 기대 개수)
 COUNTS = []
 # 사람이 대조할 질문과, 그 자리를 찾기 쉽게 보여 줄 표현

@@ -83,13 +83,95 @@ CHECK_WIKI_PAGE = [
     ["주간 보고의 미입력이 0건으로 바뀌지 않았는가", ["미입력"]],
 ]
 
+# 4장 앱 버전(2026-11-02): 헤르메스 데스크톱 앱 대화로 적용하고 옵시디언에서 출처 링크를 눌러 원본을 연다.
+# 5장부터의 CLI 예제는 WIKI_RULES·ONBOARDING_*를 그대로 쓴다.
+WIKI_RULES_APP = """
+# 스튜디오 메리 위키 정리 규칙 (wiki-curator)
+
+1. 폴더 역할
+   - raw/: 원본 문서 보관소입니다. 읽기만 하고 절대 수정하거나 삭제하지 않습니다.
+   - wiki/guides/: 안내·운영 규칙 등 주제별 정리 페이지입니다.
+   - wiki/decisions/: 회의와 변경 메모로 확정한 결정 페이지입니다.
+   - wiki/criteria/: 사람의 검토로 확정한 판단 기준 페이지입니다.
+   - wiki/index.md: 현재 위키 페이지의 목록과 한 줄 요약입니다.
+   - wiki/log.md: 정리할 때마다 한 줄씩 더하는 정리 기록입니다.
+
+2. 정리와 출처 규칙
+   - 모든 사실과 일정 옆에는 근거가 된 원본의 document_id와 버전(예: DOC-001@r1)을 적습니다.
+   - 출처는 원본 파일로 가는 링크로 적습니다. wiki/guides/의 페이지에서는 [DOC-001@r1](../../raw/DOC-001_onboarding.md)처럼 적습니다.
+   - wiki/index.md의 목록도 페이지로 가는 링크로 적습니다. 예: [새 동료 안내 준비와 자료 기준](guides/onboarding.md)
+   - 원본의 state가 '잠정'이거나 업무가 '확인 대기'이면 위키 페이지에도 그대로 표시합니다.
+   - 원본에 없는 날짜, 시각, 장소, 담당자, 수치는 추측하지 않고 '미정' 또는 '확인 필요'로 남깁니다.
+   - 회의 자료나 보고서의 '미입력'은 0건과 구별해 기록합니다.
+   - 새 원본이 이전 조건을 바꾸면 현재 조건을 갱신하고 이전 조건은 변경 이력에 출처와 함께 남깁니다.
+   - 새 원본에서 미정으로 되돌린 항목은 이전 원본의 잠정 값을 끌어오지 않고 미정으로 표시합니다.
+
+3. 적용 방법
+   - wiki/의 파일을 쓰거나 고치기 전에 바꿀 파일의 전체 내용을 대화창에 먼저 보여 주고, 사람이 '확인'이라고 답한 뒤에만 씁니다.
+   - 쓰기 전에 지금의 wiki/ 폴더 전체를 output/wiki-before/에 복사해 둡니다. 이미 있으면 output/wiki-before-2/처럼 번호를 붙입니다.
+   - 쓴 뒤 wiki/log.md 끝에 '정리 시각 · wiki-curator · 읽은 원본 → 갱신한 페이지 · 확인: 확인한 사람' 한 줄을 더합니다.
+   - wiki/의 페이지는 사람이 옵시디언에서 직접 고치지 않습니다. 고칠 내용은 대화로 알려 주고 이 절차로 다시 씁니다.
+"""
+
+ONBOARDING_PAGE_APP = """
+---
+title: 새 동료 안내 준비와 자료 기준
+updated_at: 2026-10-07T14:00:00+09:00
+curated_by: wiki-curator
+source_refs:
+  - DOC-001@r1
+  - DOC-002@r1
+  - DOC-003@r1
+  - DOC-009@r1
+---
+
+<!-- 비교용 편집 예시: 실제 모델 응답 아님 -->
+
+# 새 동료 안내 준비와 자료 기준
+
+## 1. 현재 안내 일정과 조건
+- 안내 일시: 2026-10-12 10:00 (상태: 잠정, 출처: [DOC-001@r1](../../raw/DOC-001_onboarding.md))
+- 안내 장소: 미정 (출처: [DOC-001@r1](../../raw/DOC-001_onboarding.md))
+- 안내자료 최종 검토자: 미정 (출처: [DOC-001@r1](../../raw/DOC-001_onboarding.md))
+
+## 2. 자료함 이용과 회고 반영 기준
+- 원본 보존과 파일명 규칙: 원본은 수정하지 않고 보존하며 이름에 문서 종류와 버전을 표시함 (상태: 확정 규칙, 출처: [DOC-002@r1](../../raw/DOC-002_library-rules.md))
+- 지난 공지 회고의 개선 제안: 안내 자료의 최신 위치를 한곳에서 찾도록 목록을 유지하자는 제안 (상태: 개선 제안, 출처: [DOC-003@r1](../../raw/DOC-003_retrospective.md))
+
+## 3. 관련 준비 현황
+- 주간 보고: 2026-10-05~10-09 기간 중 관측 완료 4건(ITEM-001~004), 10/08~10/09는 미입력(0건 아님), 회의실 A 회신 대기, 업무 TASK-001 확인 대기 (출처: [DOC-009@r1](../../raw/DOC-009_weekly-report.r1.md), 근거 묶음 [DOC-004@r1](../../raw/DOC-004_weekly-meetings.md))
+"""
+
+ONBOARDING_INDEX_APP = """
+<!-- 비교용 편집 예시: 실제 모델 응답 아님 -->
+# 위키 목록
+
+| 페이지 | 한 줄 요약 | 참조 원본 |
+|---|---|---|
+| [새 동료 안내 준비와 자료 기준](guides/onboarding.md) | 잠정 안내 일정과 미정 조건, 자료함 이용 기준, 주간 보고 현황 | DOC-001@r1, DOC-002@r1, DOC-003@r1, DOC-009@r1 |
+"""
+
+ONBOARDING_LOG_APP = """
+# 정리 기록
+
+- 2026-10-07T14:00:00+09:00 · wiki-curator · DOC-001@r1, DOC-002@r1, DOC-003@r1, DOC-009@r1 → guides/onboarding.md, index.md · 확인: 매니저 (비교용 편집 예시)
+"""
+
+GITIGNORE_CH04 = """
+.env
+*.wav
+*.mp3
+output/
+.obsidian/
+"""
+
 SPECS = []
 
 # ── 4장 내 자료의 로컬 위키 ─────────────────────────────────────────────
 
 SPECS.append({
     "chapter": 4, "name": "01-wiki-folder", "title": "로컬 위키 폴더와 정리 규칙 확인", "base": "wiki/ch04",
-    "files": {"AGENTS.md": WIKI_RULES, **EMPTY_WIKI},
+    "files": {"AGENTS.md": WIKI_RULES_APP, ".gitignore": GITIGNORE_CH04, **EMPTY_WIKI},
     "after": {"prompt.md": """
         이 폴더는 스튜디오 메리의 로컬 위키야. 아직 위키 페이지는 만들지 마.
 
@@ -106,10 +188,20 @@ SPECS.append({
     "readme": {
         "intro": """
             4장 시작 자료(초기 원본 네 건과 주간 보고 근거 묶음)로 만든 로컬 위키 폴더입니다. 헤르메스가 규칙 파일(AGENTS.md)을
-            읽고 원본의 문서 ID·버전·상태를 확인합니다. 책 4.1~4.2절에 대응합니다.
+            읽고 원본의 문서 ID·버전·상태를 확인합니다. 옵시디언으로 폴더 구성을 보는 연습도 이 폴더로 합니다. 책 4.1~4.3절에 대응합니다.
         """,
         "run": ["cd ~/team-ai-agent/code/ch04/01-wiki-folder", "hermes chat --query-file prompt.md", "uv run check.py"],
-        "files": [("AGENTS.md", "위키 정리 규칙(작업 폴더 규칙). 이 폴더에서 헤르메스를 실행하면 자동으로 읽힙니다"),
+        "app": """
+            1. 옵시디언에서 이 폴더를 보관함으로 열어 raw와 wiki 폴더를 확인합니다(책 4.2절).
+            2. 헤르메스 앱에서 새 대화를 열고 다음 문장을 보냅니다.
+
+            ```text
+            작업 폴더는 홈 폴더의 team-ai-agent\\code\\ch04\\01-wiki-folder야. 이 폴더의 prompt.md를 읽고 그 지시대로 해 줘. 경로는 모두 작업 폴더 기준이야.
+            ```
+
+            3. 답의 표에서 DOC-001@r1이 잠정, DOC-009@r1의 업무가 확인 대기로 구분되는지 봅니다. 이 실습은 파일을 만들거나 고치지 않습니다.
+        """,
+        "files": [("AGENTS.md", "위키 정리 규칙(작업 폴더 규칙). 지시문이 먼저 읽게 합니다"),
                   ("raw/", "초기 원본 네 건과 주간 보고 근거 묶음(report-input/). 수정하지 않습니다"),
                   ("wiki/", "위키 페이지 폴더(아직 비어 있음)"),
                   ("input/", "원본 등록 기록(raw-registry.json·report-source-map.json)"),
@@ -120,51 +212,67 @@ SPECS.append({
 
 SPECS.append({
     "chapter": 4, "name": "02-first-page", "title": "첫 위키 페이지 정리", "base": "wiki/ch04",
-    "files": {"AGENTS.md": WIKI_RULES, **EMPTY_WIKI},
+    "files": {"AGENTS.md": WIKI_RULES_APP, ".gitignore": GITIGNORE_CH04, **EMPTY_WIKI},
     "after": {
         "prompt.md": """
             wiki-curator 역할로 초기 원본 네 건을 정리해 첫 위키 페이지를 만들어 줘.
 
-            먼저 AGENTS.md와 wiki/ 폴더를 확인해 줘. 읽을 원본은 raw/의 DOC-001@r1, DOC-002@r1, DOC-003@r1, DOC-009@r1이야.
+            먼저 AGENTS.md를 읽고 그 규칙을 따라 줘. 읽을 원본은 raw/의 DOC-001@r1, DOC-002@r1, DOC-003@r1, DOC-009@r1이야.
             원본은 절대 수정하지 마.
 
-            다음 기준으로 새 동료 안내 페이지의 변경안을 output/wiki-draft/guides/onboarding.md에 저장해 줘.
+            새 동료 안내 페이지 wiki/guides/onboarding.md를 다음 기준으로 정리해 줘.
             1. 머리말에 title, updated_at(정리한 시각), curated_by(wiki-curator), source_refs(네 원본)를 적어 줘.
             2. '현재 안내 일정과 조건' 절: 잠정 일시(10월 12일 10:00, 잠정)와 미정 항목(장소·최종 검토자)을 나누고 각 줄에 출처(DOC-001@r1)를 붙여 줘.
             3. '자료함 이용과 회고 반영 기준' 절: 자료함 이용 규칙(DOC-002@r1)과 지난 공지 회고의 개선 제안(DOC-003@r1)을 사실과 제안으로 나눠 줘.
             4. '관련 준비 현황' 절: 주간 보고(DOC-009@r1, 업무 TASK-001 확인 대기)의 관측 완료 4건과 10/08~10/09 미입력을 0건과 구별해 적어 줘.
+            출처는 AGENTS.md의 예처럼 원본 파일로 가는 링크로 적어 줘.
 
-            이어서 목록 변경안 output/wiki-draft/index.md(페이지 경로와 한 줄 요약)도 저장해 줘.
-            wiki/ 아래 파일은 직접 고치지 마. 저장한 변경안을 다시 읽어 보여 줘.
+            목록 wiki/index.md에는 이 페이지로 가는 링크와 한 줄 요약을 적어 줘.
+            두 파일의 전체 내용을 먼저 보여 주고, 내가 확인하면 AGENTS.md의 적용 방법대로 백업하고 저장한 뒤 정리 기록까지 남겨 줘.
         """,
-        "expected/wiki/guides/onboarding.md": ONBOARDING_PAGE,
-        "expected/wiki/index.md": ONBOARDING_INDEX,
+        "expected/wiki/guides/onboarding.md": ONBOARDING_PAGE_APP,
+        "expected/wiki/index.md": ONBOARDING_INDEX_APP,
     },
     "main": {"title": "4장 첫 위키 페이지 예제: 헤르메스의 변경안을 위키에 적용하고 검색한다.",
              "steps": {"apply": ("output/wiki-draft/의 변경안을 충돌 검사·백업과 함께 wiki/에 적용", [["wiki", "apply-draft"]]),
                        "search": ("위키에서 검색어가 있는 줄 찾기(예: uv run main.py search 잠정)", [["wiki", "search", "--query", "{extra}"]])}},
-    "check": {"results": ["output/wiki-base.json", "wiki/guides/onboarding.md", "wiki/index.md", "wiki/log.md"], "human": CHECK_WIKI_PAGE},
+    "check": {"results": ["wiki/guides/onboarding.md", "wiki/index.md", "wiki/log.md"], "human": CHECK_WIKI_PAGE},
     "readme": {
         "intro": """
-            헤르메스가 wiki-curator 역할로 초기 원본 네 건을 읽어 새 동료 안내 페이지의 변경안을 output/wiki-draft/에 쓰고,
-            사람이 확인한 뒤 main.py가 wiki/에 적용합니다. 책 4.3절에 대응합니다.
+            헤르메스가 wiki-curator 역할로 초기 원본 네 건을 읽어 새 동료 안내 페이지와 목록을 대화창에 먼저 보여 주고,
+            사람이 확인하면 wiki/에 씁니다. 옵시디언에서 페이지의 출처 링크를 눌러 원본을 엽니다. 책 4.4절에 대응합니다.
         """,
         "run": ["cd ~/team-ai-agent/code/ch04/02-first-page", "hermes chat --query-file prompt.md", "uv run main.py apply", "uv run check.py"],
-        "files": [("AGENTS.md", "위키 정리 규칙. 변경안은 output/wiki-draft/에 쓰도록 정했습니다"),
+        "app": """
+            1. 헤르메스 앱에서 새 대화를 열고 다음 문장을 보냅니다.
+
+            ```text
+            작업 폴더는 홈 폴더의 team-ai-agent\\code\\ch04\\02-first-page야. 이 폴더의 prompt.md를 읽고 그 지시대로 해 줘. 경로는 모두 작업 폴더 기준이야.
+            ```
+
+            2. 헤르메스가 보여 준 두 파일에서 잠정·미정·미입력과 출처 링크를 확인한 뒤 다음 문장으로 답합니다. 실행 승인 상자가 나오면 쓰려는 파일이 이 예제 폴더의 wiki 안인지 확인하고 [Run]을 누릅니다.
+
+            ```text
+            확인. 적용해 줘. 확인한 사람은 매니저야.
+            ```
+
+            3. 옵시디언에서 이 폴더를 보관함으로 열고 wiki\\guides\\onboarding.md를 엽니다. 출처 링크(DOC-001@r1 등)를 누르면 raw의 원본이 열립니다.
+        """,
+        "reset": "wiki 폴더도 처음 상태로 돌리려면 output을 지우기 전에 먼저 새 대화에서 '작업 폴더는 홈 폴더의 team-ai-agent\\code\\ch04\\02-first-page야. output\\wiki-before의 내용으로 wiki 폴더를 되돌려 줘.'라고 부탁합니다. 이어서",
+        "files": [("AGENTS.md", "위키 정리 규칙. 대화로 확인받은 뒤에만 wiki에 쓰고, 출처는 원본으로 가는 링크로 적도록 정했습니다"),
                   ("raw/", "초기 원본 네 건과 근거 묶음"), ("wiki/", "위키 페이지 폴더(적용 전에는 비어 있음)"),
                   ("prompt.md", "첫 페이지 정리 지시문"), ("main.py", "apply: 변경안 적용(충돌 검사·백업·정리 기록) / search: 검색"),
                   ("expected/wiki/", "저자가 편집한 비교용 페이지"), ("check.py", "원본 보존·페이지 저장 확인과 사람이 볼 줄 표시")],
         "notes": """
-            apply는 wiki/가 마지막 적용 뒤에 바뀌었으면 충돌로 멈추고, 적용 전 위키를 output/wiki-before-N/에 남깁니다.
-            적용한 변경안 폴더는 output/wiki-draft-applied-N/으로 옮겨집니다.
+            헤르메스는 wiki에 쓰기 전에 지금의 wiki를 output/wiki-before/에 복사하고, 쓴 뒤 wiki/log.md에 확인한 사람과 함께 한 줄을 남깁니다(AGENTS.md 3절).
         """,
     },
 })
 
 SPECS.append({
     "chapter": 4, "name": "03-source-query", "title": "위키 출처 조회", "base": "wiki/ch04",
-    "files": {"AGENTS.md": WIKI_RULES, "wiki/guides/onboarding.md": ONBOARDING_PAGE, "wiki/index.md": ONBOARDING_INDEX,
-              "wiki/log.md": ONBOARDING_LOG},
+    "files": {"AGENTS.md": WIKI_RULES_APP, ".gitignore": GITIGNORE_CH04, "wiki/guides/onboarding.md": ONBOARDING_PAGE_APP,
+              "wiki/index.md": ONBOARDING_INDEX_APP, "wiki/log.md": ONBOARDING_LOG_APP},
     "after": {
         "prompt.md": """
             이 폴더의 위키만 근거로 삼아 다음 세 질문에 답해 줘.
@@ -207,9 +315,19 @@ SPECS.append({
     "readme": {
         "intro": """
             4.3절에서 만든 것과 같은 위키 페이지가 들어 있는 폴더입니다. 헤르메스에 짧은 질문 세 개를 보내 위키 경로와 원본 출처가
-            함께 답에 붙는지, 잠정·미정·미입력이 유지되는지 확인합니다. 책 4.4절에 대응합니다.
+            함께 답에 붙는지, 잠정·미정·미입력이 유지되는지 확인합니다. 책 4.5절에 대응합니다.
         """,
         "run": ["cd ~/team-ai-agent/code/ch04/03-source-query", "hermes chat --query-file prompt.md", "uv run main.py search 잠정", "uv run check.py"],
+        "app": """
+            1. 헤르메스 앱에서 새 대화를 열고 다음 문장을 보냅니다.
+
+            ```text
+            작업 폴더는 홈 폴더의 team-ai-agent\\code\\ch04\\03-source-query야. 이 폴더의 prompt.md를 읽고 그 지시대로 해 줘. 경로는 모두 작업 폴더 기준이야.
+            ```
+
+            2. 저장된 output\\ch04-query-check.md를 옵시디언이나 메모장으로 열어 답마다 위키 경로와 원본 문서 ID가 붙었는지, 잠정·미정·미입력·확인 대기가 그대로인지 봅니다.
+            3. 옵시디언 왼쪽 위의 검색(돋보기)에 '잠정'을 넣으면 위키와 원본에서 그 말이 있는 줄을 찾을 수 있습니다.
+        """,
         "files": [("wiki/", "4.3절 결과와 같은 위키(비교용 편집 예시)"), ("raw/", "초기 원본과 근거 묶음"),
                   ("prompt.md", "질문 세 개와 저장 위치"), ("main.py", "search: 검색어가 있는 위키 줄 찾기"),
                   ("expected/ch04-query-check.md", "비교용 답변"), ("check.py", "원본 보존·답변 저장 확인")],
