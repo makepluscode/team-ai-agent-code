@@ -3,11 +3,11 @@ document_id: DOC-012
 revision: r1
 created_at: 2026-10-12T09:30:00+09:00
 effective_at: 2026-10-12T09:00:00+09:00
-state: 확정
+state: 연습용 확인본
 meeting_id: MTG-001
-confirmed_by: M01
+confirmed_by: 매니저 (제공 합성 대본 대조 연습)
 event_id: EVT-010
-audio_sha256: "<MTG-001 음원 SHA-256 해시>"
+audio_sha256: null
 source_refs:
   - DOC-011@r1
   - DOC-010@r1

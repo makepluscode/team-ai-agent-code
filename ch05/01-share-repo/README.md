@@ -1,18 +1,18 @@
 # 01-share-repo: 팀 위키 저장소 준비
 
+> 이 예제는 윈도우의 헤르메스 데스크톱 앱으로 실습합니다. 예제는 홈 폴더의 team-ai-agent\code(C:\Users\로그인 이름\team-ai-agent\code)에 받고, 대화창에 넣을 문장은 [복사용 문장 모음](../../COMMANDS.md)에서 복사합니다. main.py·check.py·reset.py는 예제 저장소의 자동 시험용이며 책의 실습에서는 쓰지 않습니다.
+
 4장에서 정리한 로컬 위키를 GitHub 비공개 저장소로 올릴 준비를 하는 예제입니다. 헤르메스가 로그인 상태와 제외 목록(.gitignore)을
 확인하고, 사람이 올라갈 파일 목록을 확인한 뒤 저장소를 만듭니다. GitHub 계정과 gh 로그인은 부록 B를 따릅니다. 책 5.1절에 대응합니다.
 
 ## 실행 방법
 
-```bash
-cp -r ~/team-ai-agent/code/ch05/01-share-repo ~/studio-merry-wiki
-cd ~/studio-merry-wiki
-hermes chat --query-file prompt.md
-uv run check.py
-```
+1. 헤르메스 앱에서 새 대화를 열고 다음 문장을 보냅니다.
 
-처음부터 다시 할 때는 이 폴더에서 `uv run reset.py`를 실행해 받은 처음 상태로 되돌린 뒤 실행 방법을 다시 따라 합니다.
+   작업 폴더는 홈 폴더의 team-ai-agent\code\ch05\01-share-repo야. 이 폴더의 prompt.md를 읽고 그 내용대로 진행해 줘.
+
+2. 헤르메스가 보여 준 원본과 결과를 읽습니다. 위키 쓰기나 공유 전 확인을 요청하면 내용을 확인한 뒤 답합니다.
+3. 위키는 옵시디언에서 열어 출처 링크와 현재 조건을 대조합니다. expected/는 비교용 편집 예시입니다.
 
 ## 폴더 구성
 
@@ -22,9 +22,11 @@ uv run check.py
 | .gitignore | 공유하지 않을 파일 목록 |
 | raw/·wiki/ | 4장까지 정리한 원본과 위키 |
 | prompt.md | 로그인·제외 목록 확인과 저장소 준비 지시문 |
-| check.py | 원본 보존과 제외 목록 확인 |
-| reset.py | 예제 폴더를 받은 처음 상태로 되돌리기(다시 할 때) |
 
 
 실제 GitHub 저장소 생성과 올리기는 헤르메스가 gh·git으로 실행합니다. v1.7 예제로 저장소를 새로 만드는 전 과정은 두 기준 장비에서 TODO(검증)입니다.
 GitHub을 쓸 수 없으면 이 폴더를 그대로 두고 5.3~5.4절의 두 예제 폴더로 인계를 연습합니다.
+
+## 다시 하기
+
+위키를 바꾼 예제는 먼저 output/wiki-before/의 백업과 현재 위키를 비교해 달라고 부탁합니다. 복원할 백업을 고르고 확인한 뒤 위키를 복원합니다. 공유 저장소의 변경 이력은 지우지 않습니다. 새 대화에서 '작업 폴더는 홈 폴더의 team-ai-agent\code\ch05\01-share-repo야. output 폴더의 파일 목록을 보여 주고, 내가 확인하면 지워 줘.'라고 부탁합니다.

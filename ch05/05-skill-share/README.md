@@ -1,21 +1,20 @@
 # 05-skill-share: 공유 스킬 배포
 
+> 이 예제는 윈도우의 헤르메스 데스크톱 앱으로 실습합니다. 예제는 홈 폴더의 team-ai-agent\code(C:\Users\로그인 이름\team-ai-agent\code)에 받고, 대화창에 넣을 문장은 [복사용 문장 모음](../../COMMANDS.md)에서 복사합니다. main.py·check.py·reset.py는 예제 저장소의 자동 시험용이며 책의 실습에서는 쓰지 않습니다.
+
 3장의 주간 보고 스킬을 팀 위키 저장소의 skills/로 공유하기 전에 점검하는 예제입니다. 점검한 스킬을 저장소에 올리면 동료가
 tap으로 설치합니다. 책 5.5절에 대응합니다.
 
 ## 실행 방법
 
-```bash
-cd ~/team-ai-agent/code/ch05/05-skill-share
-hermes chat --query-file prompt.md
-uv run check.py
-mkdir -p ~/studio-merry-wiki/skills && cp -r output/skills/weekly-report ~/studio-merry-wiki/skills/
-hermes skills install <내 GitHub 계정>/studio-merry-wiki/skills/weekly-report
-uv run main.py doctor
-hermes skills check
-```
+1. 헤르메스 앱에서 새 대화를 열고 다음 문장을 보냅니다.
 
-처음부터 다시 할 때는 이 폴더에서 `uv run reset.py`를 실행해 받은 처음 상태로 되돌린 뒤 실행 방법을 다시 따라 합니다.
+           작업 폴더는 홈 폴더의 team-ai-agent\code\ch05\05-skill-share야. 이 폴더의 prompt.md를 읽고 그 내용대로 진행해 줘.
+
+        2. 헤르메스가 보여 준 원본과 결과를 읽습니다. 위키 쓰기나 공유 전 확인을 요청하면 내용을 확인한 뒤 답합니다.
+        3. 위키는 옵시디언에서 열어 출처 링크와 현재 조건을 대조합니다. expected/는 비교용 편집 예시입니다.
+
+점검 결과를 확인한 뒤 같은 대화에서 '이 폴더의 share.md를 읽고 그 내용대로 진행해 줘.'라고 부탁합니다.
 
 ## 폴더 구성
 
@@ -23,9 +22,12 @@ hermes skills check
 |---|---|
 | skills/weekly-report/SKILL.md | 3장에서 만든 주간 보고 스킬 |
 | prompt.md | 공유 전 점검 지시문 |
-| check.py | 원본 보존·점검 결과 저장 확인 |
-| main.py | 단계 doctor. 인자 없이 실행하면 할 일과 단계를 안내 |
-| reset.py | 예제 폴더를 받은 처음 상태로 되돌리기(다시 할 때) |
+| input/ | 공유 스킬을 실행해 비교할 노트 묶음·관측 기준 |
+| share.md | 점검한 스킬의 공유·설치 지시문 |
 
 
 v1.7 주간 보고 스킬을 동료 환경에서 tap으로 설치해 같은 결과를 얻는 전 과정은 TODO(검증)입니다.
+
+## 다시 하기
+
+위키를 바꾼 예제는 먼저 output/wiki-before/의 백업과 현재 위키를 비교해 달라고 부탁합니다. 복원할 백업을 고르고 확인한 뒤 위키를 복원합니다. 공유 저장소의 변경 이력은 지우지 않습니다. 새 대화에서 '작업 폴더는 홈 폴더의 team-ai-agent\code\ch05\05-skill-share야. output 폴더의 파일 목록을 보여 주고, 내가 확인하면 지워 줘.'라고 부탁합니다.
