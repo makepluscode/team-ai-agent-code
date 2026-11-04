@@ -1,20 +1,17 @@
 # 03-decision-wiki: 회의 결정의 위키 반영
 
-사람이 확인한 회의록(DOC-012@r1)을 raw/에 등록하고, 헤르메스가 wiki-curator로 결정 페이지와 안내 페이지의 변경안을 쓴 뒤
-사람이 확인하고 적용합니다. 책 6.4절에 대응합니다.
+> 이 예제는 윈도우의 헤르메스 데스크톱 앱으로 실습합니다. 예제는 홈 폴더의 team-ai-agent\code(C:\Users\로그인 이름\team-ai-agent\code)에 받고, 대화창에 넣을 문장은 [복사용 문장 모음](../../COMMANDS.md)에서 복사합니다. main.py·check.py·reset.py는 예제 저장소의 자동 시험용이며 책의 실습에서는 쓰지 않습니다.
+
+제공 합성 대본과 대조한 연습용 회의록으로 결정 페이지와 안내 페이지를 갱신합니다. 실제 원음 확인 기록과 구별합니다. 바꿀 내용을 사람이 확인하면 백업하고 씁니다. 책 6.4절에 대응합니다.
 
 ## 실행 방법
 
-```bash
-cd ~/team-ai-agent/code/ch06/03-decision-wiki
-uv run main.py register
-hermes chat --query-file prompt.md
-uv run main.py preview
-uv run main.py apply
-uv run check.py
-```
+1. 헤르메스 앱에서 새 대화를 열고 다음 문장을 보냅니다.
 
-처음부터 다시 할 때는 이 폴더에서 `uv run reset.py`를 실행해 받은 처음 상태로 되돌린 뒤 실행 방법을 다시 따라 합니다.
+   작업 폴더는 홈 폴더의 team-ai-agent\code\ch06\03-decision-wiki야. 이 폴더의 prompt.md를 읽고 그 내용대로 진행해 줘.
+
+2. 헤르메스가 보여 준 원본과 결과를 읽습니다. 위키 쓰기나 공유 전 확인을 요청하면 내용을 확인한 뒤 답합니다.
+3. 위키는 옵시디언에서 열어 출처 링크와 현재 조건을 대조합니다. expected/는 비교용 편집 예시입니다.
 
 ## 폴더 구성
 
@@ -24,6 +21,8 @@ uv run check.py
 | raw/·wiki/ | 5장까지의 원본과 위키 |
 | prompt.md | 결정 반영 지시문 |
 | expected/wiki/ | 비교용 결정 페이지 |
-| check.py | 원본 보존·등록·페이지 저장 확인 |
-| main.py | 단계 register / preview / apply. 인자 없이 실행하면 할 일과 단계를 안내 |
-| reset.py | 예제 폴더를 받은 처음 상태로 되돌리기(다시 할 때) |
+
+
+## 다시 하기
+
+위키를 바꾼 예제는 먼저 output/wiki-before/의 백업과 현재 위키를 비교해 달라고 부탁합니다. 복원할 백업을 고르고 확인한 뒤 위키를 복원합니다. 공유 저장소의 변경 이력은 지우지 않습니다. 새 대화에서 '작업 폴더는 홈 폴더의 team-ai-agent\code\ch06\03-decision-wiki야. output 폴더의 파일 목록을 보여 주고, 내가 확인하면 지워 줘.'라고 부탁합니다.

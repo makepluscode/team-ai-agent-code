@@ -1,13 +1,14 @@
-wiki-curator 역할로 확인한 회의록을 위키에 반영해 줘.
-
-먼저 AGENTS.md와 wiki/index.md, wiki/guides/onboarding.md, raw/DOC-012_meeting-notes.md(DOC-012@r1),
-raw/DOC-011_transcript-fallback.md(DOC-011@r1)를 읽어 줘. raw/의 원본은 절대 수정하지 마.
-
-1. 결정 페이지 변경안 output/wiki-draft/decisions/onboarding.md: 머리말 source_refs(DOC-012@r1, DOC-011@r1, DOC-010@r1, DOC-001@r1),
-   현재 결정(10월 15일 10:00·회의실 A), 취소된 계획(12일), 기각된 대안(14일), 할 일 두 건(TASK-009, TASK-002 확인 대기 유지),
-   미정 항목(최종 검토자)을 출처와 함께 정리해 줘.
-2. 안내 페이지 변경안 output/wiki-draft/guides/onboarding.md: 현재 일시·장소를 '10월 15일 10:00 · 회의실 A (확정, DOC-012@r1)'로 바꾸고
-   최종 검토자는 '미정'으로 유지, 변경 이력에 회의 확정을 추가해 줘.
-3. 목록 변경안 output/wiki-draft/index.md에 결정 페이지를 추가해 줘.
-
-wiki/ 아래 파일은 직접 고치지 마. 저장한 변경안을 다시 읽어 보여 줘.
+wiki-curator 역할로 회의록의 결정을 위키에 반영해 줘.
+AGENTS.md와 input/DOC-012_meeting-notes.md, raw/DOC-011_transcript-fallback.md,
+wiki/index.md와 wiki/guides/onboarding.md를 먼저 읽어 줘.
+이번 입력은 원음 대조 전 합성 자료를 이용한 연습이야. 실제 원음 확인을 마쳤다고 쓰지 마.
+회의록 원본을 바꾸지 말고 raw/DOC-012_meeting-notes.md에 같은 내용으로 복사해 줘.
+같은 이름의 원본이 있으면 내용을 비교하고 다르면 멈춰 줘.
+wiki/decisions/onboarding.md에 15일 10시·회의실 A 확정, 12일 잠정 계획 취소,
+14일 대안 기각을 나누어 적고 원본으로 가는 출처 링크를 붙여 줘.
+자료함 정리는 문준서, 가이드 수정은 송지우가 맡고 기한은 14일 17시로 적어 줘.
+가이드 수정 업무의 확인 대기는 유지하고 최종 검토자와 그 기한은 미정으로 남겨 줘.
+안내 페이지의 현재 조건도 고치고 목록에 결정 페이지를 추가해 줘.
+바꿀 세 파일의 전체 내용을 대화창에 보여 주고 내 확인을 기다려 줘.
+확인 뒤 AGENTS.md의 백업·쓰기·정리 기록 절차를 따라 적용해 줘.
+쓴 파일을 다시 읽어 현재 결정·취소·기각·미정을 보여 줘.

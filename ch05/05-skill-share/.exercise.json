@@ -3,6 +3,14 @@
   "package_version": "1.7",
   "sources": {
     "input/DOC-004_weekly-meetings.md": "6b7964eb758bd13149cf7e6361761db31928e201f6f75bca44ed2fe6af1ee7a7",
+    "input/organized/2026-10-02_회의노트_주간회의.md": "f582fd23234d57a1a72cccd7c5d5717588fce17e41fadb42221e9d1de8942ed8",
+    "input/organized/2026-10-05_업무노트_할일.txt": "10ab65aee8be74690e68e16c986a0d179a16768db1c39b23ee94ab938dcf7a44",
+    "input/organized/2026-10-05_회의노트_주간회의.md": "634cf8aacca8ece123e65fb2abca30e21f9e044b90c806b0281d4768b8b848cc",
+    "input/organized/2026-10-06_대화기록_온보딩준비.txt": "38e7d5c55b99cefc33d3532d3020b9e8f0a3efebeb1668bd783b850dc1dcedc8",
+    "input/organized/2026-10-06_업무노트_비교표작성.md": "98e8dc6633fe268f0e270367a9d161deb398b32e874fea4b774cff50303493c9",
+    "input/organized/2026-10-06_업무노트_회의실문의.txt": "c0306db9ea7a3df6862d789b4481e3bef8aa6e048ab782ee01fa6f667edcd189",
+    "input/organized/2026-10-06_회의노트_원온원.txt": "ef8aae9761901055f486662c73bb934dfb389f6c12d12ec801578eb443cda198",
+    "input/organized/2026-10-07_업무노트_준비상태점검.txt": "00ff4eb90136070d90e098173ffbbe5753763868bb916ad089e5b0cda1f8598c",
     "input/raw-registry.json": "8e145e171c56d7d454ef9b12bac15bb68a275e26f96a8a6fe913c969b2512301",
     "input/report-source-map.json": "97a66d4c3c3204cea4b8fef5f81f47ff59278ba280810dc9f18d46e26ea295fa",
     "input/snapshot.json": "55cae40a6f04c5bbeca0f3bdb1996f69a83e2ba11463c7b69739672df072e116",
@@ -28,7 +36,7 @@
   "example": "ch05/05-skill-share",
   "wiki_base": {
     "guides/onboarding.md": "94565ed490d9367c9db0254690699fe49957b38f188a341cce4e058edf0bd7f3",
-    "index.md": "38fcc9c0224367d3d74b308baca9d84eafbd86965de66b68183bdbb501f15c71",
+    "index.md": "a1e058cccffbf58870ada642888747f33f87cb3e7a5ce0f09517984d71c80b72",
     "log.md": "6e39a8d71edb2b45292f04f9025fef65f1e83c4b5c6f167e18c60839ed44d8eb"
   }
 }

@@ -84,7 +84,7 @@ CHECK_WIKI_PAGE = [
 ]
 
 # 4장 앱 버전(2026-11-02): 헤르메스 데스크톱 앱 대화로 적용하고 옵시디언에서 출처 링크를 눌러 원본을 연다.
-# 5장부터의 CLI 예제는 WIKI_RULES·ONBOARDING_*를 그대로 쓴다.
+# 7장부터의 CLI 예제는 WIKI_RULES·ONBOARDING_*를 그대로 쓴다.
 WIKI_RULES_APP = """
 # 스튜디오 메리 위키 정리 규칙 (wiki-curator)
 
@@ -499,12 +499,12 @@ SPECS.append({
                         ["변경 이력에 DOC-001@r1 → DOC-010@r1이 남았는가", ["DOC-010@r1", "이력"]]]},
     "readme": {
         "intro": """
-            자료 담당 M03이 쓴 일정 변경 메모(DOC-010@r1)를 raw/에 원본으로 등록하고, 매니저의 헤르메스가 wiki-curator로 위키 변경안을 쓴 뒤
+            문준서가 쓴 일정 변경 메모(DOC-010@r1)를 raw/에 원본으로 등록하고, 매니저의 헤르메스가 wiki-curator로 위키 변경안을 쓴 뒤
             사람이 확인하고 적용합니다. 책 5.3절에 대응합니다.
         """,
         "run": ["cd ~/team-ai-agent/code/ch05/03-change-memo", "uv run main.py register", "hermes chat --query-file prompt.md",
                 "uv run main.py apply", "uv run check.py"],
-        "files": [("input/DOC-010_schedule-change.md", "M03이 쓴 일정 변경 메모(등록 전)"), ("raw/·wiki/", "4장까지의 원본과 위키"),
+        "files": [("input/DOC-010_schedule-change.md", "문준서가 쓴 일정 변경 메모(등록 전)"), ("raw/·wiki/", "4장까지의 원본과 위키"),
                   ("prompt.md", "변경 메모 반영 지시문"), ("main.py", "register: 메모를 raw/에 등록 / apply: 변경안 적용"),
                   ("expected/wiki/", "비교용 위키 페이지"), ("check.py", "원본 보존·등록·페이지 저장 확인")],
     },
@@ -552,7 +552,7 @@ SPECS.append({
     "copy": {"raw/DOC-010_schedule-change.md": "examples/wiki/ch05/start/input/DOC-010_schedule-change.md"},
     "after": {
         "prompt.md": """
-            이 폴더는 동료 M02 송지우가 받아 온 팀 위키 사본이야.
+            이 폴더는 동료 송지우가 받아 온 팀 위키 사본이야.
             갱신된 wiki/guides/onboarding.md와 raw/DOC-010_schedule-change.md를 먼저 읽고 바뀐 조건을 요약해 줘.
 
             이어서 기존 온보딩 가이드 input/DOC-007_onboarding-guide.r1.md(DOC-007@r1)를 고친 새 버전을
@@ -811,6 +811,119 @@ SPECS.append({
                   ("check.py", "원본 보존·등록·페이지 저장 확인")],
     },
 })
+
+
+# 5·6장 앱 경로: 자동 시험용 main/check는 유지하고 독자는 앱 대화로 진행한다.
+APP56_PROMPTS = {
+    (5, "01-share-repo"): """
+        이 폴더의 raw/·wiki/·AGENTS.md·.gitignore를 홈 폴더의 studio-merry-wiki로 복사해 팀 위키를 준비해 줘.
+        대상 폴더가 이미 있으면 덮어쓰지 말고 목록을 보여 준 뒤 멈춰 줘.
+        GitHub 로그인 상태를 확인하고 로그인돼 있지 않으면 부록 B를 따라 로그인하도록 알려 줘.
+        .gitignore에 .env, 음성 파일, output/, state/, .obsidian/이 들어 있는지 확인해 줘.
+        공유할 파일 목록과 비공개 저장소 이름 studio-merry-wiki를 먼저 보여 주고 내 확인을 기다려 줘.
+        확인 뒤 내 계정의 비공개 저장소로 올리고 주소와 마지막 변경 이력을 보여 줘.
+        비밀정보나 음원이 있으면 멈추고, 기존 저장소를 덮어쓰거나 강제로 올리지 마.
+    """,
+    (5, "02-wiki-sync"): """
+        이 폴더의 skills/wiki-sync를 홈 폴더의 studio-merry-wiki/skills/wiki-sync로 복사해 줘.
+        같은 경로가 이미 있으면 차이를 보여 주고 내 확인을 기다려 줘.
+        복사한 SKILL.md를 읽고 그 절차로만 동기화해 줘.
+        먼저 바뀐 파일 목록과 제안 기록 문구를 보여 주고, 내가 고른 파일과 문구를 확인한 뒤에 기록과 동기화를 진행해 줘.
+        충돌이나 거부가 나면 임의로 덮어쓰지 말고 바로 멈춘 뒤 상태를 알려 줘.
+        이어서 이 스킬을 헤르메스에서 호출할 수 있도록 설치하고 결과를 보여 줘.
+        tap 설치를 확인하지 못하면 성공했다고 쓰지 말고 실패 내용과 현재 설치 상태를 알려 줘.
+    """,
+    (5, "03-change-memo"): """
+        wiki-curator 역할로 문준서의 변경 메모를 위키에 반영해 줘.
+        먼저 AGENTS.md와 wiki/guides/onboarding.md, input/DOC-010_schedule-change.md를 읽어 줘.
+        입력 원본을 바꾸지 말고 raw/DOC-010_schedule-change.md에 같은 내용으로 복사해 줘.
+        같은 이름의 원본이 있으면 내용을 비교하고 다르면 멈춰 줘.
+        안내 날짜는 10월 15일로 확정하고 시각·장소·최종 검토자는 미정으로 적어 줘.
+        이전 12일 10시 잠정 계획은 변경 이력에 남기고 15일의 시각으로 옮기지 마.
+        DOC-010@r1을 출처에 추가하고 원본으로 가는 상대 링크를 붙여 줘.
+        안내 페이지와 목록의 바꿀 전체 내용을 대화창에 보여 주고 내 확인을 기다려 줘.
+        확인 뒤 AGENTS.md의 백업·쓰기·정리 기록 절차를 따라 적용해 줘.
+        원본과 결과를 다시 읽어 바뀐 날짜와 남은 미정을 보여 줘.
+    """,
+    (6, "03-decision-wiki"): """
+        wiki-curator 역할로 회의록의 결정을 위키에 반영해 줘.
+        AGENTS.md와 input/DOC-012_meeting-notes.md, raw/DOC-011_transcript-fallback.md,
+        wiki/index.md와 wiki/guides/onboarding.md를 먼저 읽어 줘.
+        이번 입력은 원음 대조 전 합성 자료를 이용한 연습이야. 실제 원음 확인을 마쳤다고 쓰지 마.
+        회의록 원본을 바꾸지 말고 raw/DOC-012_meeting-notes.md에 같은 내용으로 복사해 줘.
+        같은 이름의 원본이 있으면 내용을 비교하고 다르면 멈춰 줘.
+        wiki/decisions/onboarding.md에 15일 10시·회의실 A 확정, 12일 잠정 계획 취소,
+        14일 대안 기각을 나누어 적고 원본으로 가는 출처 링크를 붙여 줘.
+        자료함 정리는 문준서, 가이드 수정은 송지우가 맡고 기한은 14일 17시로 적어 줘.
+        가이드 수정 업무의 확인 대기는 유지하고 최종 검토자와 그 기한은 미정으로 남겨 줘.
+        안내 페이지의 현재 조건도 고치고 목록에 결정 페이지를 추가해 줘.
+        바꿀 세 파일의 전체 내용을 대화창에 보여 주고 내 확인을 기다려 줘.
+        확인 뒤 AGENTS.md의 백업·쓰기·정리 기록 절차를 따라 적용해 줘.
+        쓴 파일을 다시 읽어 현재 결정·취소·기각·미정을 보여 줘.
+    """,
+}
+
+# 기존 페이지도 옵시디언에서 출처를 눌러 열 수 있도록 링크를 붙인다.
+import re as _re
+import textwrap as _textwrap
+
+def _app_source_links(text):
+    names = {"DOC-001": "DOC-001_onboarding.md", "DOC-002": "DOC-002_library-rules.md",
+             "DOC-003": "DOC-003_retrospective.md", "DOC-009": "DOC-009_weekly-report.r1.md",
+             "DOC-010": "DOC-010_schedule-change.md", "DOC-011": "DOC-011_transcript-fallback.md",
+             "DOC-012": "DOC-012_meeting-notes.md"}
+    front, separator, body = text.lstrip().partition("\n---\n") if text.lstrip().startswith("---") else ("", "", text)
+    for doc, name in names.items():
+        body = _re.sub(rf"(?<![\w/]){doc}@r1(?![\w\]])", f"[{doc}@r1](../../raw/{name})", body)
+    return front + separator + body
+
+for _spec in SPECS:
+    if _spec["chapter"] not in (5, 6):
+        continue
+    _key = (_spec["chapter"], _spec["name"])
+    _spec["files"]["AGENTS.md"] = WIKI_RULES_APP + "\n정리 기록과 updated_at은 한국 표준시(Asia/Seoul, +09:00)로 적습니다. 확인한 사람을 아직 알려 주지 않았다면 쓰기 전에 물어봅니다.\n"
+    _spec["files"][".gitignore"] += "\n.obsidian/\n"
+    for _path, _text in list(_spec["files"].items()):
+        if _path.startswith("wiki/"):
+            if _path.endswith("index.md"):
+                _spec["files"][_path] = _text.replace("| guides/onboarding.md |", "| [새 동료 안내 준비와 자료 기준](guides/onboarding.md) |")
+            elif _path.endswith("onboarding.md"):
+                _spec["files"][_path] = _app_source_links(_text)
+    if _key in APP56_PROMPTS:
+        _spec["after"]["prompt.md"] = APP56_PROMPTS[_key]
+    _spec["readme"]["app"] = f"""
+        1. 헤르메스 앱에서 새 대화를 열고 다음 문장을 보냅니다.
+
+           작업 폴더는 홈 폴더의 team-ai-agent\\code\\ch{_spec['chapter']:02}\\{_spec['name']}야. 이 폴더의 prompt.md를 읽고 그 내용대로 진행해 줘.
+
+        2. 헤르메스가 보여 준 원본과 결과를 읽습니다. 위키 쓰기나 공유 전 확인을 요청하면 내용을 확인한 뒤 답합니다.
+        3. 위키는 옵시디언에서 열어 출처 링크와 현재 조건을 대조합니다. expected/는 비교용 편집 예시입니다.
+    """
+    _spec["readme"]["reset"] = "위키를 바꾼 예제는 먼저 output/wiki-before/의 백업과 현재 위키를 비교해 달라고 부탁합니다. 복원할 백업을 고르고 확인한 뒤 위키를 복원합니다. 공유 저장소의 변경 이력은 지우지 않습니다."
+    _spec["readme"]["files"] = [(name, role) for name, role in _spec["readme"]["files"] if not name.endswith(".py")]
+    if _key == (5, "04-member-revision"):
+        _spec["after"]["prompt.md"] = _spec["after"]["prompt.md"].replace("동료 M02 송지우", "동료 송지우").replace("(M03 문준서)", "(문준서)")
+        _spec["readme"]["notes"] = "실제 공유에서는 홈 폴더의 studio-merry-wiki-member를 송지우 역할의 두 번째 폴더로 씁니다. wiki-sync로 받은 최신 위키와 가이드 원본을 읽고 새 결과를 output/에 저장합니다. 이 예제 폴더는 공유 연결이 막혀도 제공 자료로 시작하는 대안입니다. 같은 계정의 두 폴더 연습은 다른 계정 초대 검증과 구별합니다."
+    if _key == (6, "02-meeting-notes"):
+        _spec["after"]["prompt.md"] = _textwrap.dedent(_spec["after"]["prompt.md"]).strip() + "\n머리말의 state는 초안, confirmed_by는 미확인으로 적어 줘. 원음 해시는 음원이 없으므로 미제공으로 적고, 사람 확인 전에는 확정된 회의록이라고 쓰지 마.\n"
+        _spec["readme"]["intro"] = "합성 대본에서 결정·할 일·취소·미정을 구분한 회의록 초안을 만듭니다. 음원이 없으므로 실제 원음 대조는 하지 않습니다. 이번 연습에서는 제공 대본의 근거 줄과 비교해 확인합니다. 책 6.3절에 대응합니다."
+    if _key == (6, "03-decision-wiki"):
+        _spec["files"]["input/DOC-012_meeting-notes.md"] = MEETING_NOTES.replace("state: 확정", "state: 연습용 확인본").replace("confirmed_by: M01", "confirmed_by: 매니저 (제공 합성 대본 대조 연습)").replace('audio_sha256: "<MTG-001 음원 SHA-256 해시>"', 'audio_sha256: null')
+        _spec["readme"]["intro"] = "제공 합성 대본과 대조한 연습용 회의록으로 결정 페이지와 안내 페이지를 갱신합니다. 실제 원음 확인 기록과 구별합니다. 바꿀 내용을 사람이 확인하면 백업하고 씁니다. 책 6.4절에 대응합니다."
+    if _key == (5, "05-skill-share"):
+        _spec["copy"].update({"input/DOC-004_weekly-meetings.md": "ch03/01-weekly-report/input/DOC-004_weekly-meetings.md",
+                              "input/snapshot.json": "ch03/01-weekly-report/input/snapshot.json",
+                              "input/organized": "ch03/01-weekly-report/input/organized"})
+        _spec["readme"]["files"].append(("input/", "공유 스킬을 실행해 비교할 노트 묶음·관측 기준"))
+        _spec["after"]["share.md"] = """
+            점검한 output/skills/weekly-report/SKILL.md를 팀 위키의 skills/weekly-report/SKILL.md와 비교해 줘.
+            바꿀 내용과 공유할 파일 목록을 보여 주고 내 확인을 기다려 줘.
+            확인 뒤 복사하고 wiki-sync 스킬로 고른 파일만 기록·동기화해 줘.
+            동료 역할의 환경에 공유 저장소의 이 스킬을 tap으로 설치하고 설치 결과를 보여 줘.
+            설치가 막히면 성공으로 쓰지 말고 원인과 현재 상태를 알려 줘.
+        """
+        _spec["readme"]["files"].append(("share.md", "점검한 스킬의 공유·설치 지시문"))
+        _spec["readme"]["app"] += "\n점검 결과를 확인한 뒤 같은 대화에서 '이 폴더의 share.md를 읽고 그 내용대로 진행해 줘.'라고 부탁합니다.\n"
 
 # ── 7장 팀 요청의 접수와 기록 ─────────────────────────────────────────
 

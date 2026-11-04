@@ -1,13 +1,10 @@
-wiki-curator 역할로 새로 들어온 변경 메모를 위키에 반영해 줘.
-
-먼저 AGENTS.md와 wiki/guides/onboarding.md, raw/DOC-010_schedule-change.md(DOC-010@r1, 작성 M03)를 읽어 줘.
-원본 파일(DOC-001@r1, DOC-010@r1)은 절대 수정하지 마.
-
-wiki/guides/onboarding.md의 변경안을 output/wiki-draft/guides/onboarding.md에 다음 기준으로 저장해 줘.
-1. 머리말의 updated_at을 정리한 시각으로 바꾸고 source_refs에 DOC-010@r1을 추가해 줘.
-2. '현재 안내 일정과 조건': 안내 날짜는 '10월 15일 (날짜 확정, DOC-010@r1)'로, 시각·장소·최종 검토자는 모두 '미정'으로 적어 줘.
-   옛 10:00 잠정 시각을 현재 시각으로 남기지 마.
-3. 페이지 아래 '일정 변경 이력' 절에 '첫 잠정 계획(10월 12일 10:00, DOC-001@r1) → 날짜만 10월 15일로 변경 확정·시각 미정 전환(DOC-010@r1)'을 남겨 줘.
-4. 목록 변경안 output/wiki-draft/index.md도 최근 갱신 정보를 고쳐 저장해 줘.
-
-wiki/ 아래 파일은 직접 고치지 마. 저장한 변경안을 다시 읽어 보여 줘.
+wiki-curator 역할로 문준서의 변경 메모를 위키에 반영해 줘.
+먼저 AGENTS.md와 wiki/guides/onboarding.md, input/DOC-010_schedule-change.md를 읽어 줘.
+입력 원본을 바꾸지 말고 raw/DOC-010_schedule-change.md에 같은 내용으로 복사해 줘.
+같은 이름의 원본이 있으면 내용을 비교하고 다르면 멈춰 줘.
+안내 날짜는 10월 15일로 확정하고 시각·장소·최종 검토자는 미정으로 적어 줘.
+이전 12일 10시 잠정 계획은 변경 이력에 남기고 15일의 시각으로 옮기지 마.
+DOC-010@r1을 출처에 추가하고 원본으로 가는 상대 링크를 붙여 줘.
+안내 페이지와 목록의 바꿀 전체 내용을 대화창에 보여 주고 내 확인을 기다려 줘.
+확인 뒤 AGENTS.md의 백업·쓰기·정리 기록 절차를 따라 적용해 줘.
+원본과 결과를 다시 읽어 바뀐 날짜와 남은 미정을 보여 줘.
