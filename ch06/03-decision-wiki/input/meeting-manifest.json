@@ -1,16 +1,18 @@
 {
   "meeting_id": "MTG-001",
   "data_kind": "synthetic",
-  "audio": null,
-  "audio_sha256": null,
-  "audio_duration_seconds": null,
+  "audio": "input/MTG-001_meeting.mp3",
+  "audio_sha256": "9380fe80e515813ea6605867f3fbd37c88ccdbfb83107516913982f8a806d783",
+  "audio_duration_seconds": 72.6,
+  "audio_kind": "AI 음성 합성(실제 회의 녹음 아님)",
+  "speakers": [
+    "매니저",
+    "문준서",
+    "송지우",
+    "홍예린"
+  ],
   "fallback": "DOC-011_transcript-fallback.md",
-  "fallback_kind": "authored-not-audio-verified",
+  "fallback_kind": "authored-transcript",
   "transcription_executed": false,
-  "speaker_identification": false,
-  "TODO": [
-    "1분 확인 음원·5분 본 음원 제작",
-    "음원 길이·음성·해시·구간 청취 대조",
-    "Windows WSL2와 Mac mini M4 전사 검증"
-  ]
+  "speaker_identification": false
 }

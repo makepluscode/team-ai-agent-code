@@ -1,6 +1,6 @@
 # 04-member-revision: 위키를 받은 동료의 결과 수정
 
-> 이 예제는 윈도우의 헤르메스 데스크톱 앱으로 실습합니다. 예제는 홈 폴더의 team-ai-agent\code(C:\Users\로그인 이름\team-ai-agent\code)에 받고, 대화창에 넣을 문장은 [복사용 문장 모음](../../COMMANDS.md)에서 복사합니다. main.py·check.py·reset.py는 예제 저장소의 자동 시험용이며 책의 실습에서는 쓰지 않습니다.
+> 이 예제는 윈도우의 헤르메스 데스크톱 앱으로 실습합니다. 예제는 홈 폴더의 team-ai-agent\code(C:\Users\로그인 이름\team-ai-agent\code)에 받고, 대화창에 넣을 문장은 [복사용 문장 모음](../../COMMANDS.md)에서 복사합니다. main.py·check.py는 예제 저장소의 자동 시험용이며 책의 실습에서는 쓰지 않습니다.
 
 매니저의 wiki-curator가 갱신한 위키를 받은 동료(M02)의 폴더입니다. 헤르메스가 위키와 변경 원본을 근거로 온보딩 가이드
 2번째 버전(DOC-007@r2)을 만듭니다. 이 단계까지 끝나야 동료 인계가 완료됩니다. 책 5.4절에 대응합니다.
@@ -23,10 +23,11 @@
 | input/DOC-007_onboarding-guide.r1.md | 수정할 온보딩 가이드 1번째 버전 |
 | prompt.md | 가이드 수정 지시문 |
 | expected/DOC-007_onboarding-guide.r2.md | 비교용 2번째 버전 |
+| reset.py | 예제 폴더를 받은 처음 상태로 되돌리기(다시 할 때) |
 
 
 receive는 같은 장 폴더의 03-change-memo를 마친 뒤 실행해 실제 결과를 넘겨받는 인계입니다. 03을 건너뛰었다면 receive 없이 미리 넣어 둔 위키(03 완료 상태의 비교용 예시)로 연습할 수 있지만 그것은 인계 확인이 아닙니다. GitHub으로 공유했다면 동료 폴더(~/studio-merry-wiki-member)에서 '위키 동기화해 줘'로 받은 뒤 같은 지시문을 씁니다.
 
 ## 다시 하기
 
-위키를 바꾼 예제는 먼저 output/wiki-before/의 백업과 현재 위키를 비교해 달라고 부탁합니다. 복원할 백업을 고르고 확인한 뒤 위키를 복원합니다. 공유 저장소의 변경 이력은 지우지 않습니다. 새 대화에서 '작업 폴더는 홈 폴더의 team-ai-agent\code\ch05\04-member-revision야. output 폴더의 파일 목록을 보여 주고, 내가 확인하면 지워 줘.'라고 부탁합니다.
+남겨 둘 결과는 먼저 다른 폴더에 복사한 뒤, 새 대화에서 '작업 폴더는 홈 폴더의 team-ai-agent\code\ch05\04-member-revision야. 이 폴더의 reset.py를 실행해 줘.'라고 부탁합니다. 고치거나 지운 파일은 받은 내용으로 되살아나고 output처럼 새로 생긴 파일은 지워집니다.

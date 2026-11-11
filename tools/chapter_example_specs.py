@@ -177,10 +177,9 @@ SPECS.append({
 
         1. AGENTS.md를 읽고 핵심 정리 규칙을 다섯 줄로 요약해 줘.
         2. raw/의 초기 원본 네 건(DOC-001@r1, DOC-002@r1, DOC-003@r1, DOC-009@r1)을 열어
-           파일 이름, document_id, revision, created_at, effective_at, state, source_refs를 표로 보여 줘.
-           빠진 항목이 있으면 표시해 줘.
-        3. 원본에서 '잠정'·'미정'·'확인 대기'로 표시해야 할 핵심 조건을 목록으로 알려 줘.
-        4. raw/report-input/은 주간 보고의 근거 묶음이야. 파일 목록만 보여 줘.
+           '문서 | 상태(state) | 잠정·미정·확인 대기로 볼 조건' 표로 보여 줘.
+           머리말에 빠진 항목(document_id, revision, created_at, effective_at, state, source_refs)이 있으면 표 아래에 따로 알려 줘.
+        3. raw/report-input/은 주간 보고의 근거 묶음이야. 파일 목록만 보여 줘.
 
         어떤 파일도 만들거나 고치지 마.
     """},
@@ -632,14 +631,14 @@ state: 확정
 meeting_id: MTG-001
 confirmed_by: M01
 event_id: EVT-010
-audio_sha256: "<MTG-001 음원 SHA-256 해시>"
+audio_sha256: "9380fe80e515813ea6605867f3fbd37c88ccdbfb83107516913982f8a806d783"
 source_refs:
   - DOC-011@r1
   - DOC-010@r1
   - DOC-001@r1
 ---
 
-<!-- 비교용 편집 예시: 실제 모델 응답 아님. 원음 구간은 음원 제작·청취 뒤 입력(TODO) -->
+<!-- 비교용 편집 예시: 실제 모델 응답 아님 -->
 
 # 새 동료 안내 방식 및 일정 확정 회의록 (MTG-001)
 
@@ -648,7 +647,7 @@ source_refs:
   - 확정 내용: 2026-10-15 10:00, 장소는 회의실 A로 확정한다. (DOC-010@r1의 날짜 확정에 시각·장소 추가 확정)
   - 취소된 계획: 초기 메모(DOC-001@r1)의 2026-10-12 10:00 잠정 계획은 최종 취소한다.
   - 기각된 대안: 회의 중 제안된 2026-10-14 진행 대안은 채택하지 않는다(기각).
-  - 원음 근거 구간: DOC-011@r1 [음원 청취 후 입력]
+  - 음원 근거 구간: DOC-011@r1 [00:21.1–00:29.7], [00:34.5–00:40.9]
 
 ## 2. 확정된 할 일 (업무 연결)
 - [DOC-012#task-01] 자료함 파일명·분류 기준 정리 (업무 ID: TASK-009, 상태: 진행)
@@ -701,35 +700,38 @@ SPECS.append({
         "prompt.md": """
         MTG-001 회의의 입력 자료를 점검해 줘. 아직 전사나 요약은 하지 마.
 
-        1. input/meeting-manifest.json을 읽고 회의 ID, 음원 경로와 해시, 기준 전사문(DOC-011@r1) 경로를 표로 정리해 줘.
-           음원이 없으면(audio가 null) 그렇다고 밝히고 기준 전사문 대안으로 진행한다고 적어 줘.
+        1. input/meeting-manifest.json을 읽고 회의 ID, 음원 경로·길이·해시, 기준 전사문(DOC-011@r1) 경로를 표로 정리해 줘.
+           음원 파일이 실제로 있는지, 해시가 회의 정보와 같은지도 확인해 줘. 음원이 없으면(audio가 null) 그렇다고 밝혀 줘.
         2. input/glossary.txt의 인물·장소·업무 용어를 보여 줘.
         3. input/DOC-011_transcript-fallback.md에서 '12일', '14일', '15일', '10시', '17시', '회의실 A', '검토자'가 나오는 줄을 모두 뽑아 줘.
         원본과 입력 파일은 수정하지 마.
     """,
-        "transcript.md": """
-            로컬 전사 결과(output/transcript.json)를 읽고 기준 전사문(input/DOC-011_transcript-fallback.md, DOC-011@r1)과 대조해 줘.
-            1. 전체 구간 수와 마지막 구간의 종료 시각이 음원 길이와 맞는지 확인해 줘.
-            2. '12일', '14일', '15일', '10시', '17시', '회의실 A', '검토자'가 언급된 구간 번호와 시작·종료 시각을 모두 뽑아 줘.
-            3. 날짜나 고유명사가 기준 전사문과 다르게 적힌 구간이 있으면 수정 전후 표로 보여 줘.
-            전사 결과 파일은 덮어쓰지 마.
+        "transcribe.md": """
+            회의 음원(input/MTG-001_meeting.mp3)을 내 컴퓨터에서 로컬로 전사해 줘.
+            1. 이 폴더에서 `uv run --extra transcription main.py transcribe input/MTG-001_meeting.mp3`를 실행해.
+               처음에는 전사 프로그램과 모델을 내려받아 시간이 걸려. 오류가 나면 멈추고 오류를 그대로 보여 줘.
+            2. 끝나면 output/transcript.json의 구간을 시작 시각과 함께 표로 보여 줘.
+            3. 기준 전사문(input/DOC-011_transcript-fallback.md)과 다르게 적힌 낱말을 '구간 | 전사 결과 | 기준 전사문' 표로 보여 줘.
+               날짜·시각·장소·이름이 다른 곳은 따로 표시해 줘.
+            전사 결과와 입력 파일은 고치지 마.
         """},
     "main": {"title": "6장 회의 입력 예제: 음원이 있을 때 faster-whisper로 로컬 전사한다(선택).",
              "steps": {"transcribe": ("음원을 로컬 전사해 output/transcript.json에 저장(uv run --extra transcription main.py transcribe <음원>)",
                                       [["meetings", "transcribe", "--audio", "{extra}"]])}},
     "check": {"title": "6장 회의 입력 예제의 원본 보존을 확인한다."},
-    "optional_deps": {"transcription": ["faster-whisper>=1.0.0"]},
+    "optional_deps": {"transcription": ["faster-whisper>=1.0.0", "av<16"]},
     "readme": {
         "intro": """
             MTG-001 회의의 입력 자료(회의 정보·용어표·기준 전사문)를 점검하고, 음원이 있으면 로컬 Whisper(faster-whisper)로 전사하는
-            예제입니다. 이 책의 합성 회의 음원은 아직 제작 전이어서 기준 전사문(DOC-011@r1)으로 6.3절을 이어 갑니다. 책 6.1~6.2절에 대응합니다.
+            예제입니다. 음원(input/MTG-001_meeting.mp3)은 기준 전사문(DOC-011@r1)의 대본을 AI 음성으로 합성한 72초짜리 연습 자료이며 실제 회의 녹음이 아닙니다.
+            전사를 하지 못해도 기준 전사문으로 6.3절을 이어 갈 수 있습니다. 책 6.1~6.2절에 대응합니다.
         """,
         "run": ["cd ~/team-ai-agent/code/ch06/01-meeting-input", "hermes chat --query-file prompt.md",
                 "uv run --extra transcription main.py transcribe <음원 경로>", "uv run check.py"],
         "files": [("input/meeting-manifest.json", "회의 ID·음원·해시·대안 전사문 정보"), ("input/glossary.txt", "전사 힌트용 용어표"),
-                  ("input/DOC-011_transcript-fallback.md", "저자가 쓴 기준 전사문(합성, 원음 대조 전)"), ("prompt.md", "입력 점검 지시문"), ("transcript.md", "전사 결과와 기준 전사문 대조 지시문(음원이 있을 때)"),
+                  ("input/MTG-001_meeting.mp3", "합성 회의 음원(AI 음성, 72초)"), ("input/DOC-011_transcript-fallback.md", "저자가 쓴 기준 전사문(음원의 대본, 구간 시각 포함)"), ("prompt.md", "입력 점검 지시문"), ("transcribe.md", "로컬 전사와 기준 전사문 대조 지시문"),
                   ("main.py", "transcribe: 로컬 전사(선택, faster-whisper 필요)"), ("check.py", "원본 보존 확인")],
-        "notes": "전사는 CPU·base·int8 구성을 검토 기준으로 둡니다. 실제 음원의 전사와 원음 청취 대조는 두 기준 장비에서 TODO(검증)입니다.",
+        "notes": "전사는 faster-whisper base·CPU·int8 구성입니다. 음원은 tools/make_meeting_audio.py로 만들었습니다(BizRouter의 OpenAI 호환 음성 API). 맥 기준 장비의 전사는 TODO(검증)입니다.",
     },
 })
 
@@ -739,15 +741,14 @@ SPECS.append({
     "after": {
         "prompt.md": """
             MTG-001 회의 전사문(input/DOC-011_transcript-fallback.md, DOC-011@r1)과 회의 정보(input/meeting-manifest.json),
-            현재 위키 안내 페이지(wiki/guides/onboarding.md)를 읽고 회의록 초안을 써 줘.
+            현재 위키 안내 페이지(wiki/guides/onboarding.md)를 읽고 회의록 초안을 써 줘. 새로 만들 회의록의 문서 ID는 DOC-012야.
 
             1. 확정 결정(DOC-012#decision-01): 확정된 안내 날짜·시각·장소를 적고, 취소된 옛 계획(10월 12일)과 기각된 대안(10월 14일)을 따로 적어 줘.
             2. 신규 할 일(DOC-012#task-01): M03 문준서의 자료함 파일명·분류 정리(TASK-009)와 기한.
             3. 기존 업무(DOC-012#task-02): M02 송지우의 온보딩 가이드 수정(TASK-002)과 기한. 가이드 검토 전이므로 확인 대기를 유지해.
             4. 미정 사항(DOC-012#pending-01): 후속 안내자료의 최종 검토자와 기한은 '미정'. 매니저를 검토자로 지정하지 마.
 
-            모든 항목에 근거 줄과 DOC-011@r1을 붙이고, 사람이 원음과 대조할 체크리스트를 끝에 넣어 줘.
-            전사문은 음원 대조 전 합성 대본이라는 점도 적어 줘.
+            모든 항목에 근거 줄의 구간 시각과 DOC-011@r1을 붙이고, 사람이 음원을 들으며 대조할 체크리스트를 끝에 넣어 줘.
             output/DOC-012_meeting-notes.md에 새로 저장하고 다시 읽어 보여 줘. 원본은 수정하지 마.
         """,
         "expected/DOC-012_meeting-notes.md": MEETING_NOTES,
@@ -816,40 +817,39 @@ SPECS.append({
 # 5·6장 앱 경로: 자동 시험용 main/check는 유지하고 독자는 앱 대화로 진행한다.
 APP56_PROMPTS = {
     (5, "01-share-repo"): """
-        이 폴더의 raw/·wiki/·AGENTS.md·.gitignore를 홈 폴더의 studio-merry-wiki로 복사해 팀 위키를 준비해 줘.
-        대상 폴더가 이미 있으면 덮어쓰지 말고 목록을 보여 준 뒤 멈춰 줘.
-        GitHub 로그인 상태를 확인하고 로그인돼 있지 않으면 부록 B를 따라 로그인하도록 알려 줘.
-        .gitignore에 .env, 음성 파일, output/, state/, .obsidian/이 들어 있는지 확인해 줘.
-        공유할 파일 목록과 비공개 저장소 이름 studio-merry-wiki를 먼저 보여 주고 내 확인을 기다려 줘.
-        확인 뒤 내 계정의 비공개 저장소로 올리고 주소와 마지막 변경 이력을 보여 줘.
-        비밀정보나 음원이 있으면 멈추고, 기존 저장소를 덮어쓰거나 강제로 올리지 마.
+        이 폴더의 raw, wiki, AGENTS.md, .gitignore를 홈 폴더의 studio-merry-wiki로 복사하고, 내 깃허브의 같은 이름 비공개 저장소로 올려 줘.
+        - 로그인이 안 돼 있거나 같은 이름의 폴더·저장소가 이미 있으면 멈춰.
+        - 올릴 파일 목록을 먼저 보여 주고 내 확인을 기다려. 비밀번호·API 키나 음성 파일이 섞여 있으면 멈춰.
+        - 끝나면 저장소 주소를 보여 줘.
     """,
     (5, "02-wiki-sync"): """
-        이 폴더의 skills/wiki-sync를 홈 폴더의 studio-merry-wiki/skills/wiki-sync로 복사해 줘.
-        같은 경로가 이미 있으면 차이를 보여 주고 내 확인을 기다려 줘.
-        복사한 SKILL.md를 읽고 그 절차로만 동기화해 줘.
-        먼저 바뀐 파일 목록과 제안 기록 문구를 보여 주고, 내가 고른 파일과 문구를 확인한 뒤에 기록과 동기화를 진행해 줘.
-        충돌이나 거부가 나면 임의로 덮어쓰지 말고 바로 멈춘 뒤 상태를 알려 줘.
-        이어서 이 스킬을 헤르메스에서 호출할 수 있도록 설치하고 결과를 보여 줘.
-        tap 설치를 확인하지 못하면 성공했다고 쓰지 말고 실패 내용과 현재 설치 상태를 알려 줘.
+        이 폴더의 skills/wiki-sync를 홈 폴더의 studio-merry-wiki/skills/wiki-sync로 복사하고, 그 SKILL.md의 절차로 위키를 동기화해 줘.
+        - 같은 스킬이 이미 있으면 차이를 보여 주고 내 확인을 기다려.
+        - 충돌이나 오류가 나면 덮어쓰지 말고 멈춰.
+        - 끝나면 이 스킬을 내 헤르메스에도 설치하고 결과를 보여 줘.
     """,
     (5, "03-change-memo"): """
-        wiki-curator 역할로 문준서의 변경 메모를 위키에 반영해 줘.
-        먼저 AGENTS.md와 wiki/guides/onboarding.md, input/DOC-010_schedule-change.md를 읽어 줘.
-        입력 원본을 바꾸지 말고 raw/DOC-010_schedule-change.md에 같은 내용으로 복사해 줘.
-        같은 이름의 원본이 있으면 내용을 비교하고 다르면 멈춰 줘.
-        안내 날짜는 10월 15일로 확정하고 시각·장소·최종 검토자는 미정으로 적어 줘.
-        이전 12일 10시 잠정 계획은 변경 이력에 남기고 15일의 시각으로 옮기지 마.
-        DOC-010@r1을 출처에 추가하고 원본으로 가는 상대 링크를 붙여 줘.
-        안내 페이지와 목록의 바꿀 전체 내용을 대화창에 보여 주고 내 확인을 기다려 줘.
-        확인 뒤 AGENTS.md의 백업·쓰기·정리 기록 절차를 따라 적용해 줘.
-        원본과 결과를 다시 읽어 바뀐 날짜와 남은 미정을 보여 줘.
+        AGENTS.md를 따라 문준서의 일정 변경 메모(input/DOC-010_schedule-change.md)를 위키에 반영해 줘.
+        - 메모는 이름과 내용을 바꾸지 않고 raw/에 복사해.
+        - 안내 페이지(wiki/guides/onboarding.md)와 목록(wiki/index.md)을 고쳐.
+        - 안내 날짜는 10월 15일 확정, 시각·장소·최종 검토자는 미정이야.
+    """,
+    (5, "04-member-revision"): """
+        갱신된 위키(wiki/guides/onboarding.md)를 보고 온보딩 가이드 input/DOC-007_onboarding-guide.r1.md의 새 버전을 만들어 줘.
+        - 원본은 그대로 두고 output/DOC-007_onboarding-guide.r2.md로 저장해. 속성은 AGENTS.md 4절을 따라.
+        - 날짜는 10월 15일 확정, 시각·장소·최종 검토자는 미정. 예전 10:00은 남기지 마.
+        - 끝에 변경 근거를 적고, 이전 버전과 바뀐 줄을 보여 줘.
+    """,
+    (5, "05-skill-share"): """
+        주간 보고 스킬(skills/weekly-report/SKILL.md)을 동료와 나눠 쓸 수 있게 점검해 줘.
+        - 내 컴퓨터에만 있는 경로나 API 키가 있으면 알려 줘.
+        - 같은 업무를 두 번 세지 않는지, 미입력을 0건과 구별하는지, 업무를 '확인 대기'로 두는지 봐 줘.
+        - 원본은 그대로 두고, 고친 파일(고칠 곳이 없으면 그대로)을 output/skills/weekly-report/SKILL.md에 저장해.
     """,
     (6, "03-decision-wiki"): """
         wiki-curator 역할로 회의록의 결정을 위키에 반영해 줘.
         AGENTS.md와 input/DOC-012_meeting-notes.md, raw/DOC-011_transcript-fallback.md,
         wiki/index.md와 wiki/guides/onboarding.md를 먼저 읽어 줘.
-        이번 입력은 원음 대조 전 합성 자료를 이용한 연습이야. 실제 원음 확인을 마쳤다고 쓰지 마.
         회의록 원본을 바꾸지 말고 raw/DOC-012_meeting-notes.md에 같은 내용으로 복사해 줘.
         같은 이름의 원본이 있으면 내용을 비교하고 다르면 멈춰 줘.
         wiki/decisions/onboarding.md에 15일 10시·회의실 A 확정, 12일 잠정 계획 취소,
@@ -883,12 +883,23 @@ for _spec in SPECS:
     _key = (_spec["chapter"], _spec["name"])
     _spec["files"]["AGENTS.md"] = WIKI_RULES_APP + "\n정리 기록과 updated_at은 한국 표준시(Asia/Seoul, +09:00)로 적습니다. 확인한 사람을 아직 알려 주지 않았다면 쓰기 전에 물어봅니다.\n"
     _spec["files"][".gitignore"] += "\n.obsidian/\n"
+    if _spec["chapter"] == 6:
+        # 제공 합성 음원은 예제와 함께 배포한다(실제 녹음은 계속 제외)
+        _spec["files"][".gitignore"] += "!input/MTG-001_meeting.mp3\n"
     for _path, _text in list(_spec["files"].items()):
         if _path.startswith("wiki/"):
             if _path.endswith("index.md"):
                 _spec["files"][_path] = _text.replace("| guides/onboarding.md |", "| [새 동료 안내 준비와 자료 기준](guides/onboarding.md) |")
             elif _path.endswith("onboarding.md"):
                 _spec["files"][_path] = _app_source_links(_text)
+    if _key == (5, "04-member-revision"):
+        _spec["files"]["AGENTS.md"] += """
+4. 문서 새 버전
+   - 원래 문서는 고치지 않고 output/에 새 파일로 저장합니다.
+   - 맨 위 속성: document_id는 그대로, revision은 다음 번호, supersedes는 이전 버전(예: DOC-007@r1), state는 원본과 같게, created_at·effective_at은 작성 시각입니다.
+   - 업무가 있으면 task_id와 task_status를 적습니다. 온보딩 가이드 수정은 TASK-002이며 사람이 검토하기 전까지 '확인 대기'입니다.
+   - source_refs에는 이전 원본, 변경 원본, 참고한 위키 페이지 경로를 적습니다(예: DOC-001@r1, DOC-010@r1, wiki/guides/onboarding.md).
+"""
     if _key in APP56_PROMPTS:
         _spec["after"]["prompt.md"] = APP56_PROMPTS[_key]
     _spec["readme"]["app"] = f"""
@@ -905,24 +916,29 @@ for _spec in SPECS:
         _spec["after"]["prompt.md"] = _spec["after"]["prompt.md"].replace("동료 M02 송지우", "동료 송지우").replace("(M03 문준서)", "(문준서)")
         _spec["readme"]["notes"] = "실제 공유에서는 홈 폴더의 studio-merry-wiki-member를 송지우 역할의 두 번째 폴더로 씁니다. wiki-sync로 받은 최신 위키와 가이드 원본을 읽고 새 결과를 output/에 저장합니다. 이 예제 폴더는 공유 연결이 막혀도 제공 자료로 시작하는 대안입니다. 같은 계정의 두 폴더 연습은 다른 계정 초대 검증과 구별합니다."
     if _key == (6, "02-meeting-notes"):
-        _spec["after"]["prompt.md"] = _textwrap.dedent(_spec["after"]["prompt.md"]).strip() + "\n머리말의 state는 초안, confirmed_by는 미확인으로 적어 줘. 원음 해시는 음원이 없으므로 미제공으로 적고, 사람 확인 전에는 확정된 회의록이라고 쓰지 마.\n"
-        _spec["readme"]["intro"] = "합성 대본에서 결정·할 일·취소·미정을 구분한 회의록 초안을 만듭니다. 음원이 없으므로 실제 원음 대조는 하지 않습니다. 이번 연습에서는 제공 대본의 근거 줄과 비교해 확인합니다. 책 6.3절에 대응합니다."
+        _spec["after"]["prompt.md"] = _textwrap.dedent(_spec["after"]["prompt.md"]).strip() + "\n머리말의 state는 초안, confirmed_by는 미확인, audio_sha256은 회의 정보의 값으로 적어 줘. 사람이 음원과 대조하기 전에는 확정된 회의록이라고 쓰지 마.\n"
+        _spec["readme"]["intro"] = "기준 전사문에서 결정·할 일·취소·미정을 구분한 회의록 초안을 만들고, 사람이 음원의 해당 구간을 들어 대조합니다. 책 6.3절에 대응합니다."
     if _key == (6, "03-decision-wiki"):
-        _spec["files"]["input/DOC-012_meeting-notes.md"] = MEETING_NOTES.replace("state: 확정", "state: 연습용 확인본").replace("confirmed_by: M01", "confirmed_by: 매니저 (제공 합성 대본 대조 연습)").replace('audio_sha256: "<MTG-001 음원 SHA-256 해시>"', 'audio_sha256: null')
-        _spec["readme"]["intro"] = "제공 합성 대본과 대조한 연습용 회의록으로 결정 페이지와 안내 페이지를 갱신합니다. 실제 원음 확인 기록과 구별합니다. 바꿀 내용을 사람이 확인하면 백업하고 씁니다. 책 6.4절에 대응합니다."
+        _spec["files"]["input/DOC-012_meeting-notes.md"] = MEETING_NOTES.replace("confirmed_by: M01", "confirmed_by: 매니저").replace("<!-- 비교용 편집 예시: 실제 모델 응답 아님 -->", "<!-- 제공 회의록: 매니저가 음원의 근거 구간을 듣고 확인한 연습용 회의록 -->") + _textwrap.dedent("""
+        ## 4. 확인 기록
+        - 확인자: 매니저
+        - 확인 방법: 음원(input/MTG-001_meeting.mp3)을 들으며 DOC-011@r1의 근거 구간과 대조
+        - 확인한 구간: [00:21.1–00:29.7], [00:30.4–00:40.9], [00:41.5–00:54.9], [00:55.6–01:06.5]
+        - 보완한 값: 날짜의 월(10월)은 음원에 나오지 않아 회의를 연 매니저가 확인해 채움
+        - 미확인 항목: 화자 구분(자동 화자 식별 미실행), 업무 ID(TASK-009·TASK-002)는 기존 업무 기록 기준
+        """)
+        _spec["readme"]["intro"] = "음원과 대조해 확인한 회의록으로 결정 페이지와 안내 페이지를 갱신합니다. 바꿀 내용을 사람이 확인하면 백업하고 씁니다. 책 6.4절에 대응합니다."
     if _key == (5, "05-skill-share"):
         _spec["copy"].update({"input/DOC-004_weekly-meetings.md": "ch03/01-weekly-report/input/DOC-004_weekly-meetings.md",
                               "input/snapshot.json": "ch03/01-weekly-report/input/snapshot.json",
                               "input/organized": "ch03/01-weekly-report/input/organized"})
         _spec["readme"]["files"].append(("input/", "공유 스킬을 실행해 비교할 노트 묶음·관측 기준"))
         _spec["after"]["share.md"] = """
-            점검한 output/skills/weekly-report/SKILL.md를 팀 위키의 skills/weekly-report/SKILL.md와 비교해 줘.
-            바꿀 내용과 공유할 파일 목록을 보여 주고 내 확인을 기다려 줘.
-            확인 뒤 복사하고 wiki-sync 스킬로 고른 파일만 기록·동기화해 줘.
-            동료 역할의 환경에 공유 저장소의 이 스킬을 tap으로 설치하고 설치 결과를 보여 줘.
-            설치가 막히면 성공으로 쓰지 말고 원인과 현재 상태를 알려 줘.
+            점검한 스킬(output/skills/weekly-report/SKILL.md)을 팀 위키의 skills/weekly-report/SKILL.md로 복사하고 wiki-sync 스킬로 동기화해 줘.
+            - 복사하기 전에 바뀌는 내용을 보여 주고 내 확인을 기다려.
+            - 내 헤르메스에 설치하지는 마. 설치는 동료가 받은 공유본을 지금 스킬과 비교한 뒤 정해.
         """
-        _spec["readme"]["files"].append(("share.md", "점검한 스킬의 공유·설치 지시문"))
+        _spec["readme"]["files"].append(("share.md", "점검한 스킬을 팀 위키에 공유하는 지시문"))
         _spec["readme"]["app"] += "\n점검 결과를 확인한 뒤 같은 대화에서 '이 폴더의 share.md를 읽고 그 내용대로 진행해 줘.'라고 부탁합니다.\n"
 
 # ── 7장 팀 요청의 접수와 기록 ─────────────────────────────────────────

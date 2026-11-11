@@ -1,7 +1,6 @@
 wiki-curator 역할로 회의록의 결정을 위키에 반영해 줘.
 AGENTS.md와 input/DOC-012_meeting-notes.md, raw/DOC-011_transcript-fallback.md,
 wiki/index.md와 wiki/guides/onboarding.md를 먼저 읽어 줘.
-이번 입력은 원음 대조 전 합성 자료를 이용한 연습이야. 실제 원음 확인을 마쳤다고 쓰지 마.
 회의록 원본을 바꾸지 말고 raw/DOC-012_meeting-notes.md에 같은 내용으로 복사해 줘.
 같은 이름의 원본이 있으면 내용을 비교하고 다르면 멈춰 줘.
 wiki/decisions/onboarding.md에 15일 10시·회의실 A 확정, 12일 잠정 계획 취소,

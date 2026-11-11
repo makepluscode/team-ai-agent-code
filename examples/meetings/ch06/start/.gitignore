@@ -2,3 +2,4 @@
 *.wav
 *.mp3
 output/
+!input/MTG-001_meeting.mp3
