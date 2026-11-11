@@ -1,6 +1,6 @@
 # 02-first-page: 첫 위키 페이지 정리
 
-> 이 예제는 윈도우의 헤르메스 데스크톱 앱으로 실습합니다. 예제는 홈 폴더의 team-ai-agent\code(C:\Users\로그인 이름\team-ai-agent\code)에 받고, 대화창에 넣을 문장은 [복사용 문장 모음](../../COMMANDS.md)에서 복사합니다. main.py·check.py·reset.py는 예제 저장소의 자동 시험용이며 책의 실습에서는 쓰지 않습니다.
+> 이 예제는 윈도우의 헤르메스 데스크톱 앱으로 실습합니다. 예제는 홈 폴더의 team-ai-agent\code(C:\Users\로그인 이름\team-ai-agent\code)에 받고, 대화창에 넣을 문장은 [복사용 문장 모음](../../COMMANDS.md)에서 복사합니다. main.py·check.py는 예제 저장소의 자동 시험용이며 책의 실습에서는 쓰지 않습니다.
 
 헤르메스가 wiki-curator 역할로 초기 원본 네 건을 읽어 새 동료 안내 페이지와 목록을 대화창에 먼저 보여 주고,
 사람이 확인하면 wiki/에 씁니다. 옵시디언에서 페이지의 출처 링크를 눌러 원본을 엽니다. 책 4.4절에 대응합니다.
@@ -30,10 +30,11 @@
 | wiki/ | 위키 페이지 폴더(적용 전에는 비어 있음) |
 | prompt.md | 첫 페이지 정리 지시문 |
 | expected/wiki/ | 저자가 편집한 비교용 페이지 |
+| reset.py | 예제 폴더를 받은 처음 상태로 되돌리기(다시 할 때) |
 
 
 헤르메스는 wiki에 쓰기 전에 지금의 wiki를 output/wiki-before/에 복사하고, 쓴 뒤 wiki/log.md에 확인한 사람과 함께 한 줄을 남깁니다(AGENTS.md 3절).
 
 ## 다시 하기
 
-wiki 폴더도 처음 상태로 돌리려면 output을 지우기 전에 먼저 새 대화에서 '작업 폴더는 홈 폴더의 team-ai-agent\code\ch04\02-first-page야. output\wiki-before의 내용으로 wiki 폴더를 되돌려 줘.'라고 부탁합니다. 이어서 새 대화에서 '작업 폴더는 홈 폴더의 team-ai-agent\code\ch04\02-first-page야. output 폴더의 파일 목록을 보여 주고, 내가 확인하면 지워 줘.'라고 부탁합니다.
+남겨 둘 결과는 먼저 다른 폴더에 복사한 뒤, 새 대화에서 '작업 폴더는 홈 폴더의 team-ai-agent\code\ch04\02-first-page야. 이 폴더의 reset.py를 실행해 줘.'라고 부탁합니다. 고치거나 지운 파일은 받은 내용으로 되살아나고 output처럼 새로 생긴 파일은 지워집니다.

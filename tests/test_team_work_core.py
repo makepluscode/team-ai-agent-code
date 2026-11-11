@@ -212,9 +212,14 @@ def test_claude_requires_explicit_configuration(monkeypatch):
         models.call_commercial("system", "prompt")
 
 
-def test_meeting_fallback_is_not_audio_verification():
-    manifest = read(PACKAGE_ROOT / "examples/meetings/ch06/start/input/meeting-manifest.json")
-    assert manifest["audio"] is None
+def test_meeting_audio_matches_manifest():
+    import hashlib
+    start = PACKAGE_ROOT / "examples/meetings/ch06/start"
+    manifest = read(start / "input/meeting-manifest.json")
+    # 제공 음원은 합성 음성이며, 해시가 회의 정보와 같아야 한다. 전사는 독자가 실행한다
+    audio = start / manifest["audio"]
+    assert hashlib.sha256(audio.read_bytes()).hexdigest() == manifest["audio_sha256"]
+    assert "합성" in manifest["audio_kind"]
     assert manifest["transcription_executed"] is False
     jobs = read(PACKAGE_ROOT / "examples/meetings/ch06/start/input/jobs.json")
     assert "input/expected-decisions.json" not in jobs["meeting-notes"]["inputs"]

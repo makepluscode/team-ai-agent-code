@@ -82,6 +82,12 @@ https://github.com/makepluscode/team-ai-agent-code 저장소를 내 홈 폴더�
 작업 폴더는 홈 폴더의 team-ai-agent\code\ch01\01-hello-jarvis야. 이 폴더의 remember.md를 읽고 그 지시대로 해 줘.
 ```
 
+대화창에 입력:
+
+```text
+헤르메스 메모리 파일 USER.md를 미리보기 창에 열어 줘.
+```
+
 
 ## 1.4.2 기억 확인
 
@@ -260,19 +266,13 @@ weekly-report-practice 예약을 삭제하고, 남은 예약 목록을 보여 �
 작업 폴더는 홈 폴더의 team-ai-agent\code\ch05\01-share-repo야. 이 폴더의 prompt.md를 읽고 그 지시대로 해 줘. 경로는 모두 작업 폴더 기준이야.
 ```
 
-대화창에 입력:
-
-```text
-보여 준 파일 목록을 확인했어. 그 파일만 비공개 저장소에 첫 기록으로 올려 줘. 기존 저장소나 파일을 덮어써야 하면 멈춰 줘.
-```
-
 
 ## 5.1.3 동료의 사본 준비
 
 대화창에 입력:
 
 ```text
-방금 확인한 공유 저장소를 홈 폴더의 studio-merry-wiki-member에 받아 줘. 이 폴더는 송지우 역할의 사본이야. 이미 폴더가 있으면 덮어쓰지 말고 멈춰 줘. 두 폴더의 연결된 저장소 주소와 마지막 변경 이력이 같은지 보여 줘.
+이 저장소를 송지우 역할의 사본으로 홈 폴더의 studio-merry-wiki-member에 받아 줘. 이미 폴더가 있으면 멈춰. 두 폴더가 같은 저장소에 연결됐는지 보여 줘.
 ```
 
 
@@ -284,22 +284,19 @@ weekly-report-practice 예약을 삭제하고, 남은 예약 목록을 보여 �
 작업 폴더는 홈 폴더의 team-ai-agent\code\ch05\02-wiki-sync야. 이 폴더의 prompt.md를 읽고 그 지시대로 해 줘. 경로는 모두 작업 폴더 기준이야.
 ```
 
+대화창에 입력:
+
+```text
+이름은 매니저, 이메일은 contact.studiomerry@gmail.com으로 이 저장소에만 적어 줘.
+```
+
 
 ## 5.2.2 고른 파일만 동기화
 
 대화창에 입력:
 
 ```text
-작업 폴더는 홈 폴더의 studio-merry-wiki야. wiki-sync 스킬로 동기화해 줘. 바뀐 파일 목록과 제안 기록 문구를 먼저 보여 줘. 내가 고른 파일과 문구를 확인한 뒤에만 기록과 동기화를 진행해 줘. 충돌이나 오류가 나면 멈춰 줘.
-```
-
-
-## 5.2.3 충돌과 중단
-
-대화창에 입력:
-
-```text
-동기화는 멈춘 상태로 둬. 충돌한 파일과 양쪽에서 바꾼 내용을 나란히 보여 줘. 원본은 보존하고, 어느 쪽을 남길지는 아직 결정하지 마. 강제로 올리거나 한쪽 변경을 버리지 마.
+작업 폴더는 홈 폴더의 studio-merry-wiki야. wiki-sync 스킬로 동기화해 줘.
 ```
 
 
@@ -323,7 +320,13 @@ weekly-report-practice 예약을 삭제하고, 남은 예약 목록을 보여 �
 대화창에 입력:
 
 ```text
-홈 폴더의 team-ai-agent\code\ch05\03-change-memo에서 갱신한 위키를 같은 ch05의 04-member-revision으로 받아 쓸 거야. 두 폴더의 AGENTS.md를 먼저 읽고, 옮길 위키 파일과 필요한 출처 원본 목록을 보여 줘. 04의 기존 온보딩 가이드와 다른 원본은 바꾸지 말고, 내가 확인할 때까지 복사하지 마.
+홈 폴더의 team-ai-agent\code\ch05\03-change-memo의 wiki 폴더를 같은 ch05의 04-member-revision에 복사해 줘. 복사할 파일 목록을 먼저 보여 주고 내 확인을 기다려. 04의 input에 있는 온보딩 가이드(DOC-007)는 바꾸지 마.
+```
+
+대화창에 입력:
+
+```text
+확인. 기존 wiki는 백업한 뒤 복사해 줘.
 ```
 
 
@@ -356,7 +359,19 @@ weekly-report-practice 예약을 삭제하고, 남은 예약 목록을 보여 �
 대화창에 입력:
 
 ```text
-홈 폴더의 studio-merry-wiki-member에서 공유받은 skills\weekly-report를 읽어 줘. 지금 설치된 weekly-report와 차이, 설치할 위치, 스킬 출처를 보여 줘. 기존 스킬은 아직 바꾸지 마.
+복사해도 돼. 기록 문구는 '[매니저] weekly-report 스킬 점검본 공유 · 중복·미입력·확인 대기 규칙 보강'으로 해 줘. 이름 자리에는 에이전트 이름을 쓰지 마.
+```
+
+대화창에 입력:
+
+```text
+홈 폴더의 studio-merry-wiki-member에서 팀의 변경을 받아 온 뒤, 공유된 skills\weekly-report를 지금 내 weekly-report 스킬과 비교해 줘. 아직 바꾸지는 마.
+```
+
+대화창에 입력:
+
+```text
+공유본을 팀의 기준으로 쓸게. studio-merry-wiki-member의 skills\weekly-report로 내 weekly-report 스킬을 바꿔 설치하고, 설치한 SKILL.md가 공유본과 같은지 확인해 줘.
 ```
 
 
@@ -365,7 +380,7 @@ weekly-report-practice 예약을 삭제하고, 남은 예약 목록을 보여 �
 대화창에 입력:
 
 ```text
-공유받은 weekly-report 스킬로 주간 보고를 만들어 줘. 입력 자료는 홈 폴더의 team-ai-agent\code\ch05\05-skill-share에 있는 input\DOC-004_weekly-meetings.md와 raw\report-input이야. 관측 기준은 input\snapshot.json에서 읽어 줘. 관측 기준은 파일에 든 값을 쓰고, 보고서는 이 예제의 output 안에 새 이름으로 저장해 줘. 저장한 뒤 관측 완료 건수와 미입력, 업무 상태를 다시 읽어 보여 줘.
+작업 폴더는 홈 폴더의 team-ai-agent\code\ch05\05-skill-share야. 공유받은 weekly-report 스킬로 주간 보고를 만들어 output에 저장해 줘.
 ```
 
 
@@ -382,6 +397,15 @@ weekly-report-practice 예약을 삭제하고, 남은 예약 목록을 보여 �
 ```
 
 
+## 6.2 로컬 전사
+
+대화창에 입력:
+
+```text
+작업 폴더는 홈 폴더의 team-ai-agent\code\ch06\01-meeting-input야. 이 폴더의 transcribe.md를 읽고 그 지시대로 해 줘. 경로는 모두 작업 폴더 기준이야.
+```
+
+
 ## 6.3 회의록 초안과 확인
 
 대화창에 입력:
@@ -393,23 +417,11 @@ weekly-report-practice 예약을 삭제하고, 남은 예약 목록을 보여 �
 대화창에 입력:
 
 ```text
-후속 안내자료의 최종 검토자는 정해지지 않았어. 합성 대본의 해당 발언을 다시 읽고 담당과 기한을 미정으로 고쳐 줘. 온보딩 가이드 수정은 확인 대기를 유지해 줘. 회의록은 아직 초안이며 원음 확인은 미완료라고 적어 줘.
-```
-
-대화창에 입력:
-
-```text
-제공 합성 대본과 회의록 초안을 대조했어. 대본 근거 확인자는 매니저로 적어 줘. 원음 확인은 미완료로 남기고, 실제 회의의 원음 확인을 마친 기록으로 바꾸지 마. 수정한 파일을 다시 읽어 보여 줘.
+체크리스트의 구간을 음원으로 들으며 회의록 초안과 대조했어. 확인한 사람은 매니저야. 머리말의 confirmed_by를 매니저로, state를 확정으로 바꾸고 확인한 구간을 적어 줘. 수정한 파일을 다시 읽어 보여 줘.
 ```
 
 
 ## 6.4 위키의 현재 결정
-
-대화창에 입력:
-
-```text
-앞 절에서 만든 02-meeting-notes\output\DOC-012_meeting-notes.md를 이번 예제의 input\DOC-012_meeting-notes.md와 비교해 줘. 경로는 ch06 폴더 기준이야. 다른 내용을 먼저 보여 주고 내 확인을 기다려 줘. 내가 확인하면 앞 절 결과를 이번 입력으로 복사하되, 제공 입력은 output\input-before에 백업해 줘. 합성 대본 사용과 원음 확인 미완료 표시를 유지해 줘.
-```
 
 대화창에 입력:
 
@@ -420,5 +432,5 @@ weekly-report-practice 예약을 삭제하고, 남은 예약 목록을 보여 �
 대화창에 입력:
 
 ```text
-확인. 적용해 줘. 확인한 사람은 매니저야. 제공 합성 자료로 한 실습이며 원음 확인은 미완료라는 표시를 유지해 줘.
+확인. 적용해 줘. 확인한 사람은 매니저야.
 ```

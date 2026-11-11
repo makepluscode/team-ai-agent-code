@@ -25,3 +25,9 @@
    - wiki/의 페이지는 사람이 옵시디언에서 직접 고치지 않습니다. 고칠 내용은 대화로 알려 주고 이 절차로 다시 씁니다.
 
 정리 기록과 updated_at은 한국 표준시(Asia/Seoul, +09:00)로 적습니다. 확인한 사람을 아직 알려 주지 않았다면 쓰기 전에 물어봅니다.
+
+4. 문서 새 버전
+   - 원래 문서는 고치지 않고 output/에 새 파일로 저장합니다.
+   - 맨 위 속성: document_id는 그대로, revision은 다음 번호, supersedes는 이전 버전(예: DOC-007@r1), state는 원본과 같게, created_at·effective_at은 작성 시각입니다.
+   - 업무가 있으면 task_id와 task_status를 적습니다. 온보딩 가이드 수정은 TASK-002이며 사람이 검토하기 전까지 '확인 대기'입니다.
+   - source_refs에는 이전 원본, 변경 원본, 참고한 위키 페이지 경로를 적습니다(예: DOC-001@r1, DOC-010@r1, wiki/guides/onboarding.md).
