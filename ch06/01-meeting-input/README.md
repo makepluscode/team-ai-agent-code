@@ -22,13 +22,13 @@ MTG-001 회의의 입력 자료(회의 정보·용어표·기준 전사문)를 �
 | input/meeting-manifest.json | 회의 ID·음원·해시·대안 전사문 정보 |
 | input/glossary.txt | 전사 힌트용 용어표 |
 | input/MTG-001_meeting.mp3 | 합성 회의 음원(AI 음성, 72초) |
-| input/DOC-011_transcript-fallback.md | 저자가 쓴 기준 전사문(음원의 대본, 구간 시각 포함) |
+| input/DOC-011_transcript-fallback.md | 음원의 대본을 적은 기준 전사문(구간 시각 포함) |
 | prompt.md | 입력 점검 지시문 |
 | transcribe.md | 로컬 전사와 기준 전사문 대조 지시문 |
 | reset.py | 예제 폴더를 받은 처음 상태로 되돌리기(다시 할 때) |
 
 
-음원이 있을 때만(선택): uv run --extra transcription main.py transcribe <음원 경로>. 결과는 이 폴더의 output/transcript.json이고, 다음 예제(02-meeting-notes)에서는 ../01-meeting-input/output/transcript.json으로 읽습니다. 전사는 CPU·base·int8 구성을 검토 기준으로 둡니다. 실제 음원의 전사와 원음 청취 대조는 두 기준 장비에서 TODO(검증)입니다.
+음원이 있을 때만(선택): uv run --extra transcription main.py transcribe <음원 경로>. 결과는 이 폴더의 output/transcript.json이고, 다음 예제(02-meeting-notes)에서는 ../01-meeting-input/output/transcript.json으로 읽습니다. 전사는 CPU·base·int8 구성을 검토 기준으로 둡니다. 윈도우에서 확인했고, 맥에서의 전사는 TODO(검증)입니다.
 
 ## 다시 하기
 

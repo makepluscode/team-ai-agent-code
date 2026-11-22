@@ -15,6 +15,8 @@ from pathlib import Path
 HERE = Path(__file__).resolve().parent
 # 있어야 하는 결과 파일(이 폴더 기준)
 RESULTS = ["output/DOC-007_onboarding-guide.r2.md"]
+# 헤르메스 앱으로 실습하는 장(1~6장)인지. 앱 장은 독자가 main.py를 쓰지 않으므로 안내 문구가 다르다
+APP = True
 # SQLite 기록 확인: (설명, 질의, 기대 개수)
 COUNTS = []
 # 사람이 대조할 질문과, 그 자리를 찾기 쉽게 보여 줄 표현
@@ -27,6 +29,10 @@ def sha256(path: Path) -> str:
 
 def hint(name: str) -> str:
     """빠진 결과 파일마다 다음에 할 일을 알려 준다."""
+    if APP and (name.startswith(("wiki/", "output/wiki-before"))):
+        return "헤르메스가 바꿀 내용을 대화창에 보여 주고 '확인'을 받은 뒤 output/wiki-before/에 백업하고 위키에 썼는지 보세요(AGENTS.md 3절)."
+    if APP and name.startswith("raw/"):
+        return "지시문대로 원본을 raw/에 복사했는지 보세요. 원본은 이름과 내용을 바꾸지 않습니다."
     if name == "output/wiki-base.json":
         return "변경안을 uv run main.py preview로 확인한 뒤 uv run main.py apply로 적용하세요."
     if name.startswith("raw/"):
@@ -48,7 +54,8 @@ def main() -> int:
     for name in changed:
         print(f"[실패] 원본이 없거나 바뀌었습니다: {name}")
     if changed:
-        print("    → 원본은 고치지 않습니다. uv run reset.py로 예제 폴더를 처음 상태로 되돌린 뒤 다시 시작하세요.")
+        print("    → 원본은 고치지 않습니다. " + ("대화창에서 '이 폴더의 reset.py를 실행해 줘.'라고 부탁해" if APP else "uv run reset.py로")
+              + " 예제 폴더를 처음 상태로 되돌린 뒤 다시 시작하세요.")
     failures += len(changed)
     if not changed:
         print(f"[통과] 원본 {len(sources)}개 보존")
