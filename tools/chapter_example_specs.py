@@ -95,6 +95,7 @@ WIKI_RULES_APP = """
    - wiki/criteria/: 사람의 검토로 확정한 판단 기준 페이지입니다.
    - wiki/index.md: 현재 위키 페이지의 목록과 한 줄 요약입니다.
    - wiki/log.md: 정리할 때마다 한 줄씩 더하는 정리 기록입니다.
+   - expected/: 사람이 결과와 비교할 때 여는 비교용 편집 예시입니다. 작업할 때는 읽거나 베끼지 않습니다.
 
 2. 정리와 출처 규칙
    - 모든 사실과 일정 옆에는 근거가 된 원본의 document_id와 버전(예: DOC-001@r1)을 적습니다.
@@ -261,7 +262,7 @@ SPECS.append({
         "files": [("AGENTS.md", "위키 정리 규칙. 대화로 확인받은 뒤에만 wiki에 쓰고, 출처는 원본으로 가는 링크로 적도록 정했습니다"),
                   ("raw/", "초기 원본 네 건과 근거 묶음"), ("wiki/", "위키 페이지 폴더(적용 전에는 비어 있음)"),
                   ("prompt.md", "첫 페이지 정리 지시문"), ("main.py", "apply: 변경안 적용(충돌 검사·백업·정리 기록) / search: 검색"),
-                  ("expected/wiki/", "저자가 편집한 비교용 페이지"), ("check.py", "원본 보존·페이지 저장 확인과 사람이 볼 줄 표시")],
+                  ("expected/wiki/", "비교용으로 편집한 페이지"), ("check.py", "원본 보존·페이지 저장 확인과 사람이 볼 줄 표시")],
         "notes": """
             헤르메스는 wiki에 쓰기 전에 지금의 wiki를 output/wiki-before/에 복사하고, 쓴 뒤 wiki/log.md에 확인한 사람과 함께 한 줄을 남깁니다(AGENTS.md 3절).
         """,
@@ -428,7 +429,7 @@ SPECS.append({
         "files": [("AGENTS.md", "위키 정리 규칙"), (".gitignore", "공유하지 않을 파일 목록"), ("raw/·wiki/", "4장까지 정리한 원본과 위키"),
                   ("prompt.md", "로그인·제외 목록 확인과 저장소 준비 지시문"), ("check.py", "원본 보존과 제외 목록 확인")],
         "notes": """
-            실제 GitHub 저장소 생성과 올리기는 헤르메스가 gh·git으로 실행합니다. v1.7 예제로 저장소를 새로 만드는 전 과정은 두 기준 장비에서 TODO(검증)입니다.
+            실제 깃허브 저장소 생성과 올리기는 헤르메스가 gh·git으로 실행합니다. 윈도우 헤르메스 데스크톱 앱에서 확인했고, 맥에서의 같은 과정은 TODO(검증)입니다.
             GitHub을 쓸 수 없으면 이 폴더를 그대로 두고 5.3~5.4절의 두 예제 폴더로 인계를 연습합니다.
         """,
     },
@@ -492,7 +493,7 @@ SPECS.append({
     "main": {"title": "5장 변경 메모 예제: 동료의 변경 메모를 raw/에 등록하고 헤르메스의 변경안을 위키에 적용한다.",
              "steps": {"register": ("input/의 변경 메모를 raw/에 원본으로 등록(해시 기록)", [["wiki", "register", "--source", "input/DOC-010_schedule-change.md"]]),
                        "apply": ("output/wiki-draft/의 변경안을 충돌 검사·백업과 함께 wiki/에 적용", [["wiki", "apply-draft"]])}},
-    "check": {"results": ["raw/DOC-010_schedule-change.md", "output/wiki-base.json", "wiki/guides/onboarding.md"],
+    "check": {"results": ["raw/DOC-010_schedule-change.md", "output/wiki-before/log.md", "wiki/guides/onboarding.md"],
               "human": [["안내 날짜가 10월 15일(확정)이고 시각·장소·검토자가 미정인가", ["2026-10-15", "10월 15일", "미정"]],
                         ["옛 10:00이 새 날짜에 붙어 '15일 10:00'이 되지 않았는가", ["10:00"]],
                         ["변경 이력에 DOC-001@r1 → DOC-010@r1이 남았는가", ["DOC-010@r1", "이력"]]]},
@@ -615,7 +616,7 @@ SPECS.append({
                 "hermes skills install <내 GitHub 계정>/studio-merry-wiki/skills/weekly-report", "hermes skills check"],
         "files": [("skills/weekly-report/SKILL.md", "3장에서 만든 주간 보고 스킬"), ("prompt.md", "공유 전 점검 지시문"),
                   ("check.py", "원본 보존·점검 결과 저장 확인")],
-        "notes": "v1.7 주간 보고 스킬을 동료 환경에서 tap으로 설치해 같은 결과를 얻는 전 과정은 TODO(검증)입니다.",
+        "notes": "동료는 공유된 스킬을 지금 설치된 스킬과 비교한 뒤 설치합니다. 실제 다른 컴퓨터에서 설치해 같은 결과를 얻는 과정은 TODO(검증)입니다.",
     },
 })
 
@@ -729,7 +730,7 @@ SPECS.append({
         "run": ["cd ~/team-ai-agent/code/ch06/01-meeting-input", "hermes chat --query-file prompt.md",
                 "uv run --extra transcription main.py transcribe <음원 경로>", "uv run check.py"],
         "files": [("input/meeting-manifest.json", "회의 ID·음원·해시·대안 전사문 정보"), ("input/glossary.txt", "전사 힌트용 용어표"),
-                  ("input/MTG-001_meeting.mp3", "합성 회의 음원(AI 음성, 72초)"), ("input/DOC-011_transcript-fallback.md", "저자가 쓴 기준 전사문(음원의 대본, 구간 시각 포함)"), ("prompt.md", "입력 점검 지시문"), ("transcribe.md", "로컬 전사와 기준 전사문 대조 지시문"),
+                  ("input/MTG-001_meeting.mp3", "합성 회의 음원(AI 음성, 72초)"), ("input/DOC-011_transcript-fallback.md", "음원의 대본을 적은 기준 전사문(구간 시각 포함)"), ("prompt.md", "입력 점검 지시문"), ("transcribe.md", "로컬 전사와 기준 전사문 대조 지시문"),
                   ("main.py", "transcribe: 로컬 전사(선택, faster-whisper 필요)"), ("check.py", "원본 보존 확인")],
         "notes": "전사는 faster-whisper base·CPU·int8 구성입니다. 음원은 tools/make_meeting_audio.py로 만들었습니다(BizRouter의 OpenAI 호환 음성 API). 맥 기준 장비의 전사는 TODO(검증)입니다.",
     },
@@ -795,7 +796,7 @@ SPECS.append({
     "main": {"title": "6장 결정 반영 예제: 확인한 회의록을 raw/에 등록하고 헤르메스의 변경안을 위키에 적용한다.",
              "steps": {"register": ("확인한 회의록을 raw/에 원본으로 등록", [["wiki", "register", "--source", "input/DOC-012_meeting-notes.md"]]),
                        "apply": ("output/wiki-draft/의 변경안을 충돌 검사·백업과 함께 적용", [["wiki", "apply-draft"]])}},
-    "check": {"results": ["raw/DOC-012_meeting-notes.md", "output/wiki-base.json", "wiki/decisions/onboarding.md", "wiki/guides/onboarding.md"],
+    "check": {"results": ["raw/DOC-012_meeting-notes.md", "output/wiki-before/log.md", "wiki/decisions/onboarding.md", "wiki/guides/onboarding.md"],
               "human": [["현재 결정이 10월 15일 10:00·회의실 A이고 출처 DOC-012가 붙었는가", ["회의실 A", "DOC-012"]],
                         ["취소(12일)·기각(14일)이 현재 결정과 분리됐는가", ["취소", "기각"]],
                         ["TASK-002가 확인 대기로 남고 최종 검토자가 미정인가", ["TASK-002", "검토자"]]]},
@@ -899,6 +900,10 @@ for _spec in SPECS:
    - 맨 위 속성: document_id는 그대로, revision은 다음 번호, supersedes는 이전 버전(예: DOC-007@r1), state는 원본과 같게, created_at·effective_at은 작성 시각입니다.
    - 업무가 있으면 task_id와 task_status를 적습니다. 온보딩 가이드 수정은 TASK-002이며 사람이 검토하기 전까지 '확인 대기'입니다.
    - source_refs에는 이전 원본, 변경 원본, 참고한 위키 페이지 경로를 적습니다(예: DOC-001@r1, DOC-010@r1, wiki/guides/onboarding.md).
+   - 이전 버전의 data_kind와 '비교용 편집 예시' 표시 줄은 제공 자료를 구별하는 표시이므로 새 버전에 옮기지 않습니다.
+
+5. 위키 받아 오기
+   - 담당자가 정리한 wiki/ 폴더를 다른 예제 폴더나 공유 사본에서 그대로 복사해 오는 일은 위키 정리가 아닙니다. 복사할 파일 목록을 보여 주고 확인을 받은 뒤, 지금의 wiki/를 백업하고 복사합니다. 확인한 사람의 이름은 묻지 않고 wiki/log.md에 줄을 더하지 않습니다.
 """
     if _key in APP56_PROMPTS:
         _spec["after"]["prompt.md"] = APP56_PROMPTS[_key]
@@ -1809,7 +1814,7 @@ spec = _spec(6, "01-meeting-input")
 spec["readme"]["run"] = [c for c in spec["readme"]["run"] if "transcribe" not in c]
 spec["readme"]["notes"] = ("음원이 있을 때만(선택): uv run --extra transcription main.py transcribe <음원 경로>. 결과는 이 폴더의 "
                            "output/transcript.json이고, 다음 예제(02-meeting-notes)에서는 ../01-meeting-input/output/transcript.json으로 읽습니다. "
-                           "전사는 CPU·base·int8 구성을 검토 기준으로 둡니다. 실제 음원의 전사와 원음 청취 대조는 두 기준 장비에서 TODO(검증)입니다.")
+                           "전사는 CPU·base·int8 구성을 검토 기준으로 둡니다. 윈도우에서 확인했고, 맥에서의 전사는 TODO(검증)입니다.")
 
 # 9. 12장 복구는 DB까지 새 폴더에 돌아왔는지 확인한다
 _spec(12, "03-hours-backup")["check"]["results"].append("../03-hours-backup-restored/state/requests.sqlite3")
@@ -1844,3 +1849,34 @@ for spec in SPECS:
         spec["readme"]["files"] = files + [("main.py", desc)]
 
 
+
+# 10. 6장 로컬 전사의 실행 명령은 작업 폴더 규칙(AGENTS.md)에 두고, 독자가 읽는 지시문(transcribe.md)에는 싣지 않는다
+#     (2026-11-22 2부 검수: 앱 버전 본문에 uv run·main.py를 싣지 않는다는 AGENTS.md 규칙)
+spec = _spec(6, "01-meeting-input")
+spec["files"]["AGENTS.md"] += """
+4. 로컬 전사
+   - 회의 음원은 이 폴더에서 `uv run --extra transcription main.py transcribe <음원 경로>`로 전사합니다. 결과는 output/transcript.json에 저장됩니다.
+   - 전사는 내 컴퓨터 안에서만 하고 음원을 인터넷 서비스로 보내지 않습니다. 처음 실행할 때는 전사 프로그램과 모델을 내려받아 몇 분이 걸릴 수 있습니다.
+   - 전사 중 오류가 나면 다른 방법으로 바꾸지 말고 멈춘 뒤 오류를 그대로 보여 줍니다.
+"""
+spec["after"]["transcribe.md"] = """
+    회의 음원(input/MTG-001_meeting.mp3)을 내 컴퓨터에서 로컬로 전사해 줘.
+    1. 전사 방법은 AGENTS.md의 '4. 로컬 전사'를 따라 줘. 오류가 나면 멈추고 오류를 그대로 보여 줘.
+    2. 끝나면 output/transcript.json의 구간을 시작 시각과 함께 표로 보여 줘.
+    3. 기준 전사문(input/DOC-011_transcript-fallback.md)과 다르게 적힌 낱말을 '구간 | 전사 결과 | 기준 전사문' 표로 보여 줘.
+       날짜·시각·장소·이름이 다른 곳은 따로 표시해 줘.
+    전사 결과와 입력 파일은 고치지 마.
+"""
+
+# 11. 6장 결정 반영의 비교용 결정 페이지에도 원본으로 가는 출처 링크를 붙인다(앱 버전 위키 규칙, 2026-11-22 2부 검수).
+#     10·11장은 같은 DECISION_PAGE를 CLI 형식 그대로 쓰므로 6장 예제에서만 바꾼다.
+_DOC012 = "[DOC-012@r1](../../raw/DOC-012_meeting-notes.md)"
+_spec(6, "03-decision-wiki")["after"]["expected/wiki/decisions/onboarding.md"] = (
+    _app_source_links(DECISION_PAGE)
+    .replace("(확정, DOC-012#decision-01)", f"(확정, 출처: {_DOC012} 결정 1)")
+    .replace("([DOC-001@r1](../../raw/DOC-001_onboarding.md) → DOC-012#decision-01)", f"(최초 계획 [DOC-001@r1](../../raw/DOC-001_onboarding.md) → 출처: {_DOC012} 결정 1)")
+    .replace("(DOC-012#decision-01)", f"(출처: {_DOC012} 결정 1)")
+    .replace("(DOC-012#task-01)", f"(출처: {_DOC012} 할 일 1)")
+    .replace("(DOC-012#task-02)", f"(출처: {_DOC012} 할 일 2)")
+    .replace("(DOC-012#pending-01)", f"(출처: {_DOC012} 미정 1)")
+)
