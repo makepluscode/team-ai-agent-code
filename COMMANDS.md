@@ -287,11 +287,17 @@ weekly-report-practice 예약을 삭제하고, 남은 예약 목록을 보여 �
 대화창에 입력:
 
 ```text
-이름은 매니저, 이메일은 contact.studiomerry@gmail.com으로 이 저장소에만 적어 줘.
+이름은 매니저, 이메일은 <내 깃허브 메일 주소>로 이 저장소에만 적어 줘.
 ```
 
 
 ## 5.2.2 고른 파일만 동기화
+
+대화창에 입력:
+
+```text
+홈 폴더의 team-ai-agent\code\ch05\03-change-memo\input\DOC-010_schedule-change.md를 studio-merry-wiki의 raw에 복사해 줘.
+```
 
 대화창에 입력:
 

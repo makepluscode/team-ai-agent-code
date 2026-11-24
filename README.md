@@ -16,9 +16,9 @@
 | [ch03/01-weekly-report](ch03/01-weekly-report/) | 노트 8개로 주간 보고 | 3.1절 |
 | [ch03/02-weekly-skill](ch03/02-weekly-skill/) | 주간 보고 스킬 등록과 짧은 요청 재실행 | 3.2절 |
 | [ch03/03-weekly-schedule](ch03/03-weekly-schedule/) | 금요일 개인 예약 등록·즉시 실행·중지 | 3.3절 |
-| [ch04/01-wiki-folder](ch04/01-wiki-folder/) | 로컬 위키 폴더와 정리 규칙 확인 | 4.1~4.2절 |
-| [ch04/02-first-page](ch04/02-first-page/) | 첫 위키 페이지 정리 | 4.3절 |
-| [ch04/03-source-query](ch04/03-source-query/) | 위키 출처 조회 | 4.4절 |
+| [ch04/01-wiki-folder](ch04/01-wiki-folder/) | 로컬 위키 폴더와 정리 규칙 확인 | 4.1~4.3절 |
+| [ch04/02-first-page](ch04/02-first-page/) | 첫 위키 페이지 정리 | 4.4절 |
+| [ch04/03-source-query](ch04/03-source-query/) | 위키 출처 조회 | 4.5절 |
 | [ch05/01-share-repo](ch05/01-share-repo/) | 팀 위키 저장소 준비 | 5.1절 |
 | [ch05/02-wiki-sync](ch05/02-wiki-sync/) | 위키 동기화 스킬 | 5.2절 |
 | [ch05/03-change-memo](ch05/03-change-memo/) | 동료의 변경 메모 반영 | 5.3절 |
