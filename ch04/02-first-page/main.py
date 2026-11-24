@@ -10,7 +10,7 @@
 단계:
   preview: 변경안이 적용되면 바뀔 줄(diff)을 보여 줌. 파일은 바꾸지 않음
   apply: 변경안 diff를 보여 주고 y로 확인하면 충돌 검사·백업과 함께 wiki/에 적용
-  search: 위키에서 검색어가 있는 줄 찾기(예: uv run main.py search 잠정)
+  search: 위키에서 검색어가 있는 줄 찾기(예: uv run main.py search 미정)
 
 제공 코드(team_work)는 이 예제 폴더가 들어 있는 code 폴더에서 찾는다. 예제 폴더를 다른 곳으로 옮겼다면
 환경 변수 TEAM_AGENT_CODE에 받은 code 폴더 경로를 지정한다. 단계의 실제 처리는 code/src/team_work/에 있고, 이 파일은 단계 이름과 명령을 잇기만 한다.
@@ -46,7 +46,7 @@ STEPS = {
         ]
     ],
     "search": [
-        "위키에서 검색어가 있는 줄 찾기(예: uv run main.py search 잠정)",
+        "위키에서 검색어가 있는 줄 찾기(예: uv run main.py search 미정)",
         [
             [
                 "wiki",

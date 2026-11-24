@@ -4,7 +4,7 @@
   "sources": {
     "input/DOC-004_weekly-meetings.md": "6b7964eb758bd13149cf7e6361761db31928e201f6f75bca44ed2fe6af1ee7a7",
     "input/DOC-011_transcript-fallback.md": "807e9ca9ca94589bb648e4c74a27c8297d12c7ee8bf65434d5ea50e892c435a4",
-    "input/DOC-012_meeting-notes.md": "d52e7fc9f359b07b977a80febab754574c725f0dbd47aae5e51415e88f19aa2d",
+    "input/DOC-012_meeting-notes.md": "8f646f6219843d498ae803207c0688ff5f11153285742bf77f9c1a249bbb5f0c",
     "input/MTG-001_meeting.mp3": "9380fe80e515813ea6605867f3fbd37c88ccdbfb83107516913982f8a806d783",
     "input/glossary.txt": "e74234f99ab0c159b2cea85a59d27170ac7db842fe0e213607c57f6cf56eac05",
     "input/meeting-manifest.json": "6e8d14e5b08e9c6c4f15e11d35709d31cd75ddcaf7982e76b2fcf8f7c503602a",
@@ -34,7 +34,7 @@
   "editable_settings": [],
   "example": "ch06/03-decision-wiki",
   "wiki_base": {
-    "guides/onboarding.md": "ebd2b6241335904308a9e717b5f83d94e7196184a1659ac4fd3b3c27a59ead67",
+    "guides/onboarding.md": "858676ae30b1d8be188855c9eba8d338f30f494f53f1c8055c5e6600d26d175b",
     "index.md": "e699a526702cdfe4b55f0818c68e9ed51136b8d50444cc2698b9f24b865e061c",
     "log.md": "6e39a8d71edb2b45292f04f9025fef65f1e83c4b5c6f167e18c60839ed44d8eb"
   }

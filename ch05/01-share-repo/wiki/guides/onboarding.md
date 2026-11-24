@@ -15,7 +15,7 @@ source_refs:
 # 새 동료 안내 준비와 자료 기준
 
 ## 1. 현재 안내 일정과 조건
-- 안내 일시: 2026-10-12 10:00 (상태: 잠정, 출처: raw/DOC-001_onboarding.md [DOC-001@r1])
+- 안내 일시: 미정(후보 2026-10-12 10:00) (출처: raw/DOC-001_onboarding.md [DOC-001@r1])
 - 안내 장소: 미정 (출처: raw/DOC-001_onboarding.md [DOC-001@r1])
 - 안내자료 최종 검토자: 미정 (출처: raw/DOC-001_onboarding.md [DOC-001@r1])
 

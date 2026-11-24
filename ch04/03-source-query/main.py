@@ -8,7 +8,7 @@
   uv run main.py <단계> --yes   확인 질문만 생략(충돌·원본 검사는 그대로)
 
 단계:
-  search: 검색어가 있는 위키 줄 찾기(예: uv run main.py search 잠정)
+  search: 검색어가 있는 위키 줄 찾기(예: uv run main.py search 미정)
 
 제공 코드(team_work)는 이 예제 폴더가 들어 있는 code 폴더에서 찾는다. 예제 폴더를 다른 곳으로 옮겼다면
 환경 변수 TEAM_AGENT_CODE에 받은 code 폴더 경로를 지정한다. 단계의 실제 처리는 code/src/team_work/에 있고, 이 파일은 단계 이름과 명령을 잇기만 한다.
@@ -26,7 +26,7 @@ NEEDED_VERSION = "1.7"
 # 단계 이름 → 설명과 team-work 명령 목록
 STEPS = {
     "search": [
-        "검색어가 있는 위키 줄 찾기(예: uv run main.py search 잠정)",
+        "검색어가 있는 위키 줄 찾기(예: uv run main.py search 미정)",
         [
             [
                 "wiki",
@@ -50,7 +50,7 @@ GUIDE = [
         ]
     ],
     [
-        "uv run main.py search 잠정",
+        "uv run main.py search 미정",
         []
     ],
     [
